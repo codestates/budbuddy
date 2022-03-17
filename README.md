@@ -27,14 +27,6 @@
 ![bud](https://user-images.githubusercontent.com/33453360/158592548-0ed1284e-b8f8-47da-bd41-6e6848f3eb31.png)
   - [API 문서 상세보기 (스웨거)](https://app.swaggerhub.com/apis/d3856/BudBuddy/1.0#/)
 
-링크  
-[[BUD BUDDY]]()
----
-
-## 각 항목의 세부사항은 Wiki에서 살펴볼 수 있습니다
-
-[Project Detail 여기를 클릭!](https://github.com/codestates/budbuddy/wiki, "google link")
-
 ### Tech Stack
 ![Screenshot from 2022-03-17 14-34-21](https://user-images.githubusercontent.com/93773242/158760479-4f921de7-038b-4b11-9182-e4b1f5360bc3.png)
 
@@ -74,3 +66,11 @@
 <img src="https://img.shields.io/badge/Route53-232F3E?style=flat-square&logo=Amazon AWS&logoColor=yellow"/></a>
 <img src="https://img.shields.io/badge/RDS-232F3E?style=flat-square&logo=Amazon AWS&logoColor=yellow"/></a>
 <img src="https://img.shields.io/badge/S3-232F3E?style=flat-square&logo=Amazon AWS&logoColor=yellow"/></a>
+
+링크  
+[[BUD BUDDY]]()
+---
+
+## 각 항목의 세부사항은 Wiki에서 살펴볼 수 있습니다
+
+[Project Detail 여기를 클릭!](https://github.com/codestates/budbuddy/wiki, "google link")
