@@ -3,5 +3,18 @@
   "tabWidth": 2,
   "semi": true,
   "singleQuote": false,
-  "printWidth": 200
+  "printWidth": 200,
+
+  "arrowParens": "always",
+  "bracketSameLine": false,
+  "bracketSpacing": true,
+  "embeddedLanguageFormatting": "auto",
+  "htmlWhitespaceSensitivity": "css",
+  "insertPragma": false,
+  "jsxSingleQuote": false,
+  "proseWrap": "preserve",
+  "quoteProps": "as-needed",
+  "requirePragma": true,
+  "useTabs": false,
+  "vueIndentScriptAndStyle": false
 }
