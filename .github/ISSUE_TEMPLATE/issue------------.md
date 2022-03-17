@@ -1,8 +1,8 @@
 ---
-name: 'Issue: 에러 핸들링 템플릿'
-about: Describe this issue template's purpose here.
-title: "[ Issue ] 에러 핸들링"
-labels: documentation
+name: 에러 핸들링 카드 Error Handling
+about: 에러 핸들에 대한 기록
+title: "[ Error handling ] 이름 / 2022-00-00"
+labels: Completed, documentation, Error, In progress
 assignees: yhs9421877
 
 ---
