@@ -24,8 +24,11 @@ app.get("/", (req, res) => {
   res.send("버드버디! 시작!");
 });
 
+console.log(process.env.REACT_APP_API_URL);
+
 const controllers = require("./controllers");
-app.post("/login", controllers.login);
+app.post("/users/login", controllers.login);
+app.post("/users/signup", controllers.signup);
 
 app.listen(PORT, () => {
   console.log(`서버 시작 http://localhost:${PORT}`);

@@ -14,7 +14,7 @@
   "jsxSingleQuote": false,
   "proseWrap": "preserve",
   "quoteProps": "as-needed",
-  "requirePragma": true,
+  "requirePragma": false,
   "useTabs": false,
   "vueIndentScriptAndStyle": false
 }

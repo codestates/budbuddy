@@ -1,25 +1,40 @@
 import React from "react";
+import axios from "axios";
 
 const Signup = () => {
-  function reqSingup(e) {
+  async function reqSingup(e) {
     e.preventDefault();
 
-      for(let i=1; i<e.currentTarget.length-1; i++){
-       
-        console.log("회원가입진행:",e.currentTarget[i].value);
-      }
+    const { userId, password, nickname } = e.target;
+    const payload = {
+      userId: userId.value,
+      password: password.value,
+      nickname: nickname.value,
+    };
 
-    console.log(e.target.userId.value);
-    console.log(e.target.password.value);
-    console.log(e.target.nickname.value);
-
+    try {
+      const resData = await axios.post(process.env.REACT_APP_API_URL + "/users/signup", payload);
+      console.log("회원가입 응답::::", resData);
+    } catch (err) {
+      const err_code = Number(
+        JSON.stringify(err.message)
+          .split(" ")
+          .pop()
+          .replace(/[^0-9]/g, ""),
+      );
+      console.log("회원가입 err_code:", err_code);
+    }
   }
 
   return (
     <div>
       <h1>버드버디</h1>
       <p>회원가입</p>
-      <form onSubmit={(e) => { reqSingup(e);}} >
+      <form
+        onSubmit={(e) => {
+          reqSingup(e);
+        }}
+      >
         <fieldset>
           <legend>회원 가입 정보를 입력해주세요</legend>
           <input type="text" placeholder="user id" name="userId" />

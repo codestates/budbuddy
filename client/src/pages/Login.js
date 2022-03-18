@@ -15,7 +15,7 @@ function Login() {
     // refPassword.current.value = "";
 
     try {
-      const resData = await axios.post(process.env.REACT_APP_API_URL + "/login", payload);
+      const resData = await axios.post(process.env.REACT_APP_API_URL + "/users/login", payload);
       console.log(resData.data.payload);
 
       const { name, age, job } = resData.data.payload;
