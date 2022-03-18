@@ -13,19 +13,29 @@
 
 **_버드버디_** 입니다 😜
 
+### 목업플로우
 
-### 목업플로우 
 ---
+
 ![목업 플로우](https://user-images.githubusercontent.com/33453360/158735542-f19ac48a-526a-4d75-bf8d-3e8e295f3465.PNG)
-  - [목업 플로우](https://app.moqups.com/bvuGdqxY3AbobvwrHNKNJZIGfAkDbcW0/view/page/ad64222d5)
-### 사이트맵 
+
+- [목업 플로우](https://app.moqups.com/bvuGdqxY3AbobvwrHNKNJZIGfAkDbcW0/view/page/ad64222d5)
+
+### 사이트맵
+
 ---
+
 ![사이트맵](https://user-images.githubusercontent.com/33453360/158378749-be71f3c0-c42a-476e-878d-319facbe61a2.PNG)
-  - [사이트 맵 링크](https://app.moqups.com/FTjUHBffxGHvebc7tAFZ7XUHobj1zEdb/view/page/a57bebd7a?ui=0&fit_width=1)
+
+- [사이트 맵 링크](https://app.moqups.com/FTjUHBffxGHvebc7tAFZ7XUHobj1zEdb/view/page/a57bebd7a?ui=0&fit_width=1)
+
 ### API Doc
+
 ---
+
 ![bud](https://user-images.githubusercontent.com/33453360/158592548-0ed1284e-b8f8-47da-bd41-6e6848f3eb31.png)
-  - [API 문서 상세보기 (스웨거)](https://app.swaggerhub.com/apis/d3856/BudBuddy/1.0#/)
+
+- [API 문서 상세보기 (스웨거)](https://app.swaggerhub.com/apis/d3856/BudBuddy/1.0#/)
 
 ### Tech Stack
 ![Screenshot from 2022-03-17 14-34-21](https://user-images.githubusercontent.com/93773242/158760479-4f921de7-038b-4b11-9182-e4b1f5360bc3.png)
@@ -69,6 +79,7 @@
 
 링크  
 [[BUD BUDDY]]()
+
 ---
 
 ## 각 항목의 세부사항은 Wiki에서 살펴볼 수 있습니다
