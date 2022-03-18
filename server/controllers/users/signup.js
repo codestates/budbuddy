@@ -17,11 +17,12 @@ module.exports = async (req, res) => {
         salt,
       },
     });
-    // console.log("얻어온 유저의 값:::::", user.dataValues, created);
+    console.log("얻어온 유저의 값:::::", user.dataValues, created);
 
     if (created) {
       return res.status(201).json({ message: `${userId}의 회원가입이 완료되었습니다`, id: user.dataValues.userId });
     } else {
+      console.log("기존 회원 가입");
       return res.status(401).send("기존에 가입되어 있는 회원입니다.");
     }
   } catch (err) {

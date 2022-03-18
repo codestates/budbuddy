@@ -1,4 +1,7 @@
 import React from "react";
+import { ThemeProvider } from "styled-components";
+import GlobalStyle from "./styles/GlobalStyle";
+import Theme from "./styles/Theme";
 import { Route, Routes } from "react-router-dom";
 import axios from "axios";
 import Login from "./pages/Login";
@@ -10,11 +13,14 @@ axios.defaults.withCredentials = true;
 const App = () => {
   return (
     <div>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/login" element={<Login />} />
-      </Routes>
+      <ThemeProvider theme={Theme}>
+        <GlobalStyle />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/login" element={<Login />} />
+        </Routes>
+      </ThemeProvider>
     </div>
   );
 };
