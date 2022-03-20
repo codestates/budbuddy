@@ -7,6 +7,7 @@ const theme = {
   signupInputLineHeight: "0.3rem",
   borderRadius: "4px",
   placeholderColor: "MediumSeaGreen",
+  textWaringColor: "tomato",
 };
 
 export default theme;

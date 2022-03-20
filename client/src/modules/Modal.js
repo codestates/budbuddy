@@ -7,9 +7,10 @@ const ModalContainer = styled.div`
   left: 0px;
   height: 100%;
   width: 100%;
-  display: flex;
+  display: grid;
   justify-content: center;
   align-items: center;
+  place-items: center;
   z-index: 10;
 
   > .modal_overlay {
@@ -20,30 +21,24 @@ const ModalContainer = styled.div`
   }
 
   > .modal_content {
-    background-color: white;
-    padding: 10px 10px;
-    justify-content: center;
-    text-align: center;
     position: relative;
-    border-radius: 10px;
+    background-color: white;
+    padding: 20px;
+    border-radius: ${(props) => props.theme.borderRadius};
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
-    width: 40%;
-    height: 15%;
 
-    display: flex;
-    justify-content: center;
+    display: grid;
     align-items: center;
+    justify-content: center;
+    place-items: center;
+    text-align: center;
+
     flex-direction: column;
   }
 
   > .modal_content > .modal_text {
-    margin: 0;
     font-size: 20px;
-
     display: grid;
-    justify-content: center;
-    align-items: center;
-
     white-space: pre;
   }
 
@@ -51,13 +46,10 @@ const ModalContainer = styled.div`
     all: unset;
     background-color: steelblue;
     color: white;
-    padding: 5px 20px;
-    border-radius: 10%;
+    padding: 3px 5px;
+    border-radius: ${(props) => props.theme.borderRadius};
     cursor: pointer;
 
-    margin: 10px;
-    width: 3%;
-    height: 20%;
     transform: translateY(10px);
   }
 

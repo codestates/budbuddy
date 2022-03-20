@@ -57,13 +57,13 @@ export const BGWrapper = styled.div`
 
 export const SignupWrapper = styled.div`
   display: grid;
-  grid-template-columns: minmax(1fr, auto);
-  grid-template-rows: repeat(4, minmax(1fr, auto));
+  grid-template-columns: repeat(3, minmax(1fr, auto));
+  grid-template-rows: minmax(1fr, auto) minmax(3fr, auto) minmax(0.1fr, auto) minmax(1fr, auto);
   grid-template-areas:
-    "signupText"
-    "inputWrapper"
-    "hr"
-    "join";
+    "signupText signupText signupText"
+    "inputWrapper inputWrapper inputWrapper"
+    "hr hr hr"
+    "test join cancle";
 
   text-align: center;
   align-items: center;
@@ -86,20 +86,48 @@ export const SignupWrapper = styled.div`
 
   .hr {
     grid-area: hr;
-    margin: 1.5rem 0 1.5rem 0;
+    margin: 0.6rem 0 1rem 0;
 
     background-color: GhostWhite;
   }
-  .join {
-    grid-area: join;
+
+  .btn {
     border-radius: ${(props) => props.theme.borderRadius};
     border: none;
     background-color: MediumSeaGreen;
 
-    width: 23%;
     color: white;
     padding: 6px;
     font-size: 20px;
+    transition: background-color 0.3s;
+  }
+
+  .join {
+    grid-area: join;
+  }
+
+  .join:active {
+    background-color: Teal;
+    color: black;
+  }
+
+  .test {
+    grid-area: test;
+  }
+
+  .test:active {
+    background-color: Teal;
+    color: black;
+  }
+
+  .cancle {
+    grid-area: cancle;
+    background-color: IndianRed;
+  }
+
+  .cancle:active {
+    background-color: LightPink;
+    color: black;
   }
 `;
 
@@ -108,11 +136,14 @@ export const InputWrapper = styled.div`
 
   display: grid;
   grid-template-columns: minmax(1fr, auto) minmax(9fr, auto);
-  grid-template-rows: repeat(3, minmax(1fr, auto));
+  grid-template-rows: repeat(6, minmax(1fr, auto));
   grid-template-areas:
     "idIcon inputId"
+    "chId chId"
     "passIcon inputPass"
-    "nickIcon inputNick";
+    "chPass chPass"
+    "nickIcon inputNick"
+    "chNick chNick";
 
   justify-content: center;
   text-align: center;
@@ -161,5 +192,26 @@ export const InputWrapper = styled.div`
   > *::placeholder {
     color: ${(props) => props.theme.placeholderColor};
     opacity: 0.5;
+  }
+
+  > .ch {
+    font-size: 12px;
+    white-space: pre;
+  }
+
+  > .invalid {
+    color: ${(props) => props.theme.textWaringColor};
+  }
+
+  > .chId {
+    grid-area: chId;
+  }
+
+  > .chPass {
+    grid-area: chPass;
+  }
+
+  > .chNick {
+    grid-area: chNick;
   }
 `;
