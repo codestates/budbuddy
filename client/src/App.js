@@ -7,6 +7,7 @@ import axios from "axios";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
 import Signup from "./pages/Signup";
+import NavigationBar from "./pages/components/NavigationBar";
 
 axios.defaults.withCredentials = true;
 
@@ -20,6 +21,7 @@ const App = () => {
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
         </Routes>
+        <NavigationBar className="navi" />
       </ThemeProvider>
     </div>
   );

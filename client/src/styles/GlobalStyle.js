@@ -41,9 +41,11 @@ a {
     text-decoration: none;
   }
 
-body {
+html,body {
+
     box-sizing: border-box;
     padding: 0px;
+
 }
   
 `;

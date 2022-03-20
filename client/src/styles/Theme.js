@@ -1,5 +1,5 @@
 const theme = {
-  mainColor: "WhiteSmoke",
+  mainColor: "PaleGoldenRod",
   subColor: "LightSteelBlue",
   boxShadowColor: "teal",
   fontSizeBg: "1.3rem",
@@ -8,6 +8,7 @@ const theme = {
   borderRadius: "4px",
   placeholderColor: "MediumSeaGreen",
   textWaringColor: "tomato",
+  navigationBGColor: "SteelBlue",
 };
 
 export default theme;

@@ -13,8 +13,6 @@ export const BGWrapper = styled.div`
 
   box-shadow: 15px 15px 7px ${(props) => props.theme.boxShadowColor};
 
-  margin: 1.1rem;
-
   img {
     width: 100%;
     height: 100%;

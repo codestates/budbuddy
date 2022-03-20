@@ -1,5 +1,6 @@
 import React, { useRef } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 function Login() {
   const refID = useRef(null);
@@ -43,6 +44,9 @@ function Login() {
       <button className="login" onClick={loginReq}>
         로그인
       </button>
+      <Link to="/signup">
+        <span className="signup">회원가입</span>
+      </Link>
     </div>
   );
 }
