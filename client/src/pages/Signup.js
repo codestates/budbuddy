@@ -8,6 +8,9 @@ import { faKey, faUser, faMask } from "@fortawesome/free-solid-svg-icons";
 import { validId, validPassword, validNickName, removeHangul } from "../utils/validation";
 import { useNavigate } from "react-router-dom";
 import { sleep } from "../utils/thirdParty";
+import create from "zustand";
+
+const useStore = create(() => ({ isLogined: false }));
 
 //배경 이미지 전환 트랜지션 필요
 
@@ -45,7 +48,7 @@ const Signup = () => {
     }
   }
 
-  function makeErrModal(modalCode) {
+  function makeModal(modalCode) {
     const tasks = {
       401() {
         return <ShadowModal text="이미 가입된 회원입니다" />;
@@ -231,7 +234,7 @@ const Signup = () => {
 
   return (
     <Content>
-      {makeErrModal(modalCode)}
+      {makeModal(modalCode)}
       <br />
       <BGWrapper>
         <img src={`signupBg/IMG_${imgNumber || 4311}.JPG`} alt={`bg`} />
@@ -278,6 +281,7 @@ const Signup = () => {
           className="test btn"
           onClick={() => {
             setModalCode(101);
+            useStore.setState({ isLogined: true });
           }}>
           Test
         </button>
