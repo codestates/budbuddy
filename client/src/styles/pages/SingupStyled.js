@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const SignupWrapper = styled.div`
+export const SignupWrapper = styled.form`
   display: grid;
   grid-template-columns: repeat(3, minmax(1fr, auto));
   grid-template-rows: minmax(1fr, auto) minmax(3fr, auto) minmax(0.1fr, auto) minmax(1fr, auto);
@@ -15,7 +15,7 @@ export const SignupWrapper = styled.div`
   place-items: center;
   justify-content: center;
 
-  background-color: ${(props) => props.theme.subColor};
+  background-color: ${(props) => props.theme.formColor};
   margin: 15% 10% 0 10%;
   padding-top: 4%;
   padding-bottom: 4%;
@@ -25,7 +25,15 @@ export const SignupWrapper = styled.div`
     grid-area: signupText;
     margin-bottom: 1.3rem;
     letter-spacing: 7px;
-    color: Snow;
+    color: black;
+
+    @media screen and (min-width: 390px) {
+      font-size: 1.7rem;
+    }
+
+    @media screen and (min-width: 520px) {
+      font-size: 2.1rem;
+    }
   }
 
   .hr {
@@ -49,7 +57,7 @@ export const SignupWrapper = styled.div`
     grid-area: join;
   }
 
-  .join:active {
+  .join:hover {
     background-color: Teal;
     color: black;
   }
@@ -60,25 +68,25 @@ export const SignupWrapper = styled.div`
     color: black;
   }
 
-  .cancle:active {
+  .cancle:hover {
     background-color: IndianRed;
     color: white;
   }
 `;
 
-export const InputWrapper = styled.form`
+export const InputWrapper = styled.div`
   grid-area: inputWrapper;
 
   display: grid;
   grid-template-columns: minmax(1fr, auto) minmax(9fr, auto);
   grid-template-rows: repeat(6, minmax(1fr, auto));
   grid-template-areas:
-    "idIcon inputId"
     "chId chId"
-    "passIcon inputPass"
+    "idIcon inputId"
     "chPass chPass"
-    "nickIcon inputNick"
-    "chNick chNick";
+    "passIcon inputPass"
+    "chNick chNick"
+    "nickIcon inputNick";
 
   justify-content: center;
   text-align: center;
@@ -131,6 +139,14 @@ export const InputWrapper = styled.form`
   > .ch {
     font-size: 12px;
     white-space: pre;
+
+    @media screen and (min-width: 390px) {
+      font-size: 1rem;
+    }
+
+    @media screen and (min-width: 520px) {
+      font-size: 1.3rem;
+    }
   }
 
   > .invalid {
