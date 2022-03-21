@@ -1,10 +1,13 @@
 const { User } = require("../../models/index");
-const createHashedPassword = require("../../modules/createHashedPassword");
+
+const createPassword = require("../../modules/createPassword");
+const jwt = require("jsonwebtoken");
+require("dotenv").config();
 
 module.exports = async (req, res) => {
   //이 유효성 검사는 클라에서 처리한다
   const { userId, password, nickname } = req.body;
-  const { password: encryptPassword, salt } = await createHashedPassword(password);
+  const { password: encryptPassword, salt } = await createPassword(password);
 
   try {
     const [user, created] = await User.findOrCreate({
@@ -15,7 +18,8 @@ module.exports = async (req, res) => {
         salt,
       },
     });
-    // console.log("얻어온 유저의 값:::::", user.dataValues, created);
+
+    console.log("얻어온 유저의 값: ", user.toJson(), 'isCreated? : ', created);
 
     if (created) {
       return res.status(201).json({ message: "signupSuccess", id: user.dataValues.userId });
@@ -24,6 +28,6 @@ module.exports = async (req, res) => {
       return res.status(202).json({ message: "usedUserId" });
     }
   } catch (err) {
-    console.log("회원가입 에러 발생:::::", err);
+    console.error("회원가입 에러 발생: ", err);
   }
 };

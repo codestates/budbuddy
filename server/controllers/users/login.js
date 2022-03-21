@@ -1,5 +1,5 @@
 const { User } = require("../../models/index");
-const makePasswordHashed = require("../../modules/makePasswordHashed");
+const authPassword = require("../../modules/authenticatePassword");
 const jwt = require("jsonwebtoken");
 
 require("dotenv").config();
@@ -7,7 +7,7 @@ const { ACCESS_SECRET } = process.env;
 
 module.exports = async (req, res) => {
   const { userId, password } = req.body;
-  const findPassword = await makePasswordHashed(userId, password);
+  const findPassword = await authPassword(userId, password);
 
   // console.log("findPassword:::", findPassword);
   if (findPassword === undefined) {
