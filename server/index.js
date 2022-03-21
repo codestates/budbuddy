@@ -13,24 +13,23 @@ var accessLogStream = rfs.createStream("access.log", {
 });
 
 const app = express();
-const PORT = process.env.SERVER_PORT || 80;
 
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 let corsOrigin = "*";
-console.log(process.env.NODE_ENV);
-
+console.log("NODE_ENV: ", process.env.NODE_ENV);
 if (process.env.NODE_ENV === "development") {
   require("dotenv").config();
+  var PORT = process.env.SERVER_PORT || 80;
   app.use(morgan("dev"));
-  corsOrigin = `http://localhost:3000`;
+  corsOrigin = `http://localhost:${PORT}`;
 } else if (process.env.NODE_ENV === "production") {
+  var PORT = 80;
   app.use(morgan("common", { stream: accessLogStream }));
   corsOrigin = ["https://budbuddy.click", "http://budbuddy.click"];
 }
-console.log(corsOrigin);
 const corsOptions = {
   origin: corsOrigin,
   credentials: true,
