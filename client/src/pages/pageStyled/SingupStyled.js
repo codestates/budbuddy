@@ -1,58 +1,5 @@
 import styled from "styled-components";
 
-export const Content = styled.div`
-  background-color: ${(props) => props.theme.mainColor};
-`;
-
-export const BGWrapper = styled.div`
-  display: grid;
-
-  height: 30%;
-  text-align: center;
-  position: relative;
-
-  box-shadow: 15px 15px 7px ${(props) => props.theme.boxShadowColor};
-
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: blur(1px);
-    border: none;
-  }
-
-  .backText {
-    position: absolute;
-
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    white-space: pre;
-
-    font-size: ${(props) => props.theme.fontSizeBg};
-    font-weight: ${(props) => props.theme.fontWeightBg};
-    color: MintCream;
-
-    > h1 {
-      text-transform: uppercase;
-      outline: 3px solid white;
-      outline-offset: 0.3em;
-      display: inline-block;
-      margin: 0.4em 0 0.5em;
-    }
-
-    > h1 > span {
-      color: MintCream;
-      text-transform: capitalize;
-      font-weight: 0;
-    }
-
-    .green {
-      color: green;
-    }
-  }
-`;
-
 export const SignupWrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(3, minmax(1fr, auto));
@@ -61,7 +8,7 @@ export const SignupWrapper = styled.div`
     "signupText signupText signupText"
     "inputWrapper inputWrapper inputWrapper"
     "hr hr hr"
-    "test join cancle";
+    "join join cancle";
 
   text-align: center;
   align-items: center;
@@ -69,7 +16,7 @@ export const SignupWrapper = styled.div`
   justify-content: center;
 
   background-color: ${(props) => props.theme.subColor};
-  margin: 0 10% 0 10%;
+  margin: 15% 10% 0 10%;
   padding-top: 4%;
   padding-bottom: 4%;
   border-radius: ${(props) => props.theme.borderRadius};
@@ -77,7 +24,6 @@ export const SignupWrapper = styled.div`
   .signupText {
     grid-area: signupText;
     margin-bottom: 1.3rem;
-    font-size: 2rem;
     letter-spacing: 7px;
     color: Snow;
   }
@@ -96,7 +42,6 @@ export const SignupWrapper = styled.div`
 
     color: white;
     padding: 6px;
-    font-size: 20px;
     transition: background-color 0.3s;
   }
 
@@ -109,23 +54,15 @@ export const SignupWrapper = styled.div`
     color: black;
   }
 
-  .test {
-    grid-area: test;
-  }
-
-  .test:active {
-    background-color: Teal;
-    color: black;
-  }
-
   .cancle {
     grid-area: cancle;
-    background-color: IndianRed;
+    background-color: Gainsboro;
+    color: black;
   }
 
   .cancle:active {
-    background-color: LightPink;
-    color: black;
+    background-color: IndianRed;
+    color: white;
   }
 `;
 
@@ -153,7 +90,6 @@ export const InputWrapper = styled.div`
     height: 2.1rem;
     border-radius: ${(props) => props.theme.borderRadius};
     padding-left: 1rem;
-    font-size: 20px;
   }
 
   > * {
@@ -161,7 +97,7 @@ export const InputWrapper = styled.div`
   }
 
   > .icon {
-    font-size: 22px;
+    font-size: ${(props) => props.theme.fontIconSize};
     filter: invert(85%) sepia(90%) saturate(400%) hue-rotate(130deg) brightness(95%) contrast(50%);
   }
 

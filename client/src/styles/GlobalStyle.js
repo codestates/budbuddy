@@ -27,25 +27,27 @@ const GlobalStyle = createGlobalStyle`
         font-style: normal;
     }
 
-*, *::before, *::after {
+html {
     box-sizing: border-box;
+}
+
+*, *::before, *::after {
+    box-sizing: inherit;
     font-family: 'BMJUA', monospace;
     font-style: normal;
     font-weight: 100;
     margin: 0;
     padding: 0;
-    
 }
 
 a {
     text-decoration: none;
   }
 
-html,body {
-
+body {
     box-sizing: border-box;
-    padding: 0px;
-
+    padding: 0 auto;
+    margin: 0 auto;
 }
   
 `;

@@ -70,8 +70,7 @@ function ShadowModal({ text }) {
       className={`modal ${isModal}`}
       onClick={() => {
         removeModal();
-      }}
-    >
+      }}>
       <div className={`modal_overlay ${isModal}`} />
       <div className={`modal_content ${isModal}`}>
         <div className={`modal_text ${isModal}`}>{text}</div>

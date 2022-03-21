@@ -1,15 +1,42 @@
 import React, { useState, useRef } from "react";
-import { Content, BGWrapper, SignupWrapper, InputWrapper } from "./pageStyled/SingupStyled";
+import styled from "styled-components";
+import { OutLine, BGWrapper } from "./pageStyled/common/CommonStyled";
+import { SignupWrapper, InputWrapper } from "./pageStyled/SingupStyled";
 import axios from "axios";
-import ShadowModal from "../modules/Modal";
-import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faKey, faUser, faMask } from "@fortawesome/free-solid-svg-icons";
 import { validId, validPassword, validNickName, removeHangul } from "../utils/validation";
 import { useNavigate } from "react-router-dom";
-import { sleep } from "../utils/thirdParty";
-import useStore from "../store/store";
+import { sleep, makeModal } from "../utils/thirdParty";
 
+const SignupBG = styled(BGWrapper)`
+  padding-top: ${(props) => props.theme.backgroundPaddingTop};
+
+  margin: 0 1rem 0 1rem;
+
+  > .std {
+    box-shadow: 15px 15px 7px ${(props) => props.theme.boxShadowColor};
+  }
+
+  .backText {
+    > h1 {
+      text-transform: uppercase;
+      outline: 2px solid rgb(255, 255, 255, 0.5);
+      outline-offset: 0.3em;
+      display: inline-block;
+      margin: 0.4em 0 0.5em;
+    }
+
+    > h1 > span {
+      text-transform: capitalize;
+      font-weight: 0;
+    }
+
+    .green {
+      color: green;
+    }
+  }
+`;
 //배경 이미지 전환 트랜지션 필요
 
 const Signup = () => {
@@ -44,33 +71,6 @@ const Signup = () => {
       );
       setModalCode(err_code);
     }
-  }
-
-  function makeModal(modalCode) {
-    const tasks = {
-      401() {
-        return <ShadowModal text="이미 가입된 회원입니다" />;
-      },
-      201() {
-        return (
-          <Link to="/login">
-            <ShadowModal text={`회원가입이 완료되었습니다.\n로그인 페이지로 이동합니다`} />
-          </Link>
-        );
-      },
-      101() {
-        return (
-          <Link to="/">
-            <ShadowModal text={`테스트 계정으로 시작합니다`} />
-          </Link>
-        );
-      },
-    };
-    if (!tasks[modalCode]) {
-      // console.log(`예외처리하지 않는 모달코드(${modalCode})입니다:`);
-      return null;
-    }
-    return tasks[modalCode]();
   }
 
   function chValidation(e) {
@@ -229,32 +229,26 @@ const Signup = () => {
 
   let imgNumber = 4976;
   let navigate = useNavigate();
-  const { login, setLogin } = useStore();
 
   return (
-    <Content>
+    <div>
       {makeModal(modalCode)}
-      <br />
-      <br />
-      <br />
-      <br />
-      <BGWrapper>
-        <img src={`signupBg/IMG_${imgNumber || 4311}.JPG`} alt={`bg`} />
-        <div className="backText">
-          <p>
-            Take care of <span className="green">your plants</span>
-          </p>
-          <h1 className="green">
-            Bud<span>Buddy</span>
-          </h1>
-          <p>
-            We <strong>love</strong> and <strong>protect nature</strong> stuff
-          </p>
+      <SignupBG>
+        <div className="std">
+          <img className="signupBg" src={`signupBg/IMG_${imgNumber || 4311}.JPG`} alt={`bg`} />
+          <div className="backText">
+            <p>
+              Take care of <span className="green">your plants</span>
+            </p>
+            <h1 className="green">
+              Bud<span>Buddy</span>
+            </h1>
+            <p>
+              We <strong>love</strong> and <strong>protect nature</strong> stuff
+            </p>
+          </div>
         </div>
-      </BGWrapper>
-      <br />
-      <br />
-      <br />
+      </SignupBG>
       <SignupWrapper>
         <p className="signupText">회원가입</p>
         <InputWrapper className="inputWrapper">
@@ -280,17 +274,6 @@ const Signup = () => {
           }}>
           Join
         </button>
-        {login ? (
-          <div />
-        ) : (
-          <button
-            onClick={() => {
-              setLogin(true);
-              setModalCode(101);
-            }}>
-            Test
-          </button>
-        )}
         <button
           className="cancle btn"
           onClick={async () => {
@@ -300,15 +283,7 @@ const Signup = () => {
           가입취소
         </button>
       </SignupWrapper>
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-    </Content>
+    </div>
   );
 };
 
