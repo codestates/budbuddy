@@ -8,8 +8,6 @@ export const Content = styled.nav`
 
   position: fixed;
   bottom: 0;
-  left: 0;
-  right: 0;
 
   z-index: 10;
   display: grid;
@@ -32,14 +30,14 @@ export const Content = styled.nav`
   /* a:active {
     color: black;
   } */
-  /* 
+
   @media screen and (min-width: 390px) {
     width: ${(props) => props.theme.iphoneWidth};
   }
 
   @media screen and (min-width: 520px) {
     width: ${(props) => props.theme.web520px};
-  } */
+  }
 `;
 
 function NavigationBar() {

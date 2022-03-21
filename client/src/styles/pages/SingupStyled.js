@@ -49,7 +49,7 @@ export const SignupWrapper = styled.div`
     grid-area: join;
   }
 
-  .join:active {
+  .join:hover {
     background-color: Teal;
     color: black;
   }
@@ -60,7 +60,7 @@ export const SignupWrapper = styled.div`
     color: black;
   }
 
-  .cancle:active {
+  .cancle:hover {
     background-color: IndianRed;
     color: white;
   }

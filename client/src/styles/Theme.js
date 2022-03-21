@@ -11,7 +11,7 @@ const theme = {
   textWaringColor: "tomato",
   navigationBGColor: "SteelBlue",
   backgroundTextColor: "MintCream",
-  backgroundPaddingTop: "5rem",
+  backgroundPaddingTop: "6rem",
   iphoneWidth: "390px",
   web520px: "520px",
   width: 390,

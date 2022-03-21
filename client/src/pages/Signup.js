@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import styled from "styled-components";
-import { OutLine, BGWrapper } from "../styles/CommonStyled";
+import { BGWrapper } from "../styles/CommonStyled";
 import { SignupWrapper, InputWrapper } from "../styles/pages/SingupStyled";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

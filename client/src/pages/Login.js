@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import styled from "styled-components";
-import { OutLine, Content, BGWrapper } from "../styles/CommonStyled";
+import { BGWrapper } from "../styles/CommonStyled";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -36,7 +36,7 @@ const LoginBG = styled(BGWrapper)`
 `;
 
 const LoginForm = styled.div`
-  margin: 2rem 3rem 0 3rem;
+  margin: 14% 3rem 0 3rem;
   padding: 1rem 1rem 0.4rem 1rem;
   background-color: #f7f6f6;
   border-radius: ${(props) => props.theme.borderRadius};
@@ -125,15 +125,11 @@ const SocialWrapper = styled.div`
     border: none;
     padding: 0.3rem 2rem;
     font-weight: 100;
+    transition: background-color 0.3s;
   }
-`;
 
-const Logo = styled.div`
-  padding-left: 8px;
-  padding-top: 58%;
-
-  > span {
-    font-weight: 200;
+  .kakao:hover {
+    background-color: #ffd532;
   }
 `;
 
@@ -210,9 +206,6 @@ function Login() {
       <SocialWrapper>
         <button className="kakao">카카오톡으로 로그인</button>
       </SocialWrapper>
-      <Logo className="logo">
-        <span>Bud Buddy</span>
-      </Logo>
     </div>
   );
 }
