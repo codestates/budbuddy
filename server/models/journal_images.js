@@ -15,8 +15,14 @@ module.exports = (sequelize, DataTypes) => {
   }
   Journal_Images.init(
     {
-      user_id: DataTypes.INTEGER,
-      journal_id: DataTypes.INTEGER,
+      user_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      journal_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
       ext: DataTypes.STRING,
       filename: DataTypes.STRING,
       store_filename: DataTypes.STRING,

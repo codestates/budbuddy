@@ -14,6 +14,7 @@ module.exports = {
           model: "Users",
           key: "id",
         },
+        allowNull: false,
       },
       journal_id: {
         type: Sequelize.INTEGER,
@@ -21,18 +22,23 @@ module.exports = {
           model: "Journals",
           key: "id",
         },
+        allowNull: false,
       },
       ext: {
         type: Sequelize.STRING,
+        allowNull: false,
       },
       filename: {
         type: Sequelize.STRING,
+        allowNull: false,
       },
       store_filename: {
         type: Sequelize.STRING,
+        allowNull: false,
       },
       store_path: {
         type: Sequelize.STRING,
+        allowNull: false,
       },
       created_at: {
         allowNull: false,

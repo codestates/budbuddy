@@ -14,9 +14,11 @@ module.exports = {
           model: "Users",
           key: "id",
         },
+        allowNull: false,
       },
       name: {
         type: Sequelize.STRING,
+        allowNull: false,
       },
       created_at: {
         allowNull: false,
