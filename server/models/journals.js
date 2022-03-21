@@ -28,11 +28,20 @@ module.exports = (sequelize, DataTypes) => {
   }
   Journals.init(
     {
-      user_id: DataTypes.INTEGER,
-      plant_id: DataTypes.INTEGER,
+      user_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      plant_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
       summary: DataTypes.STRING,
       detailbody: DataTypes.STRING,
-      public: DataTypes.BOOLEAN,
+      public: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+      },
     },
     {
       sequelize,

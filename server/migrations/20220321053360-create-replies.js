@@ -14,6 +14,7 @@ module.exports = {
           model: "Replies",
           key: "id",
         },
+        allowNull: true,
       },
       user_id: {
         type: Sequelize.INTEGER,
@@ -21,9 +22,11 @@ module.exports = {
           model: "Users",
           key: "id",
         },
+        allowNull: false,
       },
       body: {
         type: Sequelize.STRING,
+        allowNull: false,
       },
       journal_id: {
         type: Sequelize.INTEGER,
@@ -31,6 +34,7 @@ module.exports = {
           model: "Journals",
           key: "id",
         },
+        allowNull: false,
       },
       class: {
         type: Sequelize.TINYINT,

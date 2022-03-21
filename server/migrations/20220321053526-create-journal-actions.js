@@ -14,6 +14,7 @@ module.exports = {
           model: "Journals",
           key: "id",
         },
+        allowNull: false,
       },
       actions_id: {
         type: Sequelize.INTEGER,
@@ -21,6 +22,7 @@ module.exports = {
           model: "Actions",
           key: "id",
         },
+        allowNull: false,
       },
       created_at: {
         allowNull: false,
