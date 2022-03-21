@@ -22,7 +22,7 @@ let corsOrigin = "*";
 console.log("NODE_ENV: ", process.env.NODE_ENV);
 if (process.env.NODE_ENV === "development") {
   require("dotenv").config();
-  var PORT = process.env.SERVER_PORT || 80;
+  var PORT = 3000;
   app.use(morgan("dev"));
   corsOrigin = `http://localhost:${PORT}`;
 } else if (process.env.NODE_ENV === "production") {
