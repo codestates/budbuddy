@@ -1,15 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
-import useStore from "../../store/store";
+import useStore from "../store/store";
 
 export const Content = styled.nav`
   cursor: pointer;
 
   position: fixed;
   bottom: 0;
-  left: 0;
-  right: 0;
 
   z-index: 10;
   display: grid;
@@ -32,14 +30,14 @@ export const Content = styled.nav`
   /* a:active {
     color: black;
   } */
-  /* 
+
   @media screen and (min-width: 390px) {
     width: ${(props) => props.theme.iphoneWidth};
   }
 
   @media screen and (min-width: 520px) {
     width: ${(props) => props.theme.web520px};
-  } */
+  }
 `;
 
 function NavigationBar() {
@@ -60,7 +58,9 @@ function NavigationBar() {
         <span className="album">앨범</span>
       </NavLink>
       {login ? (
-        <span className="login">내 정보</span>
+        <NavLink to="/mypage">
+          <span className="login">내 정보</span>
+        </NavLink>
       ) : (
         <NavLink to="/login">
           <span className="login">로그인</span>

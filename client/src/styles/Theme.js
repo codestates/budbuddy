@@ -1,6 +1,7 @@
 const theme = {
   mainColor: "DarkSeaGreen",
   subColor: "LightSteelBlue",
+  formColor: "#f7f6f6",
   boxShadowColor: "teal",
   fontSizeBg: "1.3rem",
   fontWeightBg: 400,
