@@ -37,7 +37,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       },
       summary: DataTypes.STRING,
-      detailbody: DataTypes.STRING,
+      detail_body: DataTypes.STRING,
       public: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
