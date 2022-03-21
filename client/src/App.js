@@ -1,56 +1,34 @@
-import React, { useRef } from "react";
-import styled from "styled-components";
+import React from "react";
+import { ThemeProvider } from "styled-components";
+import GlobalStyle from "./styles/GlobalStyle";
+import Theme from "./styles/Theme";
+import { Route, Routes } from "react-router-dom";
 import axios from "axios";
-
-export const Content = styled.div``;
-
+import Login from "./pages/Login";
+import Home from "./pages/Home";
+import Signup from "./pages/Signup";
+import NavigationBar from "./pages/components/NavigationBar";
+import { OutLine, Content } from "./pages/pageStyled/common/CommonStyled";
 axios.defaults.withCredentials = true;
 
-function App() {
-  const refID = useRef(null);
-  const refPassword = useRef(null);
-
-  async function loginReq(e) {
-    const payload = {
-      Id: refID.current.value,
-      password: refPassword.current.value,
-    };
-
-    // refID.current.value = "";
-    // refPassword.current.value = "";
-
-    try {
-      const resData = await axios.post(process.env.REACT_APP_API_URL + "/login", payload);
-      console.log(resData.data.payload);
-
-      const { name, age, job } = resData.data.payload;
-
-      const loginSetting = {
-        isLogin: true,
-        accessToken: "SDFASDF",
-        userInfo: resData.data.payload,
-      };
-    } catch (err) {
-      console.log(err);
-    }
-  }
-
+const App = () => {
   return (
-    <div className="App">
-      <Content>
-        <h1>버드버디 시작!</h1>
-        <span>ID: </span>
-        <input ref={refID} className="" placeholder="test"></input>
-        <div></div>
-        <span>Password: </span>
-        <input ref={refPassword} className="" placeholder="1111"></input>
-        <div></div>
-        <button className="login" onClick={loginReq}>
-          로그인
-        </button>
-      </Content>
+    <div>
+      <ThemeProvider theme={Theme}>
+        <GlobalStyle />
+        <OutLine>
+          <Content className="Content">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/signup" element={<Signup />} />
+              <Route path="/login" element={<Login />} />
+            </Routes>
+            <NavigationBar className="navi" />
+          </Content>
+        </OutLine>
+      </ThemeProvider>
     </div>
   );
-}
+};
 
 export default App;
