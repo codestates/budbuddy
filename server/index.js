@@ -13,23 +13,24 @@ var accessLogStream = rfs.createStream("access.log", {
 });
 
 const app = express();
-const PORT = process.env.SERVER_PORT || 3000;
+const PORT = process.env.SERVER_PORT || 80;
 
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 let corsOrigin = "*";
+console.log(process.env.NODE_ENV);
 
 if (process.env.NODE_ENV === "development") {
   require("dotenv").config();
   app.use(morgan("dev"));
-  corsOrigin = `http://localhost:${PORT}`;
+  corsOrigin = `http://localhost:3000`;
 } else if (process.env.NODE_ENV === "production") {
   app.use(morgan("common", { stream: accessLogStream }));
   corsOrigin = ["https://budbuddy.click", "http://budbuddy.click"];
 }
-
+console.log(corsOrigin);
 const corsOptions = {
   origin: corsOrigin,
   credentials: true,
@@ -39,12 +40,13 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 app.get("/", (req, res) => {
-  res.send("버드버디! 시작!");
+  res.send("버드버디! 시작! 여기는");
 });
 
 //router
 const controllers = require("./controllers");
-app.post("/login", controllers.login);
+app.post("/users/login", controllers.login);
+app.post("/users/signup", controllers.signup);
 
 app.listen(PORT, () => {
   console.log(`서버 시작 ${corsOrigin}`);

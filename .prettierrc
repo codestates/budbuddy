@@ -6,15 +6,12 @@
   "printWidth": 200,
 
   "arrowParens": "always",
-  "bracketSameLine": false,
+  "bracketSameLine": true,
   "bracketSpacing": true,
   "embeddedLanguageFormatting": "auto",
   "htmlWhitespaceSensitivity": "css",
-  "insertPragma": false,
   "jsxSingleQuote": false,
   "proseWrap": "preserve",
   "quoteProps": "as-needed",
-  "requirePragma": true,
-  "useTabs": false,
-  "vueIndentScriptAndStyle": false
+  "useTabs": false
 }

@@ -7,10 +7,10 @@ export const Content = styled.div`
   display: grid;
 `;
 
-const Home = () => {
+const Mypage = () => {
   return (
     <Content>
-      <p>안녕하세요! 자신의 식물을 일기처럼 기록해보세요.</p>
+      <p>이곳은 마이 페이지</p>
       <div>리스트1</div>
       <div>리스트1</div>
       <div>리스트1</div>
@@ -22,4 +22,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Mypage;
