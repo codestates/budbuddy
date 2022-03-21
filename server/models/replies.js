@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Replies.hasOne(models.Replies);
+      Replies.hasMany(models.Replies, { foreignKey: "group_id" });
       Replies.belongsTo(models.Users, { foreignKey: "user_id" });
       Replies.belongsTo(models.Journals, { foreignKey: "journal_id" });
     }
