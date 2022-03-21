@@ -1,12 +1,12 @@
 import React, { useRef, useState } from "react";
 import styled from "styled-components";
-import { OutLine, Content, BGWrapper } from "./pageStyled/common/CommonStyled";
+import { OutLine, Content, BGWrapper } from "../styles/CommonStyled";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faKey, faUser } from "@fortawesome/free-solid-svg-icons";
 import useStore from "../store/store";
-import { sleep, makeModal } from "../utils/thirdParty";
+import { sleep, makeModal } from "../utils/errExeption";
 
 const BrWrapper = styled.div`
   display: grid;

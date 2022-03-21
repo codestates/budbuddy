@@ -1,4 +1,4 @@
-import ShadowModal from "../modules/Modal";
+import ShadowModal from "../components/Modal";
 import { Link } from "react-router-dom";
 
 export const sleep = (n) => new Promise((resolve) => setTimeout(resolve, n));

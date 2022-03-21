@@ -1,13 +1,13 @@
 import React, { useState, useRef } from "react";
 import styled from "styled-components";
-import { OutLine, BGWrapper } from "./pageStyled/common/CommonStyled";
-import { SignupWrapper, InputWrapper } from "./pageStyled/SingupStyled";
+import { OutLine, BGWrapper } from "../styles/CommonStyled";
+import { SignupWrapper, InputWrapper } from "../styles/pages/SingupStyled";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faKey, faUser, faMask } from "@fortawesome/free-solid-svg-icons";
-import { validId, validPassword, validNickName, removeHangul } from "../utils/validation";
+import { validId, validPassword, validNickName, removeHangul } from "../modules/validation";
 import { useNavigate } from "react-router-dom";
-import { sleep, makeModal } from "../utils/thirdParty";
+import { sleep, makeModal } from "../utils/errExeption";
 
 const SignupBG = styled(BGWrapper)`
   padding-top: ${(props) => props.theme.backgroundPaddingTop};

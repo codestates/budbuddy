@@ -66,7 +66,7 @@ export const SignupWrapper = styled.div`
   }
 `;
 
-export const InputWrapper = styled.div`
+export const InputWrapper = styled.form`
   grid-area: inputWrapper;
 
   display: grid;

@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
-import useStore from "../../store/store";
+import useStore from "../store/store";
 
 export const Content = styled.nav`
   cursor: pointer;
