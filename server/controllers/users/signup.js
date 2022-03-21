@@ -1,7 +1,5 @@
 const { User } = require("../../models/index");
 const createHashedPassword = require("../../modules/createHashedPassword");
-const jwt = require("jsonwebtoken");
-require("dotenv").config();
 
 module.exports = async (req, res) => {
   //이 유효성 검사는 클라에서 처리한다
@@ -17,7 +15,7 @@ module.exports = async (req, res) => {
         salt,
       },
     });
-    console.log("얻어온 유저의 값:::::", user.dataValues, created);
+    // console.log("얻어온 유저의 값:::::", user.dataValues, created);
 
     if (created) {
       return res.status(201).json({ message: `${userId}의 회원가입이 완료되었습니다`, id: user.dataValues.userId });

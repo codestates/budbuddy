@@ -2,6 +2,14 @@ import ShadowModal from "../components/Modal";
 import { Link } from "react-router-dom";
 
 export const sleep = (n) => new Promise((resolve) => setTimeout(resolve, n));
+export const parseErrCode = (msg) => {
+  return Number(
+    JSON.stringify(msg)
+      .split(" ")
+      .pop()
+      .replace(/[^0-9]/g, ""),
+  );
+};
 export function makeModal(modalCode = 0) {
   const tasks = {
     401() {
@@ -20,6 +28,12 @@ export function makeModal(modalCode = 0) {
           <ShadowModal text={`테스트 계정으로 시작합니다`} />
         </Link>
       );
+    },
+    doNotExistUser() {
+      return <ShadowModal text={`존재하지 않는 유저입니다.`} />;
+    },
+    wrongPassword() {
+      return <ShadowModal text={`비밀번호가 맞지 않습니다.`} />;
     },
   };
   if (!tasks[modalCode]) {

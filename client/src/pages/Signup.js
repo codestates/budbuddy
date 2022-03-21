@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faKey, faUser, faMask } from "@fortawesome/free-solid-svg-icons";
 import { validId, validPassword, validNickName, removeHangul } from "../modules/validation";
 import { useNavigate } from "react-router-dom";
-import { sleep, makeModal } from "../utils/errExeption";
+import { sleep, makeModal, parseErrCode } from "../utils/errExeption";
 
 const SignupBG = styled(BGWrapper)`
   padding-top: ${(props) => props.theme.backgroundPaddingTop};
@@ -63,12 +63,7 @@ const Signup = () => {
 
       setModalCode(201);
     } catch (err) {
-      const err_code = Number(
-        JSON.stringify(err.message)
-          .split(" ")
-          .pop()
-          .replace(/[^0-9]/g, ""),
-      );
+      const err_code = parseErrCode(err.message);
       setModalCode(err_code);
     }
   }

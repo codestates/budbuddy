@@ -58,7 +58,9 @@ function NavigationBar() {
         <span className="album">앨범</span>
       </NavLink>
       {login ? (
-        <span className="login">내 정보</span>
+        <NavLink to="/mypage">
+          <span className="login">내 정보</span>
+        </NavLink>
       ) : (
         <NavLink to="/login">
           <span className="login">로그인</span>
