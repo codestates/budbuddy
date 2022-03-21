@@ -5,10 +5,10 @@ export const Content = styled.div`
   display: grid;
 `;
 
-const Home = () => {
+const Daily = () => {
   return (
     <div>
-      <p>여기는 홈페이지.</p>
+      <p>여기는ㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㄴㅇㅁㅁㄴㅇ 내 일지.</p>
       <div>리스트1</div>
       <div>리스트1</div>
       <div>리스트1</div>
@@ -20,4 +20,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Daily;

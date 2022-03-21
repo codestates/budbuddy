@@ -1,4 +1,14 @@
 /*eslint-disable */
+
+export function validEmail(email) {
+  const regExp = /[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z0-9\.kr]+/g;
+  if (!regExp.test(email)) {
+    return false;
+  } else {
+    return true;
+  }
+}
+
 export function validId(id) {
   id = removeHangul(id);
   id = removeSpace(id);

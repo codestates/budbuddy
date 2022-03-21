@@ -10,7 +10,7 @@ export const OutLine = styled.div`
 `;
 
 export const Content = styled.div`
-  background-color: Aquamarine;
+  background-color: ${(props) => props.theme.subColor};
   height: 100vh;
 
   @media screen and (min-width: 390px) {

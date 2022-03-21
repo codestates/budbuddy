@@ -5,9 +5,9 @@ import { SignupWrapper, InputWrapper } from "../styles/pages/SingupStyled";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faKey, faUser, faMask } from "@fortawesome/free-solid-svg-icons";
-import { validId, validPassword, validNickName, removeHangul } from "../modules/validation";
+import { validEmail, validPassword, validNickName, removeHangul } from "../modules/validation";
 import { useNavigate } from "react-router-dom";
-import { sleep, makeModal, parseErrCode } from "../utils/errExeption";
+import { sleep, makeModal } from "../utils/errExeption";
 import useStore from "../store/store";
 
 const SignupBG = styled(BGWrapper)`
@@ -44,7 +44,7 @@ const Signup = () => {
   const [modalCode, setModalCode] = useState(0);
   const [isValid, setIsValid] = useState(false);
 
-  const checkId = useRef(null);
+  const checkEmail = useRef(null);
   const checkPass = useRef(null);
   const checkNick = useRef(null);
 
@@ -63,8 +63,7 @@ const Signup = () => {
         navigate("/mypage");
       }
     } catch (err) {
-      const err_code = parseErrCode(err.message);
-      setModalCode(err_code);
+      setModalCode(err.response.data.message);
     }
   }
 
@@ -76,16 +75,16 @@ const Signup = () => {
     }
 
     switch (className) {
-      case "inputId":
+      case "inputEmail":
         {
-          const isValid = validId(e.target.value);
+          const isValid = validEmail(e.target.value);
           if (!isValid) {
-            checkId.current.textContent = "유효하지 않은 아이디입니다";
-            checkId.current.className = "chId ch invalid";
+            checkEmail.current.textContent = "유효하지 않은 이메일입니다";
+            checkEmail.current.className = "chEmail ch invalid";
             setIsValid(false);
           } else {
-            checkId.current.textContent = "";
-            checkId.current.className = "chId ch";
+            checkEmail.current.textContent = "";
+            checkEmail.current.className = "chEmail ch";
             setIsValid(true);
           }
         }
@@ -131,9 +130,9 @@ const Signup = () => {
     if (e.target.value !== "") return;
 
     switch (className) {
-      case "inputId": {
-        checkId.current.className = "chId ch";
-        return (checkId.current.textContent = "첫글자는 영문이며 특수문자,한글 및 공백 사용불가\n 총 4~15글자 사이여야 합니다.");
+      case "inputEmail": {
+        checkEmail.current.className = "chEmail ch";
+        return (checkEmail.current.textContent = "이메일 형식을 입력해주세요.");
       }
       case "inputPass":
         checkPass.current.className = "chPass ch";
@@ -151,9 +150,9 @@ const Signup = () => {
     const className = e.target.className;
 
     switch (className) {
-      case "inputId": {
-        checkId.current.className = "chId ch";
-        checkId.current.textContent = "";
+      case "inputEmail": {
+        checkEmail.current.className = "chEmail ch";
+        checkEmail.current.textContent = "";
         return;
       }
       case "inputPass": {
@@ -181,16 +180,16 @@ const Signup = () => {
     }
 
     switch (className) {
-      case "inputId": {
-        const isValid = validId(e.target.value);
+      case "inputEmail": {
+        const isValid = validEmail(e.target.value);
         if (!isValid) {
           setIsValid(false);
-          checkId.current.textContent = "유효하지 않은 아이디입니다";
-          checkId.current.className = "chId ch invalid";
+          checkEmail.current.textContent = "유효하지 않은 이메일 형식입니다";
+          checkEmail.current.className = "chEmail ch invalid";
         } else {
           setIsValid(true);
-          checkId.current.className = "chId ch";
-          checkId.current.textContent = "";
+          checkEmail.current.className = "chEmail ch";
+          checkEmail.current.textContent = "";
         }
         return;
       }
@@ -227,10 +226,10 @@ const Signup = () => {
 
   function join(e) {
     e.preventDefault();
-    const { userId, password, nickname } = e.target;
+    const { email, password, nickname } = e.target;
     // console.log("Join:::", userId.value, password.value, nickname.value);
 
-    if (userId.value === "" || password.value === "" || nickname.value === "") {
+    if (email.value === "" || password.value === "" || nickname.value === "") {
       setModalCode("reqfillform");
       return;
     } else if (!isValid) {
@@ -239,7 +238,7 @@ const Signup = () => {
     }
 
     const signupInfo = {
-      userId: userId.value,
+      email: email.value,
       password: password.value,
       nickname: nickname.value,
     };
@@ -270,8 +269,8 @@ const Signup = () => {
         <p className="signupText">회원가입</p>
         <InputWrapper className="inputWrapper">
           <FontAwesomeIcon className="idIcon icon" icon={faUser} />
-          <input className="inputId" name="userId" type="text" placeholder="ID를 입력하세요" maxLength={15} onBlur={explainReset} onFocus={explainSignup} onChange={chValidation} />
-          <div ref={checkId} className="chId ch" name="chId"></div>
+          <input className="inputEmail" name="email" type="text" placeholder="이메일을 입력하세요" maxLength={30} onBlur={explainReset} onFocus={explainSignup} onChange={chValidation} />
+          <div ref={checkEmail} className="chEmail ch" name="chEmail"></div>
           <FontAwesomeIcon className="passIcon icon" icon={faKey} />
           <input className="inputPass" name="password" type="text" placeholder="비밀번호를 입력하세요" maxLength={20} onBlur={explainReset} onFocus={explainSignup} onChange={chValidation} />
           <div ref={checkPass} className="chPass ch"></div>

@@ -81,7 +81,7 @@ export const InputWrapper = styled.div`
   grid-template-columns: minmax(1fr, auto) minmax(9fr, auto);
   grid-template-rows: repeat(6, minmax(1fr, auto));
   grid-template-areas:
-    "chId chId"
+    "chEmail chEmail"
     "idIcon inputId"
     "chPass chPass"
     "passIcon inputPass"
@@ -153,8 +153,8 @@ export const InputWrapper = styled.div`
     color: ${(props) => props.theme.textWaringColor};
   }
 
-  > .chId {
-    grid-area: chId;
+  > .chEmail {
+    grid-area: chEmail;
   }
 
   > .chPass {

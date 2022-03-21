@@ -15,7 +15,12 @@ function Login() {
 
   async function loginReq(e) {
     e.preventDefault();
+
     const { userId, password } = e.target;
+    if (userId.value === "" || password.value === "") {
+      setModalCode("reqfillLoginform");
+      return;
+    }
 
     const payload = {
       userId: userId.value,
@@ -26,14 +31,14 @@ function Login() {
       const resData = await axios.post(process.env.REACT_APP_API_URL + "/users/login", payload);
       // console.log("응답::::", resData.data);
       setModalCode(resData.data.message);
-
       if (resData.data.message === "ok") {
         setLogin(true);
         navigate("/mypage");
         return;
       }
     } catch (err) {
-      console.log(err);
+      console.log(err.response.data);
+      setModalCode(err.response.data.message);
     }
   }
 

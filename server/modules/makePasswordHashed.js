@@ -1,7 +1,7 @@
 const { User } = require("../models/index");
 const crypto = require("crypto");
 
-const makePasswordHashed = (userId, plainPassword) =>
+const makePasswordHashed = (email, plainPassword) =>
   new Promise(async (resolve, reject) => {
     // salt를 가져오는 부분은 각자의 DB에 따라 수정
     try {
@@ -9,7 +9,7 @@ const makePasswordHashed = (userId, plainPassword) =>
         attributes: ["salt"],
         raw: true,
         where: {
-          userId,
+          email,
         },
       }).then((result) => result.salt);
 
