@@ -31,7 +31,7 @@ export const LoginBG = styled(BGWrapper)`
 export const LoginForm = styled.form`
   margin: 14% 3rem 0 3rem;
   padding: 1rem 1rem 0.4rem 1rem;
-  background-color: #f7f6f6;
+  background-color: ${(props) => props.theme.formColor};
   border-radius: ${(props) => props.theme.borderRadius};
 
   display: grid;

@@ -1,6 +1,7 @@
 const theme = {
   mainColor: "DarkSeaGreen",
   subColor: "LightSteelBlue",
+  formColor: "#f7f6f6",
   boxShadowColor: "teal",
   fontSizeBg: "1.3rem",
   fontWeightBg: 400,
@@ -11,7 +12,7 @@ const theme = {
   textWaringColor: "tomato",
   navigationBGColor: "SteelBlue",
   backgroundTextColor: "MintCream",
-  backgroundPaddingTop: "6rem",
+  backgroundPaddingTop: "5rem",
   iphoneWidth: "390px",
   web520px: "520px",
   width: 390,

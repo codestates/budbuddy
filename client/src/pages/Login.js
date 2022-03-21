@@ -67,7 +67,7 @@ function Login() {
             onClick={async () => {
               await sleep(250);
               setLogin(true);
-              setModalCode(101);
+              setModalCode("testLogin");
             }}>
             Test 계정
           </span>
