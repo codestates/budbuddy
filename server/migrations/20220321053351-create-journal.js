@@ -27,7 +27,7 @@ module.exports = {
       summary: {
         type: Sequelize.STRING,
       },
-      detailbody: {
+      detail_body: {
         type: Sequelize.STRING,
       },
       public: {
