@@ -14,6 +14,7 @@ module.exports = {
           model: "Users",
           key: "id",
         },
+        allowNull: false,
       },
       plant_id: {
         type: Sequelize.INTEGER,
@@ -21,15 +22,17 @@ module.exports = {
           model: "Plants",
           key: "id",
         },
+        allowNull: false,
       },
       summary: {
         type: Sequelize.STRING,
       },
-      detailbody: {
+      detail_body: {
         type: Sequelize.STRING,
       },
       public: {
         type: Sequelize.BOOLEAN,
+        allowNull: false,
       },
       created_at: {
         allowNull: false,
