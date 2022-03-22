@@ -2,15 +2,13 @@ import React from "react";
 import styled from "styled-components";
 
 export const Layout = styled.div`
-  background-color: ${(props) => props.theme.mainColor};
-
   display: grid;
 `;
 
-const Mypage = () => {
+const Daily = () => {
   return (
-    <Layout>
-      <p>이곳은 마이 페이지</p>
+    <div>
+      <p>여기는ㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㄴㅇㅁㅁㄴㅇ 내 일지.</p>
       <div>리스트1</div>
       <div>리스트1</div>
       <div>리스트1</div>
@@ -18,8 +16,8 @@ const Mypage = () => {
       <div>리스트1</div>
       <div>리스트1</div>
       <div>리스트1</div>
-    </Layout>
+    </div>
   );
 };
 
-export default Mypage;
+export default Daily;

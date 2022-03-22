@@ -1,35 +1,7 @@
 import styled from "styled-components";
-import { BGWrapper } from "../CommonStyled";
-
-export const BrWrapper = styled.div`
-  display: grid;
-  justify-content: center;
-  place-items: center;
-
-  .hr {
-    margin: 1.8rem;
-    background-color: white;
-    width: 600%;
-  }
-`;
-
-export const LoginBG = styled(BGWrapper)`
-  padding-top: ${(props) => props.theme.backgroundPaddingTop};
-  padding-bottom: 1rem;
-
-  .backText {
-    @media screen and (min-width: 390px) {
-      font-size: 1.7rem;
-    }
-
-    @media screen and (min-width: 520px) {
-      font-size: 2.4rem;
-    }
-  }
-`;
 
 export const LoginForm = styled.form`
-  margin: 14% 3rem 0 3rem;
+  margin: 8% 3rem 0 3rem;
   padding: 1rem 1rem 0.4rem 1rem;
   background-color: ${(props) => props.theme.formColor};
   border-radius: ${(props) => props.theme.borderRadius};
@@ -90,7 +62,7 @@ export const LoginForm = styled.form`
     margin-top: 1rem;
   }
   .signtext {
-    font-size: 19px;
+    font-size: 14px;
   }
 
   .textAni {
