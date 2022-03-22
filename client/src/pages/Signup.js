@@ -7,23 +7,29 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faKey, faUser, faMask } from "@fortawesome/free-solid-svg-icons";
 import { validEmail, validPassword, validNickName, removeHangul } from "../modules/validation";
 import { useNavigate } from "react-router-dom";
-import { sleep, makeModal } from "../utils/errExeption";
+import { makeModal } from "../utils/errExeption";
+import { sleep } from "../modules/sleep";
 import useStore from "../store/store";
 
 const SignupBG = styled(BGWrapper)`
   padding-top: ${(props) => props.theme.backgroundPaddingTop};
 
-  margin: 0 1rem 0 1rem;
+  margin: 0 0rem 0 0rem;
 
   > .std {
-    box-shadow: 15px 15px 7px ${(props) => props.theme.boxShadowColor};
+    transition: box-shadow 0.3s ease;
+  }
+
+  .std:hover {
+    box-shadow: 0px -13px #53a7ea, 0px 13px #53a7ea, 0px -13px #53a7ea;
+    transform: translateY(-3px);
   }
 
   .backText {
     > h1 {
       text-transform: uppercase;
+      outline-offset: 0.4em;
       outline: 2px solid rgb(255, 255, 255, 0.5);
-      outline-offset: 0.3em;
       display: inline-block;
       margin: 0.4em 0 0.5em;
     }
@@ -266,7 +272,7 @@ const Signup = () => {
         </div>
       </SignupBG>
       <SignupWrapper onSubmit={join}>
-        <p className="signupText">회원가입</p>
+        <div className="signupText">회원가입</div>
         <InputWrapper className="inputWrapper">
           <FontAwesomeIcon className="idIcon icon" icon={faUser} />
           <input className="inputEmail" name="email" type="text" placeholder="이메일을 입력하세요" maxLength={30} onBlur={explainReset} onFocus={explainSignup} onChange={chValidation} />

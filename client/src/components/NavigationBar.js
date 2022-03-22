@@ -36,7 +36,7 @@ export const Content = styled.nav`
   }
 
   @media screen and (min-width: 520px) {
-    width: ${(props) => props.theme.web520px};
+    width: ${(props) => props.theme.webWidth};
   }
 `;
 

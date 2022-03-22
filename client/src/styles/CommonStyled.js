@@ -11,20 +11,14 @@ export const OutLine = styled.div`
 
 export const Content = styled.div`
   background-color: ${(props) => props.theme.subColor};
-  height: 100vh;
+  font-size: 2.5vh;
 
   @media screen and (min-width: 390px) {
     width: ${(props) => props.theme.iphoneWidth};
-    * {
-      font-size: 1.2rem;
-    }
   }
 
   @media screen and (min-width: 520px) {
-    width: ${(props) => props.theme.web520px};
-    * {
-      font-size: 1.9rem;
-    }
+    width: ${(props) => props.theme.webWidth};
   }
 `;
 

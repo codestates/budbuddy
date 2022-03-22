@@ -32,7 +32,7 @@ html {
 }
 
 *, *::before, *::after {
-    box-sizing: inherit;
+    box-sizing: border-box;
     font-family: 'BMJUA', monospace;
     font-style: normal;
     font-weight: 100;
@@ -46,7 +46,7 @@ a {
 
 body {
     box-sizing: border-box;
-    padding: 0 auto;
+    padding: 0;
     margin: 0 auto;
 }
   

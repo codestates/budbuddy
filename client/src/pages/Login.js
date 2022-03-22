@@ -1,12 +1,20 @@
 import React, { useState } from "react";
-import { SocialWrapper, BrWrapper, LoginBG, LoginForm } from "../styles/pages/LoginStyled";
+import styled from "styled-components";
+import { SocialWrapper, LoginForm } from "../styles/pages/LoginStyled";
+import { BGWrapper } from "../styles/CommonStyled";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faKey, faUser } from "@fortawesome/free-solid-svg-icons";
 import useStore from "../store/store";
-import { sleep, makeModal } from "../utils/errExeption";
+import { makeModal } from "../utils/errExeption";
+import { sleep } from "../modules/sleep";
 import { useNavigate } from "react-router-dom";
+import Hr from "../components/Hr";
+
+const LoginBg = styled(BGWrapper)`
+  padding-top: ${(props) => props.theme.backgroundPaddingTop};
+`;
 
 function Login() {
   let navigate = useNavigate();
@@ -45,12 +53,12 @@ function Login() {
   return (
     <div>
       {makeModal(modalCode)}
-      <LoginBG>
+      <LoginBg>
         <div className="std">
           <img src={`signupBg/IMG_${4976}.JPG`} alt={`bg`} />
           <p className="backText">"나무는 나무라지 않는다."</p>
         </div>
-      </LoginBG>
+      </LoginBg>
       <LoginForm onSubmit={loginReq}>
         <FontAwesomeIcon className="idIcon icon" icon={faUser} />
         <input className="inputId" placeholder="아이디를 입력하세요" name="userId"></input>
@@ -83,9 +91,7 @@ function Login() {
           </Link>
         </div>
       </LoginForm>
-      <BrWrapper>
-        <hr className="hr" />
-      </BrWrapper>
+      <Hr padding={3} width={90} />
       <SocialWrapper>
         <button className="kakao">카카오톡으로 로그인</button>
       </SocialWrapper>

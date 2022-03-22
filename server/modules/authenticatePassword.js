@@ -11,7 +11,7 @@ const authenticatePassword = (email, plainPassword) =>
           email,
         },
       });
-      console.log(salt.toJson());
+      // console.log(salt.toJson());
       crypto.pbkdf2(plainPassword, salt, 100000, 64, "sha512", (err, key) => {
         if (err) reject(err);
         resolve(key.toString("base64"));

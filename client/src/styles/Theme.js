@@ -2,7 +2,6 @@ const theme = {
   mainColor: "#141414",
   subColor: "LightSteelBlue",
   formColor: "#f7f6f6",
-  boxShadowColor: "teal",
   placeholderColor: "MediumSeaGreen",
   textWaringColor: "tomato",
   navigationBGColor: "SteelBlue",
@@ -13,9 +12,8 @@ const theme = {
   signupInputLineHeight: "0.3rem",
   borderRadius: "4px",
   backgroundPaddingTop: "5rem",
-  iphoneWidth: "390px",
-  web520px: "520px",
-  width: 390,
+  iphoneWidth: "100vw",
+  webWidth: "400px",
 };
 
 export default theme;

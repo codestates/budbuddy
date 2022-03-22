@@ -26,14 +26,6 @@ export const SignupWrapper = styled.form`
     margin-bottom: 1.3rem;
     letter-spacing: 7px;
     color: black;
-
-    @media screen and (min-width: 390px) {
-      font-size: 1.7rem;
-    }
-
-    @media screen and (min-width: 520px) {
-      font-size: 2.1rem;
-    }
   }
 
   .hr {

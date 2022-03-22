@@ -1,7 +1,6 @@
 import ShadowModal from "../components/Modal";
 import { Link } from "react-router-dom";
 
-export const sleep = (n) => new Promise((resolve) => setTimeout(resolve, n));
 export const parseErrCode = (msg) => {
   return Number(
     JSON.stringify(msg)

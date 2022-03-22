@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-export const Content = styled.div`
+export const Layout = styled.div`
   background-color: ${(props) => props.theme.mainColor};
 
   display: grid;
@@ -9,7 +9,7 @@ export const Content = styled.div`
 
 const Mypage = () => {
   return (
-    <Content>
+    <Layout>
       <p>이곳은 마이 페이지</p>
       <div>리스트1</div>
       <div>리스트1</div>
@@ -18,7 +18,7 @@ const Mypage = () => {
       <div>리스트1</div>
       <div>리스트1</div>
       <div>리스트1</div>
-    </Content>
+    </Layout>
   );
 };
 
