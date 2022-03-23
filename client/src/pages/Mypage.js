@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 export const Layout = styled.div`
   display: grid;
+  /* height: inherit; */
 `;
 
 const Mypage = () => {

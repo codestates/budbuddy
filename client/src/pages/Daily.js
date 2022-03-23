@@ -1,22 +1,18 @@
 import React from "react";
 import styled from "styled-components";
+import Logo from "../components/Logo";
+import TabBtnOne from "../components/TabBtnOne";
+export const Layout = styled.div``;
 
-export const Layout = styled.div`
-  display: grid;
-`;
-
-const Daily = () => {
+//식물 추가 탭
+//카드 컴포넌트
+//<Logo />
+const Daily = ({ tabName, btnName }) => {
   return (
-    <div>
-      <p>여기는ㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㄴㅇㅁㅁㄴㅇ 내 일지.</p>
-      <div>리스트1</div>
-      <div>리스트1</div>
-      <div>리스트1</div>
-      <div>리스트1</div>
-      <div>리스트1</div>
-      <div>리스트1</div>
-      <div>리스트1</div>
-    </div>
+    <Layout>
+      <Logo />
+      <TabBtnOne tabName={"내 식물"} btnName={"내 식물 추가"} />
+    </Layout>
   );
 };
 
