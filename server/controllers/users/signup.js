@@ -1,16 +1,16 @@
-const { User } = require("../../models/index");
+const { Users } = require("../../models/index");
 
 const createPassword = require("../../modules/createPassword");
-const jwt = require("jsonwebtoken");
-require("dotenv").config();
 
 module.exports = async (req, res) => {
   //이 유효성 검사는 클라에서 처리한다
   const { email, password, nickname } = req.body;
-  const { password: encryptPassword, salt } = await createHashedPassword(password);
+  const { password: encryptPassword, salt } = await createPassword(password);
+
+  console.log(encryptPassword, salt);
 
   try {
-    const [user, created] = await User.findOrCreate({
+    const [user, created] = await Users.findOrCreate({
       where: { email },
       defaults: {
         password: encryptPassword,
@@ -19,7 +19,7 @@ module.exports = async (req, res) => {
       },
     });
 
-    console.log("얻어온 유저의 값: ", user.toJson(), "isCreated? : ", created);
+    console.log("얻어온 유저의 값: ", user.dataValues, "isCreated? : ", created);
 
     if (created) {
       return res.status(201).json({ message: "signupSuccess", email: user.dataValues.email });

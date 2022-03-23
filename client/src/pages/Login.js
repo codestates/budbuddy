@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { SocialWrapper, LoginForm } from "../styles/pages/LoginStyled";
-import { BGWrapper } from "../styles/CommonStyled";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -26,14 +25,14 @@ function Login() {
   async function loginReq(e) {
     e.preventDefault();
     // console.log("호출");
-    const { userId, password } = e.target;
-    if (userId.value === "" || password.value === "") {
+    const { email, password } = e.target;
+    if (email.value === "" || password.value === "") {
       setModalCode("reqfillLoginform");
       return;
     }
 
     const payload = {
-      userId: userId.value,
+      email: email.value,
       password: password.value,
     };
 
@@ -60,7 +59,7 @@ function Login() {
       <br />
       <LoginForm onSubmit={loginReq}>
         <FontAwesomeIcon className="idIcon icon" icon={faUser} />
-        <input className="inputId" placeholder="아이디를 입력하세요" name="userId"></input>
+        <input className="inputId" placeholder="이메일을 입력하세요" name="email"></input>
         <FontAwesomeIcon className="passIcon icon" icon={faKey} />
         <input className="inputPass" placeholder="비밀번호를 입력하세요" name="password" type="password"></input>
         <button
