@@ -1,26 +1,39 @@
+const { User } = require("../../models/index");
+const authPassword = require("../../modules/authenticatePassword");
 const jwt = require("jsonwebtoken");
-require("dotenv").config();
 
+require("dotenv").config();
 const { ACCESS_SECRET } = process.env;
 
 module.exports = async (req, res) => {
-  const { Id, password } = req.body;
+  const { userId, password } = req.body;
+  const findPassword = await authPassword(userId, password);
 
+  // console.log("findPassword:::", findPassword);
+  if (findPassword === undefined) {
+    return res.status(202).send({ message: "doNotExistUser" });
+  }
+
+  const value = await User.findOne({
+    where: {
+      userId,
+      password: findPassword,
+    },
+  });
+
+  if (!value) {
+    return res.status(202).send({ message: "wrongPassword" });
+  }
+
+  console.log("value:::", value);
+
+  const { userId: findId, nickname } = value.dataValues;
   const payload = {
-    Id,
-    name: "jeyoung",
-    age: 38,
-    job: "programmer",
+    findId,
+    nickname,
   };
 
-  const opt = {
-    expiresIn: "1h",
-  };
-
-  const accessToken = jwt.sign(payload, ACCESS_SECRET, opt);
-
-  return res
-    .status(200)
-    .cookie("accessToken", accessToken, { maxAge: 60 * 60 * 60 * 60 * 100 })
-    .send({ payload, message: "ok" });
+  const accessToken = jwt.sign(payload, ACCESS_SECRET, { expiresIn: "1d" });
+  payload.accessToken = accessToken;
+  return res.status(200).send({ payload, message: "ok" });
 };
