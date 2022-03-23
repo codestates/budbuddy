@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const PlantsCycleChangeContainer = styled.div`
-  background-color: ${(props) => props.theme.mainColor};
+  background-color: ${(props) => props.theme.formColor};
   grid-area: PlantsCycleChange;
   display: grid;
   grid-template-columns: repeat(3, minmax(1fr, auto));

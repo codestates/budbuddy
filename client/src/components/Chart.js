@@ -96,9 +96,9 @@ const Chart = () => {
     svg
       .append("path") //넣어주기
       .datum(data)
-      .attr("fill", "green")
-      .attr("stroke", "green")
-      .attr("stroke-width", 3)
+      .attr("fill", "#BFD4AF")
+      .attr("stroke", "#8AB06D")
+      .attr("stroke-width", 1)
       .attr("d", area);
 
     // 각점에 텍스트 추가하기

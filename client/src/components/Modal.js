@@ -55,18 +55,6 @@ const ModalContainer = styled.div`
   &.hidden {
     display: none;
   }
-
-  @media screen and (min-width: 390px) {
-    * {
-      font-size: 1.3rem;
-    }
-  }
-
-  @media screen and (min-width: 520px) {
-    * {
-      font-size: 2.3rem;
-    }
-  }
 `;
 
 function ShadowModal({ text }) {

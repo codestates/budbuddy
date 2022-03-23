@@ -14,7 +14,10 @@ module.exports = (sequelize, DataTypes) => {
   }
   Actions.init(
     {
-      type: DataTypes.STRING,
+      type: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
     },
     {
       sequelize,
