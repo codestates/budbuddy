@@ -15,6 +15,10 @@ export const SignupWrapper = styled.form`
   place-items: center;
   justify-content: center;
 
+  > * {
+    font-size: 2vh;
+  }
+
   background-color: ${(props) => props.theme.formColor};
   margin: 15% 10% 0 10%;
   padding-top: 4%;
@@ -26,6 +30,7 @@ export const SignupWrapper = styled.form`
     margin-bottom: 1.3rem;
     letter-spacing: 7px;
     color: black;
+    font-size: 3vh;
   }
 
   .hr {
@@ -129,16 +134,8 @@ export const InputWrapper = styled.div`
   }
 
   > .ch {
-    font-size: 12px;
+    font-size: 14px;
     white-space: pre;
-
-    @media screen and (min-width: 390px) {
-      font-size: 1rem;
-    }
-
-    @media screen and (min-width: 520px) {
-      font-size: 1.3rem;
-    }
   }
 
   > .invalid {
