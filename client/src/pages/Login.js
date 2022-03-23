@@ -55,8 +55,6 @@ function Login() {
     <Layout>
       {makeModal(modalCode)}
       <TextOnImg texts={proverbs} />
-      <br />
-      <br />
       <LoginForm onSubmit={loginReq}>
         <FontAwesomeIcon className="idIcon icon" icon={faUser} />
         <input className="inputId" placeholder="이메일을 입력하세요" name="email"></input>
@@ -93,16 +91,6 @@ function Login() {
       <SocialWrapper>
         <button className="kakao">카카오톡으로 로그인</button>
       </SocialWrapper>
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
     </Layout>
   );
 }
