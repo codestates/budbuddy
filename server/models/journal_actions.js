@@ -15,8 +15,14 @@ module.exports = (sequelize, DataTypes) => {
   }
   Journal_Actions.init(
     {
-      journal_id: DataTypes.INTEGER,
-      actions_id: DataTypes.INTEGER,
+      journal_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      actions_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
     },
     {
       sequelize,

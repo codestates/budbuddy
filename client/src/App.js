@@ -9,6 +9,9 @@ import Home from "./pages/Home";
 import Signup from "./pages/Signup";
 import Mypage from "./pages/Mypage";
 import MypageRecord from "./pages/MypageRecord";
+import Story from "./pages/Story";
+import Daily from "./pages/Daily";
+import Album from "./pages/Album";
 import NavigationBar from "./components/NavigationBar";
 import { OutLine, Content } from "./styles/CommonStyled";
 axios.defaults.withCredentials = true;
@@ -22,8 +25,11 @@ const App = () => {
           <Content className="Content">
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/signup" element={<Signup />} />
+              <Route path="/story" element={<Story />} />
+              <Route path="/daily" element={<Daily />} />
+              <Route path="/album" element={<Album />} />
               <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
               <Route path="/mypage" element={<Mypage />} />
               <Route path="/mypage/list/record" element={<MypageRecord />} />
             </Routes>
