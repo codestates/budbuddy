@@ -5,7 +5,6 @@ const morgan = require("morgan");
 const fs = require("fs");
 const path = require("path");
 var rfs = require("rotating-file-stream");
-const PORT = process.env.SERVER_PORT || 80;
 // create a rotating write stream
 var accessLogStream = rfs.createStream("access.log", {
   interval: "1d", // rotate daily
@@ -22,9 +21,11 @@ let corsOrigin = "*";
 console.log("NODE_ENV: ", process.env.NODE_ENV);
 if (process.env.NODE_ENV === "development") {
   require("dotenv").config();
+  var PORT = process.env.SERVER_PORT || 3000;
   app.use(morgan("dev"));
-  corsOrigin = `http://localhost:3000`;
+  corsOrigin = `http://localhost:${PORT}`;
 } else if (process.env.NODE_ENV === "production") {
+  var PORT = 80;
   app.use(morgan("common", { stream: accessLogStream }));
   corsOrigin = ["https://budbuddy.click", "http://budbuddy.click"];
 }
