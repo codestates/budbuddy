@@ -6,6 +6,7 @@ const theme = {
   textWaringColor: "tomato",
   navigationBGColor: "SteelBlue",
   backgroundTextColor: "MintCream",
+  colorGainsboro: "Gainsboro",
   fontSizeBg: "1.3rem",
   fontWeightBg: 400,
   fontIconSize: "27px",
