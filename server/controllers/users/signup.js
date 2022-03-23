@@ -9,6 +9,8 @@ module.exports = async (req, res) => {
 
   console.log(encryptPassword, salt);
 
+  // 유효검사
+
   try {
     const [user, created] = await Users.findOrCreate({
       where: { email },
