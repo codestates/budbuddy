@@ -4,7 +4,6 @@ export const LoginForm = styled.form`
   margin: 8% 3rem 0 3rem;
   padding: 1rem 1rem 0.4rem 1rem;
   background-color: ${(props) => props.theme.formColor};
-  border-radius: ${(props) => props.theme.borderRadius};
 
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(1fr, auto));
@@ -12,14 +11,17 @@ export const LoginForm = styled.form`
   grid-template-areas:
     "idIcon inputId inputId inputId inputId inputId"
     "passIcon inputPass inputPass inputPass inputPass inputPass"
-    ". login login test test ."
+    ". login login . test ."
     ". . . . . signup";
 
   justify-content: start;
   align-items: end;
+
   > * {
+    border-radius: ${(props) => props.theme.borderRadius};
     border: none;
     padding: 0.5rem;
+    font-size: 1.1rem;
   }
 
   > .icon {
@@ -52,8 +54,8 @@ export const LoginForm = styled.form`
   }
 
   .test {
+    margin-top: 25%;
     grid-area: test;
-    margin-top: 10%;
   }
 
   .signup {
@@ -61,16 +63,21 @@ export const LoginForm = styled.form`
     padding: 0;
     margin-top: 1rem;
   }
+
   .signtext {
-    font-size: 14px;
+    font-size: 15px;
   }
 
   .textAni {
-    transition: color 0.2s cubic-bezier(0, 1.23, 1, 0.55);
+    transition: all 0.2s cubic-bezier(0, 1.23, 1, 0.55);
+    background-color: Gainsboro;
+    color: black;
+    padding: 0.3rem;
   }
 
   .textAni:hover {
-    color: MediumPurple;
+    background-color: Teal;
+    color: white;
   }
 
   a {
@@ -85,10 +92,11 @@ export const SocialWrapper = styled.div`
   place-items: center;
 
   .kakao {
+    font-size: 1.3rem;
     background-color: #fff064;
     border-radius: 10px;
     border: none;
-    padding: 0.3rem 2rem;
+    padding: 0.4rem 2rem;
     font-weight: 100;
     transition: background-color 0.3s;
   }

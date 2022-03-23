@@ -293,15 +293,28 @@ const Signup = () => {
           }}>
           Join
         </button>
-        <div
+        <button
           className="cancle btn"
           onClick={async () => {
             await sleep(200);
             navigate("/");
           }}>
           가입취소
-        </div>
+        </button>
       </SignupWrapper>
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
     </div>
   );
 };

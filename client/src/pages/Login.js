@@ -10,9 +10,11 @@ import useStore from "../store/store";
 import { makeModal } from "../utils/errExeption";
 import { sleep } from "../modules/sleep";
 import { useNavigate } from "react-router-dom";
+import { proverbs } from "../utils/dummy";
+import TextOnImg from "../components/TextOnImg";
 import Hr from "../components/Hr";
 
-const LoginBg = styled(BGWrapper)`
+const Layout = styled.div`
   padding-top: ${(props) => props.theme.backgroundPaddingTop};
 `;
 
@@ -23,7 +25,7 @@ function Login() {
 
   async function loginReq(e) {
     e.preventDefault();
-
+    // console.log("호출");
     const { userId, password } = e.target;
     if (userId.value === "" || password.value === "") {
       setModalCode("reqfillLoginform");
@@ -51,14 +53,11 @@ function Login() {
   }
 
   return (
-    <div>
+    <Layout>
       {makeModal(modalCode)}
-      <LoginBg>
-        <div className="std">
-          <img src={`signupBg/IMG_${4976}.JPG`} alt={`bg`} />
-          <p className="backText">"나무는 나무라지 않는다."</p>
-        </div>
-      </LoginBg>
+      <TextOnImg texts={proverbs} />
+      <br />
+      <br />
       <LoginForm onSubmit={loginReq}>
         <FontAwesomeIcon className="idIcon icon" icon={faUser} />
         <input className="inputId" placeholder="아이디를 입력하세요" name="userId"></input>
@@ -75,7 +74,7 @@ function Login() {
         {login ? (
           <div />
         ) : (
-          <span
+          <button
             className="test textAni"
             onClick={async () => {
               await sleep(250);
@@ -83,9 +82,9 @@ function Login() {
               setModalCode("testLogin");
             }}>
             Test 계정
-          </span>
+          </button>
         )}
-        <div className="signup textAni">
+        <div className="signup">
           <Link to="/signup">
             <span className="signtext">회원가입</span>
           </Link>
@@ -95,7 +94,17 @@ function Login() {
       <SocialWrapper>
         <button className="kakao">카카오톡으로 로그인</button>
       </SocialWrapper>
-    </div>
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+    </Layout>
   );
 }
 

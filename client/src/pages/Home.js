@@ -1,6 +1,6 @@
 import React from "react";
-import { slideImgs, proverbs } from "../utils/dummy";
 import styled from "styled-components";
+import { slideImgs, proverbs } from "../utils/dummy";
 import TextOnImg from "../components/TextOnImg";
 import Hr from "../components/Hr";
 import ImgSlide from "../components/ImgSlide";
@@ -22,6 +22,8 @@ const Home = () => {
       <TextOnImg texts={proverbs} />
       <Hr padding={4.5} width={90} />
       <ImgSlide images={slideImgs} />
+      <br></br>
+      <br></br>
       <br></br>
       <br></br>
       <br></br>

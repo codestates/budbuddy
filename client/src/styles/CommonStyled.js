@@ -11,7 +11,7 @@ export const OutLine = styled.div`
 
 export const Content = styled.div`
   background-color: ${(props) => props.theme.subColor};
-  font-size: 2.5vh;
+  font-size: 2.2vh;
 
   @media screen and (min-width: 390px) {
     width: ${(props) => props.theme.iphoneWidth};
