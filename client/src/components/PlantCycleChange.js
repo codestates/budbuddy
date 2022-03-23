@@ -23,12 +23,15 @@ const DayCircle = styled.div`
   align-items: center;
   margin: auto;
   > div {
-    width: 30vw;
-    height: 30vw;
+    width: 7vw;
+    height: 7vw;
+    /* width: 30vw;
+    height: 30vw; */
     border-radius: 50%;
     align-items: center;
     text-align: center;
-    line-height: 30vw;
+    /* line-height: 30vw; */
+    line-height: 7vw;
   }
   > .water {
     background-color: skyblue;
@@ -46,12 +49,15 @@ const CircleName = styled.div`
   align-items: center;
   margin: auto;
   > div {
-    width: 30vw;
-    height: 5vw;
+    width: 7vw;
+    height: 2vw;
+    /* width: 30vw;
+    height: 5vw; */
     border-radius: 50%;
     align-items: center;
     text-align: center;
-    line-height: 5vw;
+    /* line-height: 5vw; */
+    line-height: 2vw;
   }
 `;
 const PlantsCycleChange = () => {

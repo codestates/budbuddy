@@ -5,7 +5,7 @@ import useStore from "../store/store";
 
 export const Content = styled.nav`
   cursor: pointer;
-
+  width: inherit;
   position: fixed;
   bottom: 0;
 

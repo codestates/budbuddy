@@ -9,35 +9,12 @@ import { faDroplet, faThermometer, faRepeat } from "@fortawesome/free-solid-svg-
 const CalendarContainer = styled.div`
   grid-area: CalendarContainer;
   align-items: center;
+  width: 100vw;
+  height: auto;
   margin: auto;
 `;
 const Cover = styled.div`
   display: flex;
-`;
-
-const Water = styled.div`
-  height: 8px;
-  width: 8px;
-  background-color: #f87171;
-  border-radius: 50%;
-  display: flex;
-  margin-left: 1px;
-`;
-const Soli = styled.div`
-  height: 8px;
-  width: 8px;
-  background-color: brown;
-  border-radius: 50%;
-  display: flex;
-  margin-left: 1px;
-`;
-const Nutrition = styled.div`
-  height: 8px;
-  width: 8px;
-  background-color: yellow;
-  border-radius: 50%;
-  display: flex;
-  margin-left: 1px;
 `;
 
 function CalendarComponents() {
