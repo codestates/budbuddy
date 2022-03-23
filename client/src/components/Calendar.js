@@ -20,7 +20,8 @@ const Water = styled.div`
 
 function CalendarComponents() {
   const [value, onChange] = useState(new Date());
-  const [mark, setMark] = useState(["2020 - 02 - 23"]);
+  const [mark, setMark] = useState(["2020 - 03 - 22"]);
+  console.log(mark);
 
   return (
     <CalendarContainer>
@@ -33,17 +34,23 @@ function CalendarComponents() {
         navigationLabel={null}
         // showNeighboringMonth={false}// 전달 이번달 날짜 회색으로 보여주기
         locale="ko-KO"
+        className="mx-auto w-full text-sm border-b"
         tileContent={({ date, view }) => {
           if (mark.find((x) => x === moment(date).format("YYYY-MM-DD"))) {
-            return (
-              <>
-                {/* <div className="flex justify-center items-center absoluteDiv"> */}
-                <Water></Water>
-                {/* </div> */}
-              </>
-            );
+            return "x";
           }
         }}
+        // tileContent={({ activeStartDate, date, view }) => {
+        //   if (mark.find((x) => x === moment(date).format("YYYY-MM-DD"))) {
+        //     return (
+        //       <>
+        //         <div className="flex justify-center items-center absoluteDiv">
+        //           <Water></Water>
+        //         </div>
+        //       </>
+        //     );
+        //   }
+        // }}
       />
       <Water></Water>
     </CalendarContainer>
