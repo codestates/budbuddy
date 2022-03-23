@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Content = styled.div`
-  background-color: ${(props) => props.theme.mainColor};
+  background-color: ${(props) => props.theme.formColor};
 
   display: grid;
   grid-template-columns: repeat(3, minmax(1fr, auto));
