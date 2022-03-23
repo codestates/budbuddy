@@ -8,6 +8,7 @@ import Login from "./pages/Login";
 import Home from "./pages/Home";
 import Signup from "./pages/Signup";
 import Mypage from "./pages/Mypage";
+import MypageRecord from "./pages/MypageRecord";
 import Story from "./pages/Story";
 import Daily from "./pages/Daily";
 import Album from "./pages/Album";
@@ -30,6 +31,7 @@ const App = () => {
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
               <Route path="/mypage" element={<Mypage />} />
+              <Route path="/mypage/list/record" element={<MypageRecord />} />
             </Routes>
             <NavigationBar className="navi" />
           </Content>
