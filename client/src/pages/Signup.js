@@ -278,7 +278,7 @@ const Signup = () => {
           <input className="inputEmail" name="email" type="text" placeholder="이메일을 입력하세요" maxLength={30} onBlur={explainReset} onFocus={explainSignup} onChange={chValidation} />
           <div ref={checkEmail} className="chEmail ch" name="chEmail"></div>
           <FontAwesomeIcon className="passIcon icon" icon={faKey} />
-          <input className="inputPass" name="password" type="text" placeholder="비밀번호를 입력하세요" maxLength={20} onBlur={explainReset} onFocus={explainSignup} onChange={chValidation} />
+          <input className="inputPass" name="password" type="password" placeholder="비밀번호를 입력하세요" maxLength={20} onBlur={explainReset} onFocus={explainSignup} onChange={chValidation} />
           <div ref={checkPass} className="chPass ch"></div>
           <FontAwesomeIcon className="nickIcon icon" icon={faMask} />
           <input className="inputNick" name="nickname" type="text" placeholder="사용할 닉네임을 입력하세요" maxLength={15} onBlur={explainReset} onFocus={explainSignup} onChange={chValidation} />
@@ -293,14 +293,13 @@ const Signup = () => {
           }}>
           Join
         </button>
-        <button
+        <span
           className="cancle btn"
-          onClick={async () => {
-            await sleep(200);
+          onClick={() => {
             navigate("/");
           }}>
           가입취소
-        </button>
+        </span>
       </SignupWrapper>
       <br />
       <br />
