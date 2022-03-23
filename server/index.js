@@ -42,9 +42,10 @@ app.get("/", (req, res) => {
 });
 
 //router
-const controllers = require("./controllers");
-app.post("/users/login", controllers.login);
-app.post("/users/signup", controllers.signup);
+const router = require('./routes');
+
+app.use('/users', router.usersRouter);
+app.use('/oauth', router.oauthRouter);
 
 app.listen(PORT, () => {
   console.log(`서버 시작 ${PORT}`);
