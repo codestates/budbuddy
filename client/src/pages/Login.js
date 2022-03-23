@@ -1,12 +1,21 @@
 import React, { useState } from "react";
-import { SocialWrapper, BrWrapper, LoginBG, LoginForm } from "../styles/pages/LoginStyled";
+import styled from "styled-components";
+import { SocialWrapper, LoginForm } from "../styles/pages/LoginStyled";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faKey, faUser } from "@fortawesome/free-solid-svg-icons";
 import useStore from "../store/store";
-import { sleep, makeModal } from "../utils/errExeption";
+import { makeModal } from "../utils/errExeption";
+import { sleep } from "../modules/sleep";
 import { useNavigate } from "react-router-dom";
+import { proverbs } from "../utils/dummy";
+import TextOnImg from "../components/TextOnImg";
+import Hr from "../components/Hr";
+
+const Layout = styled.div`
+  padding-top: ${(props) => props.theme.backgroundPaddingTop};
+`;
 
 function Login() {
   let navigate = useNavigate();
@@ -15,10 +24,15 @@ function Login() {
 
   async function loginReq(e) {
     e.preventDefault();
-    const { userId, password } = e.target;
+    // console.log("호출");
+    const { email, password } = e.target;
+    if (email.value === "" || password.value === "") {
+      setModalCode("reqfillLoginform");
+      return;
+    }
 
     const payload = {
-      userId: userId.value,
+      email: email.value,
       password: password.value,
     };
 
@@ -26,29 +40,26 @@ function Login() {
       const resData = await axios.post(process.env.REACT_APP_API_URL + "/users/login", payload);
       // console.log("응답::::", resData.data);
       setModalCode(resData.data.message);
-
       if (resData.data.message === "ok") {
         setLogin(true);
         navigate("/mypage");
         return;
       }
     } catch (err) {
-      console.log(err);
+      console.log(err.response.data);
+      setModalCode(err.response.data.message);
     }
   }
 
   return (
-    <div>
+    <Layout>
       {makeModal(modalCode)}
-      <LoginBG>
-        <div className="std">
-          <img src={`signupBg/IMG_${4976}.JPG`} alt={`bg`} />
-          <p className="backText">"나무는 나무라지 않는다."</p>
-        </div>
-      </LoginBG>
+      <TextOnImg texts={proverbs} />
+      <br />
+      <br />
       <LoginForm onSubmit={loginReq}>
         <FontAwesomeIcon className="idIcon icon" icon={faUser} />
-        <input className="inputId" placeholder="아이디를 입력하세요" name="userId"></input>
+        <input className="inputId" placeholder="이메일을 입력하세요" name="email"></input>
         <FontAwesomeIcon className="passIcon icon" icon={faKey} />
         <input className="inputPass" placeholder="비밀번호를 입력하세요" name="password" type="password"></input>
         <button
@@ -62,7 +73,7 @@ function Login() {
         {login ? (
           <div />
         ) : (
-          <span
+          <button
             className="test textAni"
             onClick={async () => {
               await sleep(250);
@@ -70,21 +81,29 @@ function Login() {
               setModalCode("testLogin");
             }}>
             Test 계정
-          </span>
+          </button>
         )}
-        <div className="signup textAni">
+        <div className="signup">
           <Link to="/signup">
             <span className="signtext">회원가입</span>
           </Link>
         </div>
       </LoginForm>
-      <BrWrapper>
-        <hr className="hr" />
-      </BrWrapper>
+      <Hr padding={3} width={90} />
       <SocialWrapper>
         <button className="kakao">카카오톡으로 로그인</button>
       </SocialWrapper>
-    </div>
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+    </Layout>
   );
 }
 

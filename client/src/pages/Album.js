@@ -5,50 +5,50 @@ export const Layout = styled.div`
   display: grid;
 `;
 
-const Mypage = () => {
+const Album = () => {
   return (
-    <Layout>
-      <p>이곳은 마이 페이지</p>
+    <div>
+      <p>여기는 앨범.</p>
       <div>리스트1</div>
       <div>리스트1</div>
       <div>리스트1</div>
       <div>리스트1</div>
       <div>리스트1</div>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
       <div>리스트1</div>
       <div>리스트1</div>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-    </Layout>
+    </div>
   );
 };
 
-export default Mypage;
+export default Album;
