@@ -15,6 +15,10 @@ export const SignupWrapper = styled.form`
   place-items: center;
   justify-content: center;
 
+  > * {
+    font-size: 2vh;
+  }
+
   background-color: ${(props) => props.theme.formColor};
   margin: 15% 10% 0 10%;
   padding-top: 4%;
@@ -26,14 +30,7 @@ export const SignupWrapper = styled.form`
     margin-bottom: 1.3rem;
     letter-spacing: 7px;
     color: black;
-
-    @media screen and (min-width: 390px) {
-      font-size: 1.7rem;
-    }
-
-    @media screen and (min-width: 520px) {
-      font-size: 2.1rem;
-    }
+    font-size: 3vh;
   }
 
   .hr {
@@ -81,7 +78,7 @@ export const InputWrapper = styled.div`
   grid-template-columns: minmax(1fr, auto) minmax(9fr, auto);
   grid-template-rows: repeat(6, minmax(1fr, auto));
   grid-template-areas:
-    "chId chId"
+    "chEmail chEmail"
     "idIcon inputId"
     "chPass chPass"
     "passIcon inputPass"
@@ -137,24 +134,16 @@ export const InputWrapper = styled.div`
   }
 
   > .ch {
-    font-size: 12px;
+    font-size: 14px;
     white-space: pre;
-
-    @media screen and (min-width: 390px) {
-      font-size: 1rem;
-    }
-
-    @media screen and (min-width: 520px) {
-      font-size: 1.3rem;
-    }
   }
 
   > .invalid {
     color: ${(props) => props.theme.textWaringColor};
   }
 
-  > .chId {
-    grid-area: chId;
+  > .chEmail {
+    grid-area: chEmail;
   }
 
   > .chPass {
