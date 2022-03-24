@@ -3,8 +3,7 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css"; // css import
 import styled from "styled-components";
 import moment from "moment";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faDroplet, faThermometer, faRepeat } from "@fortawesome/free-solid-svg-icons";
+import CalenderTileDiv from "./CalendarTileDiv";
 
 const CalendarContainer = styled.div`
   grid-area: CalendarContainer;
@@ -13,21 +12,27 @@ const CalendarContainer = styled.div`
   height: auto;
   margin: auto;
 `;
-const Cover = styled.div`
-  display: flex;
-`;
 
 function CalendarComponents() {
   const [value, onChange] = useState(new Date());
   const [mark, setMark] = useState([
     // 더미데이터
-    ["2022-03-03", "water"],
-    ["2022-03-10", "water", "soil", "nutrition"],
-    ["2022-03-11", "nutrition", "water"],
-    ["2022-03-12", "soil"],
-    ["2022-03-14", "water"],
-    ["2022-03-25", "water"],
-    ["2022-03-30", "water"],
+    {
+      day: "2022-03-12",
+      actions: ["water"],
+    },
+    {
+      day: "2022-03-20",
+      actions: ["water", "nutrition"],
+    },
+    {
+      day: "2022-03-22",
+      actions: ["water", "soil"],
+    },
+    {
+      day: "2022-03-23",
+      actions: ["soil", "nutrition"],
+    },
   ]);
 
   return (
@@ -41,18 +46,27 @@ function CalendarComponents() {
         navigationLabel={null}
         locale="ko-KO"
         tileContent={({ date, view }) => {
-          for (let i = 0; i < mark.length; i++) {
-            if (mark[i][0] === moment(date).format("YYYY-MM-DD")) {
-              return (
-                <Cover>
-                  {mark[i].indexOf("water") !== -1 ? <FontAwesomeIcon className="fa-solid" icon={faDroplet} color="skyblue" /> : null}
-                  {mark[i].indexOf("soil") !== -1 ? <FontAwesomeIcon className="fa-solid" icon={faThermometer} color="#D7DF01" /> : null}
-                  {mark[i].indexOf("nutrition") !== -1 ? <FontAwesomeIcon className="fa-solid" icon={faRepeat} color="brown" /> : null}
-                </Cover>
-              );
-            }
-          }
+          mark.map((el) => {
+            // console.log("elements", el);
+            // console.log("day", el.day);
+            // console.log("actions", el.actions);
+            // console.log(el.day === moment(date).format("YYYY-MM-DD"));
+            // console.log("isitWork?", el.day === moment(date).format("YYYY-MM-DD") ? <CalenderTileDiv actions={el.actions} /> : <CalenderTileDiv actions={null} />);
+            return el.day === moment(date).format("YYYY-MM-DD") ? <CalenderTileDiv actions={el.actions} /> : <CalenderTileDiv actions={null} />;
+          });
         }}
+        // for (let i = 0; i < mark.length; i++) {
+        //   console.log("date----", date instanceof Date);
+        //   if (mark[i][0] === moment(date).format("YYYY-MM-DD")) {
+        //     return (
+        //       <Cover>
+        //         {mark[i].indexOf("water") !== -1 ? <FontAwesomeIcon className="fa-solid" icon={faDroplet} color="skyblue" /> : null}
+        //         {mark[i].indexOf("soil") !== -1 ? <FontAwesomeIcon className="fa-solid" icon={faThermometer} color="#D7DF01" /> : null}
+        //         {mark[i].indexOf("nutrition") !== -1 ? <FontAwesomeIcon className="fa-solid" icon={faRepeat} color="brown" /> : null}
+        //       </Cover>
+        //     );
+        //   }
+        // }
       />
     </CalendarContainer>
   );
