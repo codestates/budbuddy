@@ -13,3 +13,23 @@ export const proverbs = [
 ];
 
 export const slideImgs = [`signupBg/IMG_0.JPG`, `signupBg/IMG_1.JPG`, `signupBg/IMG_2.JPG`, `signupBg/IMG_3.JPG`, `signupBg/IMG_4.JPG`, `signupBg/IMG_5.JPG`, `signupBg/IMG_6.JPG`];
+
+export const doing = [
+  // 더미데이터
+  {
+    day: "2022-03-12",
+    actions: ["water"],
+  },
+  {
+    day: "2022-03-20",
+    actions: ["water", "nutrition"],
+  },
+  {
+    day: "2022-03-22",
+    actions: ["water", "soil"],
+  },
+  {
+    day: "2022-03-23",
+    actions: ["soil", "nutrition"],
+  },
+];
