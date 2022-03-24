@@ -46,7 +46,7 @@ function Login() {
         return;
       }
     } catch (err) {
-      console.log(err.response.data);
+      console.log(err);
       setModalCode(err.response.data.message);
     }
   }
@@ -59,9 +59,9 @@ function Login() {
       <br />
       <LoginForm onSubmit={loginReq}>
         <FontAwesomeIcon className="idIcon icon" icon={faUser} />
-        <input className="inputId" placeholder="이메일을 입력하세요" name="email"></input>
+        <input className="inputId" placeholder="이메일을 입력하세요" name="email" autoComplete="email"></input>
         <FontAwesomeIcon className="passIcon icon" icon={faKey} />
-        <input className="inputPass" placeholder="비밀번호를 입력하세요" name="password" type="password"></input>
+        <input className="inputPass" placeholder="비밀번호를 입력하세요" name="password" type="password" autoComplete="current-password"></input>
         <button
           className="login textAni"
           type="submit"
@@ -91,7 +91,11 @@ function Login() {
       </LoginForm>
       <Hr padding={3} width={90} />
       <SocialWrapper>
-        <button className="kakao">카카오톡으로 로그인</button>
+        <a
+          href={`https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_KAKAO_REST_API_KEY}&redirect_uri=${process.env.REACT_APP_KAKAO_REDIRECT_URI}&response_type=code`}
+          className="kakao">
+          <img src="https://developers.kakao.com/tool/resource/static/img/button/login/full/ko/kakao_login_medium_wide.png" alt="kakaoButton" />
+        </a>
       </SocialWrapper>
       <br />
       <br />

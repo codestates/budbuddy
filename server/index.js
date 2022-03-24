@@ -21,9 +21,10 @@ let corsOrigin = "*";
 console.log("NODE_ENV: ", process.env.NODE_ENV);
 if (process.env.NODE_ENV === "development") {
   require("dotenv").config();
-  var PORT = process.env.SERVER_PORT || 3000;
+  var PORT = process.env.SERVER_PORT || 4000;
+  const CLIENT_PORT = 3000;
   app.use(morgan("dev"));
-  corsOrigin = `http://localhost:${PORT}`;
+  corsOrigin = `http://localhost:${CLIENT_PORT}`;
 } else if (process.env.NODE_ENV === "production") {
   var PORT = 80;
   app.use(morgan("common", { stream: accessLogStream }));
@@ -42,10 +43,10 @@ app.get("/", (req, res) => {
 });
 
 //router
-const router = require('./routes');
+const router = require("./routes");
 
-app.use('/users', router.usersRouter);
-app.use('/oauth', router.oauthRouter);
+app.use("/users", router.usersRouter);
+app.use("/oauth", router.oauthRouter);
 
 app.listen(PORT, () => {
   console.log(`서버 시작 ${PORT}`);
