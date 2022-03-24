@@ -34,8 +34,8 @@ const App = () => {
               <Route path="/test" element={<Test />} />
               <Route path="/mypage/list/record" element={<MypageRecord />} />
             </Routes>
-            <NavigationBar className="navi" />
           </Content>
+          <NavigationBar classNsame="navi" />
         </OutLine>
       </ThemeProvider>
     </div>

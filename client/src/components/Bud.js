@@ -26,7 +26,7 @@ export const Layout = styled.div`
   .coverImg {
     object-fit: cover;
     width: 100%;
-    height: 15vh;
+    height: 18vh;
     mix-blend-mode: darken;
 
     border: solid 2px rgb(0, 0, 0, 0.65);
@@ -37,20 +37,15 @@ export const Layout = styled.div`
     height: 100%;
     color: WhiteSmoke;
     z-index: 2;
+
     position: absolute;
     text-align: center;
-    margin: 0 auto;
     top: 50%;
     left: 50%;
 
     transform: translate(-50%, -50%);
-
     visibility: hidden;
 
-    > div {
-      margin: 2.2vw 0;
-      padding: 3px;
-    }
     transition: opacity 0.25s cubic-bezier(0.55, 1.17, 0.75, 0.53);
     opacity: 0;
   }
@@ -62,9 +57,10 @@ export const Layout = styled.div`
   }
 
   .hide > .text {
+    position: relative;
+    top: 10%;
+    margin: 10%;
     letter-spacing: 0.8vw;
-    padding: 3px 0px;
-    margin: 3vw 4vw;
     transition: background-color 0.1s cubic-bezier(0.55, 1.17, 0.75, 0.53);
   }
 
