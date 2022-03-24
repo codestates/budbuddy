@@ -29,7 +29,11 @@ function Login() {
       <LoginForm />
       <Hr t={0} b={3} width={70} />
       <SocialWrapper>
-        <button className="kakao">카카오톡으로 로그인</button>
+        <a
+          href={`https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_KAKAO_REST_API_KEY}&redirect_uri=${process.env.REACT_APP_KAKAO_REDIRECT_URI}&response_type=code`}
+          className="kakao">
+          <img src="https://developers.kakao.com/tool/resource/static/img/button/login/full/ko/kakao_login_medium_wide.png" alt="kakaoButton" />
+        </a>
       </SocialWrapper>
     </Layout>
   );
