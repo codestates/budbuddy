@@ -11,17 +11,17 @@ import Mypage from "./pages/Mypage";
 import Story from "./pages/Story";
 import Daily from "./pages/Daily";
 import Album from "./pages/Album";
+import Test from "./pages/Test";
 import NavigationBar from "./components/NavigationBar";
 import { OutLine, Content } from "./styles/CommonStyled";
 axios.defaults.withCredentials = true;
-
 const App = () => {
   return (
     <div>
       <ThemeProvider theme={Theme}>
         <GlobalStyle />
         <OutLine>
-          <Content className="Content">
+          <Content>
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/story" element={<Story />} />
@@ -30,6 +30,7 @@ const App = () => {
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
               <Route path="/mypage" element={<Mypage />} />
+              <Route path="/test" element={<Test />} />
             </Routes>
             <NavigationBar className="navi" />
           </Content>

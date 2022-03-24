@@ -14,30 +14,30 @@ export const Layout = styled.div`
     text-align: center;
   }
 
+  .leftcap,
+  .rightcap {
+    width: 16vw;
+    font-size: 2.8vw;
+    padding: 0.3vw;
+    margin: 5px;
+    border: none;
+  }
+
   .leftcap {
     float: left;
-    margin-left: 0vh;
+    margin-left: 0vw;
     background-color: rgba(0, 0, 0, 0);
   }
   .rightcap {
     cursor: pointer;
     float: right;
-    margin-right: 2vh;
+    margin-right: 3vw;
     transition: color 0.25s cubic-bezier(0, 1.23, 1, 0.55);
   }
 
   .rightcap:hover {
     background-color: ${(props) => props.theme.hoverColor};
     color: white;
-  }
-
-  .leftcap,
-  .rightcap {
-    width: 10vh;
-    font-size: 1.7vh;
-    padding: 0.3vh;
-    margin: 5px;
-    border: none;
   }
 `;
 
