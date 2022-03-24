@@ -22,14 +22,6 @@ const Home = () => {
       <TextOnImg texts={proverbs} />
       <Hr padding={4.5} width={90} />
       <ImgSlide images={slideImgs} />
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
     </Layout>
   );
 };
