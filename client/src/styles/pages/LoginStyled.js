@@ -90,15 +90,15 @@ export const SocialWrapper = styled.div`
   place-items: center;
 
   .kakao {
-    background-color: #fff064;
-    border-radius: 10px;
-    border: none;
-    padding: 0.4rem 2rem;
-    font-weight: 100;
-    transition: background-color 0.3s;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    color: #000000;
+    text-decoration: none;
+    opacity: 1;
+    -webkit-transition: 0.3s ease-in-out;
+    transition: 0.3s ease-in-out;
   }
 
   .kakao:hover {
-    background-color: #ffd532;
+    opacity: 0.8;
   }
 `;
