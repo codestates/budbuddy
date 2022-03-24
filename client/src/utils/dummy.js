@@ -32,4 +32,8 @@ export const doing = [
     day: "2022-03-23",
     actions: ["soil", "nutrition"],
   },
+  {
+    day: "2022-03-24",
+    actions: ["soil", "nutrition", "water"],
+  },
 ];

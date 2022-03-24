@@ -16,9 +16,13 @@ const TileContentDiv = styled.div`
   display: flex;
 `;
 
+const EmptyDiv = styled.div`
+  height: 13.33px;
+`;
+
 const CalenderTileDiv = ({ actions }) => {
   if (!actions) {
-    return <div>empty</div>;
+    return <EmptyDiv></EmptyDiv>;
   }
 
   return (

@@ -2,8 +2,13 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import * as d3 from "d3";
 
-const ChartSvg = styled.svg`
+const ChartSvg = styled.svg``;
+const ChartDiv = styled.div`
   grid-area: ChartSvg;
+`;
+
+const ChartTitle = styled.h2`
+  text-align: center;
 `;
 
 const Chart = () => {
@@ -117,7 +122,12 @@ const Chart = () => {
       .attr("text-anchor", "middle");
   };
 
-  return <ChartSvg className="list" width="380" height="380"></ChartSvg>;
+  return (
+    <ChartDiv>
+      <ChartTitle>스투키 성장 기록</ChartTitle>
+      <ChartSvg className="list" width="380" height="380"></ChartSvg>
+    </ChartDiv>
+  );
 };
 
 export default Chart;

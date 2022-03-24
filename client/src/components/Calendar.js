@@ -3,17 +3,16 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css"; // css import
 import styled from "styled-components";
 import moment from "moment";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faDroplet, faThermometer, faRepeat } from "@fortawesome/free-solid-svg-icons";
 import { doing } from "../utils/dummy";
 import CalendarTileDiv from "./CalendarTileDiv";
+import "./Calendar.css";
 
 const CalendarContainer = styled.div`
   grid-area: CalendarContainer;
-  align-items: center;
-  width: 100vw;
-  height: auto;
   margin: auto;
+`;
+const CalendarTitle = styled.h2`
+  text-align: center;
 `;
 
 function CalendarComponents() {
@@ -24,9 +23,16 @@ function CalendarComponents() {
     const find = mark.find((element) => element.day === moment(date).format("YYYY-MM-DD"));
     return find ? <CalendarTileDiv actions={find.actions} /> : <CalendarTileDiv />;
   };
+  // const tileClassName = ({ date, view }) => {
+  //   if (mark.find((element) => element.day === moment(date).format("YYYY-MM-DD"))) {
+  //     return "highlight";
+  //   }
+  //   return "normal";
+  // }; //배경색
 
   return (
     <CalendarContainer>
+      <CalendarTitle>스투키 관리 기록</CalendarTitle>
       <Calendar
         onChange={onChange}
         value={value}
@@ -36,6 +42,7 @@ function CalendarComponents() {
         navigationLabel={null}
         locale="ko-KO"
         tileContent={tileContent}
+        // tileClassName={tileClassName}
       />
     </CalendarContainer>
   );
