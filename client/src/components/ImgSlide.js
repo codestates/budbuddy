@@ -5,7 +5,7 @@ export const Layout = styled.div`
   img {
     object-fit: cover;
     width: 100%;
-    height: 30vh;
+    height: 27vh;
     border: none;
   }
 

@@ -6,6 +6,10 @@ import { BGWrapper } from "../styles/CommonStyled";
 const Content = styled(BGWrapper)`
   display: grid;
 
+  img {
+    height: 27vh;
+  }
+
   .ani {
     animation-name: textFloating;
     animation-duration: ${(props) => {

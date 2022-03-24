@@ -26,7 +26,7 @@ export const Layout = styled.div`
   .coverImg {
     object-fit: cover;
     width: 100%;
-    height: 18vh;
+    height: 15vh;
     mix-blend-mode: darken;
 
     border: solid 2px rgb(0, 0, 0, 0.65);
@@ -48,7 +48,7 @@ export const Layout = styled.div`
     visibility: hidden;
 
     > div {
-      margin: 2.2vh 0;
+      margin: 2.2vw 0;
       padding: 3px;
     }
     transition: opacity 0.25s cubic-bezier(0.55, 1.17, 0.75, 0.53);
@@ -62,9 +62,9 @@ export const Layout = styled.div`
   }
 
   .hide > .text {
-    letter-spacing: 0.8vh;
+    letter-spacing: 0.8vw;
     padding: 3px 0px;
-    margin: 3vh 4vh;
+    margin: 3vw 4vw;
     transition: background-color 0.1s cubic-bezier(0.55, 1.17, 0.75, 0.53);
   }
 
@@ -74,11 +74,11 @@ export const Layout = styled.div`
   }
 
   .budName {
-    margin-top: 0.1vh;
+    margin-top: 0.1vw;
   }
 
   .date {
-    font-size: 1.3vh;
+    font-size: 1.3vw;
   }
 `;
 
