@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 export const Layout = styled.div`
   display: grid;
+  /* height: inherit; */
 `;
 
 const Mypage = () => {
@@ -16,37 +17,6 @@ const Mypage = () => {
       <div>리스트1</div>
       <div>리스트1</div>
       <div>리스트1</div>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
     </Layout>
   );
 };

@@ -21,7 +21,6 @@ export const LoginForm = styled.form`
     border-radius: ${(props) => props.theme.borderRadius};
     border: none;
     padding: 0.5rem;
-    font-size: 1.1rem;
   }
 
   > .icon {
@@ -65,7 +64,6 @@ export const LoginForm = styled.form`
   }
 
   .signtext {
-    font-size: 15px;
   }
 
   .textAni {
@@ -76,7 +74,7 @@ export const LoginForm = styled.form`
   }
 
   .textAni:hover {
-    background-color: Teal;
+    background-color: ${(props) => props.theme.hoverColor};
     color: white;
   }
 

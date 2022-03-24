@@ -299,19 +299,6 @@ const Signup = () => {
           가입취소
         </span>
       </SignupWrapper>
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
     </div>
   );
 };

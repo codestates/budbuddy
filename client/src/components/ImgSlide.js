@@ -1,12 +1,11 @@
 import React, { useRef, useState } from "react";
 import styled from "styled-components";
-import shortId from "shortid";
 
 export const Layout = styled.div`
   img {
     object-fit: cover;
     width: 100%;
-    height: 30vh;
+    height: 27vh;
     border: none;
   }
 
@@ -60,7 +59,7 @@ export const Layout = styled.div`
   }
 `;
 
-const ImgSlide = ({ images }) => {
+const ImgSlide = ({ className = "", images }) => {
   const slideRef = useRef(null);
   const [counter, setCounter] = useState(1);
 
@@ -76,13 +75,13 @@ const ImgSlide = ({ images }) => {
     setCounter((pre) => pre - 1);
   }
   return (
-    <Layout>
+    <Layout className={className}>
       <div className="section">
         <div className="slidewrap">
           <ul ref={slideRef} className="slidelist">
             {images.map((src, i) => {
               return (
-                <li key={shortId.generate()}>
+                <li key={i}>
                   <div>
                     <img src={src} alt={`bg`} />
                   </div>
