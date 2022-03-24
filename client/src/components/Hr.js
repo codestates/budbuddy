@@ -14,9 +14,9 @@ export const HrWrapper = styled.div`
   }
 `;
 
-const Hr = ({ padding = 1, width = 100 }) => {
+const Hr = ({ className = "", padding = 1, width = 100 }) => {
   return (
-    <HrWrapper padding={padding} width={width}>
+    <HrWrapper className={className} padding={padding} width={width}>
       <hr className="hr" />
     </HrWrapper>
   );

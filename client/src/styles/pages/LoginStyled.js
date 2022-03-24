@@ -76,7 +76,7 @@ export const LoginForm = styled.form`
   }
 
   .textAni:hover {
-    background-color: Teal;
+    background-color: ${(props) => props.theme.hoverColor};
     color: white;
   }
 
