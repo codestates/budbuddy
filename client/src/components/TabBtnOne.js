@@ -21,6 +21,7 @@ export const Layout = styled.div`
     padding: 1%;
     margin: 5px;
     border: none;
+    border-radius: ${(props) => props.theme.borderRadius};
   }
 
   .leftcap {

@@ -25,10 +25,10 @@ function Login() {
     <Layout>
       {makeModal(modalCode)}
       <TextOnImg texts={proverbs} />
-      <Hr t={3} b={1} width={70} />
+      <Hr t={5} b={1} width={90} />
       <div className="loginText">로그인</div>
       <LoginForm />
-      <Hr t={0} b={3} width={70} />
+      <Hr t={0} b={4} width={90} />
       <SocialWrapper>
         <Link to={`https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_KAKAO_REST_API_KEY}&redirect_uri=${process.env.REACT_APP_KAKAO_REDIRECT_URI}&response_type=code`}>
           <button className="kakao">카카오톡으로 로그인</button>
