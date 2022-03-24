@@ -21,7 +21,6 @@ export const LoginForm = styled.form`
     border-radius: ${(props) => props.theme.borderRadius};
     border: none;
     padding: 0.5rem;
-    font-size: 1.1rem;
   }
 
   > .icon {
@@ -65,7 +64,6 @@ export const LoginForm = styled.form`
   }
 
   .signtext {
-    font-size: 15px;
   }
 
   .textAni {
@@ -92,7 +90,6 @@ export const SocialWrapper = styled.div`
   place-items: center;
 
   .kakao {
-    font-size: 1.3rem;
     background-color: #fff064;
     border-radius: 10px;
     border: none;

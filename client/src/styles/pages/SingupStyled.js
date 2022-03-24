@@ -15,10 +15,6 @@ export const SignupWrapper = styled.form`
   place-items: center;
   justify-content: center;
 
-  > * {
-    font-size: 2vh;
-  }
-
   background-color: ${(props) => props.theme.formColor};
   margin: 15% 10% 0 10%;
   padding-top: 4%;
@@ -30,7 +26,6 @@ export const SignupWrapper = styled.form`
     margin-bottom: 1.3rem;
     letter-spacing: 7px;
     color: black;
-    font-size: 3vh;
   }
 
   .hr {

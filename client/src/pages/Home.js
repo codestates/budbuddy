@@ -9,7 +9,6 @@ export const Layout = styled.div`
   padding-top: ${(props) => props.theme.backgroundPaddingTop};
 
   .greeting {
-    font-size: 1.6vh;
     padding: 0rem 0rem 1rem 0.5rem;
     white-space: pre;
   }
@@ -20,7 +19,7 @@ const Home = () => {
     <Layout>
       <p className="greeting">{`안녕하세요!\n자신의 식물을 일기처럼 기록해보세요!`}</p>
       <TextOnImg texts={proverbs} />
-      <Hr padding={4.5} width={90} />
+      <Hr t={4} b={4} width={80} />
       <ImgSlide images={slideImgs} />
     </Layout>
   );
