@@ -7,14 +7,15 @@ const theme = {
   navigationBGColor: "SteelBlue",
   backgroundTextColor: "MintCream",
   colorGainsboro: "Gainsboro",
+  hoverColor: "teal",
   fontSizeBg: "1.3rem",
   fontWeightBg: 400,
-  fontIconSize: "27px",
+  fontIconSize: "20px",
   signupInputLineHeight: "0.3rem",
   borderRadius: "4px",
-  backgroundPaddingTop: "5rem",
+  backgroundPaddingTop: "4vh",
   iphoneWidth: "100vw",
-  webWidth: "400px",
+  webWidth: "350px",
 };
 
 export default theme;

@@ -7,9 +7,10 @@ module.exports = async (req, res) => {
   const { email, password, nickname } = req.body;
   const { password: encryptPassword, salt } = await createPassword(password);
 
-  console.log(encryptPassword, salt);
-
-  // 유효검사
+  // TODO: 유효검사
+  if (!email || !password || !nickname) {
+    return res.status(400).json({ message: "Bad Request" });
+  }
 
   try {
     const [user, created] = await Users.findOrCreate({
@@ -21,12 +22,9 @@ module.exports = async (req, res) => {
       },
     });
 
-    console.log("얻어온 유저의 값: ", user.dataValues, "isCreated? : ", created);
-
     if (created) {
-      return res.status(201).json({ message: "signupSuccess", email: user.dataValues.email });
+      return res.status(201).json({ message: "signupSuccess" }, user.id);
     } else {
-      console.log("기존 회원 가입");
       return res.status(403).json({ message: "usedEmail" });
     }
   } catch (err) {

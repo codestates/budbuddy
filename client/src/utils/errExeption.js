@@ -15,7 +15,6 @@ export function makeModal(modalCode = 0) {
       return <ShadowModal text="이미 가입된 회원입니다" />;
     },
     signupSuccess() {
-      console.log("가입성공 테스트");
       return (
         <Link to="/login">
           <ShadowModal text={`회원가입이 완료되었습니다.\n로그인 페이지로 이동합니다`} />

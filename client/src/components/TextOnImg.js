@@ -6,6 +6,10 @@ import { BGWrapper } from "../styles/CommonStyled";
 const Content = styled(BGWrapper)`
   display: grid;
 
+  img {
+    height: 27vh;
+  }
+
   .ani {
     animation-name: textFloating;
     animation-duration: ${(props) => {
@@ -26,7 +30,7 @@ const Content = styled(BGWrapper)`
   }
 `;
 
-const TextOnImg = ({ texts, time = 5000 }) => {
+const TextOnImg = ({ className = "", texts, time = 5000 }) => {
   const [idx, setIdx] = useState(0);
 
   useEffect(() => {
@@ -49,7 +53,7 @@ const TextOnImg = ({ texts, time = 5000 }) => {
   };
 
   return (
-    <Content textTime={time}>
+    <Content className={className} textTime={time}>
       <div className="std">
         <img src={`signupBg/IMG_${4976}.JPG`} alt={`bg`} />
         <div className="backText ani">{texts[idx]}</div>
