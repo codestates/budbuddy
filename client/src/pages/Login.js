@@ -6,6 +6,7 @@ import { proverbs } from "../utils/dummy";
 import TextOnImg from "../components/TextOnImg";
 import Hr from "../components/Hr";
 import LoginForm from "../components/LoginForm";
+import { Link } from "react-router-dom";
 
 const Layout = styled.div`
   padding-top: ${(props) => props.theme.backgroundPaddingTop};
@@ -29,11 +30,9 @@ function Login() {
       <LoginForm />
       <Hr t={0} b={3} width={70} />
       <SocialWrapper>
-        <a
-          href={`https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_KAKAO_REST_API_KEY}&redirect_uri=${process.env.REACT_APP_KAKAO_REDIRECT_URI}&response_type=code`}
-          className="kakao">
-          <img src="https://developers.kakao.com/tool/resource/static/img/button/login/full/ko/kakao_login_medium_wide.png" alt="kakaoButton" />
-        </a>
+        <Link to={`https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_KAKAO_REST_API_KEY}&redirect_uri=${process.env.REACT_APP_KAKAO_REDIRECT_URI}&response_type=code`}>
+          <button className="kakao">카카오톡으로 로그인</button>
+        </Link>
       </SocialWrapper>
     </Layout>
   );
