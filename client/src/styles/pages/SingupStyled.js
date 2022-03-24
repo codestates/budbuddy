@@ -55,7 +55,7 @@ export const SignupWrapper = styled.form`
   }
 
   .join:hover {
-    background-color: Teal;
+    background-color: ${(props) => props.theme.hoverColor};
     color: black;
   }
 
