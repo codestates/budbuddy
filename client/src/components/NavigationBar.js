@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
-import useStore from "../store/store";
 
 export const Content = styled.nav`
   cursor: pointer;
@@ -35,9 +34,8 @@ export const Content = styled.nav`
   }
 `;
 
-function NavigationBar() {
-  const { login } = useStore();
-
+function NavigationBar({ login = false }) {
+  // console.log("NavigationBar::", login);
   return (
     <Content>
       <NavLink to="/test">

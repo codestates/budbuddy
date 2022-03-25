@@ -10,7 +10,7 @@ const theme = {
   hoverColor: "teal",
   fontSizeBg: "1.3rem",
   fontWeightBg: 400,
-  fontIconSize: "20px",
+  fontIconSize: "15px",
   signupInputLineHeight: "0.3rem",
   borderRadius: "4px",
   backgroundPaddingTop: "4vh",

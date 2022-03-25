@@ -2,8 +2,18 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import * as d3 from "d3";
 
-const ChartSvg = styled.svg`
+const ChartDiv = styled.div`
   grid-area: ChartSvg;
+  > .space {
+    height: 2vh;
+  }
+`;
+const ChartSvg = styled.svg`
+  margin: auto;
+`;
+
+const ChartTitle = styled.h2`
+  text-align: center;
 `;
 
 const Chart = () => {
@@ -13,8 +23,8 @@ const Chart = () => {
 
   const makeGraph = () => {
     // 캔버스 구역 정의
-    const width = 350;
-    const height = 350;
+    const width = 300;
+    const height = 300;
     const margin = { top: 20, left: 20, bottom: 20, right: 20 };
 
     const svg = d3.select(".list");
@@ -117,7 +127,14 @@ const Chart = () => {
       .attr("text-anchor", "middle");
   };
 
-  return <ChartSvg className="list" width="380" height="380"></ChartSvg>;
+  return (
+    <ChartDiv>
+      <div className="space"></div>
+      <ChartTitle>스투키 성장 기록</ChartTitle>
+      <ChartSvg className="list" width="320" height="320"></ChartSvg>
+      <div className="space"></div>
+    </ChartDiv>
+  );
 };
 
 export default Chart;

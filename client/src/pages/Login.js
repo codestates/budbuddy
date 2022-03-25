@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { SocialWrapper } from "../styles/pages/LoginStyled";
-import { makeModal } from "../utils/errExeption";
 import { proverbs } from "../utils/dummy";
 import TextOnImg from "../components/TextOnImg";
 import Hr from "../components/Hr";
 import LoginForm from "../components/LoginForm";
+import axios from "axios";
 
 const Layout = styled.div`
   padding-top: ${(props) => props.theme.backgroundPaddingTop};
@@ -18,22 +18,40 @@ const Layout = styled.div`
 `;
 
 function Login() {
-  const [modalCode, setModalCode] = useState(0);
+  async function kakaoLogin() {
+    try {
+      const requestURL = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_KAKAO_REST_API_KEY}&redirect_uri=${process.env.REACT_APP_KAKAO_REDIRECT_URI}&response_type=code`;
+      window.location.assign(requestURL);
 
+      const resData = await axios.get(process.env.REACT_APP_API_URL + "/users/userinfo");
+      console.log(resData.data.message);
+
+      if (resData.data.message === "ok") {
+        const loginInfo = {
+          isLogined: true,
+          type: "kakao",
+        };
+
+        sessionStorage.setItem("loginInfo", JSON.stringify(loginInfo));
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  //    window.location.assign(requestURL);
+  //    sessionStorage.setItem('oauth', 'kakao');
   return (
     <Layout>
-      {makeModal(modalCode)}
       <TextOnImg texts={proverbs} />
-      <Hr t={3} b={1} width={70} />
+      <Hr t={5} b={1} width={90} />
       <div className="loginText">로그인</div>
       <LoginForm />
-      <Hr t={0} b={3} width={70} />
+      <Hr t={0} b={4} width={90} />
       <SocialWrapper>
-        <a
-          href={`https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_KAKAO_REST_API_KEY}&redirect_uri=${process.env.REACT_APP_KAKAO_REDIRECT_URI}&response_type=code`}
-          className="kakao">
-          <img src="https://developers.kakao.com/tool/resource/static/img/button/login/full/ko/kakao_login_medium_wide.png" alt="kakaoButton" />
-        </a>
+        <button onClick={kakaoLogin} className="kakao">
+          카카오톡으로 로그인
+        </button>
       </SocialWrapper>
     </Layout>
   );
