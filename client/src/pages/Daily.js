@@ -7,7 +7,7 @@ import Bud from "../components/Bud";
 import PlantAddDialog from "../components/PlantAddDialog";
 import axios from "axios";
 import { makeModal } from "../utils/errExeption";
-
+import moment from "moment";
 const Layout = styled.div`
   .logo {
     margin-top: 1rem;
@@ -48,18 +48,6 @@ const Daily = ({ login }) => {
   const [modalCode, setModalCode] = useState(0);
 
   useEffect(() => {
-    console.log("리스트 호출 시점");
-
-    async function getPlantsList() {
-      try {
-        const resData = await axios.get(process.env.REACT_APP_API_URL + "/plants");
-        console.log("성공적으로 불러온 애칭 식물 리스트::", resData.data.data);
-      } catch (err) {
-        setModalCode();
-        console.log(err);
-      }
-    }
-
     if (login) {
       getPlantsList();
     }
@@ -67,6 +55,17 @@ const Daily = ({ login }) => {
 
   function openDialog() {
     setDialog(true);
+  }
+
+  async function getPlantsList() {
+    try {
+      const resData = await axios.get(process.env.REACT_APP_API_URL + "/plants");
+      // console.log("성공적으로 불러온 애칭 식물 리스트::", resData.data.data);
+      setPlants(resData.data.data);
+    } catch (err) {
+      setModalCode();
+      console.log(err);
+    }
   }
 
   async function registerBud(budName) {
@@ -79,6 +78,7 @@ const Daily = ({ login }) => {
       };
       const resData = await axios.post(process.env.REACT_APP_API_URL + "/plants", payload);
       console.log(resData);
+      getPlantsList();
     } catch (err) {
       //alreadyExistsBudName
       setModalCode("alreadyExistsBudName");
@@ -103,7 +103,8 @@ const Daily = ({ login }) => {
           </div>
         ) : (
           plants.map((v, i) => {
-            return <Bud key={v.id} src={v.src || "Dummy/diary_4.PNG"} budName={v.name} date={v.created_at} />;
+            const date = moment(v.createdAt).format("YY-MM-DD").replaceAll("-", "/");
+            return <Bud key={v.id} src={v.src || "Dummy/diary_4.PNG"} budName={v.name} date={date} />;
           })
         )}
         {/* {budDummy.map((v, i) => {
