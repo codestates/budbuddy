@@ -18,10 +18,10 @@ export function validPassword(password) {
   const regExp = /^[A-Za-z0-9\W]{6,16}$/g;
   return regExp.test(password);
 }
-//첫글자는 영문이며 숫자 사용가능하지만\n 특수문자 및 한글 사용 불가입니다
+//완성된 한글 영문 숫자만 사용 가능하며 1~14글자 사이여야합니다
 export function validNickName(nickname) {
   nickname = removeSpace(nickname);
-  const regExp = /^[A-Za-z][^\W\s]{1,}[a-zA-Z0-9]*$/g;
+  const regExp = /^[가-힣a-zA-Z0-9]{1,14}$/gm;
   return regExp.test(nickname);
 }
 

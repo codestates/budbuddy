@@ -47,6 +47,9 @@ export function makeModal(modalCode = 0) {
     plantCycleReplaced() {
       return <ShadowModal text={`정상적으로 교체되었습니다.`} />;
     },
+    alreadyExistsBudName() {
+      return <ShadowModal text={`이미 존재하는 식물명입니다.`} />;
+    },
   };
   if (!tasks[modalCode]) {
     // console.log(`예외처리하지 않는 모달코드(${modalCode})입니다:`);
