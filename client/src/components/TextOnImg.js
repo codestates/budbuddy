@@ -1,10 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import styled from "styled-components";
 import { useInterval } from "../modules/hooks";
 import { BGWrapper } from "../styles/CommonStyled";
 
 const Content = styled(BGWrapper)`
   display: grid;
+
+  img {
+    height: 27vh;
+  }
 
   .ani {
     animation-name: textFloating;
@@ -26,18 +30,10 @@ const Content = styled(BGWrapper)`
   }
 `;
 
-const TextOnImg = ({ texts, time = 5000 }) => {
+const TextOnImg = ({ className = "", texts, time = 5000 }) => {
   const [idx, setIdx] = useState(0);
 
-  useEffect(() => {
-    changeProverb();
-  }, []);
-
-  useInterval(() => {
-    changeProverb();
-  }, time);
-
-  const changeProverb = () => {
+  const changeProverb = useCallback(() => {
     setIdx((pre) => {
       while (true) {
         const idx = parseInt(Math.random() * texts.length);
@@ -46,10 +42,18 @@ const TextOnImg = ({ texts, time = 5000 }) => {
         }
       }
     });
-  };
+  }, [texts.length]);
+
+  useEffect(() => {
+    changeProverb();
+  }, [changeProverb]);
+
+  useInterval(() => {
+    changeProverb();
+  }, time);
 
   return (
-    <Content textTime={time}>
+    <Content className={className} textTime={time}>
       <div className="std">
         <img src={`signupBg/IMG_${4976}.JPG`} alt={`bg`} />
         <div className="backText ani">{texts[idx]}</div>

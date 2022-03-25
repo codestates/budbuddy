@@ -5,15 +5,14 @@ import useStore from "../store/store";
 
 export const Content = styled.nav`
   cursor: pointer;
-
   position: fixed;
   bottom: 0;
-
   z-index: 10;
+
   display: grid;
-  grid-template-columns: repeat(5, minmax(1fr, auto));
+  grid-template-columns: repeat(6, minmax(1fr, auto));
   grid-template-rows: minmax(1fr, auto);
-  grid-template-areas: "home story daily album login";
+  grid-template-areas: "test home story daily album login";
 
   justify-content: space-evenly;
   padding: 0.5rem;
@@ -30,12 +29,8 @@ export const Content = styled.nav`
   /* a:active {
     color: black;
   } */
-
-  @media screen and (min-width: 390px) {
-    width: ${(props) => props.theme.iphoneWidth};
-  }
-
-  @media screen and (min-width: 520px) {
+  width: 100vw;
+  @media screen and (min-width: 391px) {
     width: ${(props) => props.theme.webWidth};
   }
 `;
@@ -45,6 +40,9 @@ function NavigationBar() {
 
   return (
     <Content>
+      <NavLink to="/test">
+        <span className="test">테스트</span>
+      </NavLink>
       <NavLink to="/">
         <span className="home">홈</span>
       </NavLink>

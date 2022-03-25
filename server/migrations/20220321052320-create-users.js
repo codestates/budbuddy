@@ -12,20 +12,25 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      profile_image: {
-        type: Sequelize.INTEGER,
+      profile_image_url: {
+        type: Sequelize.STRING,
       },
       nickname: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      password: {
+      social: {
         type: Sequelize.STRING,
         allowNull: false,
+        defaultValue: "normal",
+      },
+      password: {
+        type: Sequelize.STRING,
+        allowNull: true,
       },
       salt: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       created_at: {
         allowNull: false,
