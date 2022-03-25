@@ -23,9 +23,9 @@ module.exports = async (req, res) => {
     });
 
     if (created) {
-      return res.status(201).json({ message: "signupSuccess" }, user.id);
+      return res.status(201).send({ message: "signupSuccess", data: user.id });
     } else {
-      return res.status(403).json({ message: "usedEmail" });
+      return res.status(403).send({ message: "usedEmail" });
     }
   } catch (err) {
     console.error("회원가입 에러 발생: ", err);
