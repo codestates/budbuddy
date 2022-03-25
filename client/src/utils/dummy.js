@@ -13,3 +13,86 @@ export const proverbs = [
 ];
 
 export const slideImgs = [`signupBg/IMG_0.JPG`, `signupBg/IMG_1.JPG`, `signupBg/IMG_2.JPG`, `signupBg/IMG_3.JPG`, `signupBg/IMG_4.JPG`, `signupBg/IMG_5.JPG`, `signupBg/IMG_6.JPG`];
+
+export const budDummy = [
+  {
+    src: "Dummy/diary_1.PNG",
+    budName: "스투키",
+    date: "3/23 17:12",
+  },
+  {
+    src: "Dummy/diary_2.PNG",
+    budName: "바오밥",
+    date: "3/22 11:02",
+  },
+  {
+    src: "Dummy/diary_3.PNG",
+    budName: "징크스",
+    date: "3/17 03:18",
+  },
+  {
+    src: "Dummy/diary_4.PNG",
+    budName: "바이",
+    date: "3/13 21:32",
+  },
+  {
+    src: "Dummy/diary_0.PNG",
+    budName: "꺅투스",
+    date: "3/3 10:59",
+  },
+  {
+    src: "Dummy/diary_0.PNG",
+    budName: "꺅투스",
+    date: "3/3 10:59",
+  },
+  {
+    src: "Dummy/diary_0.PNG",
+    budName: "꺅투스",
+    date: "3/3 10:59",
+  },
+  {
+    src: "Dummy/diary_0.PNG",
+    budName: "꺅투스",
+    date: "3/3 10:59",
+  },
+  {
+    src: "Dummy/diary_0.PNG",
+    budName: "꺅투스",
+    date: "3/3 10:59",
+  },
+  {
+    src: "Dummy/diary_0.PNG",
+    budName: "꺅투스",
+    date: "3/3 10:59",
+  },
+  {
+    src: "Dummy/diary_0.PNG",
+    budName: "꺅투스",
+    date: "3/3 10:59",
+  },
+  {
+    src: "Dummy/diary_0.PNG",
+    budName: "꺅투스",
+    date: "3/3 10:59",
+  },
+  {
+    src: "Dummy/diary_0.PNG",
+    budName: "꺅투스",
+    date: "3/3 10:59",
+  },
+  {
+    src: "Dummy/diary_0.PNG",
+    budName: "꺅투스",
+    date: "3/3 10:59",
+  },
+  {
+    src: "Dummy/diary_0.PNG",
+    budName: "꺅투스",
+    date: "3/3 10:59",
+  },
+  {
+    src: "Dummy/diary_0.PNG",
+    budName: "꺅투스",
+    date: "3/3 10:59",
+  },
+];

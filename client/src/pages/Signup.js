@@ -61,12 +61,10 @@ const Signup = () => {
   async function reqSingup(payload) {
     try {
       const resData = await axios.post(process.env.REACT_APP_API_URL + "/users/signup", payload);
-      // console.log("회원가입 응답::::", resData.data);
       setModalCode(resData.data.message);
       if (resData.data.message === "signupSuccess") {
         await sleep(700);
-        setLogin(true);
-        navigate("/mypage");
+        navigate("/login");
       }
     } catch (err) {
       setModalCode(err.response.data.message);
@@ -301,19 +299,6 @@ const Signup = () => {
           가입취소
         </span>
       </SignupWrapper>
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
     </div>
   );
 };
