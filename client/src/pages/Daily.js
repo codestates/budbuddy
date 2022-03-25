@@ -8,6 +8,7 @@ import PlantAddDialog from "../components/PlantAddDialog";
 import axios from "axios";
 import { makeModal } from "../utils/errExeption";
 import moment from "moment";
+
 const Layout = styled.div`
   .logo {
     margin-top: 1rem;
@@ -108,7 +109,7 @@ const Daily = ({ login }) => {
           })
         )}
         {/* {budDummy.map((v, i) => {
-          return <Bud key={i} src={v.src} budName={v.budName} date={v.date} />;
+          return <Bud key={i} src={v.src} budName={v.name} date={v.createdAt} />;
         })} */}
       </BudLayout>
       {isDialog ? <PlantAddDialog open={isDialog} closeFn={setDialog} apiFn={registerBud} /> : null}
