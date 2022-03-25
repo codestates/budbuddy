@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDroplet, faThermometer, faRepeat } from "@fortawesome/free-solid-svg-icons";
 import { CycleDay, CycleMonth } from "../utils/dummy";
 import { makeModal } from "../utils/errExeption";
+import useStore from "../store/store";
 
 const ModalContainer = styled.div`
   position: fixed;
@@ -77,10 +78,11 @@ const FontAwesomePlace = styled.div`
 
 function PlantsCycleChangeModal() {
   const [isModal, setIsModal] = useState("");
+  const { closePlantCycleChangeModal } = useStore();
 
   function removeModal() {
     setIsModal("hidden");
-    // setModalCode(0);
+    closePlantCycleChangeModal();
   }
 
   const [accessModal, setaccessModal] = useState(0);
@@ -93,7 +95,7 @@ function PlantsCycleChangeModal() {
       {makeModal(accessModal)}
       <div className={`modal_overlay ${isModal}`} />
       <div className={`modal_content ${isModal}`}>
-        <div className={`modal_text ${isModal}`}>주기를 설정해주세요</div>
+        <div className={`modal_text ${isModal}`}>설정 주기를 설정해주세요</div>
         <SelectDiv>
           <SelectPlace>
             <FontAwesomePlace>

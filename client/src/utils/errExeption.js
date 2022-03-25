@@ -61,7 +61,6 @@ export function makeCycleModal(modalCode = 0) {
     },
   };
   if (!tasks[modalCode]) {
-    // console.log(`예외처리하지 않는 모달코드(${modalCode})입니다:`);
     return null;
   }
   return tasks[modalCode]();

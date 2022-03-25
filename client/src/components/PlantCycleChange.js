@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGear } from "@fortawesome/free-solid-svg-icons";
 import { makeCycleModal } from "../utils/errExeption";
+import useStore from "../store/store";
 
 const PlantsCycleChangeLayout = styled.div`
   > .space {
@@ -22,7 +23,7 @@ const PlantsCycleChangeContainer = styled.div`
     "CircleName CircleName CircleName";
   border: 1px solid black;
   width: 95%;
-  height: 17vh;
+  height: 20vh;
   margin: auto;
   border-radius: 10px;
 `;
@@ -104,15 +105,16 @@ const CircleName = styled.div`
     grid-area: soilName;
   }
 `;
+
 const PlantsCycleChange = () => {
-  const [modalCode, setModalCode] = useState(0);
+  const { plantCycle, popUpPlantCycleChangeModal } = useStore();
   const upSetting = () => {
-    setModalCode("makePlantCycleChangeModal");
+    popUpPlantCycleChangeModal();
   };
 
   return (
     <PlantsCycleChangeLayout>
-      {makeCycleModal(modalCode)}
+      {makeCycleModal(plantCycle)}
       <div className="space"></div>
       <div className="space"></div>
       <PlantsCycleChangeContainer>
