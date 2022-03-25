@@ -12,4 +12,7 @@ router.post("/login", users.login);
 // GET /userInfo
 router.get("/userinfo", users.userInfo);
 
+// POST /logout
+router.post("/logout", users.logout);
+
 module.exports = router;
