@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Users.init(
     {
-      profile_image: DataTypes.INTEGER,
+      profile_image_url: DataTypes.STRING,
       email: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -27,13 +27,18 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      password: {
+      social: {
         type: DataTypes.STRING,
         allowNull: false,
+        defaultValue: "normal",
+      },
+      password: {
+        type: DataTypes.STRING,
+        allowNull: true,
       },
       salt: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
     },
     {

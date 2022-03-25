@@ -88,17 +88,23 @@ export const SocialWrapper = styled.div`
 
   justify-content: center;
   place-items: center;
+  border: none;
 
   .kakao {
+    border: none;
+    border-radius: ${(props) => props.theme.borderRadius};
+    padding: 4px;
+    font-size: 0.7rem;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
     color: #000000;
+    background-color: #fee500;
     text-decoration: none;
     opacity: 1;
-    -webkit-transition: 0.3s ease-in-out;
-    transition: 0.3s ease-in-out;
+    -webkit-transition: background-color 0.1s ease-in-out;
+    transition: background-color 0.1s ease-in-out;
   }
 
   .kakao:hover {
-    opacity: 0.8;
+    background-color: #fff136;
   }
 `;

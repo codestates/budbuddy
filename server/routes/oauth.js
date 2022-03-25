@@ -3,7 +3,7 @@ var router = express.Router();
 
 const { oauth } = require("../controllers");
 
-// 
-router.get("/", oauth.requestToken);
+//
+router.get("/kakao", oauth.kakaoRequestToken);
 
 module.exports = router;
