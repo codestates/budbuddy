@@ -207,7 +207,7 @@ const PlantAddDialog = ({ open = false, closeFn, apiFn = "" }) => {
               <div className="text">Plant name</div>
             </div>
             <div ref={checkNick} className="chNick ch"></div>
-            <input className="input-bud trans" placeholder="식물의 이름을 입력하세요" name="budname" onFocus={onFocus} onChange={onChange} onBlur={onBlur} />
+            <input className="input-bud trans" placeholder="식물의 이름을 입력하세요" name="budname" onFocus={onFocus} onChange={onChange} onBlur={onBlur} type="text" />
             <div className="btn-wrapper trans">
               <button className="open btn trans" type="submit">
                 완료
