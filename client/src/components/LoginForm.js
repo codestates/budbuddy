@@ -10,9 +10,10 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import { teal } from "@mui/material/colors";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import useStore from "../store/store";
 import { makeModal } from "../utils/errExeption";
 import { useNavigate } from "react-router-dom";
+import useLoginStore from "../store/LoginStore";
+import { sleep } from "../modules/sleep";
 
 const Layout = styled.div`
   display: grid;
@@ -58,13 +59,12 @@ const theme = createTheme({
 });
 
 const LoginForm = () => {
+  const { setLogin } = useLoginStore();
   let navigate = useNavigate();
-  const { setLogin } = useStore();
   const [modalCode, setModalCode] = useState(0);
 
   async function loginReq(e) {
     e.preventDefault();
-    // console.log("호출");
     const { email, password } = e.target;
     if (email.value === "" || password.value === "") {
       setModalCode("reqfillLoginform");
@@ -78,9 +78,17 @@ const LoginForm = () => {
 
     try {
       const resData = await axios.post(process.env.REACT_APP_API_URL + "/users/login", payload);
+      // console.log("호출", email.value, password.value, resData);
       // console.log("응답::::", resData.data);
-      setModalCode(resData.data.message);
-      if (resData.data.message === "ok") {
+      const msg = resData.data.message.split(" ");
+      if (msg[1] === "AccessToken") {
+        // console.log("로그인 성공");
+        const loginInfo = {
+          isLogined: true,
+          type: "normal",
+        };
+
+        sessionStorage.setItem("loginInfo", JSON.stringify(loginInfo));
         setLogin(true);
         navigate("/mypage");
         return;
@@ -122,7 +130,7 @@ const LoginForm = () => {
               required
               id="password"
               label="password"
-              name="password"
+              name="current-password"
               autoComplete="current-password"
               variant="standard"
               InputProps={{ style: { fontSize: 10 } }}
@@ -153,8 +161,16 @@ const LoginForm = () => {
               sx={{ mt: 0.5, width: "22%", height: "10%", fontSize: "0.7rem" }}
               size="small"
               onClick={async () => {
-                setLogin(true);
+                const loginInfo = {
+                  isLogined: true,
+                  type: "test",
+                };
+
                 setModalCode("testLogin");
+                await sleep(500);
+                sessionStorage.setItem("loginInfo", JSON.stringify(loginInfo));
+                setLogin(true);
+                navigate("/mypage");
               }}>
               Test
             </Button>

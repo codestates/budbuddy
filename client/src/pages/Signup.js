@@ -1,6 +1,5 @@
 import React, { useState, useRef } from "react";
 import styled from "styled-components";
-import { BGWrapper } from "../styles/CommonStyled";
 import { SignupWrapper, InputWrapper } from "../styles/pages/SingupStyled";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -9,23 +8,44 @@ import { validEmail, validPassword, validNickName, removeHangul } from "../modul
 import { useNavigate } from "react-router-dom";
 import { makeModal } from "../utils/errExeption";
 import { sleep } from "../modules/sleep";
-import useStore from "../store/store";
 
-const SignupBG = styled(BGWrapper)`
+export const Layout = styled.div`
   padding-top: ${(props) => props.theme.backgroundPaddingTop};
+`;
 
+const SignupBG = styled.div`
   margin: 0 0rem 0 0rem;
+  text-align: center;
 
-  > .std {
+  .std {
+    display: grid;
+    position: relative;
     transition: box-shadow 0.3s ease;
   }
 
   .std:hover {
     box-shadow: 0px -13px #53a7ea, 0px 13px #53a7ea, 0px -13px #53a7ea;
-    transform: translateY(-3px);
+  }
+
+  img {
+    width: 100%;
+    height: 30vh;
+    object-fit: cover;
+    filter: blur(1px);
+    border: none;
   }
 
   .backText {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+    white-space: pre;
+
+    font-weight: ${(props) => props.theme.fontWeightBg};
+    color: ${(props) => props.theme.backgroundTextColor};
+
     > h1 {
       text-transform: uppercase;
       outline-offset: 0.4em;
@@ -56,7 +76,6 @@ const Signup = () => {
 
   let imgNumber = 4976;
   let navigate = useNavigate();
-  const { setLogin } = useStore();
 
   async function reqSingup(payload) {
     try {
@@ -251,7 +270,7 @@ const Signup = () => {
   }
 
   return (
-    <div>
+    <Layout>
       {makeModal(modalCode)}
       <SignupBG>
         <div className="std">
@@ -283,23 +302,25 @@ const Signup = () => {
           <div ref={checkNick} className="chNick ch"></div>
         </InputWrapper>
         <hr className="hr" width="90%" />
-        <button
-          className="join btn"
-          type="submit"
-          onBlur={() => {
-            setModalCode(0);
-          }}>
-          Join
-        </button>
-        <span
-          className="cancle btn"
-          onClick={() => {
-            navigate("/");
-          }}>
-          가입취소
-        </span>
+        <div className="btnbox">
+          <button
+            className="join btn"
+            type="submit"
+            onBlur={() => {
+              setModalCode(0);
+            }}>
+            Join
+          </button>
+          <span
+            className="cancle btn"
+            onClick={() => {
+              navigate("/");
+            }}>
+            가입취소
+          </span>
+        </div>
       </SignupWrapper>
-    </div>
+    </Layout>
   );
 };
 
