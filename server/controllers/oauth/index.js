@@ -1,3 +1,3 @@
 module.exports = {
-  requestToken: require("./requestToken"),
+  kakaoRequestToken: require("./kakao/requestToken"),
 };

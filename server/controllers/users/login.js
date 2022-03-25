@@ -24,18 +24,18 @@ module.exports = async (req, res) => {
   const jwtPayload = {
     idx: user.id,
     email: user.email,
-    profileImage: user.profile_image,
+    profileImage: user.profile_image_url,
     created_at: user.created_at,
   };
   try {
     var accessToken = await jwtModule.sign(jwtPayload);
   } catch (err) {
-    if (err) throw err;
+    return res.status(500).send(err);
   }
 
   res.cookie("accessToken", accessToken, {
     maxAge: 24 * 60 * 60 * 1000,
     httpOnly: true,
   });
-  return res.status(200).send({ accessToken, message: "ok" });
+  return res.status(200).send({ data: accessToken, message: "sent AccessToken successfully" });
 };
