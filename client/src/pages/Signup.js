@@ -4,7 +4,7 @@ import { SignupWrapper, InputWrapper } from "../styles/pages/SingupStyled";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faKey, faUser, faMask } from "@fortawesome/free-solid-svg-icons";
-import { validEmail, validPassword, validNickName, removeHangul } from "../modules/validation";
+import { validEmail, validPassword, validNickName } from "../modules/validation";
 import { useNavigate } from "react-router-dom";
 import { makeModal } from "../utils/errExeption";
 import { sleep } from "../modules/sleep";
@@ -114,7 +114,6 @@ const Signup = () => {
         return;
       case "inputPass":
         {
-          e.target.value = removeHangul(e.target.value);
           const isValid = validPassword(e.target.value);
           // console.log(className, isValid);
           if (!isValid) {
