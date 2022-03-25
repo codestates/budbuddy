@@ -162,7 +162,7 @@ const PlantAddDialog = ({ open = false, closeFn, apiFn = "" }) => {
               <button className="open btn trans" type="submit">
                 완료
               </button>
-              <button className="close btn trans" onClick={ClosePopup}>
+              <button className="close btn trans" onClick={ClosePopup} type="button">
                 취소
               </button>
             </div>
