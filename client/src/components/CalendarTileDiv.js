@@ -6,8 +6,8 @@ import { faDroplet, faThermometer, faRepeat } from "@fortawesome/free-solid-svg-
 const actionFontTag = (action, key) => {
   const actionFont = {
     water: <FontAwesomeIcon key={key} className="fa-solid" icon={faDroplet} color="skyblue" />,
-    soil: <FontAwesomeIcon key={key} className="fa-solid" icon={faThermometer} color="#D7DF01" />,
-    nutrition: <FontAwesomeIcon key={key} className="fa-solid" icon={faRepeat} color="brown" />,
+    repot: <FontAwesomeIcon key={key} className="fa-solid" icon={faThermometer} color="#D7DF01" />,
+    fertilize: <FontAwesomeIcon key={key} className="fa-solid" icon={faRepeat} color="brown" />,
   };
   return actionFont[action];
 };

@@ -4,13 +4,12 @@ import PlantsCycleChange from "../components/PlantCycleChange";
 import CalendarComponents from "../components/Calendar";
 import styled from "styled-components";
 
-// const CalendarDiv = styled.div`
-
-// `;
-
 const Content = styled.div`
-  background-color: ${(props) => props.theme.formColor};
   display: grid;
+`;
+
+const MypageRecordRayOut = styled.div`
+  background-color: ${(props) => props.theme.formColor};
   grid-template-columns: repeat(3, minmax(1fr, auto));
   grid-template-rows: repeat(5, minmax(1fr, auto));
   grid-template-areas:
@@ -24,9 +23,11 @@ const Content = styled.div`
 const MypageRecord = () => {
   return (
     <Content>
-      <CalendarComponents></CalendarComponents>
-      <PlantsCycleChange></PlantsCycleChange>
-      <Chart></Chart>
+      <MypageRecordRayOut>
+        <CalendarComponents></CalendarComponents>
+        <PlantsCycleChange></PlantsCycleChange>
+        <Chart></Chart>
+      </MypageRecordRayOut>
     </Content>
   );
 };

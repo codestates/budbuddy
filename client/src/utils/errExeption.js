@@ -1,4 +1,5 @@
 import ShadowModal from "../components/Modal";
+import PlantsCycleChangeModal from "../components/PlantCycleChangeModal";
 import { Link } from "react-router-dom";
 
 export const parseErrCode = (msg) => {
@@ -42,6 +43,21 @@ export function makeModal(modalCode = 0) {
     },
     reqfillLoginform() {
       return <ShadowModal text={`로그인 양식을 채워주세요.`} />;
+    },
+    plantCycleReplaced() {
+      return <ShadowModal text={`정상적으로 교체되었습니다.`} />;
+    },
+  };
+  if (!tasks[modalCode]) {
+    // console.log(`예외처리하지 않는 모달코드(${modalCode})입니다:`);
+    return null;
+  }
+  return tasks[modalCode]();
+}
+export function makeCycleModal(modalCode = 0) {
+  const tasks = {
+    makePlantCycleChangeModal() {
+      return <PlantsCycleChangeModal />;
     },
   };
   if (!tasks[modalCode]) {
