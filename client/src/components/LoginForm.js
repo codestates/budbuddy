@@ -165,7 +165,17 @@ const LoginForm = () => {
                   isLogined: true,
                   type: "test",
                 };
-
+                const payload = {
+                  email: "test@test.com",
+                  password: "1111",
+                  nickname: "test",
+                };
+                try {
+                  const resData = await axios.post(process.env.REACT_APP_API_URL + "/users/signup", payload);
+                  console.log(resData.data);
+                } catch (err) {
+                  console.log("테스트계정 로그인 오류:::", err);
+                }
                 setModalCode("testLogin");
                 await sleep(500);
                 sessionStorage.setItem("loginInfo", JSON.stringify(loginInfo));

@@ -9,7 +9,7 @@ router.post("/signup", users.signUp);
 // POST /login
 router.post("/login", users.login);
 
-// GET /userInfo
+// GET /userinfo
 router.get("/userinfo", users.userInfo);
 
 // POST /logout
