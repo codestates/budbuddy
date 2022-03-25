@@ -11,17 +11,10 @@ export const OutLine = styled.div`
 
 export const Content = styled.div`
   background-color: ${(props) => props.theme.subColor};
+  width: 100vw;
   min-height: 100vh;
 
-  @media screen and (max-width: 390px) {
-    width: 100vw;
-  }
-
-  @media screen and (min-width: 390px) {
-    width: ${(props) => props.theme.iphoneWidth};
-  }
-
-  @media screen and (min-width: 400px) {
+  @media screen and (min-width: 391px) {
     width: ${(props) => props.theme.webWidth};
   }
 `;

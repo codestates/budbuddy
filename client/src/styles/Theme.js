@@ -15,7 +15,7 @@ const theme = {
   borderRadius: "4px",
   backgroundPaddingTop: "4vh",
   iphoneWidth: "100vw",
-  webWidth: "245px",
+  webWidth: "350px",
 };
 
 export default theme;

@@ -4,8 +4,6 @@ import { NavLink } from "react-router-dom";
 import useStore from "../store/store";
 
 export const Content = styled.nav`
-  width: inherit;
-
   cursor: pointer;
   position: fixed;
   bottom: 0;
@@ -31,6 +29,10 @@ export const Content = styled.nav`
   /* a:active {
     color: black;
   } */
+  width: 100vw;
+  @media screen and (min-width: 391px) {
+    width: ${(props) => props.theme.webWidth};
+  }
 `;
 
 function NavigationBar() {
