@@ -6,6 +6,10 @@ const useStore = create((set) => ({
     set((state) => ({
       login: isLogin,
     })),
+
+  plantCycle: 0,
+  popUpPlantCycleChangeModal: () => set((state) => ({ plantCycle: "makePlantCycleChangeModal" })),
+  closePlantCycleChangeModal: () => set((state) => ({ plantCycle: 0 })),
 }));
 
 export default useStore;
