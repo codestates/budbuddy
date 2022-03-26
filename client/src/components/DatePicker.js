@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendarDays } from "@fortawesome/free-solid-svg-icons";
 import { curDate } from "../modules/date";
 import CustomCalendar from "../components/CustomCalendar";
+
 const Layout = styled.div`
   display: flex;
   flex-direction: column;
@@ -17,7 +18,7 @@ const Layout = styled.div`
   }
 `;
 
-const Wrapper = styled.div`
+const BtnCalendarWrap = styled.div`
   margin-top: 0.4rem;
   font-size: 1.2rem;
   position: relative;
@@ -69,6 +70,7 @@ const Wrapper = styled.div`
     margin-bottom: 0.5rem;
   }
 `;
+
 const CalendarBtn = styled.div`
   /* border: solid 1px black; */
   .display-bg {
@@ -101,11 +103,11 @@ const CalendarBtn = styled.div`
     transform: translateY(10%);
   }
 `;
-const Calendar = styled.div``;
 
 const DatePicker = ({ className }) => {
   const inputRef = useRef(null);
   const dropdownRef = useRef(null);
+  let tempDate = "";
 
   useEffect(() => {
     inputRef.current.readOnly = false;
@@ -125,9 +127,20 @@ const DatePicker = ({ className }) => {
     dropdownRef.current.className = "dropdown-content";
   }
 
+  function selectDate(date) {
+    tempDate = date;
+  }
+
+  function doneCalendar() {
+    closeCalendar();
+    inputRef.current.readOnly = false;
+    inputRef.current.value = tempDate;
+    inputRef.current.readOnly = true;
+  }
+
   return (
     <Layout className={className}>
-      <Wrapper>
+      <BtnCalendarWrap>
         <CalendarBtn className="calenda-btn">
           <div className="display-bg">
             <div className="display-bg">
@@ -140,9 +153,9 @@ const DatePicker = ({ className }) => {
         </CalendarBtn>
         <div className="dropdown">
           <div ref={dropdownRef} className="dropdown-content">
-            <CustomCalendar className="custom-calendar" />
+            <CustomCalendar className="custom-calendar" fn={selectDate} />
             <div className="btn-wrap">
-              <button onClick={closeCalendar} className="done">
+              <button onClick={doneCalendar} className="done">
                 선택완료
               </button>
               <button onClick={closeCalendar} className="cancel">
@@ -151,7 +164,7 @@ const DatePicker = ({ className }) => {
             </div>
           </div>
         </div>
-      </Wrapper>
+      </BtnCalendarWrap>
     </Layout>
   );
 };

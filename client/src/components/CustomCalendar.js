@@ -101,7 +101,7 @@ const Content = styled.div`
   }
 `;
 
-function CustomCalendar() {
+function CustomCalendar({ fn }) {
   const [cells, setCells] = useState([]);
   const [month, setMonth] = useState("");
   const [date, setDate] = useState("");
@@ -118,7 +118,6 @@ function CustomCalendar() {
 
   useEffect(() => {
     MakeCalendar();
-    setDate("선택날짜: " + moment(dt).format("YY년 MM월 DD일")); //달력 상단 날짜 표기
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dt]);
 
@@ -128,18 +127,13 @@ function CustomCalendar() {
     const endDate = new Date(dt.getFullYear(), dt.getMonth() + 1, 0).getDate();
     const firstDay = calcFirstDay(endDay, endDate);
     const prevDate = new Date(dt.getFullYear(), dt.getMonth(), 0).getDate();
-    const today = new Date();
 
     let cells = [];
     for (let i = firstDay; i > 0; i--) {
       cells.push({ className: "prev_date", day: prevDate - i + 1 });
     }
     for (let i = 1; i <= endDate; i++) {
-      if (i === today.getDate() && dt.getMonth() === today.getMonth()) {
-        cells.push({ className: "today", day: i });
-      } else {
-        cells.push({ className: "", day: i });
-      }
+      cells.push({ className: "", day: i });
     }
     setCells(cells);
   }
@@ -150,14 +144,10 @@ function CustomCalendar() {
     } else if (dir === "next") {
       dt.setMonth(dt.getMonth() + 1);
     }
-
     MakeCalendar();
   }
 
   function pickDay(e) {
-    // console.log('log', e.target.textContent);
-    // console.dir('dir', e.target);
-    // console.log(daysRef.current.children);
     let pickDay = "";
     for (let i = 0; i < daysRef.current.children.length; i++) {
       if (daysRef.current.children[i].className === "today") {
@@ -169,7 +159,9 @@ function CustomCalendar() {
       }
     }
 
-    setDate(`선택날짜: ${moment(dt).format("YY년")} ${month} ${pickDay}일`);
+    let year = moment(dt).format("YY");
+    fn(`${year}/${dt.getMonth() + 1}/${pickDay}`);
+    setDate(`선택날짜: ${year}년 ${month} ${pickDay}일`);
   }
 
   return (
