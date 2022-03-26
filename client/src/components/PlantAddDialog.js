@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSeedling } from "@fortawesome/free-solid-svg-icons";
-import { validNickName } from "../modules/validation";
+
 const Layout = styled.div`
   display: flex;
   flex-direction: column;
@@ -119,20 +119,10 @@ const FormLayout = styled.form`
     color: snow;
     background-color: IndianRed;
   }
-
-  .chNick {
-    font-size: 3px;
-    padding: 4px;
-    white-space: pre;
-  }
-  > .invalid {
-    color: ${(props) => props.theme.textWaringColor};
-  }
 `;
 
 //closeFn requied이기 때문에 디폴트 값을 안넣음
 const PlantAddDialog = ({ open = false, closeFn, apiFn = "" }) => {
-  const checkNick = useRef(null);
   const popRef = useRef(null);
   const backRef = useRef(null);
 
@@ -146,54 +136,15 @@ const PlantAddDialog = ({ open = false, closeFn, apiFn = "" }) => {
   function resisterBud(e) {
     e.preventDefault();
     if (typeof apiFn === "function") {
-      const isValid = validNickName(e.target.budname.value);
-      console.log("valid nickname:::", e.target.budname.value, isValid);
-      if (isValid) {
-        apiFn(e.target.budname.value);
-        ClosePopup();
-      }
+      console.log(e.target.budname.value);
+      apiFn();
     }
+    ClosePopup();
   }
 
   function ClosePopup() {
     closeFn(false);
     popRef.current.className = "popup";
-  }
-
-  function onFocus(e) {
-    const name = e.target.name;
-    if (e.target.value !== "") return;
-    if (name === "budname") {
-      checkNick.current.className = "chNick ch";
-      return (checkNick.current.textContent = "완성된 한글 및 영문,숫자만 사용가능하며 1~14글자 사이여야합니다.");
-    }
-  }
-
-  function onChange(e) {
-    const name = e.target.name;
-    if (e.target.value === "") {
-      onFocus(e);
-      return;
-    }
-    if (name === "budname") {
-      const isValid = validNickName(e.target.value);
-      if (!isValid) {
-        checkNick.current.textContent = "유효하지 않은 닉네임입니다";
-        checkNick.current.className = "chNick ch invalid";
-      } else {
-        checkNick.current.textContent = "";
-        checkNick.current.className = "chNick ch";
-      }
-    }
-  }
-
-  function onBlur(e) {
-    if (e.target.value !== "") {
-      return;
-    }
-
-    checkNick.current.textContent = "";
-    checkNick.current.className = "chNick ch";
   }
 
   return (
@@ -206,8 +157,7 @@ const PlantAddDialog = ({ open = false, closeFn, apiFn = "" }) => {
               <FontAwesomeIcon className="icon" icon={faSeedling} />
               <div className="text">Plant name</div>
             </div>
-            <div ref={checkNick} className="chNick ch"></div>
-            <input className="input-bud trans" placeholder="식물의 이름을 입력하세요" name="budname" onFocus={onFocus} onChange={onChange} onBlur={onBlur} type="text" />
+            <input className="input-bud trans" placeholder="식물의 이름을 입력하세요" name="budname" />
             <div className="btn-wrapper trans">
               <button className="open btn trans" type="submit">
                 완료

@@ -16,8 +16,8 @@ export const Layout = styled.div`
 
   .leftcap,
   .rightcap {
-    width: 24%;
-    font-size: 1rem;
+    width: 20%;
+    font-size: 0.3rem;
     padding: 1%;
     margin: 5px;
     border: none;

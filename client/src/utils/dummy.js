@@ -41,8 +41,8 @@ export const doing = [
 export const budDummy = [
   {
     src: "Dummy/diary_1.PNG",
-    name: "스투키",
-    createdAt: "3/23 17:12",
+    budName: "스투키",
+    date: "3/23 17:12",
   },
   {
     src: "Dummy/diary_2.PNG",
