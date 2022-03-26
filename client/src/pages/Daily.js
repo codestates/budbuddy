@@ -7,7 +7,7 @@ import Bud from "../components/Bud";
 import PlantAddDialog from "../components/PlantAddDialog";
 import axios from "axios";
 import { makeModal } from "../utils/errExeption";
-import moment from "moment";
+import { curDate } from "../modules/date";
 
 const Layout = styled.div`
   .logo {
@@ -104,7 +104,7 @@ const Daily = ({ login }) => {
           </div>
         ) : (
           plants.map((v, i) => {
-            const date = moment(v.createdAt).format("YY-MM-DD").replaceAll("-", "/");
+            const date = curDate();
             return <Bud key={v.id} src={v.src || "Dummy/diary_4.PNG"} budName={v.name} date={date} />;
           })
         )}
