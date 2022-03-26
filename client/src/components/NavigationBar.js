@@ -7,7 +7,8 @@ export const Content = styled.nav`
   position: fixed;
   bottom: 0;
   z-index: 10;
-  padding: 0.3rem;
+  padding: 0.4rem;
+  font-size: 1.2rem;
 
   background-color: ${(props) => props.theme.navigationBGColor};
 

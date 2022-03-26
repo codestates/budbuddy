@@ -15,7 +15,7 @@ import Album from "./pages/Album";
 import Test from "./pages/Test";
 import NavigationBar from "./components/NavigationBar";
 import { OutLine, Content } from "./styles/CommonStyled";
-import useLoginStore from "./store/LoginStore";
+import useLoginStore from "./store/loginStore";
 axios.defaults.withCredentials = true;
 
 const App = () => {
