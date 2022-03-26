@@ -20,9 +20,6 @@ module.exports = async (req, res) => {
         user_id,
       },
     });
-
-    console.log("[get /plants:: plantsList:]", plantsList);
-
     if (plantsList.length === 0) return res.status(404).send({ message: "Not Found" });
     return res.status(200).send({ message: "ok", data: plantsList });
   } catch (err) {

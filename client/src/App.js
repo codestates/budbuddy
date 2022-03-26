@@ -15,7 +15,7 @@ import Album from "./pages/Album";
 import Test from "./pages/Test";
 import NavigationBar from "./components/NavigationBar";
 import { OutLine, Content } from "./styles/CommonStyled";
-import useLoginStore from "./store/loginStore";
+import useLoginStore from "./store/LoginStore";
 axios.defaults.withCredentials = true;
 
 const App = () => {
@@ -45,7 +45,7 @@ const App = () => {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/story" element={<Story />} />
-              <Route path="/daily" element={<Daily login={login} />} />
+              <Route path="/daily" element={<Daily />} />
               <Route path="/album" element={<Album />} />
               <Route path="/signup" element={<Signup />} />
               {login ? <Route path="/mypage" element={<Mypage />} /> : <Route path="/login" element={<Login setLogin={setLogin} />} />}

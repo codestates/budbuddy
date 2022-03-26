@@ -4,7 +4,7 @@ import { SignupWrapper, InputWrapper } from "../styles/pages/SingupStyled";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faKey, faUser, faMask } from "@fortawesome/free-solid-svg-icons";
-import { validEmail, validPassword, validNickName } from "../modules/validation";
+import { validEmail, validPassword, validNickName, removeHangul } from "../modules/validation";
 import { useNavigate } from "react-router-dom";
 import { makeModal } from "../utils/errExeption";
 import { sleep } from "../modules/sleep";
@@ -114,6 +114,7 @@ const Signup = () => {
         return;
       case "inputPass":
         {
+          e.target.value = removeHangul(e.target.value);
           const isValid = validPassword(e.target.value);
           // console.log(className, isValid);
           if (!isValid) {
@@ -158,10 +159,10 @@ const Signup = () => {
       }
       case "inputPass":
         checkPass.current.className = "chPass ch";
-        return (checkPass.current.textContent = "영문, 특수문자, 숫자 사용가능하며\n 6~16글자 사이여야합니다");
+        return (checkPass.current.textContent = "영문, 특수문자, 숫자 사용가능하며\n 총6~16글자 사이여야합니다");
       case "inputNick":
         checkNick.current.className = "chNick ch";
-        return (checkNick.current.textContent = "완성된 한글 및 영문,숫자만 사용가능하며\n 1~14글자 사이여야합니다");
+        return (checkNick.current.textContent = "첫글자는 영문이며 숫자 사용가능하지만\n 특수문자,한글 및 공백은 사용 불가입니다.");
       default:
         return;
     }
