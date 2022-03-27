@@ -105,6 +105,7 @@ function CustomCalendar({ fn }) {
   const [cells, setCells] = useState([]);
   const [month, setMonth] = useState("");
   const [date, setDate] = useState("");
+  const [preDayIdx, setPreDayIdx] = useState(0);
   const daysRef = useRef(null);
   const { dt } = timeStore();
 
@@ -122,6 +123,9 @@ function CustomCalendar({ fn }) {
   }, [dt]);
 
   function MakeCalendar() {
+    if (preDayIdx !== 0) daysRef.current.children[preDayIdx].className = "";
+    const seletedDate = date.split("/");
+    console.log("makeCalendar", dt.getMonth() + 1, seletedDate[1]);
     setMonth(months[dt.getMonth()]); //달력 상단 날짜 표기
     const endDay = new Date(dt.getFullYear(), dt.getMonth() + 1, 0).getDay();
     const endDate = new Date(dt.getFullYear(), dt.getMonth() + 1, 0).getDate();
@@ -133,7 +137,9 @@ function CustomCalendar({ fn }) {
       cells.push({ className: "prev_date", day: prevDate - i + 1 });
     }
     for (let i = 1; i <= endDate; i++) {
-      cells.push({ className: "", day: i });
+      if (seletedDate[1] * 1 === dt.getMonth() + 1 && seletedDate[0] === moment(dt).format("YY") && seletedDate[2] * 1 === i) {
+        cells.push({ className: "today", day: i });
+      } else cells.push({ className: "", day: i });
     }
     setCells(cells);
   }
@@ -147,21 +153,22 @@ function CustomCalendar({ fn }) {
     MakeCalendar();
   }
 
-  function pickDay(e) {
+  function pickDay(idx) {
+    console.log("pickDay");
     let pickDay = "";
-    for (let i = 0; i < daysRef.current.children.length; i++) {
-      if (daysRef.current.children[i].className === "today") {
-        daysRef.current.children[i].className = "";
-      }
-      if (e.target.textContent === daysRef.current.children[i].textContent && daysRef.current.children[i].className !== "prev_date") {
-        daysRef.current.children[i].className = "today";
-        pickDay = daysRef.current.children[i].textContent;
-      }
+
+    if (preDayIdx !== 0) daysRef.current.children[preDayIdx].className = "";
+
+    if (daysRef.current.children[idx].className !== "prev_date") {
+      daysRef.current.children[idx].className = "today";
+      pickDay = daysRef.current.children[idx].textContent;
     }
 
-    let year = moment(dt).format("YY");
+    setPreDayIdx(idx);
+
+    const year = moment(dt).format("YY");
     fn(`${year}/${dt.getMonth() + 1}/${pickDay}`);
-    setDate(`선택날짜: ${year}년 ${month} ${pickDay}일`);
+    setDate(`${year}/${month}/${pickDay}`);
   }
 
   return (
@@ -177,8 +184,8 @@ function CustomCalendar({ fn }) {
               <span>&#10094;</span>
             </div>
             <div>
-              <span className="curMonth">{month}</span>
-              <p className="curDate">{date}</p>
+              <span className="curMonth">{month + "월"}</span>
+              <p className="curDate">{"선택날짜: " + date}</p>
             </div>
             <div className="next" onClick={() => moveDate("next")}>
               <span>&#10095;</span>
@@ -197,7 +204,7 @@ function CustomCalendar({ fn }) {
             {cells.map((v, i) => {
               //   console.log(v);
               return (
-                <div key={i} className={v.className} onClick={pickDay}>
+                <div key={i} className={v.className} onClick={() => pickDay(i)}>
                   {v.day}
                 </div>
               );
