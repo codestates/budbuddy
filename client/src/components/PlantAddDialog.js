@@ -3,12 +3,10 @@ import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSeedling } from "@fortawesome/free-solid-svg-icons";
 import { validNickName } from "../modules/validation";
+
 const Layout = styled.div`
   display: flex;
   flex-direction: column;
-
-  width: 100%;
-  height: 100%;
 
   position: absolute;
   text-align: center;
@@ -23,11 +21,15 @@ const Layout = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 100vw;
+    @media screen and (min-width: 391px) {
+      width: ${(props) => props.theme.webWidth};
+    }
   }
 
   .popup {
     border-radius: ${(props) => props.theme.borderRadius};
-    width: ${(props) => props.theme.webWidth};
+    width: 85%;
     padding: 2%;
     background-color: #f5f5f5;
     box-sizing: border-box;
