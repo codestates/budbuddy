@@ -1,5 +1,5 @@
 const theme = {
-  mainColor: "#141414",
+  mainColor: "snow",
   subColor: "LightSteelBlue",
   formColor: "#f7f6f6",
   calendarTopColor: "LightGrey",

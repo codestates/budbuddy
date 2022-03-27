@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import Logo from "../components/Logo";
 import DatePicker from "../components/DatePicker";
+import PlantManageToggle from "../components/PlantManageToggle";
 
 const Layout = styled.div`
   display: flex;
@@ -11,15 +12,16 @@ const Layout = styled.div`
     margin-top: 1.5rem;
   }
 
-  .calendar {
+  .date-picker {
     display: flex;
     align-self: center;
     justify-content: center;
     flex-direction: column;
   }
+  .manage-toggle {
+  }
 `;
 
-const PlantManageToggle = styled.div``;
 const PlantGrowDropdown = styled.div``;
 const Content = styled.div``;
 const WriteBtn = styled.div``;
@@ -28,8 +30,8 @@ const Test = () => {
   return (
     <Layout>
       <Logo className="logo" />
-      <DatePicker className="calendar" />
-      <PlantManageToggle />
+      <DatePicker className="date-picker" />
+      <PlantManageToggle className="manage-toggle" />
       <PlantGrowDropdown />
       <Content />
       <WriteBtn />
