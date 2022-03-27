@@ -13,10 +13,12 @@ const Content = styled.div`
 
   .calendar {
     width: 100%;
+    border-radius: ${(props) => props.theme.borderRadius};
     background-color: ${(props) => props.theme.calendarBottomColor};
   }
 
   .month {
+    border-radius: ${(props) => props.theme.borderRadius};
     width: 100%;
     background-color: ${(props) => props.theme.calendarTopColor};
     color: black;
@@ -123,10 +125,11 @@ function CustomCalendar({ fn }) {
   }, [dt]);
 
   function MakeCalendar() {
+    //
     if (preDayIdx !== 0) daysRef.current.children[preDayIdx].className = "";
-    const seletedDate = date.split("/");
-    console.log("makeCalendar", dt.getMonth() + 1, seletedDate[1]);
     setMonth(months[dt.getMonth()]); //달력 상단 날짜 표기
+
+    const seletedDate = date.split("/");
     const endDay = new Date(dt.getFullYear(), dt.getMonth() + 1, 0).getDay();
     const endDate = new Date(dt.getFullYear(), dt.getMonth() + 1, 0).getDate();
     const firstDay = calcFirstDay(endDay, endDate);
@@ -202,7 +205,6 @@ function CustomCalendar({ fn }) {
           </div>
           <div className="days" ref={daysRef}>
             {cells.map((v, i) => {
-              //   console.log(v);
               return (
                 <div key={i} className={v.className} onClick={() => pickDay(i)}>
                   {v.day}
