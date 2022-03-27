@@ -20,7 +20,6 @@ const Layout = styled.div`
 
 const BtnCalendarWrap = styled.div`
   margin-top: 0.4rem;
-  font-size: 1.2rem;
   position: relative;
   display: inline-block;
 
@@ -82,6 +81,7 @@ const CalendarBtn = styled.div`
   }
 
   .display-day {
+    font-size: ${(props) => props.theme.fontWritePageSmall};
     padding-left: 0.5rem;
     width: 100%;
     border: none;

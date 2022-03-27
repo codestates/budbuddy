@@ -8,7 +8,6 @@ const Layout = styled.div`
   .manage-box {
     display: flex;
     /* border: solid 1px red; */
-    margin-left: 1rem;
   }
 
   .manage-box > .icon {
@@ -23,7 +22,7 @@ const Layout = styled.div`
   .text {
     /* width: 12%; */
     text-align: center;
-    font-size: 1.3rem;
+    font-size: ${(props) => props.theme.fontWritePageMid};
     padding: 6px 0 0 0;
   }
   .icon {
