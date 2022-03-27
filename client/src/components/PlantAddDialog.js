@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSeedling } from "@fortawesome/free-solid-svg-icons";
 import { validNickName } from "../modules/validation";
+
 const Layout = styled.div`
   display: flex;
   flex-direction: column;

@@ -13,15 +13,12 @@ const Content = styled.div`
 
   .calendar {
     width: 100%;
-    border-radius: ${(props) => props.theme.borderRadius};
-    background-color: ${(props) => props.theme.calendarBottomColor};
   }
 
   .month {
-    border-radius: ${(props) => props.theme.borderRadius};
+    border-radius: ${(props) => props.theme.borderRadius} ${(props) => props.theme.borderRadius} 0 0;
     width: 100%;
     background-color: ${(props) => props.theme.calendarTopColor};
-    color: black;
 
     display: flex;
     justify-content: space-between;
@@ -41,6 +38,7 @@ const Content = styled.div`
     flex-wrap: wrap;
     font-weight: 300;
     padding: 5px 0;
+    background-color: ${(props) => props.theme.calendarBottomColor};
   }
   .days div {
     border-radius: ${(props) => props.theme.borderRadius};
