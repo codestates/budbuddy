@@ -3,8 +3,8 @@ import styled from "styled-components";
 import { budDummy } from "../utils/dummy";
 import Logo from "../components/Logo";
 import TabBtnOne from "../components/TabBtnOne";
-import Bud from "../components/Bud";
-import PlantAddDialog from "../components/PlantAddDialog";
+import Bud from "../components/diary/Bud";
+import PlantAddDialog from "../components/diary/PlantAddDialog";
 import axios from "axios";
 import { makeModal } from "../utils/errExeption";
 import { curDate } from "../modules/date";
@@ -20,13 +20,19 @@ const Layout = styled.div`
 `;
 
 const BudLayout = styled.div`
-  display: grid;
-  grid-template-columns: auto auto;
-  grid-template-rows: repeat(auto);
+  /* padding-top: 0.5rem;
+  padding-bottom: 2rem; */
+  width: 100%;
   margin: 0 auto;
-
-  padding-top: 0.5rem;
-  padding-bottom: 2rem;
+  .card-wrap {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0.8rem 0.5rem 0 0.5rem;
+  }
+  .cardcomponent {
+    width: 50%;
+  }
 
   .notice-pos {
     display: flex;
@@ -103,10 +109,12 @@ const Daily = ({ login }) => {
             <div className="notice">등록된 식물이 없습니다</div>
           </div>
         ) : (
-          plants.map((v, i) => {
-            const date = curDate();
-            return <Bud key={v.id} src={v.src || "Dummy/diary_4.PNG"} budName={v.name} date={date} />;
-          })
+          <div className="card-wrap">
+            {plants.map((v, i) => {
+              const date = curDate();
+              return <Bud key={v.id} src={v.src || "Dummy/diary_4.PNG"} className="cardcomponent" budName={v.name} date={date} />;
+            })}
+          </div>
         )}
         {/* {budDummy.map((v, i) => {
           return <Bud key={i} src={v.src} budName={v.name} date={v.createdAt} />;

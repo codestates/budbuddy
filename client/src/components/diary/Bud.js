@@ -78,9 +78,9 @@ export const Layout = styled.div`
   }
 `;
 
-const Bud = ({ src, budName, date }) => {
+const Bud = ({ className, src, budName, date }) => {
   return (
-    <Layout>
+    <Layout className={className}>
       <div className="shell">
         <div className="hide">
           <div className="text">일지쓰기</div>
