@@ -36,9 +36,9 @@ const Layout = styled.div`
   }
 `;
 
-function GrowInput() {
+function GrowInput({ className }) {
   return (
-    <Layout>
+    <Layout className={className}>
       <div className="shell">
         <div className="text-wrap">
           <span>현재 키:</span>
