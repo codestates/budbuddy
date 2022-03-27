@@ -48,7 +48,7 @@ const App = () => {
               <Route path="/daily" element={<Daily />} />
               <Route path="/album" element={<Album />} />
               <Route path="/signup" element={<Signup />} />
-              {login ? <Route path="/mypage" element={<Mypage />} /> : <Route path="/login" element={<Login setLogin={setLogin} />} />}
+              {login ? <Route path="/mypage" element={<Mypage login={login} />} /> : <Route path="/login" element={<Login setLogin={setLogin} />} />}
               <Route path="/test" element={<Test />} />
               <Route path="/mypage/list/record" element={<MypageRecord />} />
             </Routes>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import SideBar from "../components/SideBar";
 export const Layout = styled.div``;
 
 const Test = () => {
@@ -15,7 +16,11 @@ const Test = () => {
   //   }
   // });
 
-  return <Layout></Layout>;
+  return (
+    <Layout>
+      <SideBar></SideBar>
+    </Layout>
+  );
 };
 
 export default Test;
