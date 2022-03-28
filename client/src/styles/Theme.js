@@ -13,6 +13,7 @@ const theme = {
   colorGainsboro: "Gainsboro",
   hoverColor: "teal",
   hoverCancleColor: "IndianRed",
+  btnBgColor: "GhostWhite",
   //font
   fontSizeBg: "1.3rem",
   fontIconSize: "15px",
