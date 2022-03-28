@@ -46,7 +46,7 @@ const Layout = styled.div`
   }
 `;
 
-function PopupBtn({ onClick, setDateDisplayRef }) {
+function PopupBtn({ className, onClick, setDateDisplayRef }) {
   const inputRef = useRef(null);
 
   useEffect(() => {
@@ -57,7 +57,7 @@ function PopupBtn({ onClick, setDateDisplayRef }) {
   }, []);
 
   return (
-    <Layout className="popup-btn">
+    <Layout className={className}>
       <div className="display-bg">
         <div className="display">
           <input ref={inputRef} className="display-day" readOnly></input>

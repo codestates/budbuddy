@@ -17,11 +17,8 @@ const Layout = styled.div`
     margin-top: 1rem;
   }
 
-  .popup-btn {
-    margin: 1rem 0;
-  }
-
   .date-picker {
+    margin: 1rem 0;
   }
 
   .manage-toggle {
@@ -80,7 +77,7 @@ const Test = () => {
   return (
     <Layout name="test">
       <Logo className="logo" />
-      <DatePicker />
+      <DatePicker className="date-picker" top={90} />
       <PlantManageToggle className="manage-toggle" />
       <GrowInput className="grow-input" />
       <TextContent className="text-content" />

@@ -24,14 +24,15 @@ const Wrapper = styled.div`
   width: 100%;
 
   position: relative;
-  top: ${(props) => props.top + "px"};
-  left: ${(props) => props.left + "px"};
 
   .calendar-fragment {
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     border-radius: ${(props) => props.theme.borderRadius};
     background-color: ${(props) => props.theme.calendarBottomColor};
     width: 80%;
+    position: relative;
+    top: ${(props) => props.top + "px"};
+    left: ${(props) => props.left + "px"};
 
     .btn-wrap {
       display: flex;
@@ -57,7 +58,7 @@ const Wrapper = styled.div`
   }
 `;
 
-const DialogCalendar = ({ className, top = 100, left = 0, setDpRef, dateDisplayRef }) => {
+const DialogCalendar = ({ top = 100, left = 0, setDpRef, dateDisplayRef }) => {
   const calendarRef = useRef(null);
   let selectedDate = "";
 
@@ -83,7 +84,7 @@ const DialogCalendar = ({ className, top = 100, left = 0, setDpRef, dateDisplayR
   }
 
   return (
-    <Layout ref={calendarRef} className={`${className}`} name="layout">
+    <Layout ref={calendarRef} name="layout">
       <Wrapper top={top} left={left}>
         <div className="calendar-fragment">
           <CustomCalendar fn={selectDate} />
