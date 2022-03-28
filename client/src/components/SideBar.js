@@ -7,22 +7,27 @@ const SideBarContainer = styled.div`
   min-height: 100vh;
   background-color: aliceblue;
   display: flex;
+  flex-direction: column;
   align-self: flex-end;
+  .hehe {
+    height: 10vh;
+    border: 1px solid red;
+  }
+
   > .temp {
+    margin: 10px;
+    border: 1px solid red;
   }
 `;
 
 function SideBar() {
   return (
     <SideBarContainer class="sidebar">
-      <ul className="temp">
-        <a className="active" href="#home">
-          Home
-        </a>
-        <a href="#news">News</a>
-        <a href="#contact">Contact</a>
-        <a href="#about">About</a>
-      </ul>
+      <div className="hehe">아이디</div>
+      <div className="temp">배경이미지 세팅</div>
+      <div className="temp">로그아웃</div>
+      <div className="temp">비밀번호 변경</div>
+      <div className="temp">회원탈퇴</div>
     </SideBarContainer>
   );
 }
