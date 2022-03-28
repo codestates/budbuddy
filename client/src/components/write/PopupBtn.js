@@ -26,13 +26,13 @@ const Layout = styled.div`
     font-size: ${(props) => props.theme.fontWritePageSmall};
     padding-left: 0.5rem;
     width: 100%;
-    border: none;
-    border-radius: ${(props) => props.theme.borderRadius};
+    border: solid 1px #fff;
+    border-radius: ${(props) => props.theme.borderRadius} 0 0 ${(props) => props.theme.borderRadius};
   }
   .icon-bg {
     /* border: solid 1px black; */
     padding: 0 0.3rem;
-    border-radius: ${(props) => props.theme.borderRadius};
+    border-radius: 0 ${(props) => props.theme.borderRadius} ${(props) => props.theme.borderRadius} 0;
     color: SlateGrey;
     background-color: LightGrey;
   }
@@ -60,7 +60,7 @@ function PopupBtn({ className, onClick, setDateDisplayRef }) {
     <Layout className={className}>
       <div className="display-bg">
         <div className="display">
-          <input ref={inputRef} className="display-day" readOnly></input>
+          <input ref={inputRef} className="display-day" readOnly name="date"></input>
         </div>
         <div className="icon-bg" onClick={onClick}>
           <FontAwesomeIcon className="icon" icon={faCalendarDays} />

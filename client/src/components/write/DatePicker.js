@@ -13,7 +13,7 @@ function DatePicker({ className, top = 100, left = 0 }) {
   return (
     <>
       <PopupBtn className={className} onClick={openCalendar} setDateDisplayRef={setDateDisplayRef} />
-      <DialogCalendar className={"date-picker hidden"} top={top} left={left} setDpRef={setDpRef} dateDisplayRef={dateDisplayRef} />
+      <DialogCalendar top={top} left={left} setDpRef={setDpRef} dateDisplayRef={dateDisplayRef} />
     </>
   );
 }

@@ -84,7 +84,7 @@ const DialogCalendar = ({ top = 100, left = 0, setDpRef, dateDisplayRef }) => {
   }
 
   return (
-    <Layout ref={calendarRef} name="layout">
+    <Layout ref={calendarRef} name="layout" className="hidden">
       <Wrapper top={top} left={left}>
         <div className="calendar-fragment">
           <CustomCalendar fn={selectDate} />

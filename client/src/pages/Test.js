@@ -5,7 +5,8 @@ import PlantManageToggle from "../components/write/PlantManageToggle";
 import GrowInput from "../components/write/GrowInput";
 import TextContent from "../components/write/TextContent";
 import DatePicker from "../components/write/DatePicker";
-const Layout = styled.div`
+
+const Layout = styled.form`
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -14,7 +15,7 @@ const Layout = styled.div`
   position: relative;
 
   .logo {
-    margin-top: 1rem;
+    margin-top: 2rem;
   }
 
   .date-picker {
@@ -23,10 +24,11 @@ const Layout = styled.div`
 
   .manage-toggle {
     margin-left: 1rem;
+    margin-top: 0.3rem;
   }
   .grow-input {
     margin-left: 1rem;
-    margin-top: 0.5rem;
+    margin-top: 0.8rem;
   }
   .text-content {
     margin-top: 1.5rem;
@@ -74,8 +76,13 @@ const WriteBtn = styled.div`
 `;
 
 const Test = () => {
+  function submit(e) {
+    e.preventDefault();
+    console.log(e.target.date.value);
+  }
+
   return (
-    <Layout name="test">
+    <Layout name="test" onSubmit={submit}>
       <Logo className="logo" />
       <DatePicker className="date-picker" top={90} />
       <PlantManageToggle className="manage-toggle" />
