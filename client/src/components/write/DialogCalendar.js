@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
-import CustomCalendar from "../components/CustomCalendar";
-import { curDate } from "../modules/date";
+import CustomCalendar from "./CustomCalendar";
+import { curDate } from "../../modules/date";
 const Layout = styled.div`
   display: flex;
   flex-direction: column;
@@ -57,7 +57,7 @@ const Wrapper = styled.div`
   }
 `;
 
-const DatePicker = ({ className, top = 100, left = 0, setDpRef, dateDisplayRef }) => {
+const DialogCalendar = ({ className, top = 100, left = 0, setDpRef, dateDisplayRef }) => {
   const calendarRef = useRef(null);
   let selectedDate = "";
 
@@ -101,4 +101,4 @@ const DatePicker = ({ className, top = 100, left = 0, setDpRef, dateDisplayRef }
   );
 };
 
-export default DatePicker;
+export default DialogCalendar;

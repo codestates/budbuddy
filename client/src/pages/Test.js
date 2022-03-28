@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Logo from "../components/Logo";
-import DatePicker from "../components/DatePicker";
 import PlantManageToggle from "../components/write/PlantManageToggle";
 import GrowInput from "../components/write/GrowInput";
 import TextContent from "../components/write/TextContent";
-import PopupBtn from "../components/write/PopupBtn";
-
+import DatePicker from "../components/write/DatePicker";
 const Layout = styled.div`
   display: flex;
   flex-direction: column;
@@ -79,20 +77,10 @@ const WriteBtn = styled.div`
 `;
 
 const Test = () => {
-  const [dpRef, setDpRef] = useState(null);
-  const [dateDisplayRef, setDateDisplayRef] = useState(null);
-
-  useEffect(() => {}, []);
-
-  function openCalendar() {
-    dpRef.current.classList.remove("hidden");
-  }
-
   return (
     <Layout name="test">
       <Logo className="logo" />
-      <PopupBtn className="popup-btn" onClick={openCalendar} setDateDisplayRef={setDateDisplayRef} />
-      <DatePicker className={"date-picker hidden"} top={90} setDpRef={setDpRef} dateDisplayRef={dateDisplayRef} />
+      <DatePicker />
       <PlantManageToggle className="manage-toggle" />
       <GrowInput className="grow-input" />
       <TextContent className="text-content" />
