@@ -3,7 +3,7 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css"; // css import
 import styled from "styled-components";
 import moment from "moment";
-import { doing } from "../utils/dummy";
+import { doing } from "../../utils/dummy";
 import CalendarTileDiv from "./CalendarTileDiv";
 import "./Calendar.css";
 

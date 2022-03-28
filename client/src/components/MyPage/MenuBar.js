@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import useStore from "../store/store";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
+import SideBarStore from "../../store/SideBarStore";
 
 export const Content = styled.nav`
   position: fixed;
@@ -33,12 +33,14 @@ const Placed = styled.div`
 `;
 
 function MenuBar() {
-  const { login } = useStore();
-
+  const { popUpSideBarStore } = SideBarStore();
+  const Open = () => {
+    popUpSideBarStore();
+  };
   return (
     <Content>
       <Placed>
-        <FontAwesomeIcon className="fa-solid fa-2x" icon={faBars} cursor="pointer" />
+        <FontAwesomeIcon className="fa-solid fa-2x" icon={faBars} cursor="pointer" onClick={Open} />
       </Placed>
     </Content>
   );

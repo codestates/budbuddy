@@ -1,9 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import MenuBar from "../components/MenuBar";
+import MenuBar from "../components/MyPage/MenuBar";
 import Logo from "../components/Logo";
 import { budDummy, writingValues } from "../utils/dummy";
-import MyWritings from "../components/MyWriting";
+import MyWritings from "../components/MyPage/MyWriting";
+import SideBar from "../components/MyPage/SideBar";
+import SideBarStore from "../store/SideBarStore";
 
 const Layout = styled.div`
   display: grid;
@@ -48,8 +50,11 @@ const WritingPlace = styled.div`
 `;
 
 const Mypage = ({ login }) => {
+  const { SideBarState } = SideBarStore();
+
   return (
     <Layout>
+      {SideBarState ? <SideBar></SideBar> : null}
       <Logo className="logo" />
       <MenuBar />
       {login ? (
