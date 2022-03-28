@@ -5,7 +5,7 @@ module.exports = async (req, res) => {
   if (!req.cookies.accessToken) {
     return res.status(400).send({ message: "Bad Request", data: "There is no accessToken" });
   }
-
+  console.log("들어옴");
   const { accessToken } = req.cookies;
   try {
     var verify = await jwtModule.verify(accessToken);
@@ -15,6 +15,7 @@ module.exports = async (req, res) => {
 
   const user_id = verify.idx;
   const { name } = req.body;
+
   if (!name) return res.status(400).send({ message: "Bad Request" });
 
   try {

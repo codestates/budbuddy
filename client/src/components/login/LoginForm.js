@@ -10,10 +10,10 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import { teal } from "@mui/material/colors";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { makeModal } from "../utils/errExeption";
+import { makeModal } from "../../utils/errExeption";
 import { useNavigate } from "react-router-dom";
-import useLoginStore from "../store/LoginStore";
-import { sleep } from "../modules/sleep";
+import useLoginStore from "../../store/LoginStore";
+import { sleep } from "../../modules/sleep";
 
 const Layout = styled.div`
   display: grid;
@@ -171,10 +171,17 @@ const LoginForm = () => {
                   nickname: "test",
                 };
                 try {
-                  const resData = await axios.post(process.env.REACT_APP_API_URL + "/users/signup", payload);
+                  console.log("테스트 계정 로그인 시도");
+                  let resData = await axios.post(process.env.REACT_APP_API_URL + "/users/signup", payload);
                   console.log(resData.data);
                 } catch (err) {
+                  console.log(err.response.data);
                   console.log("테스트계정 로그인 오류:::", err);
+                  if (err.response.data.message === "usedEmail") {
+                    console.log("들어오니");
+                    let logindData = await axios.post(process.env.REACT_APP_API_URL + "/users/login", payload);
+                    console.log(logindData);
+                  }
                 }
                 setModalCode("testLogin");
                 await sleep(500);

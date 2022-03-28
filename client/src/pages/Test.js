@@ -3,6 +3,7 @@ import styled from "styled-components";
 import SideBar from "../components/SideBar";
 import Logo from "../components/Logo";
 import DatePicker from "../components/DatePicker";
+import PlantManageToggle from "../components/PlantManageToggle";
 
 const Layout = styled.div`
   display: flex;
@@ -12,11 +13,13 @@ const Layout = styled.div`
     margin-top: 1.5rem;
   }
 
-  .calendar {
+  .date-picker {
     display: flex;
     align-self: center;
     justify-content: center;
     flex-direction: column;
+  }
+  .manage-toggle {
   }
 `;
 

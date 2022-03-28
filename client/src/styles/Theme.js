@@ -1,5 +1,5 @@
 const theme = {
-  mainColor: "#141414",
+  mainColor: "snow",
   subColor: "LightSteelBlue",
   formColor: "#f7f6f6",
   calendarTopColor: "LightGrey",
@@ -16,7 +16,7 @@ const theme = {
   fontWeightBg: 400,
   fontIconSize: "15px",
   signupInputLineHeight: "0.3rem",
-  borderRadius: "4px",
+  borderRadius: "5px",
   backgroundPaddingTop: "12vh",
   iphoneWidth: "100vw",
   webWidth: "425px",

@@ -4,7 +4,7 @@ import { SocialWrapper } from "../styles/pages/LoginStyled";
 import { proverbs } from "../utils/dummy";
 import TextOnImg from "../components/TextOnImg";
 import Hr from "../components/Hr";
-import LoginForm from "../components/LoginForm";
+import LoginForm from "../components/login/LoginForm";
 import axios from "axios";
 
 const Layout = styled.div`
