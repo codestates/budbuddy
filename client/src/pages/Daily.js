@@ -99,7 +99,7 @@ const Daily = ({ login }) => {
       }}>
       {makeModal(modalCode)}
       <Logo className="logo" />
-      <TabBtnOne className="TabBtnOne" tabName="내식물" btnName="내 식물 추가" fn={openDialog} />
+      <TabBtnOne className="TabBtnOne" tabName="내 식물" btnName="내 식물 추가" fn={openDialog} />
       <BudLayout>
         {plants.length === 0 ? (
           <div className="notice-pos">

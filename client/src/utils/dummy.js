@@ -146,3 +146,14 @@ export const writingValues = [
     writingTitle: "인재가 쏘아올린 작은 공",
   },
 ];
+
+export const dummyList = [
+  { date: "3/15", title: "새싹 키우기" },
+  { date: "3/16", title: "너구리 라면과 함께" },
+  { date: "3/17", title: "오늘은 달콤한 비료" },
+  { date: "3/18", title: "쑥쑥 버드드" },
+  { date: "3/12", title: "마이 버드드" },
+  { date: "3/11", title: "코딩은 독학게" },
+  { date: "3/10", title: "당떨어짐" },
+  { date: "3/2", title: "친구랑 놀까" },
+];

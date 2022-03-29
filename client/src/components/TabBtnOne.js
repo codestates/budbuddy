@@ -16,7 +16,6 @@ export const Layout = styled.div`
 
   .leftcap,
   .rightcap {
-    width: 24%;
     font-size: 1rem;
     padding: 1%;
     margin: 5px;
@@ -25,8 +24,9 @@ export const Layout = styled.div`
   }
 
   .leftcap {
+    /* width: 28%; */
     float: left;
-    margin-left: 0vw;
+    margin-left: 1vw;
     background-color: rgba(0, 0, 0, 0);
   }
   .rightcap {
