@@ -1,38 +1,27 @@
 import styled from "styled-components";
 
 export const SignupWrapper = styled.form`
-  display: grid;
-  grid-template-columns: repeat(3, minmax(1fr, auto));
-  grid-template-rows: minmax(1fr, auto) minmax(3fr, auto) minmax(0.1fr, auto) minmax(1fr, auto);
-  grid-template-areas:
-    "signupText signupText signupText"
-    "inputWrapper inputWrapper inputWrapper"
-    "hr hr hr"
-    "join join cancle";
+  display: flex;
+  flex-direction: column;
 
   text-align: center;
-  align-items: center;
   place-items: center;
-  justify-content: center;
 
   background-color: ${(props) => props.theme.formColor};
-  margin: 15% 10% 0 10%;
-  padding-top: 4%;
-  padding-bottom: 4%;
+  margin: 9% 15% 0 15%;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
   border-radius: ${(props) => props.theme.borderRadius};
 
   .signupText {
-    grid-area: signupText;
-    margin-bottom: 1.3rem;
     letter-spacing: 7px;
     color: black;
+    margin-bottom: 0.3rem;
   }
 
   .hr {
     grid-area: hr;
     margin: 0.6rem 0 1rem 0;
-
-    background-color: GhostWhite;
   }
 
   .btn {
@@ -41,12 +30,8 @@ export const SignupWrapper = styled.form`
     background-color: MediumSeaGreen;
 
     color: white;
-    padding: 6px;
+    padding: 3px;
     transition: background-color 0.3s;
-  }
-
-  .join {
-    grid-area: join;
   }
 
   .join:hover {
@@ -61,8 +46,22 @@ export const SignupWrapper = styled.form`
   }
 
   .cancle:hover {
-    background-color: IndianRed;
+    background-color: ${(props) => props.theme.hoverCancleColor};
     color: white;
+  }
+
+  .btnbox {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    > .join {
+      width: 25%;
+      margin-left: 10%;
+    }
+    > .cancle {
+      width: 25%;
+      margin-right: 10%;
+    }
   }
 `;
 
@@ -86,8 +85,8 @@ export const InputWrapper = styled.div`
 
   input {
     border: none;
-    margin-left: 1rem;
-    height: 2.1rem;
+    margin-left: 0.5rem;
+    height: 1.5rem;
     border-radius: ${(props) => props.theme.borderRadius};
     padding-left: 1rem;
   }

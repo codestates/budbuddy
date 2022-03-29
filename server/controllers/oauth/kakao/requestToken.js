@@ -26,7 +26,7 @@ module.exports = async (req, res) => {
       defaults: {
         social: `kakao_${kakaoId}`,
         nickname: kakaoNickname,
-        profile_image_url: kakaoProfileImage 
+        profile_image_url: kakaoProfileImage,
       },
     });
   } catch (err) {
@@ -34,13 +34,13 @@ module.exports = async (req, res) => {
     res.status(500).send(err);
   }
 
-  if(created){
-    res.status(201)
+  if (created) {
+    res.status(201);
     console.log("new social user: ", user.toJSON());
   } else {
-    res.status(200)
-    console.log("already regesisted user: ", user.toJSON());
-  };
+    res.status(200);
+    // console.log("already regesisted user: ", user.toJSON());
+  }
 
   const jwtPayload = {
     idx: user.id,
@@ -55,8 +55,8 @@ module.exports = async (req, res) => {
       maxAge: 24 * 60 * 60 * 1000,
       httpOnly: true,
     });
-    return res.redirect(process.env.CLIENT_REDIRECT_URI); 
+    return res.redirect(process.env.CLIENT_REDIRECT_URI);
   } catch (err) {
-    return res.status(500).send(err)
+    return res.status(500).send(err);
   }
 };

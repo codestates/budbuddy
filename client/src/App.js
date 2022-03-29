@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { ThemeProvider } from "styled-components";
 import GlobalStyle from "./styles/GlobalStyle";
 import Theme from "./styles/Theme";
@@ -12,11 +12,32 @@ import MypageRecord from "./pages/MypageRecord";
 import Story from "./pages/Story";
 import Daily from "./pages/Daily";
 import Album from "./pages/Album";
+import Write from "./pages/Write";
 import Test from "./pages/Test";
+import Test2 from "./pages/Test2";
 import NavigationBar from "./components/NavigationBar";
 import { OutLine, Content } from "./styles/CommonStyled";
+import useLoginStore from "./store/LoginStore";
 axios.defaults.withCredentials = true;
+
 const App = () => {
+  const { isLogin } = useLoginStore();
+  const [login, setLogin] = useState(false);
+
+  useEffect(updateLoginState, [isLogin]);
+
+  function updateLoginState() {
+    let loginInfo = sessionStorage.getItem("loginInfo");
+
+    if (loginInfo) {
+      // console.log("[sessionStorage.getItem:::loginInfo]:", loginInfo);
+      loginInfo = JSON.parse(loginInfo);
+      setLogin(loginInfo.isLogined);
+    }
+  }
+
+  // console.log("Store login state::", isLogin);
+
   return (
     <div>
       <ThemeProvider theme={Theme}>
@@ -26,16 +47,17 @@ const App = () => {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/story" element={<Story />} />
-              <Route path="/daily" element={<Daily />} />
+              <Route path="/daily" element={<Daily login={login} />} />
+              <Route path="/write/:name" element={<Write />} />
               <Route path="/album" element={<Album />} />
-              <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
-              <Route path="/mypage" element={<Mypage />} />
+              {login ? <Route path="/mypage" element={<Mypage login={login} />} /> : <Route path="/login" element={<Login setLogin={setLogin} />} />}
               <Route path="/test" element={<Test />} />
+              <Route path="/test2" element={<Test2 />} />
               <Route path="/mypage/list/record" element={<MypageRecord />} />
             </Routes>
           </Content>
-          <NavigationBar classNsame="navi" />
+          <NavigationBar classNsame="navi" login={login} />
         </OutLine>
       </ThemeProvider>
     </div>

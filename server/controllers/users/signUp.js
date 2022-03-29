@@ -25,9 +25,10 @@ module.exports = async (req, res) => {
     if (created) {
       return res.status(201).send({ message: "signupSuccess", data: user.id });
     } else {
-      return res.status(403).send({ message: "usedEmail" });
+      return res.status(409).send({ message: "usedEmail" });
     }
   } catch (err) {
-    console.error("회원가입 에러 발생: ", err);
+    console.error("Sequelize Error: ", err);
+    res.status(500).send(err);
   }
 };

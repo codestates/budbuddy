@@ -41,8 +41,8 @@ export const doing = [
 export const budDummy = [
   {
     src: "Dummy/diary_1.PNG",
-    budName: "스투키",
-    date: "3/23 17:12",
+    name: "스투키",
+    createdAt: "3/23 17:12",
   },
   {
     src: "Dummy/diary_2.PNG",
@@ -123,3 +123,26 @@ export const budDummy = [
 export const CycleDay = ["1일", "2일", "3일", "4일", "5일", "6일", "7일", "8일", "9일", "10일", "11일", "12일", "13일", "14일", "15일", "16일", "17일", "18일", "19일", "20일"];
 
 export const CycleMonth = ["1개월", "2개월", "3개월", "4개월", "5개월", "6개월", "7개월", "8개월", "9개월", "10개월", "11개월", "12개월"];
+
+export const writingValues = [
+  {
+    number: 1,
+    day: "2022-03-24",
+    writingTitle: "나의 작은 라임 오렌지나무",
+  },
+  {
+    number: 2,
+    day: "2022-03-18",
+    writingTitle: "마리모 마리오",
+  },
+  {
+    number: 3,
+    day: "2022-03-11",
+    writingTitle: "강아지똥",
+  },
+  {
+    number: 4,
+    day: "2022-03-05",
+    writingTitle: "인재가 쏘아올린 작은 공",
+  },
+];

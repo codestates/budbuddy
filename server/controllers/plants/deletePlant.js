@@ -1,11 +1,12 @@
+const { Plants } = require("../../models/index");
 const jwtModule = require("../../modules/jwt");
-const { Users } = require("../../models/index");
+
 module.exports = async (req, res) => {
-  console.log("들어옴?");
   if (!req.cookies.accessToken) {
     return res.status(400).send({ message: "Bad Request", data: "There is no accessToken" });
   }
 
+  const id = req.params.id;
   const { accessToken } = req.cookies;
   try {
     var verify = await jwtModule.verify(accessToken);
@@ -13,22 +14,20 @@ module.exports = async (req, res) => {
     return res.status(401).send({ message: "Unauthorized Token", data: err });
   }
 
+  const user_id = verify.idx;
   try {
-    const reqEmail = verify.email;
-    var user = await Users.findOne({
-      attributes: ["id", "nickname", "social", "email", "profile_image_url", "created_at"],
+    const count = await Plants.destroy({
       where: {
-        email: reqEmail,
+        user_id,
+        id,
       },
     });
-
-    if (!user) {
+    if (count === 0) {
       return res.status(404).send({ message: "Not Found" });
     }
+    res.status(204).end();
   } catch (err) {
-    console.log(err);
-    return res.status(500).send({ message: "Error", data: err });
+    console.error("Sequelize Error: ", err);
+    res.status(500).send(err);
   }
-
-  return res.status(200).send({ message: "ok", data: user });
 };

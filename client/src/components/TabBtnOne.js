@@ -16,11 +16,12 @@ export const Layout = styled.div`
 
   .leftcap,
   .rightcap {
-    width: 20%;
-    font-size: 0.3rem;
+    width: 24%;
+    font-size: 1rem;
     padding: 1%;
     margin: 5px;
     border: none;
+    border-radius: ${(props) => props.theme.borderRadius};
   }
 
   .leftcap {
@@ -41,13 +42,21 @@ export const Layout = styled.div`
   }
 `;
 
-const TabBtnOne = ({ className = "", tabName, btnName }) => {
+const TabBtnOne = ({ className = "", tabName, btnName, fn }) => {
+  function clickExcute() {
+    if (typeof fn === "function") {
+      fn();
+    }
+  }
+
   return (
     <Layout>
       <div className={`shell ${className}`}>
         <div className="tab">
           <button className="leftcap">{tabName}</button>
-          <button className="rightcap">{btnName}</button>
+          <button className="rightcap" onClick={clickExcute}>
+            {btnName}
+          </button>
         </div>
       </div>
     </Layout>

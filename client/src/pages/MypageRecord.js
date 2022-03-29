@@ -1,7 +1,7 @@
 import React from "react";
-import Chart from "../components/Chart";
-import PlantsCycleChange from "../components/PlantCycleChange";
-import CalendarComponents from "../components/Calendar";
+import Chart from "../components/MyPlantsRecord/Chart";
+import PlantsCycleChange from "../components/MyPlantsRecord/PlantCycleChange";
+import CalendarComponents from "../components/MyPlantsRecord/CalendarComponents";
 import styled from "styled-components";
 
 const Content = styled.div`
