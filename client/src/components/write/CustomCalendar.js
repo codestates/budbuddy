@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import styled from "styled-components";
 import moment from "moment";
-import timeStore, { months } from "../store/timeStore";
+import timeStore, { months } from "../../store/timeStore";
 
 const Content = styled.div`
   .Wrapper {

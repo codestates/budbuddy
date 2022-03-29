@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export const Layout = styled.div`
   display: grid;
@@ -76,14 +77,24 @@ export const Layout = styled.div`
   .date {
     font-size: 1.3vw;
   }
+
+  a {
+    color: white;
+  }
 `;
 
 const Bud = ({ className, src, budName, date }) => {
+  function write() {
+    console.log(budName);
+  }
+
   return (
     <Layout className={className}>
       <div className="shell">
         <div className="hide">
-          <div className="text">일지쓰기</div>
+          <div className="text" onClick={write}>
+            <Link to={`/write/${budName}`}>일지쓰기</Link>
+          </div>
           <div className="text">앨범</div>
           <div className="text">일지목록</div>
         </div>
