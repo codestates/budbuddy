@@ -57,6 +57,16 @@ export function makeModal(modalCode = 0) {
         </Link>
       );
     },
+    dataHasBeenRemoved() {
+      return (
+        <Link to="/">
+          <ShadowModal text={`계정이 삭제되었습니다.`} />;
+        </Link>
+      );
+    },
+    PasswordReplaced() {
+      return <ShadowModal text={`비밀번호가 정상적으로 교체되었습니다.`} />;
+    },
   };
   if (!tasks[modalCode]) {
     // console.log(`예외처리하지 않는 모달코드(${modalCode})입니다:`);

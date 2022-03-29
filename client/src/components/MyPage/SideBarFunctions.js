@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faRotate, faLock, faEraser } from "@fortawesome/free-solid-svg-icons";
 import SideBarStore from "../../store/SideBarStore";
+import AccountDelete from "./AccountDelete";
+import ChangePassword from "./ChangePassword";
 
 const Content = styled.div`
   .logout {
@@ -68,11 +70,21 @@ const Content = styled.div`
 `;
 
 function SideBarFunctions({ setModalCode }) {
+  const [isDelAccount, setDelAccount] = useState(false);
+  const [isChangePassword, setChangePassword] = useState(false);
   const logOutFunction = () => {
     setModalCode("logoutSuccessfully");
   };
+  const DelAccountFunction = () => {
+    setDelAccount((current) => !current);
+  };
+  const ChangePasswordFunction = () => {
+    setChangePassword((current) => !current);
+  };
   return (
     <Content>
+      {isChangePassword ? <ChangePassword open={isChangePassword} closeFn={setChangePassword} setModalCode={setModalCode} /> : null}
+      {isDelAccount ? <AccountDelete open={isDelAccount} closeFn={setDelAccount} setModalCode={setModalCode} /> : null}
       <div className="logout">
         <FontAwesomeIcon className="fa-solid fa-user fa-2x" icon={faUser} color="snow" />
         <button className="logoutButton" onClick={logOutFunction}>
@@ -85,11 +97,15 @@ function SideBarFunctions({ setModalCode }) {
       </div>
       <div className="pwChange">
         <FontAwesomeIcon className="fa-solid fa-lock fa-2x" icon={faLock} color="snow" />
-        <button className="pwChangeButton">비밀번호 변경</button>
+        <button onClick={ChangePasswordFunction} className="pwChangeButton">
+          비밀번호 변경
+        </button>
       </div>
       <div className="DeleteAccount">
         <FontAwesomeIcon className="fa-solid fa-eraser fa-2x" icon={faEraser} color="snow" />
-        <button className="DeleteAccountButton">회원탈퇴</button>
+        <button onClick={DelAccountFunction} className="DeleteAccountButton">
+          회원탈퇴
+        </button>
       </div>
     </Content>
   );

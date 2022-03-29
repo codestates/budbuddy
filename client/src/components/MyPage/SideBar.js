@@ -54,7 +54,7 @@ const SideBarMain = styled.div`
     }
     .name {
       text-align: left;
-      font-size: 0.8rem;
+      font-size: 1rem;
       margin: 22px 0px 0px 0px;
       grid-area: name;
       color: ${(props) => props.theme.calendarBottomColor};

@@ -10,18 +10,29 @@ const WritingEachSection = styled.div`
   display: grid;
   grid-template-columns: repeat(8, 12.5%);
   grid-template-areas: " writingDay writingDay writingTitlePart writingTitlePart writingTitlePart writingTitlePart writingEdit writingDelete ";
+  height: 4vh;
   > .writingDay {
     grid-area: writingDay;
+    font-size: 0.8em;
+    line-height: 4vh;
   }
   > .writingTitlePart {
     grid-area: writingTitlePart;
     text-align: center;
+    font-size: 0.8em;
+    line-height: 4vh;
   }
   > .writingEdit {
     grid-area: writingEdit;
+    border-radius: 50%;
+    margin: 3px;
+    cursor: pointer;
   }
   > .writingDelete {
     grid-area: writingDelete;
+    border-radius: 50%;
+    margin: 3px;
+    cursor: pointer;
   }
 `;
 
