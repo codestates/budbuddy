@@ -34,7 +34,6 @@ export const Content = styled.nav`
 `;
 
 function NavigationBar({ login = false }) {
-  // console.log("NavigationBar::", login);
   return (
     <Content>
       <div className="wrap">

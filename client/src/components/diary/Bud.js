@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { useNavigateSearch } from "../../modules/hooks";
 
 export const Layout = styled.div`
   display: grid;
@@ -83,9 +83,12 @@ export const Layout = styled.div`
   }
 `;
 
-const Bud = ({ className, src, budName, date }) => {
+const Bud = ({ className, src, budName, date, plant_id }) => {
+  const navigateSearch = useNavigateSearch();
+  const goToWriteByName = () => navigateSearch("/write", { name: `${encodeURI(budName)}`, plant_id: `${plant_id}` });
+
   function write() {
-    console.log(budName);
+    goToWriteByName();
   }
 
   return (
@@ -93,7 +96,7 @@ const Bud = ({ className, src, budName, date }) => {
       <div className="shell">
         <div className="hide">
           <div className="text" onClick={write}>
-            <Link to={`/write/${budName}`}>일지쓰기</Link>
+            일지쓰기
           </div>
           <div className="text">앨범</div>
           <div className="text">일지목록</div>

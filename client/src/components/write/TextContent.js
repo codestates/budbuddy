@@ -26,7 +26,7 @@ const Layout = styled.div`
       font-size: ${(props) => props.theme.fontWritePageMid};
     }
     > .title:focus {
-      /* outline: none; */
+      outline: none;
     }
 
     > .title::placeholder {
@@ -117,13 +117,11 @@ function TextContent({ className = "" }) {
   const [img, setImg] = useState(null);
 
   function onFileChange(e) {
-    console.log("업로드 호출");
     const {
       target: { files },
     } = e;
 
     const theFile = files[0];
-    // console.log(theFile);
     const reader = new FileReader();
 
     reader.onloadend = (finishedEvent) => {
@@ -131,7 +129,6 @@ function TextContent({ className = "" }) {
         currentTarget: { result },
       } = finishedEvent;
       setImg(result);
-      // console.log(finishedEvent);
     };
 
     reader.readAsDataURL(theFile);
@@ -140,14 +137,12 @@ function TextContent({ className = "" }) {
     setImg(null);
   }
   function textAreaResize(e) {
-    console.log();
     e.target.style.height = "auto";
     e.target.style.minHeight = "15vh";
     let scHeight = e.target.scrollHeight;
     e.target.style.height = `${scHeight}px`;
   }
   function titleAlign(e) {
-    // console.log(e.target.value);
     e.target.style.textAlign = "center";
     if (e.target.value === "") e.target.style.textAlign = "start";
   }

@@ -68,10 +68,8 @@ function PlantManageToggle({ className }) {
       water() {
         setToggle({ ...toggle, isDrop: !toggle.isDrop });
         if (toggle.isDrop) {
-          console.log("set 이후 true", toggle);
           dropRef.current.classList.value = "svg-inline--fa fa-droplet icon drop fill";
         } else {
-          console.log("set 이후 false", toggle);
           dropRef.current.classList.value = "svg-inline--fa fa-droplet icon drop";
         }
       },

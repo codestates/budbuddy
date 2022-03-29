@@ -45,7 +45,7 @@ function GrowInput({ className }) {
           <span>현재 키:</span>
         </div>
         <div className="input-wrap">
-          <input className="input" type="number" placeholder="0.0cm" step="0.5" min="0" max="300" name="size" />
+          <input className="input" type="number" placeholder="0.0cm" step="0.1" min="0" max="300" name="size" />
           <span>cm</span>
         </div>
       </div>

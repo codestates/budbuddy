@@ -149,7 +149,6 @@ const PlantAddDialog = ({ open = false, closeFn, apiFn = "" }) => {
     e.preventDefault();
     if (typeof apiFn === "function") {
       const isValid = validNickName(e.target.budname.value);
-      console.log("valid nickname:::", e.target.budname.value, isValid);
       if (isValid) {
         apiFn(e.target.budname.value);
         ClosePopup();
