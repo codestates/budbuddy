@@ -18,6 +18,7 @@ const theme = {
   fontSizeBg: "1.3rem",
   fontIconSize: "15px",
   fontWeightBg: 400,
+  fontWritePageLarge: "1.3rem",
   fontWritePageMid: "1.1rem",
   fontWritePageSmall: "0.95rem",
   //layout

@@ -107,6 +107,9 @@ const Layout = styled.div`
       width: 0;
     }
   }
+  .semantic {
+    display: none;
+  }
 `;
 
 function TextContent({ className = "" }) {
@@ -151,9 +154,10 @@ function TextContent({ className = "" }) {
 
   return (
     <Layout className={className}>
+      <button className="semantic" name="photo" value={img} type="button" />
       <div className="shell">
         <div className="title-wrap">
-          <input type="text" className="title" placeholder="제목 입력" autoFocus onBlur={titleAlign} />
+          <input type="text" className="title" placeholder="제목 입력" autoFocus onBlur={titleAlign} required name="title" />
         </div>
         <div className="photo-wrap">
           {!img ? (
@@ -176,7 +180,7 @@ function TextContent({ className = "" }) {
           ) : null}
         </div>
         <div className="content-wrap">
-          <textarea className="content" placeholder="내용 입력" onKeyUp={textAreaResize}></textarea>
+          <textarea className="content" placeholder="내용 입력" onKeyUp={textAreaResize} name="content"></textarea>
         </div>
       </div>
     </Layout>

@@ -89,10 +89,10 @@ const DialogCalendar = ({ top = 100, left = 0, setDpRef, dateDisplayRef }) => {
         <div className="calendar-fragment">
           <CustomCalendar fn={selectDate} />
           <div className="btn-wrap">
-            <button className="done" onClick={selected}>
+            <button className="done" onClick={selected} type="button">
               선택완료
             </button>
-            <button className="cancel" onClick={close}>
+            <button className="cancel" onClick={close} type="button">
               선택취소
             </button>
           </div>

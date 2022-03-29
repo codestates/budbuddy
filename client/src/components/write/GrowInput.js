@@ -33,6 +33,7 @@ const Layout = styled.div`
     border-radius: ${(props) => props.theme.borderRadius};
     margin-left: 0.5rem;
     margin-right: 0.1rem;
+    padding-right: 0.2rem;
   }
 `;
 
@@ -44,7 +45,7 @@ function GrowInput({ className }) {
           <span>현재 키:</span>
         </div>
         <div className="input-wrap">
-          <input className="input" type="number" placeholder="1.0cm" step="0.5" min="0" max="300" />
+          <input className="input" type="number" placeholder="0.0cm" step="0.5" min="0" max="300" name="size" />
           <span>cm</span>
         </div>
       </div>
