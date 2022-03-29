@@ -91,7 +91,6 @@ const Write = () => {
   const parsed = qs.parse(search);
   const budName = decodeURI(parsed.name);
   const plant_id = decodeURI(parsed.plant_id);
-  console.log(plant_id);
 
   function convertToggleData(toggle) {
     const tgArr = [];

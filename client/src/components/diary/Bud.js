@@ -86,20 +86,19 @@ export const Layout = styled.div`
 const Bud = ({ className, src, budName, date, plant_id }) => {
   const navigateSearch = useNavigateSearch();
   const goToWriteByName = () => navigateSearch("/write", { name: `${encodeURI(budName)}`, plant_id: `${plant_id}` });
-
-  function write() {
-    goToWriteByName();
-  }
+  const goToWriteListByPlantId = () => navigateSearch("/write/list", { plant_id: `${plant_id}` });
 
   return (
     <Layout className={className}>
       <div className="shell">
         <div className="hide">
-          <div className="text" onClick={write}>
+          <div className="text" onClick={goToWriteByName}>
             일지쓰기
           </div>
           <div className="text">앨범</div>
-          <div className="text">일지목록</div>
+          <div className="text" onClick={goToWriteListByPlantId}>
+            일지목록
+          </div>
         </div>
         <img className="coverImg" src={src} alt={`bg`} />
         <div className="budName">{budName}</div>
