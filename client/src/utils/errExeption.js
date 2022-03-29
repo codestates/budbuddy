@@ -1,5 +1,5 @@
 import ShadowModal from "../components/Modal";
-import PlantsCycleChangeModal from "../components/PlantCycleChangeModal";
+import PlantsCycleChangeModal from "../components/MyPlantsRecord/PlantCycleChangeModal";
 import { Link } from "react-router-dom";
 
 export const parseErrCode = (msg) => {
@@ -49,6 +49,23 @@ export function makeModal(modalCode = 0) {
     },
     alreadyExistsBudName() {
       return <ShadowModal text={`이미 존재하는 식물명입니다.`} />;
+    },
+    logoutSuccessfully() {
+      return (
+        <Link to="/">
+          <ShadowModal text={`로그아웃이 완료 되었습니다.`} />;
+        </Link>
+      );
+    },
+    dataHasBeenRemoved() {
+      return (
+        <Link to="/">
+          <ShadowModal text={`계정이 삭제되었습니다.`} />;
+        </Link>
+      );
+    },
+    PasswordReplaced() {
+      return <ShadowModal text={`비밀번호가 정상적으로 교체되었습니다.`} />;
     },
   };
   if (!tasks[modalCode]) {

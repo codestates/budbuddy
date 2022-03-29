@@ -12,7 +12,7 @@ import { teal } from "@mui/material/colors";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { makeModal } from "../../utils/errExeption";
 import { useNavigate } from "react-router-dom";
-import useLoginStore from "../../store/loginStore";
+import useLoginStore from "../../store/LoginStore";
 import { sleep } from "../../modules/sleep";
 
 const Layout = styled.div`

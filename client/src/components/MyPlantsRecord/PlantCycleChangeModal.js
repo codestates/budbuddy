@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDroplet, faThermometer, faRepeat } from "@fortawesome/free-solid-svg-icons";
-import { CycleDay, CycleMonth } from "../utils/dummy";
-import { makeModal } from "../utils/errExeption";
-import useStore from "../store/store";
+import { CycleDay, CycleMonth } from "../../utils/dummy";
+import { makeModal } from "../../utils/errExeption";
+import useStore from "../../store/PlantCycleStore";
 
 const ModalContainer = styled.div`
   position: fixed;
