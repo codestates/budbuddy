@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faRotate, faLock, faEraser } from "@fortawesome/free-solid-svg-icons";
-import SideBarStore from "../../store/SideBarStore";
 import AccountDelete from "./AccountDelete";
 import ChangePassword from "./ChangePassword";
+import ImageChange from "./ImageChange";
+import ImageChangeStore from "../../store/ImageChangeStore";
 
 const Content = styled.div`
   .logout {
@@ -70,6 +71,7 @@ const Content = styled.div`
 `;
 
 function SideBarFunctions({ setModalCode }) {
+  const { ImageChangeState, popUpImageChangeModal } = ImageChangeStore();
   const [isDelAccount, setDelAccount] = useState(false);
   const [isChangePassword, setChangePassword] = useState(false);
   const logOutFunction = () => {
@@ -85,6 +87,7 @@ function SideBarFunctions({ setModalCode }) {
     <Content>
       {isChangePassword ? <ChangePassword open={isChangePassword} closeFn={setChangePassword} setModalCode={setModalCode} /> : null}
       {isDelAccount ? <AccountDelete open={isDelAccount} closeFn={setDelAccount} setModalCode={setModalCode} /> : null}
+      {ImageChangeState ? <ImageChange /> : null}
       <div className="logout">
         <FontAwesomeIcon className="fa-solid fa-user fa-2x" icon={faUser} color="snow" />
         <button className="logoutButton" onClick={logOutFunction}>
@@ -93,7 +96,9 @@ function SideBarFunctions({ setModalCode }) {
       </div>
       <div className="pictureChange">
         <FontAwesomeIcon className="fa-solid fa-arrows-rotate fa-2x fa-spin" icon={faRotate} color="snow" />
-        <button className="pictureChangeButton">이미지 교체</button>
+        <button onClick={() => popUpImageChangeModal()} className="pictureChangeButton">
+          이미지 교체
+        </button>
       </div>
       <div className="pwChange">
         <FontAwesomeIcon className="fa-solid fa-lock fa-2x" icon={faLock} color="snow" />

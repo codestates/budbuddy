@@ -71,6 +71,7 @@ function SideBar() {
     DownSideBarStore();
   };
   const [modalCode, setModalCode] = useState("");
+
   return (
     <SideBarContainer>
       <SideBarMain>

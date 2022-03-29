@@ -1,7 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
-import AccountDelete from "../components/MyPage/AccountDelete";
-import ChangePassword from "../components/MyPage/ChangePassword";
 
 const Layout = styled.div`
   display: flex;
@@ -9,11 +7,7 @@ const Layout = styled.div`
 `;
 
 const Test = () => {
-  return (
-    <Layout>
-      <ChangePassword></ChangePassword>
-    </Layout>
-  );
+  return <Layout></Layout>;
 };
 
 export default Test;
