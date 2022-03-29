@@ -39,7 +39,10 @@ function NavigationBar({ login = false }) {
     <Content>
       <div className="wrap">
         <NavLink to="/test">
-          <span className="test">테스트</span>
+          <span className="test">테스트IJ</span>
+        </NavLink>
+        <NavLink to="/test2">
+          <span className="test2">테스트JY</span>
         </NavLink>
         <NavLink to="/">
           <span className="home">홈</span>
