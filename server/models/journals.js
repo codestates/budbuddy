@@ -36,8 +36,10 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
-      summary: DataTypes.STRING,
-      detail_body: DataTypes.STRING,
+      title: DataTypes.STRING,
+      body: DataTypes.STRING,
+      plant_height: DataTypes.FLOAT,
+      date_pick: DataTypes.DATEONLY,
       public: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
