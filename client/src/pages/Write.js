@@ -5,7 +5,9 @@ import PlantManageToggle from "../components/write/PlantManageToggle";
 import GrowInput from "../components/write/GrowInput";
 import TextContent from "../components/write/TextContent";
 import DatePicker from "../components/write/DatePicker";
-import { useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+const qs = require("query-string");
+
 const Layout = styled.form`
   display: flex;
   flex-direction: column;
@@ -84,26 +86,51 @@ const WriteBtn = styled.div`
 `;
 
 const Write = () => {
-  const params = useParams();
+  //
+  const { search } = useLocation();
+  const parsed = qs.parse(search);
+  const budName = decodeURI(parsed.name);
+  const plant_id = decodeURI(parsed.plant_id);
+  console.log(plant_id);
 
-  console.log(params);
+  function convertToggleData(toggle) {
+    const tgArr = [];
+    if (toggle.isDrop) {
+      tgArr.push("water");
+    }
+    if (toggle.isNutirition) {
+      tgArr.push("fertillize");
+    }
+    if (toggle.isRepotting) {
+      tgArr.push("repot");
+    }
+
+    return tgArr;
+  }
 
   function submit(e) {
     e.preventDefault();
-    console.log(e.target.date.value);
-    console.log(JSON.parse(e.target.toggle.value));
-    console.log(e.target.size.value); //값 입력 안하면 "" 그리고 cm 붙여줘야함
-    console.log(e.target.title.value);
-    console.log(e.target.photo.value); //값 입력 안하면 ""
-    console.log(e.target.content.value); //값 입력 안하면 ""
-    console.log(e.target.checkbox.checked); //true false
+    const { date, size, title, photo, content, checkbox } = e.target;
+    const convertDate = date.value.replaceAll("/", "-");
+    let toggle = JSON.parse(e.target.toggle.value);
+    toggle = convertToggleData(toggle);
+    const payload = {
+      images: [photo.value],
+      actions: toggle,
+      plant_height: size.value + "cm",
+      plant_id,
+      title: title.value,
+      body: content.value,
+      date_pick: convertDate,
+      public: checkbox.checked,
+    };
   }
 
   return (
     <Layout name="test" onSubmit={submit}>
       <Logo className="logo" />
       <div className="bud-name">
-        <div>{`${params.name}의 일지`}</div>
+        <div>{`${budName}의 일지`}</div>
       </div>
       <DatePicker className="date-picker" top={90} />
       <PlantManageToggle className="manage-toggle" />

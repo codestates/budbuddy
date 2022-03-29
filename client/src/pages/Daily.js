@@ -109,7 +109,7 @@ const Daily = ({ login }) => {
           <div className="card-wrap">
             {plants.map((v, i) => {
               const date = curDate();
-              return <Bud key={v.id} src={v.src || "Dummy/diary_4.PNG"} className="cardcomponent" budName={v.name} date={date} />;
+              return <Bud key={v.id} src={v.src || "Dummy/diary_4.PNG"} className="cardcomponent" budName={v.name} date={date} plant_id={v.id} />;
             })}
           </div>
         )}
