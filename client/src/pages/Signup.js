@@ -115,7 +115,6 @@ const Signup = () => {
       case "inputPass":
         {
           const isValid = validPassword(e.target.value);
-          // console.log(className, isValid);
           if (!isValid) {
             checkPass.current.textContent = "유효하지 않은 비밀번호입니다";
             checkPass.current.className = "chPass ch invalid";
@@ -130,7 +129,6 @@ const Signup = () => {
       case "inputNick":
         {
           const isValid = validNickName(e.target.value);
-          // console.log(className, isValid);
           if (!isValid) {
             checkNick.current.textContent = "유효하지 않은 닉네임입니다";
             checkNick.current.className = "chNick ch invalid";
@@ -249,7 +247,6 @@ const Signup = () => {
   function join(e) {
     e.preventDefault();
     const { email, password, nickname } = e.target;
-    // console.log("Join:::", userId.value, password.value, nickname.value);
 
     if (email.value === "" || password.value === "" || nickname.value === "") {
       setModalCode("reqfillform");

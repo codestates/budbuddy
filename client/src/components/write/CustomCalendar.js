@@ -155,7 +155,6 @@ function CustomCalendar({ fn }) {
   }
 
   function pickDay(idx) {
-    console.log("pickDay");
     let pickDay = "";
 
     if (preDayIdx !== 0) daysRef.current.children[preDayIdx].className = "";

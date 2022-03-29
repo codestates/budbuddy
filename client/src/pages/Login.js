@@ -24,7 +24,6 @@ function Login() {
       window.location.assign(requestURL);
 
       const resData = await axios.get(process.env.REACT_APP_API_URL + "/users/userinfo");
-      console.log(resData.data.message);
 
       if (resData.data.message === "ok") {
         const loginInfo = {

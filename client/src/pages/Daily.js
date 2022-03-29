@@ -67,7 +67,6 @@ const Daily = ({ login }) => {
   async function getPlantsList() {
     try {
       const resData = await axios.get(process.env.REACT_APP_API_URL + "/plants");
-      // console.log("성공적으로 불러온 애칭 식물 리스트::", resData.data.data);
       setPlants(resData.data.data);
     } catch (err) {
       setModalCode();
@@ -84,12 +83,10 @@ const Daily = ({ login }) => {
         name: budName,
       };
       const resData = await axios.post(process.env.REACT_APP_API_URL + "/plants", payload);
-      console.log(resData);
       getPlantsList();
     } catch (err) {
       //alreadyExistsBudName
       setModalCode("alreadyExistsBudName");
-      console.log(err);
     }
 
     console.log("내 식물 추가시 API 호출 코드 작성란", budName);
