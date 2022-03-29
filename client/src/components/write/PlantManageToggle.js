@@ -1,4 +1,4 @@
-import React, { forwardRef, useRef } from "react";
+import React, { forwardRef, useRef, useState } from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDroplet, faEyeDropperEmpty, faSpa } from "@fortawesome/free-solid-svg-icons";
@@ -45,6 +45,10 @@ const Layout = styled.div`
   .repotting.fill {
     color: Sienna;
   }
+
+  .semantic {
+    display: none;
+  }
 `;
 
 const AwesomeIcon = forwardRef(({ className, icon, onClick }, ref) => <FontAwesomeIcon icon={icon} className={className} onClick={onClick} forwardedRef={ref} />);
@@ -53,33 +57,36 @@ function PlantManageToggle({ className }) {
   const dropRef = useRef(null);
   const nutritionRef = useRef(null);
   const repottingRef = useRef(null);
-  let isDrop = false;
-  let isNutirition = false;
-  let isRepotting = false;
+  const [toggle, setToggle] = useState({
+    isDrop: true,
+    isNutirition: true,
+    isRepotting: true,
+  });
 
-  function toggle(fnName) {
+  function toggleHandler(fnName) {
     const task = {
       water() {
-        isDrop = !isDrop;
-
-        if (isDrop) {
+        setToggle({ ...toggle, isDrop: !toggle.isDrop });
+        if (toggle.isDrop) {
+          console.log("set 이후 true", toggle);
           dropRef.current.classList.value = "svg-inline--fa fa-droplet icon drop fill";
         } else {
+          console.log("set 이후 false", toggle);
           dropRef.current.classList.value = "svg-inline--fa fa-droplet icon drop";
         }
       },
       nutrition() {
-        isNutirition = !isNutirition;
+        setToggle({ ...toggle, isNutirition: !toggle.isNutirition });
 
-        if (isNutirition) {
+        if (toggle.isNutirition) {
           nutritionRef.current.classList.value = "svg-inline--fa fa-eye-dropper icon nutrition fill";
         } else {
           nutritionRef.current.classList.value = "svg-inline--fa fa-eye-dropper icon nutrition";
         }
       },
       repotting() {
-        isRepotting = !isRepotting;
-        if (isRepotting) {
+        setToggle({ ...toggle, isRepotting: !toggle.isRepotting });
+        if (toggle.isRepotting) {
           repottingRef.current.classList.value = "svg-inline--fa fa-spa icon repotting fill";
         } else {
           repottingRef.current.classList.value = "svg-inline--fa fa-spa icon repotting";
@@ -95,8 +102,17 @@ function PlantManageToggle({ className }) {
     return task[fnName]();
   }
 
+  function convertToggle() {
+    let submitToggle = { ...toggle };
+    submitToggle.isDrop = !submitToggle.isDrop;
+    submitToggle.isNutirition = !submitToggle.isNutirition;
+    submitToggle.isRepotting = !submitToggle.isRepotting;
+    return submitToggle;
+  }
+
   return (
     <Layout className={className}>
+      <button className="semantic" name="toggle" value={JSON.stringify(convertToggle())} />
       <div className="shell">
         <div className="manage-box">
           <div className="text">
@@ -108,7 +124,7 @@ function PlantManageToggle({ className }) {
               ref={dropRef}
               icon={faDroplet}
               onClick={() => {
-                toggle("water");
+                toggleHandler("water");
               }}
             />
           </div>
@@ -118,7 +134,7 @@ function PlantManageToggle({ className }) {
               ref={nutritionRef}
               icon={faEyeDropperEmpty}
               onClick={() => {
-                toggle("nutrition");
+                toggleHandler("nutrition");
               }}
             />
           </div>
@@ -128,7 +144,7 @@ function PlantManageToggle({ className }) {
               ref={repottingRef}
               icon={faSpa}
               onClick={() => {
-                toggle("repotting");
+                toggleHandler("repotting");
               }}
             />
           </div>
