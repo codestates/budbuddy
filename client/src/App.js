@@ -17,7 +17,7 @@ import DairyList from "./pages/DairyList";
 import DailyRead from "./pages/DailyRead";
 import Test from "./pages/Test";
 import Test2 from "./pages/Test2";
-import NavigationBar from "./components/NavigationBar";
+import NavigationBar from "./components/common/NavigationBar";
 import { OutLine, Content } from "./styles/CommonStyled";
 import useLoginStore from "./store/LoginStore";
 axios.defaults.withCredentials = true;

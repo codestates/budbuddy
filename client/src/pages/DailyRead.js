@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import TabBtnOne from "../components/TabBtnOne";
+import TabBtnOne from "../components/common/TabBtnOne";
 import PlantManageToggle from "../components/write/PlantManageToggle";
 import TextContent from "../components/write/TextContent";
 import { useNavigate, useLocation } from "react-router-dom";

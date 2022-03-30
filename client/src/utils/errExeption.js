@@ -1,4 +1,4 @@
-import ShadowModal from "../components/Modal";
+import ShadowModal from "../components/common/Modal";
 import PlantsCycleChangeModal from "../components/MyPlantsRecord/PlantCycleChangeModal";
 import { Link } from "react-router-dom";
 

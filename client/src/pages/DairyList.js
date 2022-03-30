@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { useLocation } from "react-router-dom";
-import TabBtnOne from "../components/TabBtnOne";
-import Logo from "../components/Logo";
+import TabBtnOne from "../components/common/TabBtnOne";
+import Logo from "../components/common/Logo";
 import DiaryList from "../components/write/list/DiaryList";
 import { useNavigate } from "react-router-dom";
 import { dummyList } from "../utils/dummy";

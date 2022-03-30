@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import MenuBar from "../components/MyPage/MenuBar";
-import Logo from "../components/Logo";
+import Logo from "../components/common/Logo";
 import { budDummy } from "../utils/dummy";
 import SideBar from "../components/MyPage/SideBar";
 import SideBarStore from "../store/SideBarStore";

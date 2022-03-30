@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { budDummy } from "../utils/dummy";
-import Logo from "../components/Logo";
-import TabBtnOne from "../components/TabBtnOne";
+import Logo from "../components/common/Logo";
+import TabBtnOne from "../components/common/TabBtnOne";
 import Bud from "../components/diary/Bud";
 import PlantAddDialog from "../components/diary/PlantAddDialog";
 import axios from "axios";

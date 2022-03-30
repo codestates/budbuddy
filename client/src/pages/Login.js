@@ -2,8 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import { SocialWrapper } from "../styles/pages/LoginStyled";
 import { proverbs } from "../utils/dummy";
-import TextOnImg from "../components/TextOnImg";
-import Hr from "../components/Hr";
+import TextOnImg from "../components/common/TextOnImg";
+import Hr from "../components/common/Hr";
 import LoginForm from "../components/login/LoginForm";
 import axios from "axios";
 

@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import Logo from "../components/Logo";
+import Logo from "../components/common/Logo";
 import PlantManageToggle from "../components/write/PlantManageToggle";
 import GrowInput from "../components/write/GrowInput";
 import TextContent from "../components/write/TextContent";
