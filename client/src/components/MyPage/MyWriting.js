@@ -24,13 +24,13 @@ const WritingEachSection = styled.div`
   }
   > .writingEdit {
     grid-area: writingEdit;
-    border-radius: 50%;
+    border-radius: ${(props) => props.theme.borderRadius};
     margin: 3px;
     cursor: pointer;
   }
   > .writingDelete {
     grid-area: writingDelete;
-    border-radius: 50%;
+    border-radius: ${(props) => props.theme.borderRadius};
     margin: 3px;
     cursor: pointer;
   }
