@@ -14,6 +14,7 @@ import Daily from "./pages/Daily";
 import Album from "./pages/Album";
 import Write from "./pages/Write";
 import DairyList from "./pages/DairyList";
+import DailyRead from "./pages/DailyRead";
 import Test from "./pages/Test";
 import Test2 from "./pages/Test2";
 import NavigationBar from "./components/NavigationBar";
@@ -49,6 +50,7 @@ const App = () => {
               <Route path="/" element={<Home />} />
               <Route path="/story" element={<Story />} />
               <Route path="/daily" element={<Daily login={login} />} />
+              <Route path="/daily/read" element={<DailyRead />} />
               <Route path="/write" element={<Write />} />
               <Route path="/write/list" element={<DairyList />} />
               <Route path="/album" element={<Album />} />

@@ -10,7 +10,7 @@ export const Layout = styled.div`
     background: lightGrey;
   }
 
-  .tab {
+  .cap-wrap {
     text-align: center;
   }
 
@@ -26,13 +26,13 @@ export const Layout = styled.div`
   .leftcap {
     /* width: 28%; */
     float: left;
-    margin-left: 1vw;
+    margin-left: 10px;
     background-color: rgba(0, 0, 0, 0);
   }
   .rightcap {
     cursor: pointer;
     float: right;
-    margin-right: 3vw;
+    margin-right: 10px;
     transition: color 0.25s cubic-bezier(0, 1.23, 1, 0.55);
   }
 
@@ -43,16 +43,18 @@ export const Layout = styled.div`
 `;
 
 const TabBtnOne = ({ className = "", tabName, btnName, fn }) => {
-  function clickExcute() {
+  function clickExcute(e) {
+    e.preventDefault();
     if (typeof fn === "function") {
+      console.log("탭 함수 내부");
       fn();
     }
   }
 
   return (
-    <Layout>
-      <div className={`shell ${className}`}>
-        <div className="tab">
+    <Layout className={`${className}`}>
+      <div className="shell">
+        <div className="cap-wrap">
           <button className="leftcap">{tabName}</button>
           <button className="rightcap" onClick={clickExcute}>
             {btnName}

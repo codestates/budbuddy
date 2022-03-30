@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { useNavigateSearch } from "../../../modules/hooks";
 
 const Layout = styled.div`
   display: flex;
@@ -44,22 +45,21 @@ const Layout = styled.div`
   .title {
     transition: color 0.2s ease;
     padding: 0.1rem 0.6rem;
+    border-radius: ${(props) => props.theme.borderRadius};
   }
   .title:hover {
-    color: ${(props) => props.theme.hoverColor};
+    background-color: ${(props) => props.theme.hoverColor};
+    color: #fff;
   }
 `;
 
 const DiaryList = ({ diaryList }) => {
+  const navigateSearch = useNavigateSearch();
+  const goToDailyRead = (info) => navigateSearch("/daily/read", { info });
   //
-  const callModify = () => {
-    console.log("글 수정 요청 작성란");
-  };
+  const callModify = () => {};
   const callDelete = () => {
     console.log("글 삭제 요청 작성란");
-  };
-  const callRead = () => {
-    console.log("글 읽기 요청 작성란");
   };
 
   return (
@@ -70,7 +70,11 @@ const DiaryList = ({ diaryList }) => {
             <div className="date-wrap">
               <div>{v.date}</div>
             </div>
-            <div className="title" onClick={callRead}>
+            <div
+              className="title"
+              onClick={() => {
+                goToDailyRead(encodeURI(JSON.stringify(v)));
+              }}>
               <div>{v.title}</div>
             </div>
             <div className="btn-wrap">

@@ -75,7 +75,7 @@ export const Layout = styled.div`
   }
 
   .date {
-    font-size: 1.3vw;
+    font-size: 1rem;
   }
 
   a {

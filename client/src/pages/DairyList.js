@@ -17,10 +17,8 @@ const Layout = styled.div`
 
 const DairyList = () => {
   const navigate = useNavigate();
-  const { search } = useLocation();
-  const parsed = qs.parse(search);
-  const name = decodeURI(parsed.name);
-  const plant_id = decodeURI(parsed.plant_id);
+  let { name, plant_id } = qs.parse(useLocation().search);
+  name = decodeURI(name);
   return (
     <Layout>
       <div>{`${name}: ${plant_id}`}</div>
