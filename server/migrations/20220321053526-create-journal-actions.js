@@ -14,6 +14,7 @@ module.exports = {
           model: "journals",
           key: "id",
         },
+        onDelete: "CASCADE",
         allowNull: false,
       },
       action_id: {

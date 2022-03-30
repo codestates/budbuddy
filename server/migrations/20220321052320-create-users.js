@@ -12,9 +12,14 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      profile_image_url: {
-        type: Sequelize.STRING,
-      },
+      // profile_image_id: {
+      //   type: Sequelize.INTEGER,
+      //   references: {
+      //     model: "images",
+      //     key: "id",
+      //   },
+      //   onDelete: "CASCADE",
+      // },
       nickname: {
         type: Sequelize.STRING,
         allowNull: false,

@@ -14,6 +14,7 @@ module.exports = {
           model: "journals",
           key: "id",
         },
+        onDelete: "CASCADE",
         allowNull: false,
       },
       image_id: {
@@ -22,6 +23,7 @@ module.exports = {
           model: "images",
           key: "id",
         },
+        onDelete: "CASCADE",
       },
       created_at: {
         allowNull: false,

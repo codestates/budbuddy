@@ -1,16 +1,11 @@
-const jwtModule = require("../../modules/jwt");
 const { Users } = require("../../models/index");
-module.exports = async (req, res) => {
-  console.log("들어옴?");
-  if (!req.cookies.accessToken) {
-    return res.status(400).send({ message: "Bad Request", data: "There is no accessToken" });
-  }
+const checkAuth = require("../../modules/verifyCookieToken");
 
-  const { accessToken } = req.cookies;
+module.exports = async (req, res) => {
   try {
-    var verify = await jwtModule.verify(accessToken);
+    var verify = await checkAuth(req, res);
   } catch (err) {
-    return res.status(401).send({ message: "Unauthorized Token", data: err });
+    return err; // break
   }
 
   try {

@@ -10,18 +10,9 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       const { Journal_Actions, Journal_Images, Plants, Users, Replies } = models;
-      Journals.hasMany(Journal_Actions, {
-        onDelete: "CASCADE",
-        onUpdate: "CASCADE",
-      });
-      Journals.hasMany(Journal_Images, {
-        onDelete: "CASCADE",
-        onUpdate: "CASCADE",
-      });
-      Journals.hasMany(Replies, {
-        onDelete: "CASCADE",
-        onUpdate: "CASCADE",
-      });
+      Journals.hasMany(Journal_Actions);
+      Journals.hasMany(Journal_Images);
+      Journals.hasMany(Replies);
       Journals.belongsTo(Plants, { foreignKey: "plant_id" });
       Journals.belongsTo(Users, { foreignKey: "user_id" });
     }

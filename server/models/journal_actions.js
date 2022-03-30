@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       Journal_Actions.belongsTo(models.Actions, { foreignKey: "action_id" });
-      Journal_Actions.belongsTo(models.Journals, { foreignKey: "journal_id" });
+      Journal_Actions.belongsTo(models.Journals, { foreignKey: "journal_id", onDelete: "CASCADE" });
     }
   }
   Journal_Actions.init(
