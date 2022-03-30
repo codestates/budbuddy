@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { budDummy } from "../utils/dummy";
-import Logo from "../components/Logo";
-import TabBtnOne from "../components/TabBtnOne";
+import Logo from "../components/common/Logo";
+import TabBtnOne from "../components/common/TabBtnOne";
 import Bud from "../components/diary/Bud";
 import PlantAddDialog from "../components/diary/PlantAddDialog";
 import axios from "axios";
@@ -99,7 +99,7 @@ const Daily = ({ login }) => {
       }}>
       {makeModal(modalCode)}
       <Logo className="logo" />
-      <TabBtnOne className="TabBtnOne" tabName="내식물" btnName="내 식물 추가" fn={openDialog} />
+      <TabBtnOne className="TabBtnOne" tabName="내 식물" btnName="내 식물 추가" fn={openDialog} />
       <BudLayout>
         {plants.length === 0 ? (
           <div className="notice-pos">

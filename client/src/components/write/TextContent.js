@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 const Layout = styled.div`
@@ -22,6 +22,7 @@ const Layout = styled.div`
       width: 80%;
       background: none;
       border: none;
+      text-align: center;
 
       font-size: ${(props) => props.theme.fontWritePageMid};
     }
@@ -112,9 +113,10 @@ const Layout = styled.div`
   }
 `;
 
-function TextContent({ className = "" }) {
+function TextContent({ className = "", title = "", content = "" }) {
   //
   const [img, setImg] = useState(null);
+  useEffect(() => {}, []);
 
   function onFileChange(e) {
     const {
@@ -144,7 +146,9 @@ function TextContent({ className = "" }) {
   }
   function titleAlign(e) {
     e.target.style.textAlign = "center";
-    if (e.target.value === "") e.target.style.textAlign = "start";
+    if (e.target.value === "") {
+      e.target.style.textAlign = "start";
+    }
   }
 
   return (
@@ -152,7 +156,7 @@ function TextContent({ className = "" }) {
       <button className="semantic" name="photo" value={img} type="button" />
       <div className="shell">
         <div className="title-wrap">
-          <input type="text" className="title" placeholder="제목 입력" autoFocus onBlur={titleAlign} required name="title" />
+          <input type="text" className="title" placeholder="제목 입력" onBlur={titleAlign} required name="title" defaultValue={title} />
         </div>
         <div className="photo-wrap">
           {!img ? (
@@ -175,7 +179,7 @@ function TextContent({ className = "" }) {
           ) : null}
         </div>
         <div className="content-wrap">
-          <textarea className="content" placeholder="내용 입력" onKeyUp={textAreaResize} name="content"></textarea>
+          <textarea className="content" placeholder="내용 입력" onKeyUp={textAreaResize} name="content" defaultValue={content}></textarea>
         </div>
       </div>
     </Layout>

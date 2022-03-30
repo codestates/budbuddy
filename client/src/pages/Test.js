@@ -1,19 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 
-const Layout = styled.form``;
+const Layout = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 
 const Test = () => {
-  return (
-    <Layout name="test">
-      <div>테스트 페이지</div>
-      <div>테스트 페이지</div>
-      <div>테스트 페이지</div>
-      <div>테스트 페이지</div>
-      <div>테스트 페이지</div>
-      <div>테스트 페이지</div>
-    </Layout>
-  );
+  return <Layout></Layout>;
 };
 
 export default Test;
