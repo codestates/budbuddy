@@ -42,6 +42,7 @@ const ProfileImg = styled.img`
   mix-blend-mode: darken;
   border: solid 2px rgb(0, 0, 0, 0.65);
   margin: auto;
+  border-radius: ${(props) => props.theme.borderRadius};
 `;
 const WritingPlace = styled.div`
   width: 80%;

@@ -18,6 +18,7 @@ import Test2 from "./pages/Test2";
 import NavigationBar from "./components/NavigationBar";
 import { OutLine, Content } from "./styles/CommonStyled";
 import useLoginStore from "./store/LoginStore";
+import { PersistGate } from "zustand-persist";
 axios.defaults.withCredentials = true;
 
 const App = () => {
@@ -40,26 +41,28 @@ const App = () => {
 
   return (
     <div>
-      <ThemeProvider theme={Theme}>
-        <GlobalStyle />
-        <OutLine>
-          <Content>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/story" element={<Story />} />
-              <Route path="/daily" element={<Daily login={login} />} />
-              <Route path="/write/:name" element={<Write />} />
-              <Route path="/album" element={<Album />} />
-              <Route path="/signup" element={<Signup />} />
-              {login ? <Route path="/mypage" element={<Mypage login={login} />} /> : <Route path="/login" element={<Login setLogin={setLogin} />} />}
-              <Route path="/test" element={<Test />} />
-              <Route path="/test2" element={<Test2 />} />
-              <Route path="/mypage/list/record" element={<MypageRecord />} />
-            </Routes>
-          </Content>
-          <NavigationBar classNsame="navi" login={login} />
-        </OutLine>
-      </ThemeProvider>
+      <PersistGate>
+        <ThemeProvider theme={Theme}>
+          <GlobalStyle />
+          <OutLine>
+            <Content>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/story" element={<Story />} />
+                <Route path="/daily" element={<Daily login={login} />} />
+                <Route path="/write/:name" element={<Write />} />
+                <Route path="/album" element={<Album />} />
+                <Route path="/signup" element={<Signup />} />
+                {login ? <Route path="/mypage" element={<Mypage login={login} setLogin={setLogin} />} /> : <Route path="/login" element={<Login setLogin={setLogin} />} />}
+                <Route path="/test" element={<Test />} />
+                <Route path="/test2" element={<Test2 />} />
+                <Route path="/mypage/list/record" element={<MypageRecord />} />
+              </Routes>
+            </Content>
+            <NavigationBar classNsame="navi" login={login} />
+          </OutLine>
+        </ThemeProvider>
+      </PersistGate>
     </div>
   );
 };
