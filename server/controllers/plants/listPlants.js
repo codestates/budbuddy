@@ -1,16 +1,11 @@
 const { Plants } = require("../../models/index");
-const jwtModule = require("../../modules/jwt");
+const checkAuth = require("../../modules/verifyCookieToken");
 
 module.exports = async (req, res) => {
-  if (!req.cookies.accessToken) {
-    return res.status(400).send({ message: "Bad Request", data: "There is no accessToken" });
-  }
-
-  const { accessToken } = req.cookies;
   try {
-    var verify = await jwtModule.verify(accessToken);
+    var verify = await checkAuth(req, res)
   } catch (err) {
-    return res.status(401).send({ message: "Unauthorized Token", data: err });
+    return err // break
   }
 
   const user_id = verify.idx;
