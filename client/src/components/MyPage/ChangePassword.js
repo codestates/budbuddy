@@ -142,6 +142,7 @@ const FormLayout = styled.form`
     .currentPasswordInput {
       grid-area: currentPasswordInput;
       margin: 5px;
+      border: none;
     }
     .newPasswordDiv {
       grid-area: newPasswordDiv;
@@ -150,6 +151,7 @@ const FormLayout = styled.form`
     .newPasswordInput {
       grid-area: newPasswordInput;
       margin: 5px;
+      border: none;
     }
     .checkPasswordDiv {
       grid-area: checkPasswordDiv;
@@ -158,6 +160,7 @@ const FormLayout = styled.form`
     .checkPasswordInput {
       grid-area: checkPasswordInput;
       margin: 5px;
+      border: none;
     }
   }
   > .invalid {
