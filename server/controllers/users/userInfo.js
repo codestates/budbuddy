@@ -9,13 +9,15 @@ module.exports = async (req, res) => {
   }
 
   try {
-    const reqEmail = verify.email;
+    if (!req.query.name) return res.status(400).send({ message: "Bad Request" });
+    const nickname = req.query.name;
+
     var user = await Users.findOne({
       attributes: {
         exclude: ["password", "salt", "social"],
       },
       where: {
-        email: reqEmail,
+        nickname,
       },
     });
 
