@@ -9,19 +9,26 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      const { Replies, Plants, Journal_Images, Journals } = models;
+      const { Replies, Plants, Journals, Images } = models;
       Users.hasMany(Replies);
       Users.hasMany(Plants);
-      Users.hasMany(Journal_Images);
       Users.hasMany(Journals);
+      Users.hasMany(Images);
+      Users.belongsTo(Images, { foreignKey: "profile_image_id" });
     }
   }
   Users.init(
     {
-      profile_image_url: DataTypes.STRING,
+      profile_image_id: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+      },
       email: {
         type: DataTypes.STRING,
         allowNull: false,
+        validate: {
+          isEmail: true,
+        },
       },
       nickname: {
         type: DataTypes.STRING,

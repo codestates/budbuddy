@@ -8,37 +8,22 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      user_id: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: "users",
-          key: "id",
-        },
-        allowNull: false,
-      },
       journal_id: {
         type: Sequelize.INTEGER,
         references: {
           model: "journals",
           key: "id",
         },
+        onDelete: "CASCADE",
         allowNull: false,
       },
-      ext: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      filename: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      store_filename: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      store_path: {
-        type: Sequelize.STRING,
-        allowNull: false,
+      image_id: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: "images",
+          key: "id",
+        },
+        onDelete: "CASCADE",
       },
       created_at: {
         allowNull: false,

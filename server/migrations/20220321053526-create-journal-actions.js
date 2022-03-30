@@ -14,9 +14,10 @@ module.exports = {
           model: "journals",
           key: "id",
         },
+        onDelete: "CASCADE",
         allowNull: false,
       },
-      actions_id: {
+      action_id: {
         type: Sequelize.INTEGER,
         references: {
           model: "actions",

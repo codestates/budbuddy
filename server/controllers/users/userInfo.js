@@ -1,23 +1,23 @@
-const jwtModule = require("../../modules/jwt");
 const { Users } = require("../../models/index");
+const checkAuth = require("../../modules/verifyCookieToken");
+
 module.exports = async (req, res) => {
-  if (!req.cookies.accessToken) {
-    return res.status(400).send({ message: "Bad Request", data: "There is no accessToken" });
-  }
-
-  const { accessToken } = req.cookies;
   try {
-    var verify = await jwtModule.verify(accessToken);
+    var verify = await checkAuth(req, res);
   } catch (err) {
-    return res.status(401).send({ message: "Unauthorized Token", data: err });
+    return err; // break
   }
 
   try {
-    const reqEmail = verify.email;
+    if (!req.query.name) return res.status(400).send({ message: "Bad Request" });
+    const nickname = req.query.name;
+
     var user = await Users.findOne({
-      attributes: ["id", "nickname", "social", "email", "profile_image_url", "created_at"],
+      attributes: {
+        exclude: ["password", "salt", "social"],
+      },
       where: {
-        email: reqEmail,
+        nickname,
       },
     });
 
