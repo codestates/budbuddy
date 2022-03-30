@@ -77,7 +77,7 @@ function SideBar() {
       <SideBarMain>
         {makeModal(modalCode)}
         <div className="id">
-          <img className="image" src={budDummy[0].src}></img>
+          <img className="image" src={budDummy[0].src} alt="" />
           <div className="NameAndDelete">
             <button className="deleteDiv" onClick={Close}>
               <FontAwesomeIcon className="fa-solid fa-3x" icon={faX} color="white" />
