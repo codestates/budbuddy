@@ -134,3 +134,10 @@ export const dummyList = [
   { date: "3/10", title: "당떨어짐", size: "14cm", body: "새싹은 맛잇다 왜냐면 ㅅ새싹은 맛잇게 때문이다." },
   { date: "3/2", title: "친구랑 놀까", size: "9cm", body: "새싹은 맛잇다 왜냐면 ㅅ새싹은 맛잇게 때문이다." },
 ];
+
+//src={v.src || "Dummy/diary_4.PNG"}
+export const storyDummyList = [
+  { profileImg: "Dummy/story/profile/profile_01.PNG", plantName: "새싹1호", createdAt: "3/15", journalImg: "Dummy/story/plant/plant_01.PNG", summary: "오늘해준건 응원" },
+  { profileImg: "Dummy/story/profile/profile_02.PNG", plantName: "새싹2호", createdAt: "3/17", journalImg: "Dummy/story/plant/plant_02.PNG", summary: "오늘해준건 점심" },
+  { profileImg: "Dummy/story/profile/profile_03.PNG", plantName: "새싹3호", createdAt: "3/18", journalImg: "Dummy/story/plant/plant_03.PNG", summary: "내일해줄건 설탕" },
+];

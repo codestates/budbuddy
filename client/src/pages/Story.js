@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import Logo from "../components/common/Logo";
 import SearchBar from "../components/story/SearchBar";
+import StoryCard from "../components/story/StoryCard";
+import { storyDummyList } from "../utils/dummy";
 
 export const Layout = styled.div`
   display: flex;
@@ -33,6 +35,7 @@ const Story = () => {
         <p>Friend's Daily Log</p>
       </div>
       <SearchBar top={62} left={98} width={40} fn={storySearch} />
+      <StoryCard storyList={storyDummyList} />
     </Layout>
   );
 };
