@@ -18,6 +18,7 @@
     "axios": "^0.26.1",
     "d3": "^7.3.0",
     "moment": "^2.29.1",
+    "query-string": "^7.1.1",
     "react": "^17.0.2",
     "react-calendar": "^3.7.0",
     "react-dom": "^17.0.2",
@@ -25,7 +26,8 @@
     "react-scripts": "5.0.0",
     "styled-components": "^5.3.3",
     "web-vitals": "^2.1.4",
-    "zustand": "^3.7.1"
+    "zustand": "^3.7.1",
+    "zustand-persist": "^0.4.0"
   },
   "scripts": {
     "start": "react-scripts start",

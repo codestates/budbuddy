@@ -10,6 +10,7 @@ module.exports = async (req, res) => {
 
   const user_id = verify.idx;
   const { name } = req.body;
+
   if (!name) return res.status(400).send({ message: "Bad Request" });
 
   try {

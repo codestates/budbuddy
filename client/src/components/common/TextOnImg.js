@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import styled from "styled-components";
-import { useInterval } from "../modules/hooks";
-import { BGWrapper } from "../styles/CommonStyled";
+import { useInterval } from "../../modules/hooks";
+import { BGWrapper } from "../../styles/CommonStyled";
 
 const Content = styled(BGWrapper)`
   display: grid;

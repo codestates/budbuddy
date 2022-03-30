@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGear } from "@fortawesome/free-solid-svg-icons";
-import { makeCycleModal } from "../utils/errExeption";
-import useStore from "../store/store";
+import { makeCycleModal } from "../../utils/errExeption";
+import useStore from "../../store/PlantCycleStore";
 
 const PlantsCycleChangeLayout = styled.div`
   > .space {

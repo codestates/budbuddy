@@ -7,9 +7,6 @@ const Layout = styled.div`
   display: flex;
   flex-direction: column;
 
-  width: 100%;
-  height: 100%;
-
   position: absolute;
   text-align: center;
   top: 50%;
@@ -23,11 +20,15 @@ const Layout = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 100vw;
+    @media screen and (min-width: 391px) {
+      width: ${(props) => props.theme.webWidth};
+    }
   }
 
   .popup {
     border-radius: ${(props) => props.theme.borderRadius};
-    width: ${(props) => props.theme.webWidth};
+    width: 85%;
     padding: 2%;
     background-color: #f5f5f5;
     box-sizing: border-box;
@@ -119,10 +120,23 @@ const FormLayout = styled.form`
     color: snow;
     background-color: IndianRed;
   }
+
+  .chNick {
+    font-size: 0.9rem;
+    padding: 4px;
+    white-space: pre;
+  }
+  > .invalid {
+    color: ${(props) => props.theme.textWaringColor};
+  }
+  > .right {
+    color: green;
+  }
 `;
 
 //closeFn requied이기 때문에 디폴트 값을 안넣음
-const PlantAddDialog = ({ open = false, closeFn, apiFn = "" }) => {
+const AccountDelete = ({ open = true, closeFn, setModalCode }) => {
+  const checkNick = useRef(null);
   const popRef = useRef(null);
   const backRef = useRef(null);
 
@@ -135,10 +149,7 @@ const PlantAddDialog = ({ open = false, closeFn, apiFn = "" }) => {
 
   function resisterBud(e) {
     e.preventDefault();
-    if (typeof apiFn === "function") {
-      console.log(e.target.budname.value);
-      apiFn();
-    }
+    setModalCode("dataHasBeenRemoved");
     ClosePopup();
   }
 
@@ -147,17 +158,56 @@ const PlantAddDialog = ({ open = false, closeFn, apiFn = "" }) => {
     popRef.current.className = "popup";
   }
 
+  function onFocus(e) {
+    const name = e.target.name;
+    if (e.target.value !== "") return;
+    if (name === "budname") {
+      checkNick.current.className = "chNick ch";
+      return (checkNick.current.textContent = "계정삭제를 입력해야합니다.");
+    }
+  }
+
+  function onChange(e) {
+    const name = e.target.name;
+    if (e.target.value === "") {
+      onFocus(e);
+      return;
+    }
+    if (name === "budname") {
+      const isValid = e.target.value === "계정삭제";
+      console.log(e.target.value);
+      if (!isValid) {
+        checkNick.current.textContent = "계정삭제를 입력해야합니다.";
+        checkNick.current.className = "chNick ch invalid";
+      } else {
+        checkNick.current.textContent = "완료 버튼을 누르시면 탈퇴됩니다.";
+        checkNick.current.className = "chNick ch right";
+      }
+    }
+  }
+
+  function onBlur(e) {
+    if (e.target.value !== "") {
+      return;
+    }
+
+    checkNick.current.textContent = "";
+    checkNick.current.className = "chNick ch";
+  }
+
   return (
     <Layout name="plant">
       <div ref={backRef} className="background">
         <div ref={popRef} className={`popup`}>
           <FormLayout onSubmit={resisterBud}>
-            <div className="title trans">식물 추가</div>
+            <div className="title trans">계정삭제</div>
             <div className="budname trans">
               <FontAwesomeIcon className="icon" icon={faSeedling} />
-              <div className="text">Plant name</div>
+              <div className="text">Bud Buddy</div>
             </div>
-            <input className="input-bud trans" placeholder="식물의 이름을 입력하세요" name="budname" />
+            <div>계정삭제를 원하시면 "계정삭제"를 입력해주세요</div>
+            <div ref={checkNick} className="chNick ch"></div>
+            <input className="input-bud trans" placeholder="계정삭제" name="budname" onFocus={onFocus} onChange={onChange} onBlur={onBlur} type="text" />
             <div className="btn-wrapper trans">
               <button className="open btn trans" type="submit">
                 완료
@@ -173,4 +223,4 @@ const PlantAddDialog = ({ open = false, closeFn, apiFn = "" }) => {
   );
 };
 
-export default PlantAddDialog;
+export default AccountDelete;
