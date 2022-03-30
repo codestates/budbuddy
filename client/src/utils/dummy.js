@@ -124,25 +124,13 @@ export const CycleDay = ["1일", "2일", "3일", "4일", "5일", "6일", "7일",
 
 export const CycleMonth = ["1개월", "2개월", "3개월", "4개월", "5개월", "6개월", "7개월", "8개월", "9개월", "10개월", "11개월", "12개월"];
 
-export const writingValues = [
-  {
-    number: 1,
-    day: "2022-03-24",
-    writingTitle: "나의 작은 라임 오렌지나무",
-  },
-  {
-    number: 2,
-    day: "2022-03-18",
-    writingTitle: "마리모 마리오",
-  },
-  {
-    number: 3,
-    day: "2022-03-11",
-    writingTitle: "강아지똥",
-  },
-  {
-    number: 4,
-    day: "2022-03-05",
-    writingTitle: "인재가 쏘아올린 작은 공",
-  },
+export const dummyList = [
+  { date: "3/15", title: "새싹 키우기", size: "4cm", body: "새싹은 맛잇다 왜냐면 ㅅ새싹은 맛잇게 때문이다." },
+  { date: "3/16", title: "너구리 라면과 함께", size: "14cm", body: "오늘 먹고 싶은건 와플." },
+  { date: "3/17", title: "오늘은 달콤한 비료", size: "3cm", body: "새싹은 맛잇다 왜냐면 새우깡은 맛잇게 때문이다." },
+  { date: "3/18", title: "쑥쑥 버드드", size: "43cm", body: "와플은 카페인 중독짱." },
+  { date: "3/12", title: "마이 버드드", size: "29cm", body: "그 중 최애는 카라멜 와플" },
+  { date: "3/11", title: "코딩은 독학게", size: "44cm", body: "독독독 풀풀풀 풀독풀독" },
+  { date: "3/10", title: "당떨어짐", size: "14cm", body: "새싹은 맛잇다 왜냐면 ㅅ새싹은 맛잇게 때문이다." },
+  { date: "3/2", title: "친구랑 놀까", size: "9cm", body: "새싹은 맛잇다 왜냐면 ㅅ새싹은 맛잇게 때문이다." },
 ];

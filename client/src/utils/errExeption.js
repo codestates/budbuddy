@@ -1,4 +1,4 @@
-import ShadowModal from "../components/Modal";
+import ShadowModal from "../components/common/Modal";
 import PlantsCycleChangeModal from "../components/MyPlantsRecord/PlantCycleChangeModal";
 import { Link } from "react-router-dom";
 
@@ -69,7 +69,6 @@ export function makeModal(modalCode = 0) {
     },
   };
   if (!tasks[modalCode]) {
-    // console.log(`예외처리하지 않는 모달코드(${modalCode})입니다:`);
     return null;
   }
   return tasks[modalCode]();

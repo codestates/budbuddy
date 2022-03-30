@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import { slideImgs, proverbs } from "../utils/dummy";
-import TextOnImg from "../components/TextOnImg";
-import Hr from "../components/Hr";
-import ImgSlide from "../components/ImgSlide";
+import TextOnImg from "../components/common/TextOnImg";
+import Hr from "../components/common/Hr";
+import ImgSlide from "../components/common/ImgSlide";
 
 export const Layout = styled.div`
   padding-top: ${(props) => props.theme.backgroundPaddingTop};

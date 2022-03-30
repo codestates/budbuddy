@@ -1,7 +1,6 @@
 const jwtModule = require("../../modules/jwt");
 const { Users } = require("../../models/index");
 module.exports = async (req, res) => {
-  console.log("들어옴?");
   if (!req.cookies.accessToken) {
     return res.status(400).send({ message: "Bad Request", data: "There is no accessToken" });
   }

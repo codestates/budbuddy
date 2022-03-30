@@ -75,7 +75,6 @@ const DialogCalendar = ({ top = 100, left = 0, setDpRef, dateDisplayRef }) => {
   }
 
   function selected() {
-    // console.log(dateDisplayRef.current);
     dateDisplayRef.current.readOnly = false;
     if (selectedDate === "") dateDisplayRef.current.value = curDate();
     else dateDisplayRef.current.value = selectedDate;
