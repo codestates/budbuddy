@@ -7,7 +7,7 @@ import SideBar from "../components/MyPage/SideBar";
 import SideBarStore from "../store/SideBarStore";
 import { dummyList } from "../utils/dummy";
 import DiaryList from "../components/write/list/DiaryList";
-
+import useLoginStore from "../store/LoginStore";
 const Layout = styled.div`
   display: grid;
   /* height: inherit; */
@@ -46,15 +46,16 @@ const ProfileImg = styled.img`
   border-radius: ${(props) => props.theme.borderRadius};
 `;
 
-const Mypage = ({ login }) => {
+const Mypage = () => {
+  const { isLogin } = useLoginStore();
   const { SideBarState } = SideBarStore();
 
   return (
     <Layout>
-      {SideBarState ? <SideBar></SideBar> : null}
+      {SideBarState ? <SideBar /> : null}
       <Logo className="logo" />
       <MenuBar />
-      {login ? (
+      {isLogin ? (
         <MypageContainer>
           <IdPost>
             <div className="id">ID 옆집할매토종닭죽</div>

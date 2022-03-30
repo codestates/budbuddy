@@ -80,12 +80,6 @@ const LoginForm = () => {
       const resData = await axios.post(process.env.REACT_APP_API_URL + "/users/login", payload);
       const msg = resData.data.message.split(" ");
       if (msg[1] === "AccessToken") {
-        const loginInfo = {
-          isLogined: true,
-          type: "normal",
-        };
-
-        sessionStorage.setItem("loginInfo", JSON.stringify(loginInfo));
         setLogin(true);
         navigate("/mypage");
         return;
@@ -175,7 +169,6 @@ const LoginForm = () => {
                 }
                 setModalCode("testLogin");
                 await sleep(500);
-                sessionStorage.setItem("loginInfo", JSON.stringify(loginInfo));
                 setLogin(true);
                 navigate("/mypage");
               }}>

@@ -8,7 +8,7 @@ import PlantAddDialog from "../components/diary/PlantAddDialog";
 import axios from "axios";
 import { makeModal } from "../utils/errExeption";
 import { curDate } from "../modules/date";
-
+import useLoginStore from "../store/LoginStore";
 const Layout = styled.div`
   .logo {
     margin-top: 1rem;
@@ -49,16 +49,17 @@ const BudLayout = styled.div`
 `;
 
 //식물 추가 탭
-const Daily = ({ login }) => {
+const Daily = () => {
+  const { isLogin } = useLoginStore();
   const [isDialog, setDialog] = useState(false);
   const [plants, setPlants] = useState([]);
   const [modalCode, setModalCode] = useState(0);
 
   useEffect(() => {
-    if (login) {
+    if (isLogin) {
       getPlantsList();
     }
-  }, [login]);
+  }, [isLogin]);
 
   function openDialog() {
     setDialog(true);
