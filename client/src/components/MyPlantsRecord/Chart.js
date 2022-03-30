@@ -8,9 +8,12 @@ const ChartDiv = styled.div`
     height: 2vh;
   }
 `;
-const ChartSvg = styled.svg`
+const ChartSvgDiv = styled.div`
   margin: auto;
+  text-align: center;
 `;
+
+const ChartSvg = styled.svg``;
 
 const ChartTitle = styled.h2`
   text-align: center;
@@ -131,7 +134,9 @@ const Chart = () => {
     <ChartDiv>
       <div className="space"></div>
       <ChartTitle>스투키 성장 기록</ChartTitle>
-      <ChartSvg className="list" width="320" height="320"></ChartSvg>
+      <ChartSvgDiv>
+        <ChartSvg className="list" width="320" height="320"></ChartSvg>
+      </ChartSvgDiv>
       <div className="space"></div>
     </ChartDiv>
   );
