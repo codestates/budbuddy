@@ -11,7 +11,9 @@ module.exports = async (req, res) => {
   try {
     const reqEmail = verify.email;
     var user = await Users.findOne({
-      attributes: ["id", "nickname", "social", "email", "profile_image_url", "created_at"],
+      attributes: {
+        exclude: ["password", "salt", "social"],
+      },
       where: {
         email: reqEmail,
       },
