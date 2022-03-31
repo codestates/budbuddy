@@ -10,10 +10,10 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import { teal } from "@mui/material/colors";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { makeModal } from "../utils/errExeption";
+import { makeModal } from "../../utils/errExeption";
 import { useNavigate } from "react-router-dom";
-import useLoginStore from "../store/LoginStore";
-import { sleep } from "../modules/sleep";
+import useLoginStore from "../../store/LoginStore";
+import { sleep } from "../../modules/sleep";
 
 const Layout = styled.div`
   display: grid;
@@ -78,11 +78,8 @@ const LoginForm = () => {
 
     try {
       const resData = await axios.post(process.env.REACT_APP_API_URL + "/users/login", payload);
-      // console.log("호출", email.value, password.value, resData);
-      // console.log("응답::::", resData.data);
       const msg = resData.data.message.split(" ");
       if (msg[1] === "AccessToken") {
-        // console.log("로그인 성공");
         const loginInfo = {
           isLogined: true,
           type: "normal",
@@ -94,7 +91,6 @@ const LoginForm = () => {
         return;
       }
     } catch (err) {
-      console.log(err.response.data);
       setModalCode(err.response.data.message);
     }
   }
@@ -165,7 +161,18 @@ const LoginForm = () => {
                   isLogined: true,
                   type: "test",
                 };
-
+                const payload = {
+                  email: "test@test.com",
+                  password: "1111",
+                  nickname: "test",
+                };
+                try {
+                  let resData = await axios.post(process.env.REACT_APP_API_URL + "/users/signup", payload);
+                } catch (err) {
+                  if (err.response.data.message === "usedEmail") {
+                    let logindData = await axios.post(process.env.REACT_APP_API_URL + "/users/login", payload);
+                  }
+                }
                 setModalCode("testLogin");
                 await sleep(500);
                 sessionStorage.setItem("loginInfo", JSON.stringify(loginInfo));

@@ -46,7 +46,7 @@ export const SignupWrapper = styled.form`
   }
 
   .cancle:hover {
-    background-color: IndianRed;
+    background-color: ${(props) => props.theme.hoverCancleColor};
     color: white;
   }
 
