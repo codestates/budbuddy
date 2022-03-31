@@ -12,7 +12,19 @@ export const proverbs = [
   "흐르는 물은\n 앞을 다투지 아니한다.",
 ];
 
-export const slideImgs = [`signupBg/IMG_0.JPG`, `signupBg/IMG_1.JPG`, `signupBg/IMG_2.JPG`, `signupBg/IMG_3.JPG`, `signupBg/IMG_4.JPG`, `signupBg/IMG_5.JPG`, `signupBg/IMG_6.JPG`];
+export const slideImgs = [
+  `signupBg/IMG_0.jpg`,
+  `signupBg/IMG_1.PNG`,
+  `signupBg/IMG_2.jpg`,
+  `signupBg/IMG_3.png`,
+  `signupBg/IMG_4.JPG`,
+  `signupBg/IMG_5.PNG`,
+  `signupBg/IMG_6.PNG`,
+  `signupBg/IMG_7.PNG`,
+  `signupBg/IMG_8.PNG`,
+  `signupBg/IMG_9.PNG`,
+  `signupBg/IMG_10.PNG`,
+];
 
 export const doing = [
   // 더미데이터
