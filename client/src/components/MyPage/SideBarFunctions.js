@@ -78,7 +78,6 @@ function SideBarFunctions({ setModalCode }) {
   const [isDelAccount, setDelAccount] = useState(false);
   const [isChangePassword, setChangePassword] = useState(false);
   const logOutFunction = () => {
-    setModalCode("logoutSuccessfully");
     setLogin(false);
     navigate("/");
   };
