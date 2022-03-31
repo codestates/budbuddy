@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { useNavigateSearch } from "../../../modules/hooks";
+import { useNavigateSearch } from "../../modules/hooks";
 
 const Layout = styled.div`
   display: flex;
@@ -53,7 +53,7 @@ const Layout = styled.div`
   }
 `;
 
-const DiaryList = ({ diaryList }) => {
+const DiaryList = ({ diaryList = [] }) => {
   const navigateSearch = useNavigateSearch();
   const goToDailyRead = (info) => navigateSearch("/daily/read", { info });
   //
