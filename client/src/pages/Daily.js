@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { budDummy } from "../utils/dummy";
-import Logo from "../components/Logo";
-import TabBtnOne from "../components/TabBtnOne";
+import Logo from "../components/common/Logo";
+import TabBtnOne from "../components/common/TabBtnOne";
 import Bud from "../components/diary/Bud";
 import PlantAddDialog from "../components/diary/PlantAddDialog";
 import axios from "axios";
 import { makeModal } from "../utils/errExeption";
 import { curDate } from "../modules/date";
-
+import useLoginStore from "../store/LoginStore";
 const Layout = styled.div`
   .logo {
     margin-top: 1rem;
@@ -49,16 +49,17 @@ const BudLayout = styled.div`
 `;
 
 //식물 추가 탭
-const Daily = ({ login }) => {
+const Daily = () => {
+  const { isLogin } = useLoginStore();
   const [isDialog, setDialog] = useState(false);
   const [plants, setPlants] = useState([]);
   const [modalCode, setModalCode] = useState(0);
 
   useEffect(() => {
-    if (login) {
+    if (isLogin) {
       getPlantsList();
     }
-  }, [login]);
+  }, [isLogin]);
 
   function openDialog() {
     setDialog(true);
@@ -67,7 +68,6 @@ const Daily = ({ login }) => {
   async function getPlantsList() {
     try {
       const resData = await axios.get(process.env.REACT_APP_API_URL + "/plants");
-      // console.log("성공적으로 불러온 애칭 식물 리스트::", resData.data.data);
       setPlants(resData.data.data);
     } catch (err) {
       setModalCode();
@@ -84,12 +84,10 @@ const Daily = ({ login }) => {
         name: budName,
       };
       const resData = await axios.post(process.env.REACT_APP_API_URL + "/plants", payload);
-      console.log(resData);
       getPlantsList();
     } catch (err) {
       //alreadyExistsBudName
       setModalCode("alreadyExistsBudName");
-      console.log(err);
     }
 
     console.log("내 식물 추가시 API 호출 코드 작성란", budName);
@@ -102,7 +100,7 @@ const Daily = ({ login }) => {
       }}>
       {makeModal(modalCode)}
       <Logo className="logo" />
-      <TabBtnOne className="TabBtnOne" tabName="내식물" btnName="내 식물 추가" fn={openDialog} />
+      <TabBtnOne className="TabBtnOne" tabName="내 식물" btnName="내 식물 추가" fn={openDialog} />
       <BudLayout>
         {plants.length === 0 ? (
           <div className="notice-pos">
@@ -112,7 +110,7 @@ const Daily = ({ login }) => {
           <div className="card-wrap">
             {plants.map((v, i) => {
               const date = curDate();
-              return <Bud key={v.id} src={v.src || "Dummy/diary_4.PNG"} className="cardcomponent" budName={v.name} date={date} />;
+              return <Bud key={v.id} src={v.src || "Dummy/diary_4.PNG"} className="cardcomponent" budName={v.name} date={date} plant_id={v.id} />;
             })}
           </div>
         )}

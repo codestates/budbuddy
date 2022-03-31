@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import TabOption from "../components/Album/TabOption";
 
 const Layout = styled.div`
   display: flex;
@@ -7,7 +8,11 @@ const Layout = styled.div`
 `;
 
 const Test = () => {
-  return <Layout></Layout>;
+  return (
+    <Layout>
+      <TabOption tabName={"앨범"}></TabOption>
+    </Layout>
+  );
 };
 
 export default Test;

@@ -1,16 +1,11 @@
 const { Plants } = require("../../models/index");
-const jwtModule = require("../../modules/jwt");
+const checkAuth = require("../../modules/verifyCookieToken");
 
 module.exports = async (req, res) => {
-  if (!req.cookies.accessToken) {
-    return res.status(400).send({ message: "Bad Request", data: "There is no accessToken" });
-  }
-  console.log("들어옴");
-  const { accessToken } = req.cookies;
   try {
-    var verify = await jwtModule.verify(accessToken);
+    var verify = await checkAuth(req, res);
   } catch (err) {
-    return res.status(401).send({ message: "Unauthorized Token", data: err });
+    return err; // break
   }
 
   const user_id = verify.idx;
@@ -24,9 +19,9 @@ module.exports = async (req, res) => {
     });
 
     if (created) {
-      return res.status(201).send({ message: "successfullyRegisted", data: plant.id });
+      return res.status(201).send({ message: "Created", data: plant.id });
     } else {
-      return res.status(409).send({ message: "usedName" });
+      return res.status(409).send({ message: `Conflict, Used name: ${name}` });
     }
   } catch (err) {
     console.error("Sequelize Error: ", err);

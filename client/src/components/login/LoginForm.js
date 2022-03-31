@@ -78,23 +78,13 @@ const LoginForm = () => {
 
     try {
       const resData = await axios.post(process.env.REACT_APP_API_URL + "/users/login", payload);
-      // console.log("호출", email.value, password.value, resData);
-      // console.log("응답::::", resData.data);
       const msg = resData.data.message.split(" ");
       if (msg[1] === "AccessToken") {
-        // console.log("로그인 성공");
-        const loginInfo = {
-          isLogined: true,
-          type: "normal",
-        };
-
-        sessionStorage.setItem("loginInfo", JSON.stringify(loginInfo));
         setLogin(true);
         navigate("/mypage");
         return;
       }
     } catch (err) {
-      console.log(err.response.data);
       setModalCode(err.response.data.message);
     }
   }
@@ -171,21 +161,14 @@ const LoginForm = () => {
                   nickname: "test",
                 };
                 try {
-                  console.log("테스트 계정 로그인 시도");
                   let resData = await axios.post(process.env.REACT_APP_API_URL + "/users/signup", payload);
-                  console.log(resData.data);
                 } catch (err) {
-                  console.log(err.response.data);
-                  console.log("테스트계정 로그인 오류:::", err);
                   if (err.response.data.message === "usedEmail") {
-                    console.log("들어오니");
                     let logindData = await axios.post(process.env.REACT_APP_API_URL + "/users/login", payload);
-                    console.log(logindData);
                   }
                 }
                 setModalCode("testLogin");
                 await sleep(500);
-                sessionStorage.setItem("loginInfo", JSON.stringify(loginInfo));
                 setLogin(true);
                 navigate("/mypage");
               }}>

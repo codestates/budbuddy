@@ -8,7 +8,6 @@ export const Layout = styled.div`
   grid-template-rows: auto auto auto;
   flex-direction: column;
   width: 100%;
-  /* height: 53%; */
 
   .shell {
     text-align: start;
@@ -21,13 +20,12 @@ export const Layout = styled.div`
     z-index: 1;
     background-color: rgba(0, 0, 0, 0.3);
     box-shadow: 7px 4px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
-    /* filter: grayscale(100%); */
   }
 
   .coverImg {
     object-fit: cover;
     width: 100%;
-    height: 18vh;
+    height: 13vh;
     mix-blend-mode: darken;
 
     border: solid 2px rgb(0, 0, 0, 0.65);
@@ -55,57 +53,50 @@ export const Layout = styled.div`
     display: block;
     visibility: visible;
     opacity: 1;
+    font-size: 1rem;
   }
 
   .hide > .text {
     position: relative;
-    top: 10%;
-    margin: 10%;
-    letter-spacing: 0.8vw;
+    margin: auto;
+    top: 5%;
+    /* letter-spacing: 0.6vw; */
+    width: 90%;
+    height: 90%;
+    word-break: keep-all;
+    display: -webkit-box;
+    -webkit-line-clamp: 8;
+    -webkit-box-orient: vertical;
     transition: background-color 0.1s cubic-bezier(0.55, 1.17, 0.75, 0.53);
   }
 
   .hide > .text:hover {
-    background-color: ${(props) => props.theme.hoverColor};
+    font-size: 1rem;
     border-radius: ${(props) => props.theme.borderRadius};
   }
 
-  .budName {
-    margin-top: 0.1vw;
-  }
-
   .date {
-    font-size: 1rem;
-  }
-
-  a {
-    color: white;
+    font-size: 0.6rem;
   }
 `;
 
-const Bud = ({ className, src, budName, date, plant_id }) => {
+const Picture = ({ className, src, budName, date, plant_id, text }) => {
   const navigateSearch = useNavigateSearch();
   const goToWrite = () => navigateSearch("/write", { name: `${encodeURI(budName)}`, plant_id: `${plant_id}` });
-  const goToWriteList = () => navigateSearch("/write/list", { name: `${encodeURI(budName)}`, plant_id: `${plant_id}` });
 
   return (
     <Layout className={className}>
       <div className="shell">
         <div className="hide">
           <div className="text" onClick={goToWrite}>
-            일지쓰기
-          </div>
-          <div className="text">앨범</div>
-          <div className="text" onClick={goToWriteList}>
-            일지목록
+            {text}
           </div>
         </div>
         <img className="coverImg" src={src} alt={`bg`} />
-        <div className="budName">{budName}</div>
         <span className="date">{date}</span>
       </div>
     </Layout>
   );
 };
 
-export default Bud;
+export default Picture;

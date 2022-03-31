@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faX } from "@fortawesome/free-solid-svg-icons";
 import { budDummy } from "../../utils/dummy";
 import SideBarFunctions from "./SideBarFunctions";
+import useLoginStore from "../../store/LoginStore";
 import { makeModal } from "../../utils/errExeption";
 
 const SideBarContainer = styled.div`
@@ -67,6 +68,7 @@ const SideBarMain = styled.div`
 
 function SideBar() {
   const { DownSideBarStore } = SideBarStore();
+  const { nickname } = useLoginStore();
   const Close = () => {
     DownSideBarStore();
   };
@@ -77,13 +79,13 @@ function SideBar() {
       <SideBarMain>
         {makeModal(modalCode)}
         <div className="id">
-          <img className="image" src={budDummy[0].src}></img>
+          <img className="image" src={budDummy[0].src} alt="" />
           <div className="NameAndDelete">
             <button className="deleteDiv" onClick={Close}>
               <FontAwesomeIcon className="fa-solid fa-3x" icon={faX} color="white" />
             </button>
           </div>
-          <div className="name">ID:옆집할매토종닭죽</div>
+          <div className="name">ID:{nickname}</div>
         </div>
         <div className="space"></div>
         <SideBarFunctions setModalCode={setModalCode} />

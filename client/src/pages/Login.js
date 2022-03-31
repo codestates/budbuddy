@@ -2,9 +2,10 @@ import React from "react";
 import styled from "styled-components";
 import { SocialWrapper } from "../styles/pages/LoginStyled";
 import { proverbs } from "../utils/dummy";
-import TextOnImg from "../components/TextOnImg";
-import Hr from "../components/Hr";
+import TextOnImg from "../components/common/TextOnImg";
+import Hr from "../components/common/Hr";
 import LoginForm from "../components/login/LoginForm";
+import useLoginStore from "../store/LoginStore";
 import axios from "axios";
 
 const Layout = styled.div`
@@ -18,29 +19,21 @@ const Layout = styled.div`
 `;
 
 function Login() {
+  const { isLogin, setLogin } = useLoginStore();
   async function kakaoLogin() {
     try {
       const requestURL = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_KAKAO_REST_API_KEY}&redirect_uri=${process.env.REACT_APP_KAKAO_REDIRECT_URI}&response_type=code`;
       window.location.assign(requestURL);
 
       const resData = await axios.get(process.env.REACT_APP_API_URL + "/users/userinfo");
-      console.log(resData.data.message);
-
       if (resData.data.message === "ok") {
-        const loginInfo = {
-          isLogined: true,
-          type: "kakao",
-        };
-
-        sessionStorage.setItem("loginInfo", JSON.stringify(loginInfo));
+        setLogin(true);
       }
     } catch (e) {
       console.log(e);
     }
   }
 
-  //    window.location.assign(requestURL);
-  //    sessionStorage.setItem('oauth', 'kakao');
   return (
     <Layout>
       <TextOnImg texts={proverbs} />

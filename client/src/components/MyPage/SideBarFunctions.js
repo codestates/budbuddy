@@ -6,7 +6,8 @@ import AccountDelete from "./AccountDelete";
 import ChangePassword from "./ChangePassword";
 import ImageChange from "./ImageChange";
 import ImageChangeStore from "../../store/ImageChangeStore";
-
+import useLoginStore from "../../store/LoginStore";
+import { useNavigate } from "react-router-dom";
 const Content = styled.div`
   .logout {
     height: 5vh;
@@ -71,11 +72,14 @@ const Content = styled.div`
 `;
 
 function SideBarFunctions({ setModalCode }) {
+  const { setLogin } = useLoginStore();
+  const navigate = useNavigate();
   const { ImageChangeState, popUpImageChangeModal } = ImageChangeStore();
   const [isDelAccount, setDelAccount] = useState(false);
   const [isChangePassword, setChangePassword] = useState(false);
   const logOutFunction = () => {
-    setModalCode("logoutSuccessfully");
+    setLogin(false);
+    navigate("/");
   };
   const DelAccountFunction = () => {
     setDelAccount((current) => !current);

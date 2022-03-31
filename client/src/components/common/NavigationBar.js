@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
-
+import useLoginStore from "../../store/LoginStore";
 export const Content = styled.nav`
   cursor: pointer;
   position: fixed;
@@ -34,7 +34,7 @@ export const Content = styled.nav`
 `;
 
 function NavigationBar({ login = false }) {
-  // console.log("NavigationBar::", login);
+  const { isLogin } = useLoginStore();
   return (
     <Content>
       <div className="wrap">
@@ -50,7 +50,7 @@ function NavigationBar({ login = false }) {
         <NavLink to="/story">
           <span className="story">스토리</span>
         </NavLink>
-        {login ? (
+        {isLogin ? (
           <NavLink to="/daily">
             <span className="daily">내 일지</span>
           </NavLink>
@@ -58,7 +58,7 @@ function NavigationBar({ login = false }) {
         <NavLink to="/album">
           <span className="album">앨범</span>
         </NavLink>
-        {login ? (
+        {isLogin ? (
           <NavLink to="/mypage">
             <span className="login">내 정보</span>
           </NavLink>
