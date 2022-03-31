@@ -86,7 +86,7 @@ export const Layout = styled.div`
 const Bud = ({ className, src, budName, date, plant_id }) => {
   const navigateSearch = useNavigateSearch();
   const goToWrite = () => navigateSearch("/write", { name: `${encodeURI(budName)}`, plant_id: `${plant_id}` });
-  const goToWriteList = () => navigateSearch("/write/list", { name: `${encodeURI(budName)}`, plant_id: `${plant_id}` });
+  const goToListByPlantId = () => navigateSearch("/list", { name: `${encodeURI(budName)}`, plant_id: `${plant_id}` });
 
   return (
     <Layout className={className}>
@@ -96,7 +96,7 @@ const Bud = ({ className, src, budName, date, plant_id }) => {
             일지쓰기
           </div>
           <div className="text">앨범</div>
-          <div className="text" onClick={goToWriteList}>
+          <div className="text" onClick={goToListByPlantId}>
             일지목록
           </div>
         </div>
