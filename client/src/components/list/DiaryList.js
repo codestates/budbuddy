@@ -52,9 +52,13 @@ const Layout = styled.div`
     background-color: ${(props) => props.theme.hoverColor};
     color: #fff;
   }
+  .budname {
+    font-size: ${(props) => props.theme.fontWritePageXSmall};
+    color: SlateGray;
+  }
 `;
 
-const DiaryList = ({ diaryList = [] }) => {
+const DiaryList = ({ diaryList = [], isBudName = false }) => {
   const navigateSearch = useNavigateSearch();
   const goToDailyRead = (info) => navigateSearch("/daily/read", { info });
   //
@@ -80,7 +84,10 @@ const DiaryList = ({ diaryList = [] }) => {
               onClick={() => {
                 goToDailyRead(encodeURI(JSON.stringify(v)));
               }}>
-              <div>{v.title}</div>
+              <div>
+                {`${v.title}`}
+                <span className="budname">{isBudName ? ` (${v.Plant.name})` : ""}</span>
+              </div>
             </div>
             <div className="btn-wrap">
               <button className="modify" onClick={callModify}>

@@ -12,14 +12,25 @@ const useAjaxStore = create(
     },
     (set) => ({
       listByPlantId: [],
+      listByUserId: [],
       async setListByPlantId(plantId) {
         try {
           const resData = await axios.get(process.env.REACT_APP_API_URL + "/journals/my", { params: { plant: plantId } });
-          console.log(resData.data.data);
+          console.log("setListByPlantId:::", resData.data.data);
           set((state) => ({ listByPlantId: [...resData.data.data] }));
         } catch (err) {
           console.log("axios err / setListByPlatId :::", err);
           set((state) => ({ listByPlantId: [] }));
+        }
+      },
+      async setListByUserId() {
+        try {
+          const resData = await axios.get(process.env.REACT_APP_API_URL + "/journals/my");
+          console.log("setListByUserId:::", resData.data.data);
+          set((state) => ({ listByUserId: [...resData.data.data] }));
+        } catch (err) {
+          console.log("axios err / setListByUserId :::", err);
+          set((state) => ({ listByUserId: [] }));
         }
       },
     }),

@@ -99,7 +99,7 @@ const Write = () => {
       console.log(resData.data.data);
       navigate("/daily");
     } catch (err) {
-      console.log();
+      console.log(err);
     }
   }
 
