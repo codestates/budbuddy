@@ -9,29 +9,26 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Journal_Images.belongsTo(models.Users, { foreignKey: "user_id" });
-      Journal_Images.belongsTo(models.Journals, { foreignKey: "journal_id" });
+      Journal_Images.belongsTo(models.Journals, { foreignKey: "journal_id", onDelete: "CASCADE" });
+      Journal_Images.belongsTo(models.Images, { foreignKey: "image_id", onDelete: "CASCADE" });
     }
   }
   Journal_Images.init(
     {
-      user_id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-      },
       journal_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
-      ext: DataTypes.STRING,
-      filename: DataTypes.STRING,
-      store_filename: DataTypes.STRING,
-      store_path: DataTypes.STRING,
+      image_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
     },
     {
       sequelize,
       modelName: "Journal_Images",
       underscored: true,
+      tableName: "journal_images",
     },
   );
   return Journal_Images;

@@ -7,6 +7,7 @@ import TextContent from "../components/write/TextContent";
 import DatePicker from "../components/write/DatePicker";
 import PublicBtn from "../components/write/PublicBtn";
 import { useLocation } from "react-router-dom";
+import axios from "axios";
 const qs = require("query-string");
 
 const Layout = styled.form`
@@ -59,7 +60,7 @@ const Write = () => {
       tgArr.push("water");
     }
     if (toggle.isNutirition) {
-      tgArr.push("fertillize");
+      tgArr.push("fertilize");
     }
     if (toggle.isRepotting) {
       tgArr.push("repot");
@@ -68,23 +69,36 @@ const Write = () => {
     return tgArr;
   }
 
-  function submit(e) {
-    console.log("ajax 작성 필요");
+  async function submit(e) {
     e.preventDefault();
-    const { date, size, title, photo, content, checkbox } = e.target;
+    const { date, size, title, upload_img, content, checkbox } = e.target;
+
     const convertDate = date.value.replaceAll("/", "-");
+    console.log(convertDate);
     let toggle = JSON.parse(e.target.toggle.value);
     toggle = convertToggleData(toggle);
-    const payload = {
-      images: [photo.value],
-      actions: toggle,
-      plant_height: size.value + "cm",
-      plant_id,
-      title: title.value,
-      body: content.value,
-      date_pick: convertDate,
-      public: checkbox.checked,
-    };
+
+    let formdata = new FormData();
+    formdata.append("image", upload_img.files[0]);
+
+    try {
+      const imgRes = await axios.post(process.env.REACT_APP_API_URL + "/images", formdata);
+      const payload = {
+        images: [imgRes.data.data.id],
+        actions: toggle,
+        plant_height: size.value,
+        plant_id,
+        title: title.value,
+        body: content.value,
+        date_pick: convertDate,
+        public: checkbox.checked,
+      };
+      console.log(payload);
+      const resData = await axios.post(process.env.REACT_APP_API_URL + "/journals", payload);
+      console.log(resData.data.data);
+    } catch (err) {
+      console.log();
+    }
   }
 
   return (

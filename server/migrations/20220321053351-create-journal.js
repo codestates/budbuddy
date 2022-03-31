@@ -14,6 +14,7 @@ module.exports = {
           model: "users",
           key: "id",
         },
+        onDelete: "CASCADE",
         allowNull: false,
       },
       plant_id: {
@@ -24,11 +25,17 @@ module.exports = {
         },
         allowNull: false,
       },
-      summary: {
+      title: {
         type: Sequelize.STRING,
       },
-      detail_body: {
+      body: {
         type: Sequelize.STRING,
+      },
+      plant_height: {
+        type: Sequelize.FLOAT,
+      },
+      date_pick: {
+        type: Sequelize.DATEONLY,
       },
       public: {
         type: Sequelize.BOOLEAN,

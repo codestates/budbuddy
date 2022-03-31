@@ -5,7 +5,7 @@ const useLoginStore = create(
   persist(
     {
       key: "auth", // required, child key of storage
-      allowlist: ["isLogin"], // optional, will save everything if allowlist is undefined // 어느 데이터를 저장시킬지
+      allowlist: ["isLogin", "nickname"], // optional, will save everything if allowlist is undefined // 어느 데이터를 저장시킬지
       denylist: [], // optional, if allowlist set, denylist will be ignored // 저장시키지 않을 데이터
     },
     (set) => ({
@@ -13,6 +13,11 @@ const useLoginStore = create(
       setLogin: (isLogin) =>
         set((state) => ({
           isLogin: isLogin,
+        })),
+      nickname: "",
+      setNickname: (nickname) =>
+        set((state) => ({
+          nickname: nickname,
         })),
     }),
   ),
