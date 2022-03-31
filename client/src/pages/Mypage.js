@@ -47,7 +47,7 @@ const ProfileImg = styled.img`
 `;
 
 const Mypage = () => {
-  const { isLogin } = useLoginStore();
+  const { isLogin, nickname } = useLoginStore();
   const { SideBarState } = SideBarStore();
 
   return (
@@ -58,7 +58,7 @@ const Mypage = () => {
       {isLogin ? (
         <MypageContainer>
           <IdPost>
-            <div className="id">ID 옆집할매토종닭죽</div>
+            <div className="id">ID {nickname}</div>
             <div className="post">POST {dummyList.length} 개</div>
           </IdPost>
           <ProfileImg src={budDummy[0].src} alt={`bg`} />
