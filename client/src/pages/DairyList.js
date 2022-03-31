@@ -39,7 +39,7 @@ const DairyList = () => {
           navigate(-1);
         }}
       />
-      <DiaryList diaryList={listByPlantId} />
+      <DiaryList diaryList={listByPlantId} isBudName={true} type="plant" />
     </Layout>
   );
 };

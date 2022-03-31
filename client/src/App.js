@@ -3,7 +3,6 @@ import { ThemeProvider } from "styled-components";
 import GlobalStyle from "./styles/GlobalStyle";
 import Theme from "./styles/Theme";
 import { Route, Routes } from "react-router-dom";
-import axios from "axios";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
 import Signup from "./pages/Signup";
@@ -21,7 +20,6 @@ import NavigationBar from "./components/common/NavigationBar";
 import { OutLine, Content } from "./styles/CommonStyled";
 import useLoginStore from "./store/LoginStore";
 import { PersistGate } from "zustand-persist";
-axios.defaults.withCredentials = true;
 
 const App = () => {
   const { isLogin } = useLoginStore();
