@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import moment from "moment";
 import { useNavigateSearch } from "../../modules/hooks";
 
 const Layout = styled.div`
@@ -62,13 +63,17 @@ const DiaryList = ({ diaryList = [] }) => {
     console.log("글 삭제 요청 작성란");
   };
 
+  function convertData(date) {
+    return moment(date).format("YY-MM-DD");
+  }
+
   return (
     <Layout>
       {diaryList.map((v, i) => {
         return (
-          <div key={i} className="wrap">
+          <div key={v.id} className="wrap">
             <div className="date-wrap">
-              <div>{v.date}</div>
+              <div>{convertData(v.date)}</div>
             </div>
             <div
               className="title"
