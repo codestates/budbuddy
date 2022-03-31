@@ -50,13 +50,6 @@ export function makeModal(modalCode = 0) {
     alreadyExistsBudName() {
       return <ShadowModal text={`이미 존재하는 식물명입니다.`} />;
     },
-    logoutSuccessfully() {
-      return (
-        <Link to="/">
-          <ShadowModal text={`로그아웃이 완료 되었습니다.`} />;
-        </Link>
-      );
-    },
     dataHasBeenRemoved() {
       return (
         <Link to="/">
