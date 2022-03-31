@@ -47,7 +47,7 @@ const Card = styled.div`
     content: "";
     position: absolute;
     border: solid 2px ${(props) => props.theme.cardSelectColor};
-    transition: width 0.2s ease-out, height 0.2s ease-out;
+    transition: width ${(props) => `${props.hoverTransitonSec}s`} ease-out, height ${(props) => `${props.hoverTransitonSec}s`} ease-out;
     visibility: hidden;
     border-bottom: none;
     border-right: none;
@@ -89,7 +89,7 @@ const Card = styled.div`
     content: "";
     position: absolute;
     border: solid 2px ${(props) => props.theme.cardSelectColor};
-    transition: width 0.2s ease-out, height 0.2s ease-out;
+    transition: width ${(props) => `${props.hoverTransitonSec}s`} ease-out, height ${(props) => `${props.hoverTransitonSec}s`} ease-out;
     visibility: hidden;
     border-left: none;
     border-top: none;
@@ -176,7 +176,7 @@ const Card = styled.div`
       object-fit: cover;
       width: 100%;
       height: 15vh;
-      transition: transform 0.8s ease;
+      transition: transform ${(props) => `${props.hoverTransitonSec}s`} ease;
     }
 
     .summary {
@@ -208,7 +208,7 @@ const Card = styled.div`
     .btn {
       color: black;
       background-color: ${(props) => props.theme.btnBgColor};
-      transition: background-color 0.25s ease, color 0.25s ease;
+      transition: background-color ${(props) => `${props.hoverTransitonSec}s`} ease, color ${(props) => `${props.hoverTransitonSec}s`} ease;
     }
 
     .btn:hover {
@@ -224,7 +224,7 @@ const Card = styled.div`
   }
 `;
 
-const StoryCard = ({ className = "", storyList }) => {
+const StoryCard = ({ className = "", storyList, hoverTransitonSec = 0.25 }) => {
   function read(e) {
     e.preventDefault();
     console.log("스토리 읽기");
@@ -241,7 +241,7 @@ const StoryCard = ({ className = "", storyList }) => {
         <div className="wrap">
           {storyList.map((v, i) => {
             return (
-              <Card key={v.journalsId}>
+              <Card key={v.journalsId} hoverTransitonSec={hoverTransitonSec}>
                 <div className="borderlt">
                   <div className="borderrb">
                     <div className="top-cap">

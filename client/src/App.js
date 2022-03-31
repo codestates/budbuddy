@@ -40,7 +40,7 @@ const App = () => {
                 <Route path="/daily" element={<Daily />} />
                 <Route path="/daily/read" element={<DailyRead />} />
                 <Route path="/write" element={<Write />} />
-                <Route path="/write/list" element={<DairyList />} />
+                <Route path="/list" element={<DairyList />} />
                 <Route path="/album" element={<Album />} />
                 <Route path="/signup" element={<Signup />} />
                 {isLogin ? <Route path="/mypage" element={<Mypage />} /> : <Route path="/login" element={<Login />} />}

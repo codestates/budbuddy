@@ -10,10 +10,7 @@ const useLoginStore = create(
     },
     (set) => ({
       isLogin: false,
-      setLogin: (isLogin) =>
-        set((state) => ({
-          isLogin: isLogin,
-        })),
+      setLogin: (isLogin) => set((state) => ({ isLogin: isLogin })),
       nickname: "",
       setNickname: (nickname) =>
         set((state) => ({

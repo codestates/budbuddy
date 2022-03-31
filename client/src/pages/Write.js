@@ -6,7 +6,7 @@ import GrowInput from "../components/write/GrowInput";
 import TextContent from "../components/write/TextContent";
 import DatePicker from "../components/write/DatePicker";
 import PublicBtn from "../components/write/PublicBtn";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 const qs = require("query-string");
 
@@ -49,6 +49,7 @@ const Layout = styled.form`
 
 const Write = () => {
   //
+  const navigate = useNavigate();
   const { search } = useLocation();
   const parsed = qs.parse(search);
   const budName = decodeURI(parsed.name);
@@ -96,6 +97,7 @@ const Write = () => {
       console.log(payload);
       const resData = await axios.post(process.env.REACT_APP_API_URL + "/journals", payload);
       console.log(resData.data.data);
+      navigate("/daily");
     } catch (err) {
       console.log();
     }

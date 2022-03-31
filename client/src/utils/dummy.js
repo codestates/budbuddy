@@ -12,7 +12,19 @@ export const proverbs = [
   "흐르는 물은\n 앞을 다투지 아니한다.",
 ];
 
-export const slideImgs = [`signupBg/IMG_0.JPG`, `signupBg/IMG_1.JPG`, `signupBg/IMG_2.JPG`, `signupBg/IMG_3.JPG`, `signupBg/IMG_4.JPG`, `signupBg/IMG_5.JPG`, `signupBg/IMG_6.JPG`];
+export const slideImgs = [
+  `signupBg/IMG_0.jpg`,
+  `signupBg/IMG_1.PNG`,
+  `signupBg/IMG_2.jpg`,
+  `signupBg/IMG_3.png`,
+  `signupBg/IMG_4.JPG`,
+  `signupBg/IMG_5.PNG`,
+  `signupBg/IMG_6.PNG`,
+  `signupBg/IMG_7.PNG`,
+  `signupBg/IMG_8.PNG`,
+  `signupBg/IMG_9.PNG`,
+  `signupBg/IMG_10.PNG`,
+];
 
 export const doing = [
   // 더미데이터
@@ -138,7 +150,7 @@ export const dummyList = [
 //src={v.src || "Dummy/diary_4.PNG"}
 export const storyDummyList = [
   {
-    profileImg: "Dummy/story/profile/profile_01.jpg",
+    profileImg: "Dummy/story/profile/profile_01.PNG",
     username: "화순",
     plantName: "새싹1호 바오밥",
     createdAt: "3/15",
@@ -147,7 +159,7 @@ export const storyDummyList = [
     summary: "오늘해준건 응원 어제보다 나아졌다면 그렇다면 좋은 하루를 보낸것이야",
   },
   {
-    profileImg: "Dummy/story/profile/profile_02.jpg",
+    profileImg: "Dummy/story/profile/profile_02.PNG",
     username: "화신",
     plantName: "성체2호 나무",
     createdAt: "3/17",
@@ -156,7 +168,7 @@ export const storyDummyList = [
     summary: "오늘해준건 점심 점심은 콩나물 비밥밤과 너비아니 시장은 반찬이다",
   },
   {
-    profileImg: "Dummy/story/profile/profile_03.jpg",
+    profileImg: "Dummy/story/profile/profile_03.PNG",
     username: "지민러버",
     plantName: "3호 스투키키",
     createdAt: "3/18",
