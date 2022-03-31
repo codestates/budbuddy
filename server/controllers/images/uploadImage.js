@@ -2,6 +2,7 @@ const { Images } = require("../../models");
 const checkAuth = require("../../modules/verifyCookieToken");
 
 module.exports = async (req, res) => {
+  console.log(req.file);
   if (!req.file) return res.status(400).send({ message: "Bad Request" });
   const { originalname, mimetype, key, location } = req.file;
   try {

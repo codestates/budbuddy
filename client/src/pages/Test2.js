@@ -3,7 +3,17 @@ import styled from "styled-components";
 import TabBtnOne from "../components/common/TabBtnOne";
 import { useNavigate } from "react-router-dom";
 
-const Layout = styled.form``;
+const Layout = styled.form`
+  .test {
+    color: blue;
+    background-color: yellow;
+    border: none;
+  }
+
+  .test:hover {
+    background-color: ${(props) => props.theme.hoverColor};
+  }
+`;
 
 const Test2 = () => {
   let navigate = useNavigate();
@@ -17,6 +27,7 @@ const Test2 = () => {
           navigate(-1);
         }}
       />
+      <button className="test">보기</button>
     </Layout>
   );
 };

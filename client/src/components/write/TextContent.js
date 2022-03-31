@@ -125,7 +125,6 @@ function TextContent({ className = "", title = "", content = "" }) {
 
     const theFile = files[0];
     const reader = new FileReader();
-
     reader.onloadend = (finishedEvent) => {
       const {
         currentTarget: { result },
@@ -153,7 +152,6 @@ function TextContent({ className = "", title = "", content = "" }) {
 
   return (
     <Layout className={className}>
-      <button className="semantic" name="photo" value={img} type="button" />
       <div className="shell">
         <div className="title-wrap">
           <input type="text" className="title" placeholder="제목 입력" onBlur={titleAlign} required name="title" defaultValue={title} />
@@ -171,7 +169,7 @@ function TextContent({ className = "", title = "", content = "" }) {
           <label className="file" htmlFor="input-file">
             사진 업로드
           </label>
-          <input id="input-file" type="file" accept="image/*" onChange={onFileChange} style={{ display: "none" }} />
+          <input id="input-file" type="file" accept="image/*" onChange={onFileChange} style={{ display: "none" }} name="upload_img" />
           {img ? (
             <button className="cancle" onClick={onFileClear}>
               등록취소
