@@ -12,7 +12,7 @@ export const OutLine = styled.div`
 export const Content = styled.div`
   background-color: ${(props) => props.theme.subColor};
   width: 100vw;
-  min-height: 100vh;
+  min-height: 99.9vh;
 
   @media screen and (min-width: 391px) {
     width: ${(props) => props.theme.webWidth};

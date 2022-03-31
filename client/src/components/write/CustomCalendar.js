@@ -166,7 +166,7 @@ function CustomCalendar({ fn }) {
 
     setPreDayIdx(idx);
 
-    const year = moment(dt).format("YY");
+    const year = moment(dt).format("YYYY");
     fn(`${year}/${dt.getMonth() + 1}/${pickDay}`);
     setDate(`${year}/${month}/${pickDay}`);
   }
