@@ -12,4 +12,7 @@ router.post("/", plants.newPlant);
 // DELETE /plants
 router.delete("/:id", plants.deletePlant);
 
+// PUT /plants/:id
+
+router.put("/:id", plants.updatePlant);
 module.exports = router;
