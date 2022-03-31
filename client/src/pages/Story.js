@@ -38,7 +38,7 @@ const Story = () => {
         <p>Friend's Daily Log</p>
       </div>
       <SearchBar top={62} left={98} width={40} fn={storySearch} />
-      <StoryCard className="story-card" storyList={storyDummyList} />
+      <StoryCard className="story-card" storyList={storyDummyList} hoverTransitonSec={0.25} />
     </Layout>
   );
 };
