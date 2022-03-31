@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useLocation } from "react-router-dom";
 import TabBtnOne from "../components/common/TabBtnOne";
 import Logo from "../components/common/Logo";
-import DiaryList from "../components/write/list/DiaryList";
+import DiaryList from "../components/list/DiaryList";
 import { useNavigate } from "react-router-dom";
+import useAjaxStore from "../store/AjaxStore";
 import { dummyList } from "../utils/dummy";
 const qs = require("query-string");
 
@@ -19,6 +20,15 @@ const DairyList = () => {
   const navigate = useNavigate();
   let { name, plant_id } = qs.parse(useLocation().search);
   name = decodeURI(name);
+
+  const { listByPlantId, setListByPlantId } = useAjaxStore();
+
+  useEffect(() => {
+    console.log("호출은 되니 리트스");
+    setListByPlantId(plant_id);
+  }, [plant_id]);
+
+  console.log(listByPlantId);
   return (
     <Layout>
       <div>{`${name}: ${plant_id}`}</div>
@@ -31,7 +41,7 @@ const DairyList = () => {
           navigate(-1);
         }}
       />
-      <DiaryList diaryList={dummyList} />
+      <DiaryList diaryList={listByPlantId} />
     </Layout>
   );
 };

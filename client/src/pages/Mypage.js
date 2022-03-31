@@ -6,7 +6,7 @@ import { budDummy } from "../utils/dummy";
 import SideBar from "../components/MyPage/SideBar";
 import SideBarStore from "../store/SideBarStore";
 import { dummyList } from "../utils/dummy";
-import DiaryList from "../components/write/list/DiaryList";
+import DiaryList from "../components/list/DiaryList";
 import useLoginStore from "../store/LoginStore";
 const Layout = styled.div`
   display: grid;
