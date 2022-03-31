@@ -30,6 +30,11 @@ export const Content = styled.nav`
 `;
 const Placed = styled.div`
   text-align: right;
+  .menuIcon {
+    /* filter: invert(30%) sepia(100%) saturate(1000%) hue-rotate(110deg) brightness(100%) contrast(65%); */
+    font-size: 2rem;
+    color: SlateGrey;
+  }
 `;
 
 function MenuBar() {
@@ -40,7 +45,7 @@ function MenuBar() {
   return (
     <Content>
       <Placed>
-        <FontAwesomeIcon className="fa-solid fa-2x" icon={faBars} cursor="pointer" onClick={Open} />
+        <FontAwesomeIcon className="menuIcon" icon={faBars} cursor="pointer" onClick={Open} />
       </Placed>
     </Content>
   );

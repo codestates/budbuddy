@@ -81,7 +81,6 @@ const Write = () => {
 
     let formdata = new FormData();
     formdata.append("image", upload_img.files[0]);
-
     try {
       const imgRes = await axios.post(process.env.REACT_APP_API_URL + "/images", formdata);
       const payload = {
@@ -99,7 +98,7 @@ const Write = () => {
       console.log(resData.data.data);
       navigate("/daily");
     } catch (err) {
-      console.log();
+      console.log(err);
     }
   }
 
