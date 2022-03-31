@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 const Layout = styled.div`
   width: 100%;
-  min-height: 99.9vh;
   /* border: solid 1px BLACK; */
   position: absolute;
   margin: 0;

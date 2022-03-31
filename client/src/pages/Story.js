@@ -10,7 +10,6 @@ export const Layout = styled.div`
   flex-direction: column;
 
   width: 100%;
-  min-height: 100vh;
   position: relative;
   /* border: solid 1px blue; */
 
@@ -20,6 +19,10 @@ export const Layout = styled.div`
   .title {
     margin-top: 1rem;
     margin-left: 2rem;
+  }
+  .story-card {
+    margin-top: 2.4rem;
+    padding: 0 0.3rem;
   }
 `;
 
@@ -35,7 +38,7 @@ const Story = () => {
         <p>Friend's Daily Log</p>
       </div>
       <SearchBar top={62} left={98} width={40} fn={storySearch} />
-      <StoryCard storyList={storyDummyList} />
+      <StoryCard className="story-card" storyList={storyDummyList} />
     </Layout>
   );
 };
