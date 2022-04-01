@@ -13,10 +13,10 @@ export const proverbs = [
 ];
 
 export const slideImgs = [
-  `signupBg/IMG_0.jpg`,
+  `signupBg/IMG_0.JPG`,
   `signupBg/IMG_1.PNG`,
-  `signupBg/IMG_2.jpg`,
-  `signupBg/IMG_3.png`,
+  `signupBg/IMG_2.JPG`,
+  `signupBg/IMG_3.PNG`,
   `signupBg/IMG_4.JPG`,
   `signupBg/IMG_5.PNG`,
   `signupBg/IMG_6.PNG`,

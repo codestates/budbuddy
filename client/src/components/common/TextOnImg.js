@@ -55,7 +55,7 @@ const TextOnImg = ({ className = "", texts, time = 5000 }) => {
   return (
     <Content className={className} textTime={time}>
       <div className="std">
-        <img src={`signupBg/IMG_8.png`} alt={`bg`} />
+        <img src={`signupBg/IMG_8.PNG`} alt={`bg`} />
         <div className="backText ani">{texts[idx]}</div>
       </div>
     </Content>
