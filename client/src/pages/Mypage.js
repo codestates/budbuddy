@@ -21,7 +21,7 @@ const Layout = styled.div`
 
 const IdPost = styled.div`
   display: grid;
-  grid-template-columns: 20% 80%;
+  grid-template-columns: 25% 80%;
   justify-content: center;
   align-items: center;
   text-align: center;
@@ -32,7 +32,7 @@ const IdPost = styled.div`
     display: flex;
     align-items: center;
     font-size: ${(props) => props.theme.fontWritePageMid};
-    margin-left: 0.5rem;
+    margin-left: 1rem;
 
     .nick {
       font-size: 1.4rem;

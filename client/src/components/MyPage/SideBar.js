@@ -7,8 +7,6 @@ const Layout = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  min-height: 10%;
-  //
   position: absolute;
   /* overflow: hidden; */
   #menu-icon {
@@ -19,7 +17,6 @@ const Layout = styled.div`
     display: ${(props) => (props.isSidebar ? "none" : "flex")};
     justify-content: flex-end;
     margin: 1rem 1rem 0 0;
-    z-index: 1;
 
     .hamburger-icon {
       font-size: 1.8rem;
@@ -35,7 +32,7 @@ const SideBarWrapper = styled.div`
   min-height: 100vh;
   left: ${(props) => (props.isSidebar ? "50%" : "100%")};
   transition: all 0.5s ease;
-  z-index: 2;
+  z-index: 1;
   background-color: rgba(114, 153, 191, 0.5);
   .sidebar {
     display: flex;
@@ -43,8 +40,8 @@ const SideBarWrapper = styled.div`
   }
   .xmark {
     align-self: end;
-    font-size: 1.9rem;
-    margin: 0.5rem 0.7rem 0 0;
+    font-size: 2rem;
+    margin: 1rem 0.9rem 0 0;
     padding: 0 0.3rem;
     border-radius: ${(props) => props.theme.borderRadius};
     transition: background-color 0.2s ease;
@@ -66,7 +63,6 @@ const BlackScreen = styled.div`
   min-height: ${(props) => (props.isSidebar ? "100vh" : "auto")};
   background-color: ${(props) => (props.isSidebar ? "rgba(0, 0, 0, 0.35)" : "rgba(0, 0, 0, 0.0)")};
   transition: all 0.8s ease;
-  z-index: 0;
   visibility: ${(props) => (props.isSidebar ? "visible" : "hidden")};
 `;
 
