@@ -1,6 +1,7 @@
 import create from "zustand";
 import persist from "../utils/persist";
 import { devtools } from "zustand/middleware";
+import moment from "moment";
 import axios from "axios";
 axios.defaults.withCredentials = true;
 
@@ -14,6 +15,7 @@ const useAjaxStore = create(
     (set) => ({
       listByPlantId: [],
       listByUserId: [],
+      publicJournal: [],
       async setListByPlantId(plantId) {
         try {
           const resData = await axios.get(process.env.REACT_APP_API_URL + "/journals/my", { params: { plant: plantId } });
@@ -40,7 +42,37 @@ const useAjaxStore = create(
           console.log("deleteListByJournalId:::", resData);
         } catch (err) {
           console.log("axios err / deleteListByJournalId :::", err);
-          set((state) => ({ listByUserId: [] }));
+        }
+      },
+      async getAllPublicJournal() {
+        try {
+          let resjournal = await axios.get(process.env.REACT_APP_API_URL + `/journals`);
+          // let resUser = await axios.get(process.env.REACT_APP_API_URL + `/users/userinfo`);
+          resjournal = resjournal.data.data;
+          const extractedData = [];
+          console.log(resjournal);
+          for (let i = 0; i < resjournal.length; i++) {
+            let publicJournal = {
+              journalId: resjournal[i].id,
+              nickname: "임시 닉네임",
+              profileImg: null,
+              plantName: resjournal[i].Plant.name,
+              updatedAt: resjournal[i].updatedAt,
+              textContent: resjournal[i].body,
+              journalImg: null,
+            };
+
+            publicJournal.date_pick = moment(resjournal[i].updatedAt).format("MM/DD");
+            if (resjournal[i].Journal_Images.length !== 0) {
+              publicJournal.journalImg = resjournal[i].Journal_Images[0].Image.store_path;
+            }
+            extractedData.push(publicJournal);
+          }
+
+          set((state) => ({ publicJournal: extractedData }));
+        } catch (err) {
+          console.log("axios err / getAllPublicJournal :::", err);
+          set((state) => ({ publicJournal: [] }));
         }
       },
     }),
