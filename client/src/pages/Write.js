@@ -79,7 +79,7 @@ const Write = () => {
     // 토글
     let toggle = JSON.parse(e.target.toggle.value);
     toggle = convertToggleData(toggle);
-    // 토글
+    // payload
     const payload = {
       images: [],
       actions: toggle,

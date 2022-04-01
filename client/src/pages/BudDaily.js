@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { budDummy } from "../utils/dummy";
 import Logo from "../components/common/Logo";
 import TabBtnOne from "../components/common/TabBtnOne";
 import Bud from "../components/diary/Bud";
@@ -75,14 +74,21 @@ const Daily = () => {
     }
   }
 
-  async function registerBud(budName) {
+  async function registerBud(budName, upload_img) {
     //post /plants name
-    //식물 이름 유효성 검사
-    //
+    console.log(upload_img);
+
     try {
       const payload = {
         name: budName,
       };
+
+      if (upload_img.files.length !== 0) {
+        let formdata = new FormData();
+        formdata.append("image", upload_img.files[0]);
+        console.log("애칭 식물 이미지 업로드 ajax call 작성란");
+      }
+
       const resData = await axios.post(process.env.REACT_APP_API_URL + "/plants", payload);
       getPlantsList();
     } catch (err) {
