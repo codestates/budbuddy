@@ -8,23 +8,50 @@ module.exports = {
     } catch (err) {
       return err; // break
     }
-
     const user_id = verify.idx;
+    const plant_id = req.query.plant;
     try {
-      const journalList = await Journals.findAll({
-        where: {
-          user_id,
-        },
-        include: [
-          {
-            model: Journal_Images,
-            include: Images,
+      let journalList;
+      if (!plant_id) {
+        journalList = await Journals.findAll({
+          where: {
+            user_id,
           },
-          {
-            model: Plants,
+          include: [
+            {
+              model: Journal_Images,
+              include: Images,
+            },
+            {
+              model: Plants,
+            },
+            {
+              model: Journal_Actions,
+              include: Actions,
+            },
+          ],
+        });
+      } else {
+        journalList = await Journals.findAll({
+          where: {
+            user_id,
+            plant_id,
           },
-        ],
-      });
+          include: [
+            {
+              model: Journal_Images,
+              include: Images,
+            },
+            {
+              model: Plants,
+            },
+            {
+              model: Journal_Actions,
+              include: Actions,
+            },
+          ],
+        });
+      }
       if (journalList.length === 0) return res.status(404).send({ message: "Not Found" });
       return res.status(200).send({ message: "ok", data: journalList });
     } catch (err) {
@@ -45,6 +72,10 @@ module.exports = {
           },
           {
             model: Plants,
+          },
+          {
+            model: Journal_Actions,
+            include: Actions,
           },
         ],
       });
@@ -69,6 +100,10 @@ module.exports = {
           },
           {
             model: Plants,
+          },
+          {
+            model: Journal_Actions,
+            include: Actions,
           },
         ],
       });

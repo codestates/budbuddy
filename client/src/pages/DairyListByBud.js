@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useLocation } from "react-router-dom";
 import TabBtnOne from "../components/common/TabBtnOne";
 import Logo from "../components/common/Logo";
-import DiaryList from "../components/write/list/DiaryList";
+import DiaryList from "../components/list/DiaryList";
 import { useNavigate } from "react-router-dom";
-import { dummyList } from "../utils/dummy";
+import useAjaxStore from "../store/AjaxStore";
 const qs = require("query-string");
 
 const Layout = styled.div`
@@ -15,10 +15,16 @@ const Layout = styled.div`
   }
 `;
 
-const DairyList = () => {
+const DairyListByBud = () => {
   const navigate = useNavigate();
+  const { listByPlantId, setListByPlantId } = useAjaxStore();
   let { name, plant_id } = qs.parse(useLocation().search);
   name = decodeURI(name);
+
+  useEffect(() => {
+    setListByPlantId(plant_id);
+  }, [plant_id, setListByPlantId]);
+
   return (
     <Layout>
       <div>{`${name}: ${plant_id}`}</div>
@@ -31,8 +37,8 @@ const DairyList = () => {
           navigate(-1);
         }}
       />
-      <DiaryList diaryList={dummyList} />
+      <DiaryList diaryList={listByPlantId} type="plant" />
     </Layout>
   );
 };
-export default DairyList;
+export default DairyListByBud;

@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import { useNavigateSearch } from "../../../modules/hooks";
+import moment from "moment";
+import { useNavigateSearch } from "../../modules/hooks";
+import useAjaxStore from "../../store/AjaxStore";
 
 const Layout = styled.div`
   display: flex;
@@ -51,37 +53,69 @@ const Layout = styled.div`
     background-color: ${(props) => props.theme.hoverColor};
     color: #fff;
   }
+  .budname {
+    font-size: ${(props) => props.theme.fontWritePageXSmall};
+    color: SlateGray;
+  }
 `;
 
-const DiaryList = ({ diaryList }) => {
+const DiaryList = ({ diaryList = [], isBudName = false, type = "" }) => {
   const navigateSearch = useNavigateSearch();
-  const goToDailyRead = (info) => navigateSearch("/daily/read", { info });
-  //
-  const callModify = () => {};
-  const callDelete = () => {
-    console.log("글 삭제 요청 작성란");
+  const goToListByMode = (mode, info) => navigateSearch(`/daily/${mode}`, { info });
+  const { setListByUserId, setListByPlantId, deleteListByJournalId } = useAjaxStore();
+
+  const callRead = (journal) => {
+    goToListByMode("read", encodeURI(JSON.stringify(journal)));
   };
+
+  const callModify = (journal) => {
+    goToListByMode("modify", encodeURI(JSON.stringify(journal)));
+  };
+
+  const callDelete = async (journal_id, plant_id) => {
+    await deleteListByJournalId(journal_id);
+    if (type === "user") {
+      setListByUserId();
+    } else if (type === "plant") {
+      setListByPlantId(plant_id);
+    }
+  };
+
+  function convertDate(date) {
+    return moment(date).format("YY-MM-DD");
+  }
 
   return (
     <Layout>
-      {diaryList.map((v, i) => {
+      {diaryList.map((journal, i) => {
         return (
-          <div key={i} className="wrap">
+          <div key={journal.id} className="wrap">
             <div className="date-wrap">
-              <div>{v.date}</div>
+              <div>{convertDate(journal.date)}</div>
             </div>
             <div
               className="title"
               onClick={() => {
-                goToDailyRead(encodeURI(JSON.stringify(v)));
+                callRead(journal);
               }}>
-              <div>{v.title}</div>
+              <div>
+                {`${journal.title}`}
+                <span className="budname">{isBudName ? ` (${journal.Plant.name})` : ""}</span>
+              </div>
             </div>
             <div className="btn-wrap">
-              <button className="modify" onClick={callModify}>
+              <button
+                className="modify"
+                onClick={() => {
+                  callModify(journal);
+                }}>
                 수정
               </button>
-              <button className="delete" onClick={callDelete}>
+              <button
+                className="delete"
+                onClick={() => {
+                  callDelete(journal.id, journal.PlantId);
+                }}>
                 삭제
               </button>
             </div>

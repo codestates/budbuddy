@@ -12,7 +12,19 @@ export const proverbs = [
   "흐르는 물은\n 앞을 다투지 아니한다.",
 ];
 
-export const slideImgs = [`signupBg/IMG_0.JPG`, `signupBg/IMG_1.JPG`, `signupBg/IMG_2.JPG`, `signupBg/IMG_3.JPG`, `signupBg/IMG_4.JPG`, `signupBg/IMG_5.JPG`, `signupBg/IMG_6.JPG`];
+export const slideImgs = [
+  `signupBg/IMG_0.JPG`,
+  `signupBg/IMG_1.PNG`,
+  `signupBg/IMG_2.JPG`,
+  `signupBg/IMG_3.PNG`,
+  `signupBg/IMG_4.JPG`,
+  `signupBg/IMG_5.PNG`,
+  `signupBg/IMG_6.PNG`,
+  `signupBg/IMG_7.PNG`,
+  `signupBg/IMG_8.PNG`,
+  `signupBg/IMG_9.PNG`,
+  `signupBg/IMG_10.PNG`,
+];
 
 export const doing = [
   // 더미데이터
@@ -133,4 +145,35 @@ export const dummyList = [
   { date: "3/11", title: "코딩은 독학게", size: "44cm", body: "독독독 풀풀풀 풀독풀독" },
   { date: "3/10", title: "당떨어짐", size: "14cm", body: "새싹은 맛잇다 왜냐면 ㅅ새싹은 맛잇게 때문이다." },
   { date: "3/2", title: "친구랑 놀까", size: "9cm", body: "새싹은 맛잇다 왜냐면 ㅅ새싹은 맛잇게 때문이다." },
+];
+
+//src={v.src || "Dummy/diary_4.PNG"}
+export const storyDummyList = [
+  {
+    profileImg: "Dummy/story/profile/profile_01.PNG",
+    username: "화순",
+    plantName: "새싹1호 바오밥",
+    createdAt: "3/15",
+    journalsId: 1,
+    journalImg: "Dummy/story/plant/plant_01.PNG",
+    summary: "오늘해준건 응원 어제보다 나아졌다면 그렇다면 좋은 하루를 보낸것이야",
+  },
+  {
+    profileImg: "Dummy/story/profile/profile_02.PNG",
+    username: "화신",
+    plantName: "성체2호 나무",
+    createdAt: "3/17",
+    journalsId: 2,
+    journalImg: "Dummy/story/plant/plant_02.PNG",
+    summary: "오늘해준건 점심 점심은 콩나물 비밥밤과 너비아니 시장은 반찬이다",
+  },
+  {
+    profileImg: "Dummy/story/profile/profile_03.PNG",
+    username: "지민러버",
+    plantName: "3호 스투키키",
+    createdAt: "3/18",
+    journalsId: 3,
+    journalImg: "Dummy/story/plant/plant_03.PNG",
+    summary: "내일해줄건 설탕 좀 더 달콤한 인생",
+  },
 ];

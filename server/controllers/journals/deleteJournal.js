@@ -15,7 +15,6 @@ module.exports = async (req, res) => {
 
   try {
     const journal = await Journals.findByPk(journal_id);
-
     if (!journal) return res.status(404).send({ message: "Not Found" });
     if (journal.user_id !== user_id) return res.status(403).send({ message: "Forbidden" });
 

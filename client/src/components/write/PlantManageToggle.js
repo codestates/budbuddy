@@ -1,4 +1,4 @@
-import React, { forwardRef, useRef, useState } from "react";
+import React, { forwardRef, useRef, useState, useEffect } from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDroplet, faEyeDropperEmpty, faSpa } from "@fortawesome/free-solid-svg-icons";
@@ -53,15 +53,27 @@ const Layout = styled.div`
 
 const AwesomeIcon = forwardRef(({ className, icon, onClick }, ref) => <FontAwesomeIcon icon={icon} className={className} onClick={onClick} forwardedRef={ref} />);
 
-function PlantManageToggle({ className }) {
+function PlantManageToggle({ className, actions = "", mode }) {
   const dropRef = useRef(null);
   const nutritionRef = useRef(null);
   const repottingRef = useRef(null);
+
+  const [isReadOnly, setReadOnly] = useState(false);
   const [toggle, setToggle] = useState({
     isDrop: true,
     isNutirition: true,
     isRepotting: true,
   });
+
+  useEffect(() => {
+    setToggle(actions);
+    toggleHandler("water");
+    toggleHandler("nutrition");
+    toggleHandler("repotting");
+    if (mode === "read") {
+      setReadOnly(true);
+    }
+  }, []);
 
   function toggleHandler(fnName) {
     const task = {
@@ -96,7 +108,7 @@ function PlantManageToggle({ className }) {
       console.log("정의되지 않은 토글 함수");
       return null;
     }
-
+    if (isReadOnly) return;
     return task[fnName]();
   }
 

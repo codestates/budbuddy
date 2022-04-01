@@ -113,10 +113,18 @@ const Layout = styled.div`
   }
 `;
 
-function TextContent({ className = "", title = "", content = "" }) {
+function TextContent({ className = "", title = "", content = "", src = null, mode }) {
   //
   const [img, setImg] = useState(null);
-  useEffect(() => {}, []);
+  const [isReadOnly, setReadOnly] = useState(false);
+  useEffect(() => {
+    setImg(src);
+    if (mode === "read") {
+      setReadOnly(true);
+    } else {
+      setReadOnly(false);
+    }
+  }, []);
 
   function onFileChange(e) {
     const {
@@ -125,7 +133,6 @@ function TextContent({ className = "", title = "", content = "" }) {
 
     const theFile = files[0];
     const reader = new FileReader();
-
     reader.onloadend = (finishedEvent) => {
       const {
         currentTarget: { result },
@@ -153,10 +160,9 @@ function TextContent({ className = "", title = "", content = "" }) {
 
   return (
     <Layout className={className}>
-      <button className="semantic" name="photo" value={img} type="button" />
       <div className="shell">
         <div className="title-wrap">
-          <input type="text" className="title" placeholder="제목 입력" onBlur={titleAlign} required name="title" defaultValue={title} />
+          <input type="text" className="title" placeholder="제목 입력" onBlur={titleAlign} required name="title" defaultValue={title} readOnly={isReadOnly} />
         </div>
         <div className="photo-wrap">
           {!img ? (
@@ -167,19 +173,21 @@ function TextContent({ className = "", title = "", content = "" }) {
             <img className="photo" src={img} alt="" />
           )}
         </div>
-        <div className="btn">
-          <label className="file" htmlFor="input-file">
-            사진 업로드
-          </label>
-          <input id="input-file" type="file" accept="image/*" onChange={onFileChange} style={{ display: "none" }} />
-          {img ? (
-            <button className="cancle" onClick={onFileClear}>
-              등록취소
-            </button>
-          ) : null}
-        </div>
+        {isReadOnly ? null : (
+          <div className="btn">
+            <label className="file" htmlFor="input-file">
+              사진 업로드
+            </label>
+            <input id="input-file" type="file" accept="image/*" onChange={onFileChange} style={{ display: "none" }} name="upload_img" />
+            {img ? (
+              <button className="cancle" onClick={onFileClear} type="button">
+                등록취소
+              </button>
+            ) : null}
+          </div>
+        )}
         <div className="content-wrap">
-          <textarea className="content" placeholder="내용 입력" onKeyUp={textAreaResize} name="content" defaultValue={content}></textarea>
+          <textarea className="content" placeholder="내용 입력" onKeyUp={textAreaResize} name="content" defaultValue={content} readOnly={isReadOnly} />
         </div>
       </div>
     </Layout>

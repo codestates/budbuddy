@@ -54,7 +54,6 @@ const TabOption = ({ className = "", tabName, setPickValue }) => {
   const OptionValue = (e) => {
     setPickValue(e.target.value);
   };
-  console.log("FillterBud", FillterBud);
   return (
     <Layout className={`${className}`}>
       <div className="shell">

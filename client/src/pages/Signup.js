@@ -270,7 +270,7 @@ const Signup = () => {
       {makeModal(modalCode)}
       <SignupBG>
         <div className="std">
-          <img className="signupBg" src={`signupBg/IMG_${imgNumber || 4311}.JPG`} alt={`bg`} />
+          <img className="signupBg" src={`signupBg/IMG_8.png`} alt={`bg`} />
           <div className="backText">
             <p>
               Take care of <span className="green">your plants</span>
