@@ -55,7 +55,6 @@ const Album = () => {
 
   const [plants, setPlants] = useState([]);
   const [pickValue, setPickValue] = useState("");
-  console.log("pickValue", pickValue);
 
   async function getPlantsList() {
     try {
