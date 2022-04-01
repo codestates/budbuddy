@@ -58,13 +58,13 @@ const Write = () => {
 
   function convertToggleData(toggle) {
     const tgArr = [];
-    if (toggle.isDrop) {
+    if (!toggle.isWater) {
       tgArr.push("water");
     }
-    if (toggle.isNutirition) {
+    if (!toggle.isFertilize) {
       tgArr.push("fertilize");
     }
-    if (toggle.isRepotting) {
+    if (!toggle.isRepot) {
       tgArr.push("repot");
     }
 
@@ -74,32 +74,44 @@ const Write = () => {
   async function submit(e) {
     e.preventDefault();
     const { date, size, title, upload_img, content, checkbox } = e.target;
-
+    // 날짜
     const convertDate = date.value.replaceAll("/", "-");
-    console.log(convertDate);
+    // 토글
     let toggle = JSON.parse(e.target.toggle.value);
     toggle = convertToggleData(toggle);
+    // 토글
+    const payload = {
+      images: [],
+      actions: toggle,
+      plant_height: size.value,
+      plant_id,
+      title: title.value,
+      body: content.value,
+      date_pick: convertDate,
+      public: checkbox.checked,
+    };
 
-    let formdata = new FormData();
-    formdata.append("image", upload_img.files[0]);
-    try {
-      const imgRes = await axios.post(process.env.REACT_APP_API_URL + "/images", formdata);
-      const payload = {
-        images: [imgRes.data.data.id],
-        actions: toggle,
-        plant_height: size.value,
-        plant_id,
-        title: title.value,
-        body: content.value,
-        date_pick: convertDate,
-        public: checkbox.checked,
-      };
-      console.log(payload);
-      const resData = await axios.post(process.env.REACT_APP_API_URL + "/journals", payload);
-      console.log(resData.data.data);
-      navigate("/daily");
-    } catch (err) {
-      console.log(err);
+    if (upload_img.files.length === 0) {
+      try {
+        const resData = await axios.post(process.env.REACT_APP_API_URL + "/journals", payload);
+        console.log(resData.data.data);
+        navigate("/daily");
+      } catch (err) {
+        console.log(err);
+      }
+    } else {
+      //이미지
+      let formdata = new FormData();
+      formdata.append("image", upload_img.files[0]);
+      try {
+        const imgRes = await axios.post(process.env.REACT_APP_API_URL + "/images", formdata);
+        payload["images"] = [imgRes.data.data.id];
+        //이미지를 추가하고 이미지를 서버에 업로드하고 업로드 성공하면 글을 포스팅
+        await axios.post(process.env.REACT_APP_API_URL + "/journals", payload);
+        navigate("/daily");
+      } catch (err) {
+        console.log(err);
+      }
     }
   }
 
