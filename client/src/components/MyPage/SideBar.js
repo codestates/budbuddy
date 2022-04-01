@@ -17,7 +17,7 @@ const SideBarContainer = styled.div`
   /* align-self: flex-end; */
   overflow: hidden;
   position: fixed;
-  z-index: ${({ SideBarState }) => (SideBarState ? 10 : 0)};
+  z-index: ${({ isSideBarState }) => (isSideBarState ? 10 : 0)};
   @media screen and (min-width: 391px) {
     width: ${(props) => props.theme.webWidth};
   }
@@ -31,8 +31,8 @@ const SideBarMain = styled.div`
   top: 0;
   right: -100%;
   transition: 500ms;
-  z-index: ${({ SideBarState }) => (SideBarState ? 10 : 0)};
-  right: ${({ SideBarState }) => (SideBarState ? "0%" : "-100%")};
+  z-index: ${({ isSideBarState }) => (isSideBarState ? 10 : 0)};
+  right: ${({ isSideBarState }) => (isSideBarState ? "0%" : "-100%")};
 
   .id {
     height: 13vh;
@@ -75,7 +75,7 @@ const SideBarMain = styled.div`
 `;
 
 function SideBar() {
-  const { SideBarState, DownSideBarStore } = SideBarStore();
+  const { isSideBarState, DownSideBarStore } = SideBarStore();
   const { nickname } = useLoginStore();
   const Close = () => {
     DownSideBarStore();
@@ -83,8 +83,8 @@ function SideBar() {
   const [modalCode, setModalCode] = useState("");
 
   return (
-    <SideBarContainer SideBarState={SideBarState}>
-      <SideBarMain SideBarState={SideBarState}>
+    <SideBarContainer isSideBarState={isSideBarState}>
+      <SideBarMain isSideBarState={isSideBarState}>
         {makeModal(modalCode)}
         <div className="id">
           <img className="image" src={budDummy[0].src} alt="" />

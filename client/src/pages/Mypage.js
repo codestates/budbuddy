@@ -19,7 +19,7 @@ const Layout = styled.div`
 `;
 const MypageContainer = styled.div`
   display: grid;
-  z-index: ${({ SideBarState }) => (SideBarState ? 0 : 9)};
+  z-index: ${({ isSideBarState }) => (isSideBarState ? 0 : 9)};
 `;
 
 const IdPost = styled.div`
@@ -45,13 +45,12 @@ const ProfileImg = styled.img`
   height: 18vh;
   border: solid 2px rgb(0, 0, 0, 0.65);
   margin: auto;
-  z-index: 0;
   border-radius: ${(props) => props.theme.borderRadius};
 `;
 
 const Mypage = () => {
   const { isLogin, nickname } = useLoginStore();
-  const { SideBarState } = SideBarStore();
+  const { isSideBarState } = SideBarStore();
   const { listByUserId, setListByUserId } = useAjaxStore();
 
   useEffect(() => {
@@ -64,7 +63,7 @@ const Mypage = () => {
       <Logo className="logo" />
       <MenuBar />
       {isLogin ? (
-        <MypageContainer SideBarState={SideBarState}>
+        <MypageContainer isSideBarState={isSideBarState}>
           <IdPost>
             <div className="id">ID {nickname}</div>
             <div className="post">POST {dummyList.length} 개</div>

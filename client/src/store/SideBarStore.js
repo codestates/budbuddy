@@ -1,9 +1,9 @@
 import create from "zustand";
 
 const SideBarStore = create((set) => ({
-  SideBarState: false,
-  popUpSideBarStore: () => set((state) => ({ SideBarState: true })),
-  DownSideBarStore: () => set((state) => ({ SideBarState: false })),
+  isSideBarState: false,
+  popUpSideBarStore: () => set((state) => ({ isSideBarState: true })),
+  DownSideBarStore: () => set((state) => ({ isSideBarState: false })),
 }));
 
 export default SideBarStore;
