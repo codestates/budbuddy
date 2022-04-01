@@ -25,6 +25,10 @@ module.exports = {
             {
               model: Plants,
             },
+            {
+              model: Journal_Actions,
+              include: Actions,
+            },
           ],
         });
       } else {
@@ -40,6 +44,10 @@ module.exports = {
             },
             {
               model: Plants,
+            },
+            {
+              model: Journal_Actions,
+              include: Actions,
             },
           ],
         });
@@ -65,6 +73,10 @@ module.exports = {
           {
             model: Plants,
           },
+          {
+            model: Journal_Actions,
+            include: Actions,
+          },
         ],
       });
       if (journalList.length === 0) return res.status(404).send({ message: "Not Found" });
@@ -88,6 +100,10 @@ module.exports = {
           },
           {
             model: Plants,
+          },
+          {
+            model: Journal_Actions,
+            include: Actions,
           },
         ],
       });
