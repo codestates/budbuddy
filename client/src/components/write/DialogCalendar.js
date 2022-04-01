@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 import CustomCalendar from "./CustomCalendar";
 import { curDate } from "../../modules/date";
+
 const Layout = styled.div`
   display: flex;
   flex-direction: column;
@@ -76,10 +77,12 @@ const DialogCalendar = ({ top = 100, left = 0, setDpRef, dateDisplayRef }) => {
 
   function selected() {
     dateDisplayRef.current.readOnly = false;
+    //
     if (selectedDate === "") dateDisplayRef.current.value = curDate();
     else dateDisplayRef.current.value = selectedDate;
-    console.log(dateDisplayRef.current.value);
+    //
     dateDisplayRef.current.readOnly = true;
+
     close();
   }
 

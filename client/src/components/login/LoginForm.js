@@ -59,7 +59,7 @@ const theme = createTheme({
 });
 
 const LoginForm = () => {
-  const { setLogin } = useLoginStore();
+  const { setLogin, setNickname, setUserNumber, setImage } = useLoginStore();
   let navigate = useNavigate();
   const [modalCode, setModalCode] = useState(0);
 
@@ -80,6 +80,11 @@ const LoginForm = () => {
       const resData = await axios.post(process.env.REACT_APP_API_URL + "/users/login", payload);
       const msg = resData.data.message.split(" ");
       if (msg[1] === "AccessToken") {
+        const resData = await axios.get(process.env.REACT_APP_API_URL + "/users/userinfo");
+        const { nickname, profile_image_id, id } = resData.data.data;
+        setNickname(nickname);
+        setUserNumber(id);
+        setImage(profile_image_id);
         setLogin(true);
         navigate("/mypage");
         return;
@@ -165,6 +170,11 @@ const LoginForm = () => {
                 } catch (err) {
                   if (err.response.data.message === "usedEmail") {
                     let logindData = await axios.post(process.env.REACT_APP_API_URL + "/users/login", payload);
+                    const resData = await axios.get(process.env.REACT_APP_API_URL + "/users/userinfo");
+                    const { nickname, profile_image_id, id } = resData.data.data;
+                    setNickname(nickname);
+                    setUserNumber(id);
+                    setImage(profile_image_id);
                   }
                 }
                 setModalCode("testLogin");

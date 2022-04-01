@@ -9,15 +9,17 @@ import { dummyList } from "../utils/dummy";
 import DiaryList from "../components/list/DiaryList";
 import useLoginStore from "../store/LoginStore";
 import useAjaxStore from "../store/AjaxStore";
+
 const Layout = styled.div`
   display: grid;
-  /* height: inherit; */
+  height: inherit;
   .logo {
     margin-top: 1rem;
   }
 `;
 const MypageContainer = styled.div`
   display: grid;
+  z-index: ${({ SideBarState }) => (SideBarState ? 0 : 9)};
 `;
 
 const IdPost = styled.div`
@@ -39,33 +41,40 @@ const IdPost = styled.div`
 
 const ProfileImg = styled.img`
   object-fit: cover;
-  width: 80%;
-  height: 18vh;
-  mix-blend-mode: darken;
-  border: solid 2px rgb(0, 0, 0, 0.65);
+  width: 100%;
+  height: 20vh;
+  border: solid 1px rgb(0, 0, 0, 0.4);
   margin: auto;
-  border-radius: ${(props) => props.theme.borderRadius};
+  z-index: 0;
+  /* border-radius: ${(props) => props.theme.borderRadius}; */
 `;
 
 const Mypage = () => {
   const { isLogin, nickname } = useLoginStore();
   const { SideBarState } = SideBarStore();
-  const { listByUserId, setListByUserId } = useAjaxStore();
+  const { userInfo, getUserInfo, listByUserId, setListByUserId } = useAjaxStore();
 
   useEffect(() => {
-    setListByUserId();
-  }, [setListByUserId]);
+    getMapageInfo();
+  }, []);
+
+  async function getMapageInfo() {
+    await setListByUserId();
+    await getUserInfo();
+  }
+
+  // console.log(userInfo);
 
   return (
     <Layout>
-      {SideBarState ? <SideBar /> : null}
+      <SideBar />
       <Logo className="logo" />
       <MenuBar />
       {isLogin ? (
-        <MypageContainer>
+        <MypageContainer SideBarState={SideBarState}>
           <IdPost>
-            <div className="id">ID {nickname}</div>
-            <div className="post">POST {dummyList.length} 개</div>
+            <div className="id">ID {userInfo.nickname}</div>
+            <div className="post">POST {listByUserId.length} 개</div>
           </IdPost>
           <ProfileImg src={budDummy[0].src} alt={`bg`} />
           <DiaryList diaryList={listByUserId} isBudName={true} type="user" />
