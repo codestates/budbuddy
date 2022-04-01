@@ -18,6 +18,7 @@ const theme = {
   profileBorderColor: "ForestGreen",
   profileBorderHoverColor: "DodgerBlue",
   cardSelectColor: "rgba(30, 144, 255,0.5)",
+  DarkSlateGrey: "DarkSlateGrey",
   //font
   fontSizeBg: "1.3rem",
   fontIconSize: "15px",
