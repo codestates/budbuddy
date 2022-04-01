@@ -10,7 +10,7 @@ const Layout = styled.div`
   position: absolute;
   text-align: center;
   top: 50%;
-  left: 50%;
+  left: -10%;
 
   transform: translate(-50%, -50%);
 
@@ -196,7 +196,7 @@ const AccountDelete = ({ open = true, closeFn, setModalCode }) => {
   }
 
   return (
-    <Layout name="plant">
+    <Layout>
       <div ref={backRef} className="background">
         <div ref={popRef} className={`popup`}>
           <FormLayout onSubmit={resisterBud}>

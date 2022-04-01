@@ -19,7 +19,7 @@ const Layout = styled.div`
 `;
 
 function Login() {
-  const { setLogin } = useLoginStore();
+  const { setLogin, setNickname, setUserNumber, setImage } = useLoginStore();
   async function kakaoLogin() {
     try {
       const requestURL = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_KAKAO_REST_API_KEY}&redirect_uri=${process.env.REACT_APP_KAKAO_REDIRECT_URI}&response_type=code`;
@@ -28,7 +28,10 @@ function Login() {
       const resData = await axios.get(process.env.REACT_APP_API_URL + "/users/userinfo");
       console.log(resData.data.message);
       if (resData.data.message === "ok") {
-        console.log("카카오");
+        const { nickname, profile_image_id, id } = resData.data.data;
+        setNickname(nickname);
+        setUserNumber(id);
+        setImage(profile_image_id);
         setLogin(true);
       }
     } catch (e) {
