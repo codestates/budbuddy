@@ -17,7 +17,7 @@ const SideBarContainer = styled.div`
   /* align-self: flex-end; */
   overflow: hidden;
   position: fixed;
-  z-index: ${({ SideBarState }) => (SideBarState ? 5 : 0)};
+  z-index: ${({ SideBarState }) => (SideBarState ? 10 : 0)};
   @media screen and (min-width: 391px) {
     width: ${(props) => props.theme.webWidth};
   }
@@ -31,7 +31,7 @@ const SideBarMain = styled.div`
   top: 0;
   right: -100%;
   transition: 500ms;
-  z-index: ${({ SideBarState }) => (SideBarState ? 5 : 0)};
+  z-index: ${({ SideBarState }) => (SideBarState ? 10 : 0)};
   right: ${({ SideBarState }) => (SideBarState ? "0%" : "-100%")};
 
   .id {
@@ -70,7 +70,6 @@ const SideBarMain = styled.div`
     }
   }
   .space {
-    z-index: ${({ SideBarState }) => (SideBarState ? 5 : 0)};
     height: 5vh;
   }
 `;
