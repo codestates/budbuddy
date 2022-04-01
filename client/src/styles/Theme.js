@@ -11,7 +11,7 @@ const theme = {
   navigationBGColor: "SteelBlue",
   backgroundTextColor: "MintCream",
   colorGainsboro: "Gainsboro",
-  hoverColor: "rgba(0, 128, 128,0.5)",
+  hoverColor: "rgba(0, 128, 128,0.75)",
   hoverCancleColor: "IndianRed",
   btnBgColor: "rgba(248, 248, 255,0.45)",
   storyCardBgColor: "rgba(255, 250, 250, 0.55)",
