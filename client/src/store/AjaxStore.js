@@ -9,13 +9,14 @@ const useAjaxStore = create(
   persist(
     {
       key: "ajax",
-      allowlist: ["listByPlantId"],
+      allowlist: ["listByPlantId", "listByUserId", "publicJournal", "userInfo"],
       denylist: [],
     },
     (set) => ({
       listByPlantId: [],
       listByUserId: [],
       publicJournal: [],
+      userInfo: {},
       async setListByPlantId(plantId) {
         try {
           const resData = await axios.get(process.env.REACT_APP_API_URL + "/journals/my", { params: { plant: plantId } });
@@ -44,17 +45,26 @@ const useAjaxStore = create(
           console.log("axios err / deleteListByJournalId :::", err);
         }
       },
+      async getUserInfo() {
+        try {
+          const resUser = await axios.get(process.env.REACT_APP_API_URL + `/users/userinfo`);
+          // console.log("getUserInfo:::", resUser);
+          set((state) => ({ userInfo: resUser.data.data }));
+        } catch (err) {
+          console.log("axios err / getUserInfo :::", err);
+        }
+      },
       async getAllPublicJournal() {
         try {
           let resjournal = await axios.get(process.env.REACT_APP_API_URL + `/journals`);
-          // let resUser = await axios.get(process.env.REACT_APP_API_URL + `/users/userinfo`);
+
           resjournal = resjournal.data.data;
           const extractedData = [];
           console.log(resjournal);
           for (let i = 0; i < resjournal.length; i++) {
             let publicJournal = {
               journalId: resjournal[i].id,
-              nickname: "임시 닉네임",
+              nickname: resjournal[i].User.nickname,
               profileImg: null,
               plantName: resjournal[i].Plant.name,
               updatedAt: resjournal[i].updatedAt,

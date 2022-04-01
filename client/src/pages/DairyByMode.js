@@ -37,8 +37,6 @@ const DairyByMode = () => {
   const parsed = qs.parse(useLocation().search);
   const info = JSON.parse(decodeURI(parsed.info));
 
-  useEffect(() => {}, []);
-
   function convertToggleData(toggleArr) {
     let toggle = { isWater: false, isFertilize: false, isRepot: false };
     for (let i = 0; i < toggleArr.length; i++) {

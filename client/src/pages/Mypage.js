@@ -52,11 +52,18 @@ const ProfileImg = styled.img`
 const Mypage = () => {
   const { isLogin, nickname } = useLoginStore();
   const { SideBarState } = SideBarStore();
-  const { listByUserId, setListByUserId } = useAjaxStore();
+  const { userInfo, getUserInfo, listByUserId, setListByUserId } = useAjaxStore();
 
   useEffect(() => {
-    setListByUserId();
-  }, [setListByUserId]);
+    getMapageInfo();
+  }, []);
+
+  async function getMapageInfo() {
+    await setListByUserId();
+    await getUserInfo();
+  }
+
+  // console.log(userInfo);
 
   return (
     <Layout>
@@ -66,8 +73,8 @@ const Mypage = () => {
       {isLogin ? (
         <MypageContainer SideBarState={SideBarState}>
           <IdPost>
-            <div className="id">ID {nickname}</div>
-            <div className="post">POST {dummyList.length} 개</div>
+            <div className="id">ID {userInfo.nickname}</div>
+            <div className="post">POST {listByUserId.length} 개</div>
           </IdPost>
           <ProfileImg src={budDummy[0].src} alt={`bg`} />
           <DiaryList diaryList={listByUserId} isBudName={true} type="user" />
