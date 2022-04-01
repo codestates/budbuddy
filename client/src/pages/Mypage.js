@@ -12,7 +12,7 @@ import useAjaxStore from "../store/AjaxStore";
 
 const Layout = styled.div`
   display: grid;
-  /* height: inherit; */
+  height: inherit;
   .logo {
     margin-top: 1rem;
   }
@@ -41,12 +41,12 @@ const IdPost = styled.div`
 
 const ProfileImg = styled.img`
   object-fit: cover;
-  width: 80%;
-  height: 18vh;
-  border: solid 2px rgb(0, 0, 0, 0.65);
+  width: 100%;
+  height: 20vh;
+  border: solid 1px rgb(0, 0, 0, 0.4);
   margin: auto;
   z-index: 0;
-  border-radius: ${(props) => props.theme.borderRadius};
+  /* border-radius: ${(props) => props.theme.borderRadius}; */
 `;
 
 const Mypage = () => {

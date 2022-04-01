@@ -36,22 +36,19 @@ const DairyByMode = () => {
   const params = useParams();
   const parsed = qs.parse(useLocation().search);
   const info = JSON.parse(decodeURI(parsed.info));
-  info.actions = convertToggleData(info.Journal_Actions);
 
   useEffect(() => {}, []);
 
-  console.log("ListByMode:::", params.mode, info);
-
   function convertToggleData(toggleArr) {
-    let toggle = { isDrop: false, isNutirition: false, isRepotting: false };
+    let toggle = { isWater: false, isFertilize: false, isRepot: false };
     for (let i = 0; i < toggleArr.length; i++) {
       const std = toggleArr[i].Action.type;
       if (std === "repot") {
-        toggle.isRepotting = true;
+        toggle.isRepot = true;
       } else if (std === "fertilize") {
-        toggle.isNutirition = true;
+        toggle.isFertilize = true;
       } else if (std === "water") {
-        toggle.isDrop = true;
+        toggle.isWater = true;
       }
     }
 
@@ -63,6 +60,12 @@ const DairyByMode = () => {
     console.log("글 수정 ajax call 작성 란");
   }
 
+  let src = null;
+  // console.log("DairyByMode:::", params.mode, info);
+  info.actions = convertToggleData(info.Journal_Actions);
+  if (info.Journal_Images.length !== 0) {
+    src = info.Journal_Images[0].Image.store_path;
+  }
   return (
     <Layout onSubmit={submit}>
       <TabBtnOne
@@ -80,7 +83,7 @@ const DairyByMode = () => {
       <div>
         <div className="size">{`현재 키: ${info.plant_height}cm`}</div>
       </div>
-      <TextContent title={info.title} content={info.body} src={info.Journal_Images[0].Image.store_path} mode={params.mode} />
+      <TextContent title={info.title} content={info.body} src={src} mode={params.mode} />
       <PublicBtn isPublic={info.public} mode={params.mode} />
     </Layout>
   );
