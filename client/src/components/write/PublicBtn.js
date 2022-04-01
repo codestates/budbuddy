@@ -41,17 +41,26 @@ const Layout = styled.div`
   }
 `;
 
-const PublicBtn = ({ className = "" }) => {
+const PublicBtn = ({ className = "", isPublic = false, mode }) => {
+  let isReadOnly = false;
+  if (mode === "read") {
+    isReadOnly = true;
+  } else {
+    isReadOnly = false;
+  }
+
   return (
     <Layout className={className}>
       <div className="btn-wrapper">
         <div className="check-wrap">
-          <input className="ch" type="checkbox" name="checkbox" />
+          <input className="ch" type="checkbox" name="checkbox" defaultChecked={isPublic} disabled={isReadOnly} />
           <span className="ch-text">공개하기</span>
         </div>
-        <button className="write" type="submit">
-          기록하기
-        </button>
+        {isReadOnly ? null : (
+          <button className="write" type="submit">
+            기록하기
+          </button>
+        )}
       </div>
     </Layout>
   );

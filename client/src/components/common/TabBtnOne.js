@@ -46,7 +46,6 @@ const TabBtnOne = ({ className = "", tabName, btnName, fn }) => {
   function clickExcute(e) {
     e.preventDefault();
     if (typeof fn === "function") {
-      console.log("탭 함수 내부");
       fn();
     }
   }
@@ -56,7 +55,7 @@ const TabBtnOne = ({ className = "", tabName, btnName, fn }) => {
       <div className="shell">
         <div className="cap-wrap">
           <button className="leftcap">{tabName}</button>
-          <button className="rightcap" onClick={clickExcute}>
+          <button className="rightcap" onClick={clickExcute} type="button">
             {btnName}
           </button>
         </div>

@@ -15,18 +15,16 @@ const Layout = styled.div`
   }
 `;
 
-const DairyList = () => {
+const DairyListByBud = () => {
   const navigate = useNavigate();
+  const { listByPlantId, setListByPlantId } = useAjaxStore();
   let { name, plant_id } = qs.parse(useLocation().search);
   name = decodeURI(name);
-
-  const { listByPlantId, setListByPlantId } = useAjaxStore();
 
   useEffect(() => {
     setListByPlantId(plant_id);
   }, [plant_id, setListByPlantId]);
 
-  console.log(listByPlantId);
   return (
     <Layout>
       <div>{`${name}: ${plant_id}`}</div>
@@ -43,4 +41,4 @@ const DairyList = () => {
     </Layout>
   );
 };
-export default DairyList;
+export default DairyListByBud;

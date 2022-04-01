@@ -56,8 +56,6 @@ const Mypage = () => {
     setListByUserId();
   }, [setListByUserId]);
 
-  console.log("렌더링 시점 파악", listByUserId);
-
   return (
     <Layout>
       {SideBarState ? <SideBar /> : null}

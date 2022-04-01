@@ -61,12 +61,15 @@ const Layout = styled.div`
 
 const DiaryList = ({ diaryList = [], isBudName = false, type = "" }) => {
   const navigateSearch = useNavigateSearch();
+  const goToListByMode = (mode, info) => navigateSearch(`/daily/${mode}`, { info });
   const { setListByUserId, setListByPlantId, deleteListByJournalId } = useAjaxStore();
-  const goToDailyRead = (info) => navigateSearch("/daily/read", { info });
-  //
 
-  const callModify = () => {
-    console.log("글 수정 요청 작성란");
+  const callRead = (journal) => {
+    goToListByMode("read", encodeURI(JSON.stringify(journal)));
+  };
+
+  const callModify = (journal) => {
+    goToListByMode("modify", encodeURI(JSON.stringify(journal)));
   };
 
   const callDelete = async (journal_id, plant_id) => {
@@ -78,7 +81,7 @@ const DiaryList = ({ diaryList = [], isBudName = false, type = "" }) => {
     }
   };
 
-  function convertData(date) {
+  function convertDate(date) {
     return moment(date).format("YY-MM-DD");
   }
 
@@ -88,12 +91,12 @@ const DiaryList = ({ diaryList = [], isBudName = false, type = "" }) => {
         return (
           <div key={journal.id} className="wrap">
             <div className="date-wrap">
-              <div>{convertData(journal.date)}</div>
+              <div>{convertDate(journal.date)}</div>
             </div>
             <div
               className="title"
               onClick={() => {
-                goToDailyRead(encodeURI(JSON.stringify(journal)));
+                callRead(journal);
               }}>
               <div>
                 {`${journal.title}`}
@@ -101,7 +104,11 @@ const DiaryList = ({ diaryList = [], isBudName = false, type = "" }) => {
               </div>
             </div>
             <div className="btn-wrap">
-              <button className="modify" onClick={callModify}>
+              <button
+                className="modify"
+                onClick={() => {
+                  callModify(journal);
+                }}>
                 수정
               </button>
               <button
