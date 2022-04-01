@@ -1,7 +1,7 @@
 import create from "zustand";
 
 const SideBarStore = create((set) => ({
-  SideBarState: 0,
+  SideBarState: false,
   popUpSideBarStore: () => set((state) => ({ SideBarState: true })),
   DownSideBarStore: () => set((state) => ({ SideBarState: false })),
 }));

@@ -11,12 +11,13 @@ import { makeModal } from "../../utils/errExeption";
 const SideBarContainer = styled.div`
   width: 100%;
   min-height: 100vh;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0);
   display: flex;
   flex-direction: column;
   /* align-self: flex-end; */
+  overflow: hidden;
   position: fixed;
-  z-index: 5;
+  z-index: ${({ SideBarState }) => (SideBarState ? 5 : 0)};
   @media screen and (min-width: 391px) {
     width: ${(props) => props.theme.webWidth};
   }
@@ -26,6 +27,13 @@ const SideBarMain = styled.div`
   min-height: 100vh;
   background-color: #b5cda2;
   align-self: flex-end;
+  position: absolute;
+  top: 0;
+  right: -100%;
+  transition: 500ms;
+  z-index: ${({ SideBarState }) => (SideBarState ? 5 : 0)};
+  right: ${({ SideBarState }) => (SideBarState ? "0%" : "-100%")};
+
   .id {
     height: 13vh;
     display: grid;
@@ -62,12 +70,13 @@ const SideBarMain = styled.div`
     }
   }
   .space {
+    z-index: ${({ SideBarState }) => (SideBarState ? 5 : 0)};
     height: 5vh;
   }
 `;
 
 function SideBar() {
-  const { DownSideBarStore } = SideBarStore();
+  const { SideBarState, DownSideBarStore } = SideBarStore();
   const { nickname } = useLoginStore();
   const Close = () => {
     DownSideBarStore();
@@ -75,8 +84,8 @@ function SideBar() {
   const [modalCode, setModalCode] = useState("");
 
   return (
-    <SideBarContainer>
-      <SideBarMain>
+    <SideBarContainer SideBarState={SideBarState}>
+      <SideBarMain SideBarState={SideBarState}>
         {makeModal(modalCode)}
         <div className="id">
           <img className="image" src={budDummy[0].src} alt="" />

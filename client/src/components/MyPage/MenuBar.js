@@ -11,7 +11,7 @@ export const Content = styled.nav`
 
   justify-content: space-evenly;
   padding: 1rem;
-
+  z-index: ${({ SideBarState }) => (SideBarState ? 0 : 10)};
   width: 100vw;
 
   /* a {
@@ -38,12 +38,12 @@ const Placed = styled.div`
 `;
 
 function MenuBar() {
-  const { popUpSideBarStore } = SideBarStore();
+  const { SideBarState, popUpSideBarStore } = SideBarStore();
   const Open = () => {
     popUpSideBarStore();
   };
   return (
-    <Content>
+    <Content SideBarState={SideBarState}>
       <Placed>
         <FontAwesomeIcon className="menuIcon" icon={faBars} cursor="pointer" onClick={Open} />
       </Placed>

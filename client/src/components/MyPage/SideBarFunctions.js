@@ -8,6 +8,9 @@ import ImageChange from "./ImageChange";
 import ImageChangeStore from "../../store/ImageChangeStore";
 import useLoginStore from "../../store/LoginStore";
 import { useNavigate } from "react-router-dom";
+import SideBarStore from "../../store/SideBarStore";
+import axios from "axios";
+
 const Content = styled.div`
   .logout {
     height: 5vh;
@@ -72,14 +75,22 @@ const Content = styled.div`
 `;
 
 function SideBarFunctions({ setModalCode }) {
-  const { setLogin } = useLoginStore();
+  const { setLogin, setNickname, setUserNumber, setImage } = useLoginStore();
+  const { DownSideBarStore } = SideBarStore();
   const navigate = useNavigate();
   const { ImageChangeState, popUpImageChangeModal } = ImageChangeStore();
   const [isDelAccount, setDelAccount] = useState(false);
   const [isChangePassword, setChangePassword] = useState(false);
-  const logOutFunction = () => {
-    setLogin(false);
-    navigate("/");
+  const logOutFunction = async () => {
+    const resData = await axios.post(process.env.REACT_APP_API_URL + "/users/logout");
+    if (resData.status === 200) {
+      setNickname("");
+      setUserNumber("");
+      setImage(null);
+      setLogin(false);
+      DownSideBarStore();
+      navigate("/");
+    }
   };
   const DelAccountFunction = () => {
     setDelAccount((current) => !current);
