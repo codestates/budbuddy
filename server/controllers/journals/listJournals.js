@@ -29,6 +29,12 @@ module.exports = {
               model: Journal_Actions,
               include: Actions,
             },
+            {
+              model: Users,
+              attributes: {
+                exclude: ["password", "salt"],
+              },
+            },
           ],
         });
       } else {
@@ -48,6 +54,12 @@ module.exports = {
             {
               model: Journal_Actions,
               include: Actions,
+            },
+            {
+              model: Users,
+              attributes: {
+                exclude: ["password", "salt"],
+              },
             },
           ],
         });
@@ -77,6 +89,12 @@ module.exports = {
             model: Journal_Actions,
             include: Actions,
           },
+          {
+            model: Users,
+            attributes: {
+              exclude: ["password", "salt"],
+            },
+          },
         ],
       });
       if (journalList.length === 0) return res.status(404).send({ message: "Not Found" });
@@ -104,6 +122,12 @@ module.exports = {
           {
             model: Journal_Actions,
             include: Actions,
+          },
+          {
+            model: Users,
+            attributes: {
+              exclude: ["password", "salt"],
+            },
           },
         ],
       });
