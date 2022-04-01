@@ -75,10 +75,11 @@ const Content = styled.div`
 `;
 
 function SideBarFunctions({ setModalCode }) {
+  const navigate = useNavigate();
   const { setLogin, setNickname, setUserNumber, setImage } = useLoginStore();
   const { DownSideBarStore } = SideBarStore();
-  const navigate = useNavigate();
   const { ImageChangeState, popUpImageChangeModal } = ImageChangeStore();
+
   const [isDelAccount, setDelAccount] = useState(false);
   const [isChangePassword, setChangePassword] = useState(false);
   const logOutFunction = async () => {
