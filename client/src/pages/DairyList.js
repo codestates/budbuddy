@@ -6,7 +6,6 @@ import Logo from "../components/common/Logo";
 import DiaryList from "../components/list/DiaryList";
 import { useNavigate } from "react-router-dom";
 import useAjaxStore from "../store/AjaxStore";
-import { dummyList } from "../utils/dummy";
 const qs = require("query-string");
 
 const Layout = styled.div`
@@ -24,9 +23,8 @@ const DairyList = () => {
   const { listByPlantId, setListByPlantId } = useAjaxStore();
 
   useEffect(() => {
-    console.log("호출은 되니 리트스");
     setListByPlantId(plant_id);
-  }, [plant_id]);
+  }, [plant_id, setListByPlantId]);
 
   console.log(listByPlantId);
   return (
@@ -41,7 +39,7 @@ const DairyList = () => {
           navigate(-1);
         }}
       />
-      <DiaryList diaryList={listByPlantId} />
+      <DiaryList diaryList={listByPlantId} type="plant" />
     </Layout>
   );
 };

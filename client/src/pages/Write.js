@@ -7,6 +7,7 @@ import TextContent from "../components/write/TextContent";
 import DatePicker from "../components/write/DatePicker";
 import PublicBtn from "../components/write/PublicBtn";
 import { useLocation, useNavigate } from "react-router-dom";
+import GoBack from "../components/write/GoBack";
 import axios from "axios";
 const qs = require("query-string");
 
@@ -99,7 +100,7 @@ const Write = () => {
       console.log(resData.data.data);
       navigate("/daily");
     } catch (err) {
-      console.log();
+      console.log(err);
     }
   }
 
@@ -114,6 +115,7 @@ const Write = () => {
       <GrowInput className="grow-input" />
       <TextContent className="text-content" />
       <PublicBtn />
+      <GoBack top={22} left={94} width={6} />
     </Layout>
   );
 };
