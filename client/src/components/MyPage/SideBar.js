@@ -1,8 +1,9 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
 import SideBarFuntions from "./SideBarFunctions";
+import useLoginStore from "../../store/LoginStore";
 
 const Layout = styled.div`
   display: flex;
@@ -53,7 +54,63 @@ const SideBarWrapper = styled.div`
   }
   .area_desc {
     margin: 1rem 0;
+    display: flex;
     /* border: solid 1px red; */
+    .file {
+    }
+    .profile-wrap > .profileImg {
+      object-fit: cover;
+      width: 50px;
+      height: 50px;
+      margin: 0.3rem;
+      border-radius: 50%;
+      border: 2px solid ForestGreen;
+      box-shadow: inset 0px 0px 2px 3px ForestGreen;
+      transition: border 0.15s ease, box-shadow 0.15s ease;
+    }
+    .profileImg {
+      border: 2px solid Gray;
+      width: 50px;
+      height: 50px;
+      margin: 0.3rem;
+      border-radius: 50%;
+      box-shadow: inset 0px 0px 2px 3px Gray;
+      transition: border 0.15s ease, box-shadow 0.15s ease;
+    }
+    .profileImg.empty {
+      border: 2px solid Gray;
+      width: 50px;
+      height: 50px;
+      margin: 0.3rem;
+      border-radius: 50%;
+      box-shadow: inset 0px 0px 2px 3px Gray;
+      transition: border 0.15s ease, box-shadow 0.15s ease;
+    }
+    .profile-wrap > .profileImg:hover {
+      border: 2px solid DodgerBlue;
+      box-shadow: inset 0px 0px 2px 3px DodgerBlue;
+    }
+    .profileImg:hover {
+      border: 2px solid Tomato;
+      box-shadow: inset 0px 0px 2px 3px Tomato;
+      transition: border 0.15s ease, box-shadow 0.15s ease;
+    }
+    .profileImg.empty:hover {
+      border: 2px solid Tomato;
+      box-shadow: inset 0px 0px 2px 3px Tomato;
+      transition: border 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .profile-wrap {
+      grid-area: profile-wrap;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .profile-name {
+      line-height: 4rem;
+      color: ${(props) => props.theme.calendarBottomColor};
+    }
   }
 `;
 
@@ -69,11 +126,33 @@ const BlackScreen = styled.div`
 
 const SideBar = () => {
   const menuRef = useRef(null);
+  const { isLogin, nickname, userNumber, image, setImage } = useLoginStore();
   const [isSidebar, setSideBar] = useState(false);
+  const [userProfile, setUserProfile] = useState(image);
   function SidebarToggle() {
     menuRef.current.checked = !menuRef.current.checked;
     setSideBar(menuRef.current.checked);
   }
+  const onFileChange = (e) => {
+    const {
+      target: { files },
+    } = e;
+    const theFile = files[0];
+    const reader = new FileReader();
+    reader.onloadend = (finishedEvent) => {
+      const {
+        currentTarget: { result },
+      } = finishedEvent;
+      console.log("result@@@@@@@@@@@@@@@@@@@@@@@@@@@@@", result);
+      setUserProfile(result);
+    };
+    reader.readAsDataURL(theFile);
+    // setImage(userProfile);
+  };
+
+  useEffect(() => {
+    setImage(userProfile);
+  }, [userProfile]);
 
   return (
     <Layout isSidebar={isSidebar}>
@@ -86,7 +165,15 @@ const SideBar = () => {
       <SideBarWrapper isSidebar={isSidebar}>
         <div className="sidebar">
           <FontAwesomeIcon className="xmark" icon={faXmark} onClick={SidebarToggle} />
-          <span className="area_desc">SIDEBAR</span>
+          <span className="area_desc">
+            <div className="profile-wrap">
+              <label className="file" htmlFor="input-file">
+                <img title="프로필이미지 변경하기" className={`${"profileImg"} ${!userProfile ? "empty" : ""}`} src={userProfile || "Dummy/empty_user.png"} alt="" />
+              </label>
+              <input id="input-file" type="file" accept="image/*" onChange={onFileChange} style={{ display: "none" }} name="upload_img" />
+            </div>
+            <div className="profile-name">ID: {nickname}</div>
+          </span>
           <SideBarFuntions />
         </div>
       </SideBarWrapper>
