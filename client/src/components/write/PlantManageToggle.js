@@ -28,7 +28,7 @@ const Layout = styled.div`
   .icon {
     align-self: center;
     font-size: 1.4rem;
-    color: Gainsboro;
+    color: SlateGrey;
     padding: 3px;
   }
 
