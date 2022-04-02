@@ -14,7 +14,7 @@ const Layout = styled.div`
     position: fixed;
     width: 85vw;
     min-height: 50vh;
-    max-height: 80vh;
+    max-height: 70vh;
     overflow-y: auto;
     background: snow;
     animation: jelly 0.35s cubic-bezier(0.06, 1.05, 0.61, 0.91);
@@ -161,11 +161,13 @@ const StoryLayout = styled.div`
         width: 100%;
         height: 26vh;
         object-fit: cover;
-        border: solid 2px rgba(0, 0, 0, 0.05);
+        border-top: solid 2px rgba(0, 0, 0, 0.05);
+        border-bottom: solid 2px rgba(0, 0, 0, 0.05);
       }
     }
     .content {
-      margin-top: 0.5rem;
+      margin: 0.7rem 0.5rem;
+      /* border: solid 2px rgba(0, 0, 0, 0.2); */
     }
   }
 
@@ -219,6 +221,8 @@ const StoryLayout = styled.div`
 `;
 
 const JellyPopup = ({ setJellyPopup, story }) => {
+  const contentRef = useRef(null);
+
   function close() {
     setJellyPopup(false);
   }
@@ -228,6 +232,7 @@ const JellyPopup = ({ setJellyPopup, story }) => {
     e.target.style.minHeight = "15vh";
     let scHeight = e.target.scrollHeight;
     e.target.style.height = `${scHeight}px`;
+    contentRef.current.scrollTo(0, contentRef.current.scrollHeight);
   }
 
   console.log(story);
@@ -237,7 +242,7 @@ const JellyPopup = ({ setJellyPopup, story }) => {
   return (
     <Layout>
       <BlackScreen className="black" onClick={close} />
-      <div className="popup">
+      <div className="popup" ref={contentRef}>
         <StoryLayout>
           <div className="top">
             <div className="profile">

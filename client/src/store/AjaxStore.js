@@ -9,7 +9,7 @@ const useAjaxStore = create(
   persist(
     {
       key: "ajax",
-      allowlist: ["listByPlantId", "listByUserId", "publicJournal", "userInfo"],
+      allowlist: ["listByPlantId", "listByUserId", "publicJournal", "userInfo", "myPlants"],
       denylist: [],
     },
     (set) => ({
@@ -17,6 +17,7 @@ const useAjaxStore = create(
       listByUserId: [],
       publicJournal: [],
       userInfo: {},
+      myPlants: [],
       async setListByPlantId(plantId) {
         try {
           const resData = await axios.get(process.env.REACT_APP_API_URL + "/journals/my", { params: { plant: plantId } });
@@ -52,6 +53,41 @@ const useAjaxStore = create(
           set((state) => ({ userInfo: resUser.data.data }));
         } catch (err) {
           console.log("axios err / getUserInfo :::", err);
+        }
+      },
+      async getPlantsList() {
+        try {
+          const resData = await axios.get(process.env.REACT_APP_API_URL + "/plants");
+          // console.log("getPlantsList:::", resUser);
+          set((state) => ({ myPlants: resData.data.data }));
+        } catch (err) {
+          console.log("axios err / getPlantsList :::", err);
+        }
+      },
+      async setPlant(budName, upload_img) {
+        //
+        const payload = {
+          name: budName,
+          image_id: null,
+        };
+
+        try {
+          if (upload_img.files.length !== 0) {
+            let formdata = new FormData();
+            formdata.append("image", upload_img.files[0]);
+            const imgRes = await axios.post(process.env.REACT_APP_API_URL + "/images", formdata);
+            payload["image_id"] = [imgRes.data.data.id];
+            const resData = await axios.post(process.env.REACT_APP_API_URL + "/plants", payload);
+            console.log("setPlant:::with img:::", resData);
+            return "ok";
+          } else {
+            const resData = await axios.post(process.env.REACT_APP_API_URL + "/plants", payload);
+            console.log("setPlant::none img:::", resData);
+            return "ok";
+          }
+        } catch (err) {
+          console.log("setPlant:::err:::", err);
+          return "alreadyExistsBudName";
         }
       },
       async getAllPublicJournal() {
