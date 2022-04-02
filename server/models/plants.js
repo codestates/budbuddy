@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here\
       Plants.hasMany(models.Journals);
       Plants.belongsTo(models.Users, { foreignKey: "user_id" });
+      Plants.belongsTo(models.Images, { foreignKey: "image_id" });
     }
   }
   Plants.init(
@@ -19,6 +20,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
+      image_id: DataTypes.INTEGER,
       name: DataTypes.STRING,
     },
     {
