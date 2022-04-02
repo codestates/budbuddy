@@ -1,4 +1,4 @@
-const { Users } = require("../../models/index");
+const { Users, Images } = require("../../models/index");
 const checkAuth = require("../../modules/verifyCookieToken");
 
 module.exports = async (req, res) => {
@@ -13,10 +13,14 @@ module.exports = async (req, res) => {
 
     var user = await Users.findOne({
       attributes: {
-        exclude: ["password", "salt", "social"],
+        exclude: ["password", "salt"],
       },
       where: {
         id: user_id,
+      },
+      include: {
+        model: Images,
+        as: "profile_image",
       },
     });
 
@@ -28,5 +32,5 @@ module.exports = async (req, res) => {
     return res.status(500).send({ message: "Error", data: err });
   }
 
-  return res.status(200).send({ message: "ok", data: user });
+  return res.status(200).send({ message: "ok", data: user.toJSON() });
 };

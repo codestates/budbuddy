@@ -15,4 +15,7 @@ router.get("/userinfo", users.userInfo);
 // POST /logout
 router.post("/logout", users.logout);
 
+// PUT /profile
+router.put("/profile", users.changeProfile);
+
 module.exports = router;

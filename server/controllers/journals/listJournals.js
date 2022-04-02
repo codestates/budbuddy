@@ -34,6 +34,10 @@ module.exports = {
               attributes: {
                 exclude: ["password", "salt"],
               },
+              include: {
+                model: Images,
+                as: "profile_image",
+              },
             },
           ],
         });
@@ -59,6 +63,10 @@ module.exports = {
               model: Users,
               attributes: {
                 exclude: ["password", "salt"],
+              },
+              include: {
+                model: Images,
+                as: "profile_image",
               },
             },
           ],
@@ -94,6 +102,10 @@ module.exports = {
             attributes: {
               exclude: ["password", "salt"],
             },
+            include: {
+              model: Images,
+              as: "profile_image",
+            },
           },
         ],
       });
@@ -127,6 +139,10 @@ module.exports = {
             model: Users,
             attributes: {
               exclude: ["password", "salt"],
+            },
+            include: {
+              model: Images,
+              as: "profile_image",
             },
           },
         ],
