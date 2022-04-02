@@ -19,15 +19,12 @@ module.exports = {
       },
       ext: {
         type: Sequelize.STRING,
-        allowNull: false,
       },
       filename: {
         type: Sequelize.STRING,
-        allowNull: false,
       },
       store_filename: {
         type: Sequelize.STRING,
-        allowNull: false,
       },
       store_path: {
         type: Sequelize.STRING,

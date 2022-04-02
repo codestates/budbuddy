@@ -28,5 +28,5 @@ module.exports = async (req, res) => {
     return res.status(500).send({ message: "Error", data: err });
   }
 
-  return res.status(200).send({ message: "ok", data: user });
+  return res.status(200).send({ message: "ok", data: user.toJSON() });
 };

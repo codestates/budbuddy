@@ -1,5 +1,5 @@
 const kakao = require("../../../modules/kakao");
-const { Users } = require("../../../models/index");
+const { Users, Images } = require("../../../models/index");
 const jwtModule = require("../../../modules/jwt");
 module.exports = async (req, res) => {
   if (!req.query.code) {
@@ -26,26 +26,35 @@ module.exports = async (req, res) => {
       defaults: {
         social: `kakao_${kakaoId}`,
         nickname: kakaoNickname,
-        profile_image_url: kakaoProfileImage,
+        profile_image_id: null,
       },
     });
+
+    if (created) {
+      const image = await Images.create({
+        user_id: user.id,
+        store_path: kakaoProfileImage,
+        // ext: null,
+        // filename: "kakaoProfile",
+        // store_filename: null,
+      });
+      user.profile_image_id = image.id;
+      await user.save();
+      res.status(201);
+      console.log("new social user: ", user.toJSON());
+    } else {
+      res.status(200);
+      // console.log("already regesisted user: ", user.toJSON());
+    }
   } catch (err) {
     console.error("Sequelize Error: ", err);
     res.status(500).send(err);
   }
 
-  if (created) {
-    res.status(201);
-    console.log("new social user: ", user.toJSON());
-  } else {
-    res.status(200);
-    // console.log("already regesisted user: ", user.toJSON());
-  }
-
   const jwtPayload = {
     idx: user.id,
     email: user.email,
-    profileImage: user.profile_image_url,
+    profileImage: user.profile_image_id,
     created_at: user.created_at,
   };
 
