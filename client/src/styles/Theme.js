@@ -1,7 +1,7 @@
 const theme = {
   //color
-  mainColor: "snow",
-  subColor: "LightSteelBlue",
+  mainColor: "#1c1c1c",
+  subColor: "Gainsboro",
   formColor: "#f7f6f6",
   calendarTopColor: "LightGrey",
   calendarMidColor: "Gainsboro",
@@ -11,13 +11,15 @@ const theme = {
   navigationBGColor: "SteelBlue",
   backgroundTextColor: "MintCream",
   colorGainsboro: "Gainsboro",
-  hoverColor: "teal",
+  hoverColor: "rgba(0, 128, 128,0.75)",
   hoverCancleColor: "IndianRed",
   btnBgColor: "rgba(248, 248, 255,0.45)",
   storyCardBgColor: "rgba(255, 250, 250, 0.55)",
   profileBorderColor: "ForestGreen",
   profileBorderHoverColor: "DodgerBlue",
   cardSelectColor: "rgba(30, 144, 255,0.5)",
+  DarkSlateGrey: "DarkSlateGrey",
+  SideBarBgColor: "DeepSkyBlue",
   //font
   fontSizeBg: "1.3rem",
   fontIconSize: "15px",
