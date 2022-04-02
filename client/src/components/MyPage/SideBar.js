@@ -127,7 +127,6 @@ const BlackScreen = styled.div`
 
 const SideBar = () => {
   const menuRef = useRef(null);
-  const { nickname, image, setImage } = useLoginStore();
   const [isSidebar, setSideBar] = useState(false);
   const [userProfile, setUserProfile] = useState(image);
   function SidebarToggle() {
@@ -185,7 +184,7 @@ const SideBar = () => {
           <SideBarFuntions />
         </div>
       </SideBarWrapper>
-      <BlackScreen isSidebar={isSidebar} />
+      <BlackScreen isSidebar={isSidebar} onClick={SidebarToggle} />
     </Layout>
   );
 };
