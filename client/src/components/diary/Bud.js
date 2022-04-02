@@ -30,7 +30,7 @@ export const Layout = styled.div`
     height: 18vh;
     mix-blend-mode: darken;
 
-    border: solid 2px rgb(0, 0, 0, 0.65);
+    border: solid 2px rgb(0, 0, 0, 0.1);
   }
 
   .hide {

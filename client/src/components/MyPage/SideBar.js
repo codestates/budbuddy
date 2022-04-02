@@ -33,7 +33,7 @@ const SideBarWrapper = styled.div`
   left: ${(props) => (props.isSidebar ? "50%" : "100%")};
   transition: all 0.5s ease;
   z-index: 1;
-  background-color: rgba(114, 153, 191, 0.5);
+  background-color: ${(props) => props.theme.SideBarBgColor};
   .sidebar {
     display: flex;
     flex-direction: column;

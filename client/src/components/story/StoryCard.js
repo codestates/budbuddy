@@ -1,14 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import JellyPopup from "./JellyPopup";
 
 const Layout = styled.div`
   /* border: solid 1px black; */
   width: 100%;
   margin: 0 auto;
+  position: relative;
 
   .shell {
     /* border: solid 1px red; */
     width: 100%;
+    padding: 0 0.3rem;
+    margin-top: 2.1rem;
   }
 
   .wrap {
@@ -238,9 +242,12 @@ const Card = styled.div`
 `;
 
 const StoryCard = ({ className = "", storyList, hoverTransitonSec = 0.25 }) => {
+  const [isJellyPopup, setJellyPopup] = useState(false);
+
   function read(e) {
     e.preventDefault();
     console.log("스토리 읽기");
+    setJellyPopup(!isJellyPopup);
   }
 
   function share(e) {
@@ -250,6 +257,7 @@ const StoryCard = ({ className = "", storyList, hoverTransitonSec = 0.25 }) => {
 
   return (
     <Layout className={className}>
+      {isJellyPopup ? <JellyPopup setJellyPopup={setJellyPopup} /> : null}
       <div className="shell">
         <div className="wrap">
           {storyList.map((v, i) => {
