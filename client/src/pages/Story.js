@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import styled from "styled-components";
+import React, { useEffect, useState } from "react";
+import styled, { css } from "styled-components";
 import Logo from "../components/common/Logo";
 import SearchBar from "../components/story/SearchBar";
 import StoryCard from "../components/story/StoryCard";
@@ -14,6 +14,13 @@ export const Layout = styled.div`
   position: relative;
   padding-bottom: 3.5rem;
   /* border: solid 1px blue; */
+  // 젤리팝업 오픈시 부모 freeze 옵션
+  ${(props) =>
+    props.isFreeze &&
+    css`
+      height: 100vh;
+      overflow-y: hidden;
+    `}
 
   .logo {
     margin-top: 1.3rem;
@@ -30,7 +37,7 @@ export const Layout = styled.div`
 
 const Story = () => {
   const { publicJournal, getAllPublicJournal } = useAjaxStore();
-
+  const [isFreeze, setFreeze] = useState(false);
   useEffect(() => {
     getAllPublicJournal();
   }, []);
@@ -40,13 +47,13 @@ const Story = () => {
   }
 
   return (
-    <Layout>
+    <Layout isFreeze={isFreeze}>
       <Logo className="logo" />
       <div className="title">
         <p>Friend's Daily Log</p>
       </div>
       <SearchBar top={62} left={98} width={40} fn={storySearch} />
-      <StoryCard className="story-card" storyList={publicJournal} hoverTransitonSec={0.25} />
+      <StoryCard className="story-card" storyList={publicJournal} hoverTransitonSec={0.25} setFreeze={setFreeze} />
     </Layout>
   );
 };

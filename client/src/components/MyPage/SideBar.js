@@ -68,6 +68,7 @@ const BlackScreen = styled.div`
 
 const SideBar = () => {
   const menuRef = useRef(null);
+
   const [isSidebar, setSideBar] = useState(false);
   function SidebarToggle() {
     menuRef.current.checked = !menuRef.current.checked;
@@ -88,7 +89,7 @@ const SideBar = () => {
           <span className="area_desc">SIDEBAR</span>
         </div>
       </SideBarWrapper>
-      <BlackScreen isSidebar={isSidebar} />
+      <BlackScreen isSidebar={isSidebar} onClick={SidebarToggle} />
     </Layout>
   );
 };

@@ -20,6 +20,9 @@ import NavigationBar from "./components/common/NavigationBar";
 import { OutLine, Content } from "./styles/CommonStyled";
 import useLoginStore from "./store/LoginStore";
 import { PersistGate } from "zustand-persist";
+var moment = require("moment");
+require("moment-timezone");
+moment.tz.setDefault("Asia/Seoul");
 
 const App = () => {
   const { isLogin } = useLoginStore();

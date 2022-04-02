@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import JellyPopup from "./JellyPopup";
 
@@ -239,15 +239,25 @@ const Card = styled.div`
       transform: scale(1.05);
     }
   }
+
+  .open-jelly {
+    z-index: 3;
+  }
 `;
 
-const StoryCard = ({ className = "", storyList, hoverTransitonSec = 0.25 }) => {
+const StoryCard = ({ className = "", storyList, hoverTransitonSec = 0.25, setFreeze }) => {
   const [isJellyPopup, setJellyPopup] = useState(false);
+  const [story, setStory] = useState(null);
 
-  function read(e) {
+  useEffect(() => {
+    setFreeze(isJellyPopup);
+  }, [isJellyPopup]);
+
+  function read(e, info) {
     e.preventDefault();
-    console.log("스토리 읽기");
+    console.log("스토리 읽기", info);
     setJellyPopup(!isJellyPopup);
+    setStory(info);
   }
 
   function share(e) {
@@ -257,7 +267,7 @@ const StoryCard = ({ className = "", storyList, hoverTransitonSec = 0.25 }) => {
 
   return (
     <Layout className={className}>
-      {isJellyPopup ? <JellyPopup setJellyPopup={setJellyPopup} /> : null}
+      {isJellyPopup ? <JellyPopup setJellyPopup={setJellyPopup} story={story} /> : null}
       <div className="shell">
         <div className="wrap">
           {storyList.map((v, i) => {
@@ -285,7 +295,7 @@ const StoryCard = ({ className = "", storyList, hoverTransitonSec = 0.25 }) => {
                     </div>
                     <div className="bottom-cap">
                       <div className="read-wrap">
-                        <button className="read btn" onClick={read}>
+                        <button className="read btn" onClick={(e) => read(e, v)}>
                           보기
                         </button>
                       </div>

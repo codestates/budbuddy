@@ -152,7 +152,6 @@ const PlantAddDialog = ({ open = false, closeFn, apiFn = "" }) => {
     e.preventDefault();
     if (typeof apiFn === "function") {
       const { budname, upload_img } = e.target;
-
       const isValid = validNickName(budname.value);
       if (isValid) {
         apiFn(budname.value, upload_img);
