@@ -1,8 +1,9 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSeedling } from "@fortawesome/free-solid-svg-icons";
 import { validNickName } from "../../modules/validation";
+import ImgUpload from "../common/ImgUpload";
 
 const Layout = styled.div`
   display: flex;
@@ -23,7 +24,7 @@ const Layout = styled.div`
     align-items: center;
     width: 100vw;
     @media screen and (min-width: 391px) {
-      width: ${(props) => props.theme.webWidth};
+      width: ${(props) => props.theme.webWidth + "px"};
     }
   }
 
@@ -73,28 +74,29 @@ const FormLayout = styled.form`
   flex-direction: column;
   text-align: center;
   .title {
-    font-size: 0.8rem;
+    font-size: ${(props) => props.theme.fontWritePageLarge};
     align-self: center;
   }
   .budname {
-    font-size: 0.6rem;
+    font-size: ${(props) => props.theme.fontWritePageMid};
     align-self: start;
     display: flex;
     flex-direction: row;
 
     > .icon {
-      font-size: 10px;
+      font-size: ${(props) => props.theme.fontWritePageMid};
       margin-right: 4px;
     }
   }
   .desc-photo {
-    font-size: 0.6rem;
+    font-size: ${(props) => props.theme.fontWritePageMid};
     align-self: start;
   }
   .input-bud {
     border: none;
     margin: 3px 0;
     padding-left: 0.5rem;
+    font-size: ${(props) => props.theme.fontWritePageMid};
   }
 
   .btn-wrapper {
@@ -111,6 +113,7 @@ const FormLayout = styled.form`
     cursor: pointer;
     padding: 1px 3px;
     margin: 0;
+    font-size: ${(props) => props.theme.fontWritePageMid};
   }
 
   .open:hover {
@@ -148,9 +151,11 @@ const PlantAddDialog = ({ open = false, closeFn, apiFn = "" }) => {
   function resisterBud(e) {
     e.preventDefault();
     if (typeof apiFn === "function") {
-      const isValid = validNickName(e.target.budname.value);
+      const { budname, upload_img } = e.target;
+
+      const isValid = validNickName(budname.value);
       if (isValid) {
-        apiFn(e.target.budname.value);
+        apiFn(budname.value, upload_img);
         ClosePopup();
       }
     }
@@ -209,6 +214,7 @@ const PlantAddDialog = ({ open = false, closeFn, apiFn = "" }) => {
             </div>
             <div ref={checkNick} className="chNick ch"></div>
             <input className="input-bud trans" placeholder="식물의 이름을 입력하세요" name="budname" onFocus={onFocus} onChange={onChange} onBlur={onBlur} type="text" />
+            <ImgUpload />
             <div className="btn-wrapper trans">
               <button className="open btn trans" type="submit">
                 완료

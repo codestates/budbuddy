@@ -16,15 +16,15 @@ export const Layout = styled.div`
   /* border: solid 1px blue; */
 
   .logo {
-    margin-top: 1rem;
+    margin-top: 1.3rem;
   }
   .title {
     margin-top: 1rem;
     margin-left: 2rem;
   }
   .story-card {
-    margin-top: 2.4rem;
-    padding: 0 0.3rem;
+    /* margin-top: 2.4rem; */
+    /* padding: 0 0.3rem; */
   }
 `;
 

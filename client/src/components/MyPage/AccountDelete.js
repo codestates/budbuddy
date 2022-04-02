@@ -22,7 +22,7 @@ const Layout = styled.div`
     align-items: center;
     width: 100vw;
     @media screen and (min-width: 391px) {
-      width: ${(props) => props.theme.webWidth};
+      width: ${(props) => props.theme.webWidth + "px"};
     }
   }
 

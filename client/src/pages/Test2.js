@@ -1,30 +1,46 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import styled from "styled-components";
-import TabBtnOne from "../components/common/TabBtnOne";
-import { useNavigate } from "react-router-dom";
-import GoBack from "../components/write/GoBack";
 
-const Layout = styled.form`
-  display: flex;
-  flex-direction: column;
-  position: relative;
-
-  .test {
-    color: blue;
-    background-color: yellow;
-    border: none;
+const Layout = styled.div`
+  .jellybox {
+    display: flex;
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border-color: transparent;
+    background: #ff1616;
+    animation: jelly 0.6s ease;
   }
 
-  .test:hover {
-    background-color: ${(props) => props.theme.hoverColor};
+  @keyframes jelly {
+    from {
+      transform: scale(1, 1);
+    }
+    30% {
+      transform: scale(1.25, 0.75);
+    }
+    40% {
+      transform: scale(0.75, 1.25);
+    }
+    50% {
+      transform: scale(1.15, 0.85);
+    }
+    65% {
+      transform: scale(0.95, 1.05);
+    }
+    75% {
+      transform: scale(1.05, 0.95);
+    }
+    to {
+      transform: scale(1, 1);
+    }
   }
 `;
 
 const Test2 = () => {
-  let navigate = useNavigate();
   return (
     <Layout>
-      <GoBack top={22} left={58} width={20} fn={() => {}} />
+      <div className="jellybox"></div>
     </Layout>
   );
 };
