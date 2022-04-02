@@ -1,4 +1,4 @@
-const { Users } = require("../../models/index");
+const { Users, Images } = require("../../models/index");
 const checkAuth = require("../../modules/verifyCookieToken");
 
 module.exports = async (req, res) => {
@@ -13,10 +13,14 @@ module.exports = async (req, res) => {
 
     var user = await Users.findOne({
       attributes: {
-        exclude: ["password", "salt", "social"],
+        exclude: ["password", "salt"],
       },
       where: {
         id: user_id,
+      },
+      include: {
+        model: Images,
+        as: "profile_image",
       },
     });
 
