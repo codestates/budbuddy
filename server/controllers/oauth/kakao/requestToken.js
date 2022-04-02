@@ -8,7 +8,7 @@ module.exports = async (req, res) => {
 
   let userInfo;
   try {
-    const { accessToken, refreshToken } = await kakao.getToken(req.query.code);
+    var { accessToken, refreshToken } = await kakao.getToken(req.query.code);
     // const tokenInfo = await kakao.getAccessTokenInfo(accessToken);
     userInfo = await kakao.getUserInfo(accessToken);
   } catch (err) {
@@ -56,6 +56,7 @@ module.exports = async (req, res) => {
     email: user.email,
     profileImage: user.profile_image_id,
     created_at: user.created_at,
+    kakaoAccessToken: accessToken,
   };
 
   try {
