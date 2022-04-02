@@ -64,7 +64,7 @@ const Mypage = () => {
 
   async function getMapageInfo() {
     await setListByUserId();
-    await getUserInfo();
+    await getUserInfo(1);
   }
   // console.log(userInfo);
   return (
