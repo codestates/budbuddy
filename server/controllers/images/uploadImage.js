@@ -21,7 +21,6 @@ module.exports = async (req, res) => {
       store_filename: key,
       store_path: location,
     });
-    console.log("img: ", image.toJSON());
     res.status(201).send({ message: "Created", data: image.toJSON() });
   } catch (err) {
     console.error("Sequelize Error: ", err);

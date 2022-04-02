@@ -23,11 +23,11 @@ module.exports = async (req, res) => {
     const plant = await Plants.findByPk(plant_id);
     if (!plant) {
       await transaction.rollback();
-      return res.status(400).send({ message: `Bad Request, plant id: ${plant_id} invalid` });
+      return res.status(404).send({ message: `Not Found, plant id: ${plant_id} invalid` });
     }
     if (plant.user_id !== user_id) {
       await transaction.rollback();
-      return res.status(401).send({ message: `Unauthorized, plant id: ${plant_id} is not allowed` });
+      return res.status(403).send({ message: `Forbidden, plant id: ${plant_id} is not allowed` });
     }
 
     const journal = await Journals.create(
