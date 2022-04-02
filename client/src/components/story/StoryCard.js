@@ -1,14 +1,18 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import JellyPopup from "./JellyPopup";
 
 const Layout = styled.div`
   /* border: solid 1px black; */
   width: 100%;
   margin: 0 auto;
+  position: relative;
 
   .shell {
     /* border: solid 1px red; */
     width: 100%;
+    padding: 0 0.3rem;
+    margin-top: 2.1rem;
   }
 
   .wrap {
@@ -114,11 +118,11 @@ const Card = styled.div`
 
   .top-cap {
     display: grid;
-    grid-template-columns: 20% 63% 10%;
+    grid-template-columns: 20% 60% 10%;
     grid-template-rows: repeat(1, minmax(1fr, auto));
-    grid-template-areas: " profile-img name-wrap date";
+    grid-template-areas: "profile-wrap name-wrap date";
 
-    .profile-img > img {
+    .profile-wrap > .profileImg {
       object-fit: cover;
       width: 35px;
       height: 35px;
@@ -129,13 +133,25 @@ const Card = styled.div`
       transition: border 0.15s ease, box-shadow 0.15s ease;
     }
 
-    .profile-img > img:hover {
+    .profileImg.empty {
+      border: 2px solid Gray;
+      box-shadow: inset 0px 0px 2px 3px Gray;
+      transition: border 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .profile-wrap > .profileImg:hover {
       border: 2px solid DodgerBlue;
       box-shadow: inset 0px 0px 2px 3px DodgerBlue;
     }
 
-    .profile-img {
-      grid-area: profile-img;
+    .profileImg.empty:hover {
+      border: 2px solid Tomato;
+      box-shadow: inset 0px 0px 2px 3px Tomato;
+      transition: border 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .profile-wrap {
+      grid-area: profile-wrap;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -165,6 +181,7 @@ const Card = styled.div`
 
       font-size: ${(props) => props.theme.fontWritePageXSmall};
       margin-bottom: 0.3rem;
+      margin-right: 0.3rem;
     }
   }
 
@@ -222,12 +239,25 @@ const Card = styled.div`
       transform: scale(1.05);
     }
   }
+
+  .open-jelly {
+    z-index: 3;
+  }
 `;
 
-const StoryCard = ({ className = "", storyList, hoverTransitonSec = 0.25 }) => {
-  function read(e) {
+const StoryCard = ({ className = "", storyList, hoverTransitonSec = 0.25, setFreeze }) => {
+  const [isJellyPopup, setJellyPopup] = useState(false);
+  const [story, setStory] = useState(null);
+
+  useEffect(() => {
+    setFreeze(isJellyPopup);
+  }, [isJellyPopup]);
+
+  function read(e, info) {
     e.preventDefault();
-    console.log("스토리 읽기");
+    console.log("스토리 읽기", info);
+    setJellyPopup(!isJellyPopup);
+    setStory(info);
   }
 
   function share(e) {
@@ -237,34 +267,35 @@ const StoryCard = ({ className = "", storyList, hoverTransitonSec = 0.25 }) => {
 
   return (
     <Layout className={className}>
+      {isJellyPopup ? <JellyPopup setJellyPopup={setJellyPopup} story={story} /> : null}
       <div className="shell">
         <div className="wrap">
           {storyList.map((v, i) => {
             return (
-              <Card key={v.journalsId} hoverTransitonSec={hoverTransitonSec}>
+              <Card key={v.journalId} hoverTransitonSec={hoverTransitonSec}>
                 <div className="borderlt">
                   <div className="borderrb">
                     <div className="top-cap">
-                      <div className="profile-img">
-                        <img src={v.profileImg} alt="" />
+                      <div className="profile-wrap">
+                        <img className={`${"profileImg"} ${!v.profileImg ? "empty" : ""}`} src={v.profileImg || "Dummy/empty_user.png"} alt="" />
                       </div>
                       <div className="name-wrap">
-                        <div className="user-name">{v.username}</div>
+                        <div className="user-name">{v.nickname}</div>
                         <div className="plant-name">{v.plantName}</div>
                       </div>
                       <div className="date">
-                        <div>{v.createdAt}</div>
+                        <div>{v.date_pick}</div>
                       </div>
                     </div>
                     <div className="middle-cap">
                       <div className="journal-img">
-                        <img className="plant-img" src={v.journalImg} alt="" />
+                        <img className="plant-img" src={v.journalImg || "/Dummy/empty_journal.png"} alt="" />
                       </div>
-                      <div className="summary">{v.summary}</div>
+                      <div className="summary">{v.textContent}</div>
                     </div>
                     <div className="bottom-cap">
                       <div className="read-wrap">
-                        <button className="read btn" onClick={read}>
+                        <button className="read btn" onClick={(e) => read(e, v)}>
                           보기
                         </button>
                       </div>

@@ -29,6 +29,16 @@ module.exports = {
               model: Journal_Actions,
               include: Actions,
             },
+            {
+              model: Users,
+              attributes: {
+                exclude: ["password", "salt"],
+              },
+              include: {
+                model: Images,
+                as: "profile_image",
+              },
+            },
           ],
         });
       } else {
@@ -48,6 +58,16 @@ module.exports = {
             {
               model: Journal_Actions,
               include: Actions,
+            },
+            {
+              model: Users,
+              attributes: {
+                exclude: ["password", "salt"],
+              },
+              include: {
+                model: Images,
+                as: "profile_image",
+              },
             },
           ],
         });
@@ -77,6 +97,16 @@ module.exports = {
             model: Journal_Actions,
             include: Actions,
           },
+          {
+            model: Users,
+            attributes: {
+              exclude: ["password", "salt"],
+            },
+            include: {
+              model: Images,
+              as: "profile_image",
+            },
+          },
         ],
       });
       if (journalList.length === 0) return res.status(404).send({ message: "Not Found" });
@@ -104,6 +134,16 @@ module.exports = {
           {
             model: Journal_Actions,
             include: Actions,
+          },
+          {
+            model: Users,
+            attributes: {
+              exclude: ["password", "salt"],
+            },
+            include: {
+              model: Images,
+              as: "profile_image",
+            },
           },
         ],
       });

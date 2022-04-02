@@ -28,24 +28,27 @@ const Layout = styled.div`
   .icon {
     align-self: center;
     font-size: 1.4rem;
-    color: Gainsboro;
-    transition: color 0.2s ease;
+    color: SlateGrey;
     padding: 3px;
   }
-  .drop {
+
+  .water,
+  .fertilize,
+  .repot {
+    transition: color 0.25s ease;
   }
-  .drop.fill {
+
+  .water.fill {
     color: DodgerBlue;
   }
 
-  .nutrition.fill {
+  .fertilize.fill {
     color: MediumSeaGreen;
   }
 
-  .repotting.fill {
+  .repot.fill {
     color: Sienna;
   }
-
   .semantic {
     display: none;
   }
@@ -53,24 +56,23 @@ const Layout = styled.div`
 
 const AwesomeIcon = forwardRef(({ className, icon, onClick }, ref) => <FontAwesomeIcon icon={icon} className={className} onClick={onClick} forwardedRef={ref} />);
 
-function PlantManageToggle({ className, actions = "", mode }) {
-  const dropRef = useRef(null);
-  const nutritionRef = useRef(null);
-  const repottingRef = useRef(null);
+function PlantManageToggle({ className, actions = {}, mode = "" }) {
+  const waterRef = useRef(null);
+  const fertilizeRef = useRef(null);
+  const repotRef = useRef(null);
 
   const [isReadOnly, setReadOnly] = useState(false);
   const [toggle, setToggle] = useState({
-    isDrop: true,
-    isNutirition: true,
-    isRepotting: true,
+    isWater: true,
+    isFertilize: true,
+    isRepot: true,
   });
 
   useEffect(() => {
-    setToggle(actions);
-    toggleHandler("water");
-    toggleHandler("nutrition");
-    toggleHandler("repotting");
     if (mode === "read") {
+      if (actions.isWater) toggleHandler("water");
+      if (actions.isFertilize) toggleHandler("fertilize");
+      if (actions.isRepot) toggleHandler("repot");
       setReadOnly(true);
     }
   }, []);
@@ -78,28 +80,28 @@ function PlantManageToggle({ className, actions = "", mode }) {
   function toggleHandler(fnName) {
     const task = {
       water() {
-        setToggle({ ...toggle, isDrop: !toggle.isDrop });
-        if (toggle.isDrop) {
-          dropRef.current.classList.value = "svg-inline--fa fa-droplet icon drop fill";
+        setToggle({ ...toggle, isWater: !toggle.isWater });
+        if (toggle.isWater) {
+          waterRef.current.classList.add("fill");
         } else {
-          dropRef.current.classList.value = "svg-inline--fa fa-droplet icon drop";
+          waterRef.current.classList.remove("fill");
         }
       },
-      nutrition() {
-        setToggle({ ...toggle, isNutirition: !toggle.isNutirition });
+      fertilize() {
+        setToggle({ ...toggle, isFertilize: !toggle.isFertilize });
 
-        if (toggle.isNutirition) {
-          nutritionRef.current.classList.value = "svg-inline--fa fa-eye-dropper icon nutrition fill";
+        if (toggle.isFertilize) {
+          fertilizeRef.current.classList.add("fill");
         } else {
-          nutritionRef.current.classList.value = "svg-inline--fa fa-eye-dropper icon nutrition";
+          fertilizeRef.current.classList.remove("fill");
         }
       },
-      repotting() {
-        setToggle({ ...toggle, isRepotting: !toggle.isRepotting });
-        if (toggle.isRepotting) {
-          repottingRef.current.classList.value = "svg-inline--fa fa-spa icon repotting fill";
+      repot() {
+        setToggle({ ...toggle, isRepot: !toggle.isRepot });
+        if (toggle.isRepot) {
+          repotRef.current.classList.add("fill");
         } else {
-          repottingRef.current.classList.value = "svg-inline--fa fa-spa icon repotting";
+          repotRef.current.classList.remove("fill");
         }
       },
     };
@@ -112,26 +114,18 @@ function PlantManageToggle({ className, actions = "", mode }) {
     return task[fnName]();
   }
 
-  function convertToggle() {
-    let submitToggle = { ...toggle };
-    submitToggle.isDrop = !submitToggle.isDrop;
-    submitToggle.isNutirition = !submitToggle.isNutirition;
-    submitToggle.isRepotting = !submitToggle.isRepotting;
-    return submitToggle;
-  }
-
   return (
     <Layout className={className}>
-      <button className="semantic" name="toggle" value={JSON.stringify(convertToggle())} />
       <div className="shell">
+        <button className="semantic" name="toggle" value={JSON.stringify(toggle)} />
         <div className="manage-box">
           <div className="text">
             <div>관리:</div>
           </div>
           <div className="icon">
             <AwesomeIcon
-              className={"drop"}
-              ref={dropRef}
+              className={"water"}
+              ref={waterRef}
               icon={faDroplet}
               onClick={() => {
                 toggleHandler("water");
@@ -140,21 +134,21 @@ function PlantManageToggle({ className, actions = "", mode }) {
           </div>
           <div className="icon">
             <AwesomeIcon
-              className={"nutrition"}
-              ref={nutritionRef}
+              className={"fertilize"}
+              ref={fertilizeRef}
               icon={faEyeDropperEmpty}
               onClick={() => {
-                toggleHandler("nutrition");
+                toggleHandler("fertilize");
               }}
             />
           </div>
           <div className="icon">
             <AwesomeIcon
-              className={"repotting"}
-              ref={repottingRef}
+              className={"repot"}
+              ref={repotRef}
               icon={faSpa}
               onClick={() => {
-                toggleHandler("repotting");
+                toggleHandler("repot");
               }}
             />
           </div>

@@ -72,4 +72,19 @@ module.exports = {
       }
     });
   },
+  logout: (accessToken) => {
+    return new Promise(async (resolve, reject) => {
+      const options = {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      };
+      try {
+        const kakaoResopnse = await axios.post("https://kapi.kakao.com/v1/user/logout", {}, options);
+        resolve(kakaoResopnse.data);
+      } catch (err) {
+        reject(err);
+      }
+    });
+  },
 };

@@ -81,15 +81,18 @@ const LoginForm = () => {
       const msg = resData.data.message.split(" ");
       if (msg[1] === "AccessToken") {
         const resData = await axios.get(process.env.REACT_APP_API_URL + "/users/userinfo");
-        const { nickname, profile_image_id, id } = resData.data.data;
+        const { nickname, id } = resData.data.data;
+        if (resData.data.data.profile_image !== null) {
+          setImage(resData.data.data.profile_image.store_path);
+        }
         setNickname(nickname);
         setUserNumber(id);
-        setImage(profile_image_id);
         setLogin(true);
         navigate("/mypage");
         return;
       }
     } catch (err) {
+      console.log(err);
       setModalCode(err.response.data.message);
     }
   }
@@ -171,10 +174,12 @@ const LoginForm = () => {
                   if (err.response.data.message === "usedEmail") {
                     let logindData = await axios.post(process.env.REACT_APP_API_URL + "/users/login", payload);
                     const resData = await axios.get(process.env.REACT_APP_API_URL + "/users/userinfo");
-                    const { nickname, profile_image_id, id } = resData.data.data;
+                    const { nickname, id } = resData.data.data;
+                    if (resData.data.data.profile_image !== null) {
+                      setImage(resData.data.data.profile_image.store_path);
+                    }
                     setNickname(nickname);
                     setUserNumber(id);
-                    setImage(profile_image_id);
                   }
                 }
                 setModalCode("testLogin");
