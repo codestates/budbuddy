@@ -85,7 +85,7 @@ function SideBarFunctions({ setModalCode }) {
     if (resData.status === 200) {
       setNickname("");
       setUserNumber("");
-      setImage(null);
+      setImage("");
       setLogin(false);
       navigate("/");
     }
@@ -110,7 +110,7 @@ function SideBarFunctions({ setModalCode }) {
       <div className="pictureChange">
         <FontAwesomeIcon className="fa-solid fa-arrows-rotate fa-2x fa-spin" icon={faRotate} color="snow" />
         <button onClick={() => popUpImageChangeModal()} className="pictureChangeButton">
-          이미지 교체
+          배경이미지 교체
         </button>
       </div>
       <div className="pwChange">

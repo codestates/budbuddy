@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
       Images.belongsTo(models.Users, { foreignKey: "user_id", onDelete: "CASCADE" });
       Images.hasOne(models.Journal_Images, { onDelete: "CASCADE" });
       Images.hasOne(models.Users, { foreignKey: "profile_image_id" });
+      Images.hasOne(models.Plants, { foreignKey: "image_id" });
     }
   }
   Images.init(

@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
 import SideBarFuntions from "./SideBarFunctions";
 import useLoginStore from "../../store/LoginStore";
+import axios from "axios";
 
 const Layout = styled.div`
   display: flex;
@@ -126,7 +127,7 @@ const BlackScreen = styled.div`
 
 const SideBar = () => {
   const menuRef = useRef(null);
-  const { isLogin, nickname, userNumber, image, setImage } = useLoginStore();
+  const { nickname, image, setImage } = useLoginStore();
   const [isSidebar, setSideBar] = useState(false);
   const [userProfile, setUserProfile] = useState(image);
   function SidebarToggle() {
@@ -134,23 +135,30 @@ const SideBar = () => {
     setSideBar(menuRef.current.checked);
   }
   const onFileChange = (e) => {
-    const {
-      target: { files },
-    } = e;
-    const theFile = files[0];
-    const reader = new FileReader();
-    reader.onloadend = (finishedEvent) => {
+    try {
       const {
-        currentTarget: { result },
-      } = finishedEvent;
-      console.log("result@@@@@@@@@@@@@@@@@@@@@@@@@@@@@", result);
-      setUserProfile(result);
-    };
-    reader.readAsDataURL(theFile);
-    // setImage(userProfile);
+        target: { files },
+      } = e;
+      const theFile = files[0];
+      const reader = new FileReader();
+      reader.onloadend = async (finishedEvent) => {
+        const {
+          currentTarget: { result },
+        } = finishedEvent;
+
+        setUserProfile(result);
+        let formdata = new FormData();
+        formdata.append("image", theFile);
+        const imgRes = await axios.post(process.env.REACT_APP_API_URL + "/images", formdata);
+        await axios.put(process.env.REACT_APP_API_URL + "/users/profile", { profile_image_id: imgRes.data.data.id });
+      };
+      reader.readAsDataURL(theFile);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
-  useEffect(() => {
+  useEffect(async () => {
     setImage(userProfile);
   }, [userProfile]);
 

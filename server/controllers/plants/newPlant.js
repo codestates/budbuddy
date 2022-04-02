@@ -9,13 +9,16 @@ module.exports = async (req, res) => {
   }
 
   const user_id = verify.idx;
-  const { name } = req.body;
+  const { name, image_id = null } = req.body;
 
   if (!name) return res.status(400).send({ message: "Bad Request" });
 
   try {
     const [plant, created] = await Plants.findOrCreate({
       where: { user_id, name },
+      defaults: {
+        image_id,
+      },
     });
 
     if (created) {
