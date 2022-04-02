@@ -24,7 +24,7 @@ module.exports = async (req, res) => {
   const jwtPayload = {
     idx: user.id,
     email: user.email,
-    profileImage: user.profile_image_url,
+    profileImage: user.profile_image_id,
     created_at: user.created_at,
   };
   try {
