@@ -82,10 +82,11 @@ const LoginForm = () => {
       if (msg[1] === "AccessToken") {
         const resData = await axios.get(process.env.REACT_APP_API_URL + "/users/userinfo");
         const { nickname, id } = resData.data.data;
+        if (resData.data.data.profile_image !== null) {
+          setImage(resData.data.data.profile_image.store_path);
+        }
         setNickname(nickname);
         setUserNumber(id);
-        console.log(resData.data.data);
-        setImage(resData.data.data.profile_image.store_path);
         setLogin(true);
         navigate("/mypage");
         return;
@@ -174,9 +175,11 @@ const LoginForm = () => {
                     let logindData = await axios.post(process.env.REACT_APP_API_URL + "/users/login", payload);
                     const resData = await axios.get(process.env.REACT_APP_API_URL + "/users/userinfo");
                     const { nickname, id } = resData.data.data;
+                    if (resData.data.data.profile_image !== null) {
+                      setImage(resData.data.data.profile_image.store_path);
+                    }
                     setNickname(nickname);
                     setUserNumber(id);
-                    setImage(resData.data.data.profile_image.store_path);
                   }
                 }
                 setModalCode("testLogin");

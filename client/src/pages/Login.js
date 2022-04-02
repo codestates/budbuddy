@@ -29,9 +29,11 @@ function Login() {
       console.log(resData.data.message);
       if (resData.data.message === "ok") {
         const { nickname, id } = resData.data.data;
+        if (!resData.data.data.profile_image) {
+          setImage(resData.data.data.profile_image.store_path);
+        }
         setNickname(nickname);
         setUserNumber(id);
-        setImage(resData.data.data.profile_image.store_path);
         setLogin(true);
       }
     } catch (e) {
