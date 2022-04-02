@@ -61,6 +61,7 @@ const useAjaxStore = create(
           resjournal = resjournal.data.data;
           const extractedData = [];
           console.log(resjournal);
+
           for (let i = 0; i < resjournal.length; i++) {
             let publicJournal = {
               journalId: resjournal[i].id,
@@ -68,6 +69,7 @@ const useAjaxStore = create(
               profileImg: null,
               plantName: resjournal[i].Plant.name,
               updatedAt: resjournal[i].updatedAt,
+              title: resjournal[i].title,
               textContent: resjournal[i].body,
               journalImg: null,
             };
