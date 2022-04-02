@@ -2,6 +2,7 @@ import React, { useState, useRef } from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
+import SideBarFuntions from "./SideBarFunctions";
 
 const Layout = styled.div`
   display: flex;
@@ -86,6 +87,7 @@ const SideBar = () => {
         <div className="sidebar">
           <FontAwesomeIcon className="xmark" icon={faXmark} onClick={SidebarToggle} />
           <span className="area_desc">SIDEBAR</span>
+          <SideBarFuntions />
         </div>
       </SideBarWrapper>
       <BlackScreen isSidebar={isSidebar} />
