@@ -32,6 +32,7 @@ const Layout = styled.div`
   }
 
   .signup {
+    font-size: 1rem;
   }
 `;
 
@@ -52,7 +53,7 @@ const theme = createTheme({
     MuiInputLabel: {
       root: {
         color: "black",
-        fontSize: 4,
+        fontSize: 6,
       },
     },
   },
@@ -81,15 +82,18 @@ const LoginForm = () => {
       const msg = resData.data.message.split(" ");
       if (msg[1] === "AccessToken") {
         const resData = await axios.get(process.env.REACT_APP_API_URL + "/users/userinfo");
-        const { nickname, profile_image_id, id } = resData.data.data;
+        const { nickname, id } = resData.data.data;
+        if (resData.data.data.profile_image !== null) {
+          setImage(resData.data.data.profile_image.store_path);
+        }
         setNickname(nickname);
         setUserNumber(id);
-        setImage(profile_image_id);
         setLogin(true);
         navigate("/mypage");
         return;
       }
     } catch (err) {
+      console.log(err);
       setModalCode(err.response.data.message);
     }
   }
@@ -115,8 +119,8 @@ const LoginForm = () => {
               autoComplete="email"
               autoFocus
               variant="standard"
-              InputProps={{ style: { fontSize: 10 } }}
-              InputLabelProps={{ style: { fontSize: 10 } }}
+              InputProps={{ style: { fontSize: 18 } }}
+              InputLabelProps={{ style: { fontSize: 18 } }}
               fullWidth
             />
             <TextField
@@ -128,15 +132,15 @@ const LoginForm = () => {
               name="current-password"
               autoComplete="current-password"
               variant="standard"
-              InputProps={{ style: { fontSize: 10 } }}
-              InputLabelProps={{ style: { fontSize: 10 } }}
+              InputProps={{ style: { fontSize: 18 } }}
+              InputLabelProps={{ style: { fontSize: 18 } }}
               fullWidth
             />
             <FormControlLabel
               className="saved"
-              control={<Checkbox value="remember" color="primary" sx={{ "& .MuiSvgIcon-root": { fontSize: "0.5rem" } }} />}
+              control={<Checkbox value="remember" color="primary" sx={{ mt: 2, "& .MuiSvgIcon-root": { fontSize: "1rem" } }} />}
               label={
-                <Box component="div" fontSize={"0.6rem"}>
+                <Box component="div" fontSize={"1.1rem"} sx={{ mt: 2 }}>
                   로그인 저장
                 </Box>
               }
@@ -145,7 +149,7 @@ const LoginForm = () => {
               type="submit"
               variant="contained"
               size="small"
-              sx={{ width: "22%", height: "10%", fontSize: "0.7rem" }}
+              sx={{ mt: 1.5, width: "22%", height: "10%", fontSize: "1rem", pl: "1rem", pr: "1rem" }}
               onBlur={() => {
                 setModalCode(0);
               }}>
@@ -153,7 +157,7 @@ const LoginForm = () => {
             </Button>
             <Button
               variant="contained"
-              sx={{ mt: 0.5, width: "22%", height: "10%", fontSize: "0.7rem" }}
+              sx={{ mt: 1, width: "22%", height: "10%", fontSize: "1rem", pl: "1rem", pr: "1rem" }}
               size="small"
               onClick={async () => {
                 const loginInfo = {
@@ -171,10 +175,12 @@ const LoginForm = () => {
                   if (err.response.data.message === "usedEmail") {
                     let logindData = await axios.post(process.env.REACT_APP_API_URL + "/users/login", payload);
                     const resData = await axios.get(process.env.REACT_APP_API_URL + "/users/userinfo");
-                    const { nickname, profile_image_id, id } = resData.data.data;
+                    const { nickname, id } = resData.data.data;
+                    if (resData.data.data.profile_image !== null) {
+                      setImage(resData.data.data.profile_image.store_path);
+                    }
                     setNickname(nickname);
                     setUserNumber(id);
-                    setImage(profile_image_id);
                   }
                 }
                 setModalCode("testLogin");

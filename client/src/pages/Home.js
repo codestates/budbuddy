@@ -6,7 +6,7 @@ import Hr from "../components/common/Hr";
 import ImgSlide from "../components/common/ImgSlide";
 
 export const Layout = styled.div`
-  padding-top: ${(props) => props.theme.backgroundPaddingTop};
+  padding-top: 5rem;
 
   .greeting {
     padding: 0rem 0rem 1rem 0.5rem;

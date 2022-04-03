@@ -11,6 +11,10 @@ import { sleep } from "../modules/sleep";
 
 export const Layout = styled.div`
   padding-top: ${(props) => props.theme.backgroundPaddingTop};
+
+  .signupWrapper {
+    margin-top: 4.5rem;
+  }
 `;
 
 const SignupBG = styled.div`
@@ -20,25 +24,23 @@ const SignupBG = styled.div`
   .std {
     display: grid;
     position: relative;
-    transition: box-shadow 0.3s ease;
-  }
-
-  .std:hover {
-    box-shadow: 0px -13px #53a7ea, 0px 13px #53a7ea, 0px -13px #53a7ea;
   }
 
   img {
     width: 100%;
-    height: 30vh;
+    height: ${(props) => props.theme.backgroundImgHeight};
     object-fit: cover;
     filter: blur(1px);
     border: none;
+    border-top: solid 1px rgb(0, 0, 0, 0.4);
+    border-bottom: solid 1px rgb(0, 0, 0, 0.4);
   }
 
   .backText {
     position: absolute;
     top: 50%;
     left: 50%;
+    font-size: ${(props) => props.theme.fontWritePageLarge};
 
     transform: translate(-50%, -50%);
     white-space: pre;
@@ -48,10 +50,11 @@ const SignupBG = styled.div`
 
     > h1 {
       text-transform: uppercase;
-      outline-offset: 0.4em;
+      outline-offset: 0.4rem;
       outline: 2px solid rgb(255, 255, 255, 0.5);
       display: inline-block;
-      margin: 0.4em 0 0.5em;
+      padding: 0 0.5rem;
+      margin: 0.4em 0 0.5em 0;
     }
 
     > h1 > span {
@@ -74,7 +77,6 @@ const Signup = () => {
   const checkPass = useRef(null);
   const checkNick = useRef(null);
 
-  let imgNumber = 4976;
   let navigate = useNavigate();
 
   async function reqSingup(payload) {
@@ -284,7 +286,7 @@ const Signup = () => {
           </div>
         </div>
       </SignupBG>
-      <SignupWrapper onSubmit={join}>
+      <SignupWrapper className="signupWrapper" onSubmit={join}>
         <div className="signupText">회원가입</div>
         <InputWrapper className="inputWrapper">
           <FontAwesomeIcon className="idIcon icon" icon={faUser} />

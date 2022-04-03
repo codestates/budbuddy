@@ -21,27 +21,30 @@ const Layout = styled.div`
 
 const IdPost = styled.div`
   display: grid;
-  grid-template-columns: 25% 80%;
+  grid-template-columns: 42% 58%;
   justify-content: center;
   align-items: center;
   text-align: center;
   margin-top: 3rem;
   margin-bottom: 0.4rem;
 
-  > .id {
+  .id {
+    margin-left: 2%;
     display: flex;
     align-items: center;
-    font-size: ${(props) => props.theme.fontWritePageMid};
-    margin-left: 1rem;
+    font-size: ${(props) => props.theme.fontWritePageSmall};
 
     .nick {
-      font-size: 1.4rem;
+      font-size: ${(props) => props.theme.fontWritePageLarge};
       margin-left: 0.2rem;
       color: DarkGreen;
     }
   }
-  > .post {
-    margin-right: 25%;
+
+  .post {
+    font-size: ${(props) => props.theme.fontWritePageSmall};
+    display: flex;
+    align-items: center;
   }
 `;
 
@@ -64,7 +67,7 @@ const Mypage = () => {
 
   async function getMapageInfo() {
     await setListByUserId();
-    await getUserInfo();
+    await getUserInfo(1);
   }
   // console.log(userInfo);
   return (
@@ -76,7 +79,9 @@ const Mypage = () => {
           <div>{"ID :"}</div>
           <div className="nick">{userInfo.nickname}</div>
         </div>
-        <div className="post">POST {listByUserId.length} 개</div>
+        <div className="post">
+          <div>POST {listByUserId.length} 개</div>
+        </div>
       </IdPost>
       <MyPageBg>
         <img className="mypageBg" src={budDummy[0].src} alt={`bg`} />

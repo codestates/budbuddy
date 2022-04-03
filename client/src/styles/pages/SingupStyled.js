@@ -14,6 +14,7 @@ export const SignupWrapper = styled.form`
   border-radius: ${(props) => props.theme.borderRadius};
 
   .signupText {
+    font-size: ${(props) => props.theme.fontWritePageLarge};
     letter-spacing: 7px;
     color: black;
     margin-bottom: 0.3rem;
@@ -21,7 +22,7 @@ export const SignupWrapper = styled.form`
 
   .hr {
     grid-area: hr;
-    margin: 0.6rem 0 1rem 0;
+    margin: 1rem 0 1.2rem 0;
   }
 
   .btn {
@@ -55,11 +56,13 @@ export const SignupWrapper = styled.form`
     display: flex;
     justify-content: space-between;
     > .join {
+      font-size: ${(props) => props.theme.fontWritePageMid};
       width: 25%;
       margin-left: 10%;
     }
     > .cancle {
-      width: 25%;
+      font-size: ${(props) => props.theme.fontWritePageMid};
+      width: 30%;
       margin-right: 10%;
     }
   }
@@ -84,6 +87,7 @@ export const InputWrapper = styled.div`
   place-items: center;
 
   input {
+    font-size: ${(props) => props.theme.fontWritePageMid};
     border: none;
     margin-left: 0.5rem;
     height: 1.5rem;
@@ -96,7 +100,7 @@ export const InputWrapper = styled.div`
   }
 
   > .icon {
-    font-size: ${(props) => props.theme.fontIconSize};
+    font-size: ${(props) => props.theme.fontWritePageLarge};
     filter: invert(85%) sepia(90%) saturate(400%) hue-rotate(130deg) brightness(95%) contrast(50%);
   }
 

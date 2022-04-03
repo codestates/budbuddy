@@ -35,6 +35,7 @@ const theme = {
   webWidth: 425,
   //style
   borderRadius: "5px",
+  backgroundImgHeight: "28vh",
 };
 
 export default theme;

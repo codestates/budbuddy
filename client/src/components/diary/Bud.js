@@ -1,8 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import { useNavigateSearch } from "../../modules/hooks";
+import useAjaxStore from "../../store/AjaxStore";
 
-export const Layout = styled.div`
+const Layout = styled.div`
   display: grid;
   grid-template-columns: auto;
   grid-template-rows: auto auto auto;
@@ -85,8 +86,14 @@ export const Layout = styled.div`
 
 const Bud = ({ className, src, budName, date, plant_id }) => {
   const navigateSearch = useNavigateSearch();
+  const { deletePlant, getPlantsList } = useAjaxStore();
   const goToWrite = () => navigateSearch("/write", { name: `${encodeURI(budName)}`, plant_id: `${plant_id}` });
   const goToListByPlantId = () => navigateSearch("/list", { name: `${encodeURI(budName)}`, plant_id: `${plant_id}` });
+
+  async function deleteBud() {
+    await deletePlant(plant_id);
+    await getPlantsList();
+  }
 
   return (
     <Layout className={className}>
@@ -98,6 +105,9 @@ const Bud = ({ className, src, budName, date, plant_id }) => {
           <div className="text">앨범</div>
           <div className="text" onClick={goToListByPlantId}>
             일지목록
+          </div>
+          <div className="text" onClick={deleteBud}>
+            내식물 삭제
           </div>
         </div>
         <img className="coverImg" src={src} alt={`bg`} />

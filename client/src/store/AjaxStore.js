@@ -64,6 +64,15 @@ const useAjaxStore = create(
           console.log("axios err / getPlantsList :::", err);
         }
       },
+      async deletePlant(plant_id) {
+        try {
+          console.log("deletePlant:::plant_id", plant_id);
+          const resData = await axios.delete(process.env.REACT_APP_API_URL + `/plants/${plant_id}`);
+          console.log("deletePlant:::", resData);
+        } catch (err) {
+          console.log("axios err / deletePlant :::", err);
+        }
+      },
       async setPlant(budName, upload_img) {
         //
         const payload = {
@@ -75,6 +84,7 @@ const useAjaxStore = create(
           if (upload_img.files.length !== 0) {
             let formdata = new FormData();
             formdata.append("image", upload_img.files[0]);
+            console.log("imgRes:::", upload_img, payload);
             const imgRes = await axios.post(process.env.REACT_APP_API_URL + "/images", formdata);
             payload["image_id"] = [imgRes.data.data.id];
             const resData = await axios.post(process.env.REACT_APP_API_URL + "/plants", payload);
@@ -102,12 +112,12 @@ const useAjaxStore = create(
             let publicJournal = {
               journalId: resjournal[i].id,
               nickname: resjournal[i].User.nickname,
-              profileImg: null,
+              profileImg: resjournal[i].User.profile_image.store_path,
               plantName: resjournal[i].Plant.name,
               updatedAt: resjournal[i].updatedAt,
               title: resjournal[i].title,
               textContent: resjournal[i].body,
-              journalImg: null,
+              journalImg: null, //유효성 검사 이후 넣어야함
             };
 
             publicJournal.date_pick = moment(resjournal[i].updatedAt).format("MM/DD");
