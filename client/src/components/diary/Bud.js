@@ -30,7 +30,6 @@ const Layout = styled.div`
     width: 100%;
     height: 18vh;
     mix-blend-mode: multiply;
-
     border: solid 2px rgb(0, 0, 0, 0.1);
   }
 
@@ -38,7 +37,7 @@ const Layout = styled.div`
     width: 100%;
     height: 100%;
     color: WhiteSmoke;
-    z-index: 2;
+    z-index: 1;
 
     position: absolute;
     text-align: center;
@@ -60,9 +59,9 @@ const Layout = styled.div`
 
   .hide > .text {
     position: relative;
-    top: 10%;
-    margin: 10%;
-    letter-spacing: 0.5rem;
+    top: 4.5%;
+    margin: 8%;
+    letter-spacing: 0.3rem;
     transition: background-color 0.1s cubic-bezier(0.55, 1.17, 0.75, 0.53);
   }
 
@@ -84,16 +83,11 @@ const Layout = styled.div`
   }
 `;
 
-const Bud = ({ className, src, budName, date, plant_id, isPopup, setBudId }) => {
+const Bud = ({ className, src, budName, date, plant_id, setPopupInfo }) => {
   const navigateSearch = useNavigateSearch();
 
   const goToWrite = () => navigateSearch("/write", { name: `${encodeURI(budName)}`, plant_id: `${plant_id}` });
   const goToListByPlantId = () => navigateSearch("/list", { name: `${encodeURI(budName)}`, plant_id: `${plant_id}` });
-
-  function confirmDelete() {
-    isPopup(true);
-    setBudId(plant_id);
-  }
 
   return (
     <Layout className={className}>
@@ -102,11 +96,22 @@ const Bud = ({ className, src, budName, date, plant_id, isPopup, setBudId }) => 
           <div className="text" onClick={goToWrite}>
             일지쓰기
           </div>
-          <div className="text">앨범</div>
           <div className="text" onClick={goToListByPlantId}>
             일지목록
           </div>
-          <div className="text" onClick={confirmDelete}>
+          <div className="text">앨범</div>
+          <div
+            className="text"
+            onClick={() => {
+              setPopupInfo({ fn: "changeBudName", plant_id });
+            }}>
+            식물 사진 변경
+          </div>
+          <div
+            className="text"
+            onClick={() => {
+              setPopupInfo({ fn: "deleteBud", plant_id });
+            }}>
             내식물 삭제
           </div>
         </div>

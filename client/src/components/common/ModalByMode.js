@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTriangleExclamation, faCircleExclamation } from "@fortawesome/free-solid-svg-icons";
+import { faTriangleExclamation, faCircleExclamation, faImage } from "@fortawesome/free-solid-svg-icons";
+import ImgUpload from "../common/ImgUpload";
 
 const Layout = styled.div`
   position: absolute;
@@ -12,8 +13,11 @@ const Layout = styled.div`
   z-index: 1;
   /* border: solid 1px red; */
 
+  display: flex;
+  justify-content: center;
   .shell {
     /* border: solid 1px blue; */
+    position: relative;
     width: 100%;
     min-height: 100vh;
     background-color: rgba(0, 0, 0, 0.3);
@@ -25,21 +29,82 @@ const Layout = styled.div`
 
   .popup {
     /* border: solid 1px blue; */
-    max-width: 85%;
     padding: 1rem;
     border-radius: ${(props) => props.theme.borderRadius};
     background-color: ${(props) => props.theme.formColor};
     animation: flipIn 0.7s ease-out;
     display: flex;
     flex-direction: column;
+    min-width: 320px;
+    max-width: ${(props) => props.theme.webWidth * 0.9 + "px"};
   }
 
-  .text {
-    width: 100%;
+  .top {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .icon {
+      font-size: 2rem;
+      padding: 0.2rem;
+    }
+
+    .alert {
+      color: Crimson;
+    }
+
+    .err {
+      color: #ffd700;
+    }
+
+    .image {
+      color: LightCoral;
+    }
+
+    .title {
+      text-align: center;
+      white-space: pre-wrap;
+      font-size: 1.5rem;
+    }
+  }
+
+  .mid {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     text-align: center;
-    white-space: pre-wrap;
-    line-height: 1.3;
-    font-size: 1.1rem;
+    white-space: pre;
+    .content {
+      margin-top: 0.5rem;
+      font-size: 1.15rem;
+      line-height: 1.2;
+    }
+
+    /* .upload {
+      display: flex;
+      justify-content: center;
+    } */
+  }
+
+  .bottom {
+    margin-top: 0.8rem;
+    display: flex;
+    justify-content: space-evenly;
+
+    > button {
+      font-size: 1.1rem;
+      border: none;
+      padding: 0.1rem 0.3rem;
+      background: lightgray;
+      border-radius: ${(props) => props.theme.borderRadius};
+      transition: background-color 0.2s ease;
+    }
+    .confirm:hover {
+      background-color: ${(props) => props.theme.hoverColor};
+    }
+    .cancle:hover {
+      background-color: ${(props) => props.theme.hoverCancleColor};
+    }
   }
   @keyframes flipIn {
     0% {
@@ -67,107 +132,35 @@ const Layout = styled.div`
     }
   }
 `;
-//
-const TopCap = styled.div`
-  display: flex;
-  justify-content: center;
-  margin: 0.5rem;
-  .wrap {
-    display: flex;
 
-    .icon {
-      font-size: 2rem;
-      padding: 0.2rem;
-    }
-
-    .alert {
-      color: Crimson;
-    }
-
-    .err {
-      color: #ffd700;
-    }
-    .alert-text {
-      font-size: 1.7rem;
-      padding: 0.2rem;
+function makeModal(type = "", text, confirmFn = "", setPopup = "") {
+  function close() {
+    if (typeof setPopup === "function") {
+      setPopup({});
     }
   }
-`;
 
-const BottomCap = styled.div`
-  margin: 0.5rem;
-
-  .btn-wrap {
-    margin-top: 0.8rem;
-    display: flex;
-    justify-content: space-evenly;
-
-    > button {
-      font-size: 1.1rem;
-      border: none;
-      padding: 0.1rem 0.3rem;
-      background: lightgray;
-      border-radius: ${(props) => props.theme.borderRadius};
-      transition: background-color 0.2s ease;
+  function confirm() {
+    if (typeof confirmFn === "function") {
+      confirmFn();
     }
-    .confirm:hover {
-      background-color: ${(props) => props.theme.hoverColor};
-    }
-    .cancle:hover {
-      background-color: ${(props) => props.theme.hoverCancleColor};
-    }
+    setPopup({});
   }
-`;
 
-function makeTop(type = "", fn = "") {
   const tasks = {
     alert() {
       return (
-        <TopCap>
-          <div className="wrap">
+        <div className="wrap">
+          <div className="top">
             <FontAwesomeIcon className="alert icon" icon={faTriangleExclamation} />
-            <div className="alert-text">경고</div>
+            <div className="title">경고</div>
           </div>
-        </TopCap>
-      );
-    },
-    error() {
-      return (
-        <TopCap>
-          <div className="wrap">
-            <FontAwesomeIcon className="err icon" icon={faCircleExclamation} />
-            <div className="alert-text">주의</div>
+          <div className="mid">
+            <div className="content">
+              <div>{text}</div>
+            </div>
           </div>
-        </TopCap>
-      );
-    },
-  };
-
-  if (!tasks[type]) {
-    return null;
-  }
-  return tasks[type]();
-}
-
-function makeBottom(type = "alert", confirmFn = "", setPopup = "") {
-  const tasks = {
-    alert() {
-      function close() {
-        if (typeof setPopup === "function") {
-          setPopup(false);
-        }
-      }
-
-      function confirm() {
-        if (typeof confirmFn === "function") {
-          confirmFn();
-        }
-        setPopup(false);
-      }
-
-      return (
-        <BottomCap>
-          <div className="btn-wrap">
+          <div className="bottom">
             <button className="confirm" onClick={confirm}>
               확인
             </button>
@@ -175,22 +168,50 @@ function makeBottom(type = "alert", confirmFn = "", setPopup = "") {
               취소
             </button>
           </div>
-        </BottomCap>
+        </div>
       );
     },
     error() {
-      function confirm() {
-        setPopup(false);
-      }
-
       return (
-        <BottomCap>
-          <div className="btn-wrap">
+        <div className="wrap">
+          <div className="top">
+            <FontAwesomeIcon className="err icon" icon={faCircleExclamation} />
+            <div className="title">주의</div>
+          </div>
+          <div className="mid">
+            <div className="content">
+              <div>{text}</div>
+            </div>
+          </div>
+          <div className="bottom">
             <button className="confirm" onClick={confirm}>
               확인
             </button>
           </div>
-        </BottomCap>
+        </div>
+      );
+    },
+    normal() {
+      return (
+        <form className="wrap">
+          <div className="top">
+            <FontAwesomeIcon className="image icon" icon={faImage} />
+            <div className="title">사진 교체</div>
+          </div>
+          <div className="mid">
+            <div className="content">
+              <div>{text}</div>
+            </div>
+            <div className="upload">
+              <ImgUpload />
+            </div>
+          </div>
+          <div className="bottom">
+            <button className="confirm" onClick={confirm}>
+              확인
+            </button>
+          </div>
+        </form>
       );
     },
   };
@@ -205,13 +226,7 @@ const ModalByMode = ({ type = "alert", text = "", confirmFn = "", setPopup = "" 
   return (
     <Layout>
       <div className="shell">
-        <div className="popup">
-          {makeTop(type)}
-          <div className="text">
-            <div>{text}</div>
-          </div>
-          {makeBottom(type, confirmFn, setPopup)}
-        </div>
+        <div className="popup">{makeModal(type, text, confirmFn, setPopup)}</div>
       </div>
     </Layout>
   );

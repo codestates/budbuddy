@@ -50,14 +50,16 @@ const BudLayout = styled.div`
   }
 `;
 
+const alertText = "정말 삭제하시겠습니까?\n 등록 식물을 삭제하여도 일지는 남습니다.";
+const errAlreadyExist = "이미 존재하는 식물 명입니다.";
+const changeName = "등록 식물의 사진을 변경합니다.";
+
 const BudDaily = () => {
   const { isLogin } = useLoginStore();
   const { setPlant, getPlantsList, myPlants, deletePlant } = useAjaxStore();
 
   const [isDialog, setDialog] = useState(false);
-  const [isDeletePopup, setDeletePopup] = useState(false);
-  const [isErrPopup, setErrPopup] = useState(false);
-  const [deleteBudId, setBudId] = useState("");
+  const [popupInfo, setPopupInfo] = useState(false);
 
   useEffect(() => {
     if (isLogin) {
@@ -65,8 +67,8 @@ const BudDaily = () => {
     }
   }, [isLogin]);
 
-  async function deleteBud() {
-    await deletePlant(deleteBudId);
+  async function asyncDeleteBud() {
+    await deletePlant(popupInfo.plant_id);
     await getPlantsList();
   }
 
@@ -81,20 +83,35 @@ const BudDaily = () => {
   async function registerBud(budName, upload_img) {
     const res = await setPlant(budName, upload_img);
     getPlantsList();
-
     if (res === "alreadyExistsBudName") {
-      setErrPopup(true);
+      setPopupInfo({ fn: "alreadyExistsBudName" });
     }
   }
 
+  function makePopup(type = "", fn = "") {
+    const tasks = {
+      deleteBud() {
+        return <ModalByMode type="alert" text={alertText} confirmFn={asyncDeleteBud} setPopup={setPopupInfo} />;
+      },
+      changeBudName() {
+        return <ModalByMode type="normal" text={changeName} setPopup={setPopupInfo} />;
+      },
+      alreadyExistsBudName() {
+        return <ModalByMode type="error" text={errAlreadyExist} setPopup={setPopupInfo} />;
+      },
+    };
+
+    if (!tasks[type]) {
+      return null;
+    }
+    return tasks[type]();
+  }
+
   console.log(myPlants);
-  const alertText = "정말 삭제하시겠습니까?\n 등록 식물을 삭제하여도 일지는 남습니다.";
-  const errAlreadyExist = "이미 존재하는 식물 명입니다.";
 
   return (
     <Layout>
-      {isErrPopup ? <ModalByMode type="error" text={errAlreadyExist} setPopup={setErrPopup} /> : null}
-      {isDeletePopup ? <ModalByMode type="alert" text={alertText} confirmFn={deleteBud} setPopup={setDeletePopup} /> : null}
+      {makePopup(popupInfo.fn)}
       <Logo className="logo" />
       <TabBtnOne className="TabBtnOne" tabName="내 식물" btnName="내 식물 추가" fn={openDialog} />
       <BudLayout>
@@ -108,7 +125,7 @@ const BudDaily = () => {
               const date = curDate();
               let src = null;
               if (v.Image !== null) src = v.Image.store_path;
-              return <Bud key={v.id} src={src || "Dummy/empty_bud.png"} className="cardcomponent" budName={v.name} date={date} plant_id={v.id} isPopup={setDeletePopup} setBudId={setBudId} />;
+              return <Bud key={v.id} src={src || "Dummy/empty_bud.png"} className="cardcomponent" budName={v.name} date={date} plant_id={v.id} setPopupInfo={setPopupInfo} />;
             })}
           </div>
         )}
