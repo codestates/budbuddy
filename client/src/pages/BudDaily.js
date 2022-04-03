@@ -76,6 +76,8 @@ const BudDaily = () => {
     setModalCode(res); //alreadyExistsBudName
   }
 
+  console.log(myPlants);
+
   return (
     <Layout
       onClick={() => {
