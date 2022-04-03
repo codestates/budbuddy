@@ -11,18 +11,20 @@ const Layout = styled.div`
 
   position: absolute;
   text-align: center;
+
   top: 50%;
   left: 50%;
 
   transform: translate(-50%, -50%);
 
   .background {
-    min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 100vw;
+    min-height: 100vh;
+    border: solid 1px black;
     @media screen and (min-width: 391px) {
       width: ${(props) => props.theme.webWidth + "px"};
     }

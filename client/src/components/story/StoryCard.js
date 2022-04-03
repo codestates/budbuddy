@@ -127,25 +127,25 @@ const Card = styled.div`
       height: 35px;
       margin: 0.3rem;
       border-radius: 50%;
-      border: 2px solid ForestGreen;
-      box-shadow: inset 0px 0px 2px 3px ForestGreen;
-      transition: border 0.15s ease, box-shadow 0.15s ease;
-    }
-
-    .profileImg.empty {
-      border: 2px solid Gray;
-      box-shadow: inset 0px 0px 2px 3px Gray;
+      border: 2px solid DarkGrey;
+      box-shadow: inset 2px 2px 2px 2px DarkGrey;
       transition: border 0.15s ease, box-shadow 0.15s ease;
     }
 
     .profile-wrap > .profileImg:hover {
-      border: 2px solid DodgerBlue;
-      box-shadow: inset 0px 0px 2px 3px DodgerBlue;
+      border: 2px solid ForestGreen;
+      box-shadow: inset 2px 2px 2px 2px ForestGreen;
+    }
+
+    .profileImg.empty {
+      border: 2px solid Gray;
+      box-shadow: inset 2px 2px 2px 2px Gray;
+      transition: border 0.15s ease, box-shadow 0.15s ease;
     }
 
     .profileImg.empty:hover {
       border: 2px solid Tomato;
-      box-shadow: inset 0px 0px 2px 3px Tomato;
+      box-shadow: inset 2px 2px 2px 2px Tomato;
       transition: border 0.15s ease, box-shadow 0.15s ease;
     }
 
