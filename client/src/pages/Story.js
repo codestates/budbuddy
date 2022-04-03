@@ -30,7 +30,7 @@ export const Layout = styled.div`
     margin-left: 2rem;
   }
   .story-card {
-    /* margin-top: 2.4rem; */
+    margin-top: 2.4rem;
     /* padding: 0 0.3rem; */
   }
 `;
@@ -42,8 +42,8 @@ const Story = () => {
     getAllPublicJournal();
   }, []);
 
-  function storySearch() {
-    console.log("스토리 검색 함수");
+  function storySearch(word) {
+    console.log("스토리 검색 함수", word, publicJournal);
   }
 
   return (
