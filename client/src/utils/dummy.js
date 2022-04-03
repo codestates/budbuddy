@@ -13,17 +13,50 @@ export const proverbs = [
 ];
 
 export const slideImgs = [
-  `signupBg/IMG_0.JPG`,
-  `signupBg/IMG_1.PNG`,
-  `signupBg/IMG_2.JPG`,
-  `signupBg/IMG_3.PNG`,
-  `signupBg/IMG_4.JPG`,
-  `signupBg/IMG_5.PNG`,
-  `signupBg/IMG_6.PNG`,
-  `signupBg/IMG_7.PNG`,
-  `signupBg/IMG_8.PNG`,
-  `signupBg/IMG_9.PNG`,
-  `signupBg/IMG_10.PNG`,
+  {
+    src: `recomendPlant/IMG_0.JPG`,
+    title: "소문난 식물 킬러라면,\n강한 생명력을 지닌",
+    name: "멜라니 고무나무",
+    content: "힘 있게 뻗은 잎이 매력적인 멜라니 고무나무. 붉은빛을 띠는 새순은 점점 짙은 녹색으로 바뀐다. 관리가 까다롭지 않으며, 음이온과 산소를 뿜어내 공기 정화에도 도움을 준다.",
+  },
+  {
+    src: `recomendPlant/IMG_1.JPG`,
+    title: "실내 공기 정화가 필요하다면?\n",
+    name: "필로덴드론 버킨",
+    content: "선명한 잎 무늬가 독특한 관엽식물로 밝은 곳에 둘수록 무늬가 더 선명해진다. 포름알데히드 제거 능력이 탁월해 공기 정화는 물론 새집 증후군 완화에 도움을 준다..",
+  },
+  {
+    src: `recomendPlant/IMG_2.JPG`,
+    title: "활용도 높은 식물 찾고 있다면?\n 어느 공간에서나 존재감을 발하는\n",
+    name: "생선뼈 선인장",
+    content: "생선뼈를 닮은 독특한 모양이 특징. 선인장과 식물로 줄기에 수분을 머금고 있어 강한 생명력을 자랑한다. 길게 늘어지는 매력이 있어 행잉 플랜트로 활용하기 좋은 식물.",
+  },
+  {
+    src: `recomendPlant/IMG_3.JPG`,
+    title: "공간을 향기롭게 만들고 싶다면?\n천연 디퓨저,",
+    name: " 오렌지 재스민",
+    content:
+      "이름처럼 오렌지를 닮은 열매를 맺고 재스민 같은 진한 향을 가졌다. 조그맣고 향기로운 하얀색 꽃은 개화 후 1주일 이내 져버리지만 사계절 내내 꽃을 피우며 꽃이 진 후 빨간 열매를 맺는 것이 특징.",
+  },
+  {
+    src: `recomendPlant/IMG_4.JPG`,
+    title: "이국적인 공간을 꾸미고 싶다면?\n독특한 수형의",
+    name: " 드라세나 마지나타",
+    content:
+      "대조되는 색 조합과 독특한 수형으로 이국적인 분위기를 완성해주는 드라세나 마지나타. 건조함에 강하고 햇빛이 많이 필요하지 않아 드라세나 중에서도 키우기 쉬운 종이다. 공기 중 유해 물질 제거 능력이 우수하며 습도 조절까지 가능해 실내에서 키우기 좋다.",
+  },
+  {
+    src: `recomendPlant/IMG_5.JPG`,
+    title: "화려하지 않은 식물을 원한다면?\n정적인 매력을 가진",
+    name: "황칠나무",
+    content: "가느다란 곡선의 목대가 매력적인 황칠나무. 특별히 관리해 줄 조건은 없어 초보자도 키우기 쉬운 식물이다.",
+  },
+  {
+    src: `recomendPlant/IMG_6.JPG`,
+    title: "화사한 공간을 꾸미고 싶다면?\n 귀여운 꽃을 피우는",
+    name: "양골담초",
+    content: "봄부터 여름까지 앙증맞은 꽃을 피우는 양골담초. 가지마다 풍성하게 피는 노란 꽃은 색감처럼 상큼한 레몬향이 나는 것이 특징이다.",
+  },
 ];
 
 export const doing = [
