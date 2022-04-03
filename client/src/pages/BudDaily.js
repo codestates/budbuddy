@@ -50,9 +50,7 @@ const BudLayout = styled.div`
   }
 `;
 
-const alertText = "정말 삭제하시겠습니까?\n 등록 식물을 삭제하여도 일지는 남습니다.";
 const errAlreadyExist = "이미 존재하는 식물 명입니다.";
-const changeName = "등록 식물의 사진을 변경합니다.";
 
 const BudDaily = () => {
   const { isLogin } = useLoginStore();
@@ -84,34 +82,38 @@ const BudDaily = () => {
     const res = await setPlant(budName, upload_img);
     getPlantsList();
     if (res === "alreadyExistsBudName") {
-      setPopupInfo({ fn: "alreadyExistsBudName" });
+      setPopupInfo({ fn: "alreadyExistsBudName", text: errAlreadyExist });
     }
   }
 
-  function makePopup(type = "", fn = "") {
+  function makePopup(info = "", fn = "") {
     const tasks = {
       deleteBud() {
-        return <ModalByMode type="alert" text={alertText} confirmFn={asyncDeleteBud} setPopup={setPopupInfo} />;
+        info.deleteBud = asyncDeleteBud;
+        info.closePopup = setPopupInfo;
+        return <ModalByMode info={info} />;
       },
-      changeBudName() {
-        return <ModalByMode type="normal" text={changeName} setPopup={setPopupInfo} />;
+      changeBudImage() {
+        info.closePopup = setPopupInfo;
+        return <ModalByMode info={info} />;
       },
       alreadyExistsBudName() {
-        return <ModalByMode type="error" text={errAlreadyExist} setPopup={setPopupInfo} />;
+        info.closePopup = setPopupInfo;
+        return <ModalByMode info={info} />;
       },
     };
 
-    if (!tasks[type]) {
+    if (!tasks[info.fn]) {
       return null;
     }
-    return tasks[type]();
+    return tasks[info.fn]();
   }
 
   console.log(myPlants);
 
   return (
     <Layout>
-      {makePopup(popupInfo.fn)}
+      {makePopup(popupInfo)}
       <Logo className="logo" />
       <TabBtnOne className="TabBtnOne" tabName="내 식물" btnName="내 식물 추가" fn={openDialog} />
       <BudLayout>

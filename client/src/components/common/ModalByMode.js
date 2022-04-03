@@ -133,22 +133,26 @@ const Layout = styled.div`
   }
 `;
 
-function makeModal(type = "", text, confirmFn = "", setPopup = "") {
+function makeModal(info = "") {
   function close() {
-    if (typeof setPopup === "function") {
-      setPopup({});
+    if (typeof info.closePopup === "function") {
+      info.closePopup({});
     }
   }
-
-  function confirm() {
-    if (typeof confirmFn === "function") {
-      confirmFn();
+  function deleteBud() {
+    if (typeof info.deleteBud === "function") {
+      info.deleteBud();
     }
-    setPopup({});
+    info.closePopup({});
+  }
+  function changeBudImg(e) {
+    e.preventDefault();
+    console.log("버드 이미지 변경 작성란");
+    info.closePopup({});
   }
 
   const tasks = {
-    alert() {
+    deleteBud() {
       return (
         <div className="wrap">
           <div className="top">
@@ -157,11 +161,11 @@ function makeModal(type = "", text, confirmFn = "", setPopup = "") {
           </div>
           <div className="mid">
             <div className="content">
-              <div>{text}</div>
+              <div>{info.text}</div>
             </div>
           </div>
           <div className="bottom">
-            <button className="confirm" onClick={confirm}>
+            <button className="confirm" onClick={deleteBud}>
               확인
             </button>
             <button className="cancle" onClick={close}>
@@ -171,7 +175,7 @@ function makeModal(type = "", text, confirmFn = "", setPopup = "") {
         </div>
       );
     },
-    error() {
+    alreadyExistsBudName() {
       return (
         <div className="wrap">
           <div className="top">
@@ -180,18 +184,18 @@ function makeModal(type = "", text, confirmFn = "", setPopup = "") {
           </div>
           <div className="mid">
             <div className="content">
-              <div>{text}</div>
+              <div>{info.text}</div>
             </div>
           </div>
           <div className="bottom">
-            <button className="confirm" onClick={confirm}>
+            <button className="confirm" onClick={close}>
               확인
             </button>
           </div>
         </div>
       );
     },
-    normal() {
+    changeBudImage() {
       return (
         <form className="wrap">
           <div className="top">
@@ -200,14 +204,14 @@ function makeModal(type = "", text, confirmFn = "", setPopup = "") {
           </div>
           <div className="mid">
             <div className="content">
-              <div>{text}</div>
+              <div>{info.text}</div>
             </div>
             <div className="upload">
               <ImgUpload />
             </div>
           </div>
           <div className="bottom">
-            <button className="confirm" onClick={confirm}>
+            <button className="confirm" onClick={changeBudImg}>
               확인
             </button>
           </div>
@@ -216,17 +220,17 @@ function makeModal(type = "", text, confirmFn = "", setPopup = "") {
     },
   };
 
-  if (!tasks[type]) {
+  if (!tasks[info.fn]) {
     return null;
   }
-  return tasks[type]();
+  return tasks[info.fn]();
 }
 
-const ModalByMode = ({ type = "alert", text = "", confirmFn = "", setPopup = "" }) => {
+const ModalByMode = ({ info = "" }) => {
   return (
     <Layout>
       <div className="shell">
-        <div className="popup">{makeModal(type, text, confirmFn, setPopup)}</div>
+        <div className="popup">{makeModal(info)}</div>
       </div>
     </Layout>
   );

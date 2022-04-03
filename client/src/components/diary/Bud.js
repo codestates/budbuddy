@@ -83,6 +83,9 @@ const Layout = styled.div`
   }
 `;
 
+const alertText = "정말 삭제하시겠습니까?\n 등록 식물을 삭제하여도 일지는 남습니다.";
+const changeName = "등록 식물의 사진을 변경합니다.";
+
 const Bud = ({ className, src, budName, date, plant_id, setPopupInfo }) => {
   const navigateSearch = useNavigateSearch();
 
@@ -103,14 +106,14 @@ const Bud = ({ className, src, budName, date, plant_id, setPopupInfo }) => {
           <div
             className="text"
             onClick={() => {
-              setPopupInfo({ fn: "changeBudName", plant_id });
+              setPopupInfo({ fn: "changeBudImage", text: alertText, plant_id });
             }}>
             식물 사진 변경
           </div>
           <div
             className="text"
             onClick={() => {
-              setPopupInfo({ fn: "deleteBud", plant_id });
+              setPopupInfo({ fn: "deleteBud", text: changeName, plant_id });
             }}>
             내식물 삭제
           </div>
