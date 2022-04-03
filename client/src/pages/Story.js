@@ -44,7 +44,10 @@ const Story = () => {
   }, []);
 
   function storySearch(word) {
-    if (word === "") return publicJournal;
+    if (word === "") {
+      setStory(publicJournal);
+      return;
+    }
 
     word = word.replace(/[\s]/g, "");
     const regExp = new RegExp(word);
