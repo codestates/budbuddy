@@ -95,7 +95,7 @@ const StoryLayout = styled.div`
       width: 55px;
       height: 55px;
       border-radius: 25%;
-      border: solid 2px rgba(0, 0, 0, 0.05);
+      border: solid 2px rgba(0, 0, 0, 0.08);
       transition: transform ${(props) => `${props.hoverTransitonSec}s`} ease;
     }
 

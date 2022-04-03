@@ -89,10 +89,10 @@ const ImgSlide = ({ className = "", images }) => {
               );
             })}
           </ul>
-          <span className="left arrow" onClick={LeftSlide}>
+          <span className="left arrow" onClick={RightSlide}>
             <img src={"./slideArrow/left-arrow.png"} alt="" />
           </span>
-          <span className="right arrow" onClick={RightSlide}>
+          <span className="right arrow" onClick={LeftSlide}>
             <img src={"./slideArrow/right-arrow.png"} alt="" />
           </span>
         </div>
