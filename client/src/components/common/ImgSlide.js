@@ -5,7 +5,7 @@ export const Layout = styled.div`
   img {
     object-fit: cover;
     width: 100%;
-    height: 27vh;
+    height: ${(props) => props.theme.backgroundImgHeight};
     border: none;
   }
 
