@@ -2,13 +2,15 @@ import React from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import useLoginStore from "../../store/LoginStore";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHouseUser, faUsers, faBook, faCamera, faUser } from "@fortawesome/free-solid-svg-icons";
+
 export const Content = styled.nav`
   cursor: pointer;
   position: fixed;
   bottom: 0;
   z-index: 10;
   padding: 0.4rem;
-  font-size: 1.2rem;
 
   background-color: ${(props) => props.theme.navigationBGColor};
 
@@ -30,6 +32,52 @@ export const Content = styled.nav`
   .wrap {
     display: flex;
     justify-content: space-around;
+    align-items: center;
+    font-size: 1.5rem;
+
+    .link {
+      position: relative;
+
+      .icon {
+        color: dimgray;
+        transform: translateY(10%);
+        transition: color 0.25s ease;
+      }
+
+      .icon:hover {
+        color: LightCoral;
+      }
+
+      .tooltip {
+        position: absolute;
+        width: 100%;
+        top: -47%;
+        left: -20%;
+        text-decoration: none;
+        font-size: 0.8rem;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+
+        .tooltiptext {
+          font-family: sans-serif;
+          color: white;
+          background-color: black;
+          border: 1px solid black;
+          border-radius: ${(props) => props.theme.borderRadius};
+          padding: 0 0.3rem 0.2rem 0.3rem;
+          position: absolute;
+          transition: all 0.3s ease;
+          opacity: 0;
+        }
+      }
+    }
+
+    .link:hover .tooltiptext {
+      opacity: 1;
+    }
   }
 `;
 
@@ -39,32 +87,54 @@ function NavigationBar({ login = false }) {
     <Content>
       <div className="wrap">
         <NavLink to="/test">
-          <span className="test">테스트IJ</span>
-        </NavLink>
-        <NavLink to="/test2">
-          <span className="test2">테스트JY</span>
+          <span className="test">테스트</span>
         </NavLink>
         <NavLink to="/">
-          <span className="home">홈</span>
+          <div className="link">
+            <FontAwesomeIcon className="home icon" icon={faHouseUser} />
+            <div className="tooltip">
+              <span className="tooltiptext">Home</span>
+            </div>
+          </div>
         </NavLink>
         <NavLink to="/story">
-          <span className="story">스토리</span>
+          <div className="link">
+            <FontAwesomeIcon className="story icon" icon={faUsers} />
+            <div className="tooltip">
+              <span className="tooltiptext">story</span>
+            </div>
+          </div>
         </NavLink>
         {isLogin ? (
           <NavLink to="/daily">
-            <span className="daily">내 일지</span>
+            <div className="link">
+              <FontAwesomeIcon className="diary icon" icon={faBook} />
+              <div className="tooltip">
+                <span className="tooltiptext">diary</span>
+              </div>
+            </div>
           </NavLink>
         ) : null}
         <NavLink to="/album">
-          <span className="album">앨범</span>
+          <div className="link">
+            <FontAwesomeIcon className="album icon" icon={faCamera} />
+            <div className="tooltip">
+              <span className="tooltiptext">album</span>
+            </div>
+          </div>
         </NavLink>
         {isLogin ? (
           <NavLink to="/mypage">
-            <span className="login">내 정보</span>
+            <div className="link">
+              <FontAwesomeIcon className="mypage icon" icon={faUser} />
+              <div className="tooltip">
+                <span className="tooltiptext">mypage</span>
+              </div>
+            </div>
           </NavLink>
         ) : (
           <NavLink to="/login">
-            <span className="login">로그인</span>
+            <span className="login">Login</span>
           </NavLink>
         )}
       </div>
