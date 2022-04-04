@@ -3,6 +3,7 @@ const checkAuth = require("../../modules/verifyCookieToken");
 
 module.exports = async (req, res) => {
   const id = req.params.id;
+  console.log(req.params);
   if (isNaN(id)) return res.status(400).send({ message: "Bad Request", data: "id is NaN" });
 
   try {
@@ -12,6 +13,7 @@ module.exports = async (req, res) => {
   }
 
   const user_id = verify.idx;
+  console.log("서버 문제는?", user_id, id);
   try {
     const count = await Plants.destroy({
       where: {

@@ -15,11 +15,11 @@ module.exports = async (req, res) => {
     },
   });
 
-  if (!user) return res.status(404).send({ message: "doNotExistUser" });
+  if (!user) return res.status(404).send({ message: "Not Found" });
 
-  const reqEncryptPassword = await createPassword(reqPassword, user.salt);
+  const { password: reqEncryptPassword } = await createPassword(reqPassword, user.salt);
 
-  if (!user.password === reqEncryptPassword) return res.status(403).send({ message: "wrongPassword" });
+  if (user.password !== reqEncryptPassword) return res.status(403).send({ message: "wrongPassword" });
 
   const jwtPayload = {
     idx: user.id,

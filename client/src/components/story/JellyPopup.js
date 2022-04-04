@@ -95,7 +95,7 @@ const StoryLayout = styled.div`
       width: 55px;
       height: 55px;
       border-radius: 25%;
-      border: solid 2px rgba(0, 0, 0, 0.05);
+      border: solid 2px rgba(0, 0, 0, 0.08);
       transition: transform ${(props) => `${props.hoverTransitonSec}s`} ease;
     }
 
@@ -218,6 +218,25 @@ const StoryLayout = styled.div`
       }
     }
   }
+
+  .reply {
+    display: flex;
+    flex-direction: column;
+    padding: 0.1rem 0.3rem;
+    background-color: ${(props) => props.theme.replyBgColor};
+    padding: 0.7rem 0 0.7rem 0;
+
+    .reply-top {
+      display: flex;
+      justify-content: space-between;
+      padding: 0 0.5rem 0 0.5rem;
+    }
+    .reply-mid {
+      margin-top: 0.6rem;
+      padding: 0 0.5rem 0 0.5rem;
+      white-space: pre-wrap;
+    }
+  }
 `;
 
 const JellyPopup = ({ setJellyPopup, story }) => {
@@ -262,7 +281,7 @@ const JellyPopup = ({ setJellyPopup, story }) => {
               <div>{`제목: ${story.title}`}</div>
             </div>
             <div className="photo">
-              <img className="journal-img" src={story.journalImg || "Dummy/empty_journal.png"} alt="" />
+              <img className="journal-img" src={story.journalImg || "Dummy/empty_bud.jpg"} alt="" />
             </div>
             <div className="content">
               <div className="text">{story.textContent}</div>
@@ -270,7 +289,18 @@ const JellyPopup = ({ setJellyPopup, story }) => {
           </div>
           <div></div>
           <div className="bottom">
-            <div className="reply">
+            <div>
+              <div className="reply">
+                <div className="reply-top">
+                  <div>달콤전도사 </div>
+                  <div>수정 삭제 03/01</div>
+                </div>
+                <div className="reply-mid">
+                  <div>
+                    내요요요요요요웅우&nbsp;<span className="rereply">reply</span>
+                  </div>
+                </div>
+              </div>
               <div className="content-wrap">
                 <textarea className="content" placeholder="댓글 입력" onKeyUp={textAreaResize} name="content" />
               </div>

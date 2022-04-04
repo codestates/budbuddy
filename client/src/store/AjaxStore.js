@@ -61,7 +61,17 @@ const useAjaxStore = create(
           // console.log("getPlantsList:::", resUser);
           set((state) => ({ myPlants: resData.data.data }));
         } catch (err) {
+          set((state) => ({ myPlants: [] }));
           console.log("axios err / getPlantsList :::", err);
+        }
+      },
+      async deletePlant(plant_id) {
+        try {
+          console.log("deletePlant:::plant_id", plant_id);
+          const resData = await axios.delete(process.env.REACT_APP_API_URL + `/plants/${plant_id}`);
+          console.log("deletePlant:::", resData);
+        } catch (err) {
+          console.log("axios err / deletePlant :::", err);
         }
       },
       async setPlant(budName, upload_img) {
@@ -75,6 +85,7 @@ const useAjaxStore = create(
           if (upload_img.files.length !== 0) {
             let formdata = new FormData();
             formdata.append("image", upload_img.files[0]);
+            console.log("imgRes:::", upload_img, payload);
             const imgRes = await axios.post(process.env.REACT_APP_API_URL + "/images", formdata);
             payload["image_id"] = [imgRes.data.data.id];
             const resData = await axios.post(process.env.REACT_APP_API_URL + "/plants", payload);
@@ -103,12 +114,20 @@ const useAjaxStore = create(
               journalId: resjournal[i].id,
               nickname: resjournal[i].User.nickname,
               profileImg: null,
-              plantName: resjournal[i].Plant.name,
+              plantName: null,
+              writingDate: resjournal[i].date_pick,
               updatedAt: resjournal[i].updatedAt,
               title: resjournal[i].title,
               textContent: resjournal[i].body,
-              journalImg: null,
+              journalImg: null, //유효성 검사 이후 넣어야함
             };
+
+            if (resjournal[i].Plant) {
+              publicJournal.plantName = resjournal[i].Plant.name;
+            }
+            if (resjournal[i].User.profile_image !== null) {
+              publicJournal.profileImg = resjournal[i].User.profile_image.store_path;
+            }
 
             publicJournal.date_pick = moment(resjournal[i].updatedAt).format("MM/DD");
             if (resjournal[i].Journal_Images.length !== 0) {

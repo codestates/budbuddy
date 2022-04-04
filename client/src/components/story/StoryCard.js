@@ -12,7 +12,6 @@ const Layout = styled.div`
     /* border: solid 1px red; */
     width: 100%;
     padding: 0 0.3rem;
-    margin-top: 2.1rem;
   }
 
   .wrap {
@@ -128,25 +127,25 @@ const Card = styled.div`
       height: 35px;
       margin: 0.3rem;
       border-radius: 50%;
-      border: 2px solid ForestGreen;
-      box-shadow: inset 0px 0px 2px 3px ForestGreen;
-      transition: border 0.15s ease, box-shadow 0.15s ease;
-    }
-
-    .profileImg.empty {
-      border: 2px solid Gray;
-      box-shadow: inset 0px 0px 2px 3px Gray;
+      border: 2px solid DarkGrey;
+      box-shadow: inset 2px 2px 2px 2px DarkGrey;
       transition: border 0.15s ease, box-shadow 0.15s ease;
     }
 
     .profile-wrap > .profileImg:hover {
-      border: 2px solid DodgerBlue;
-      box-shadow: inset 0px 0px 2px 3px DodgerBlue;
+      border: 2px solid ForestGreen;
+      box-shadow: inset 2px 2px 2px 2px ForestGreen;
+    }
+
+    .profileImg.empty {
+      border: 2px solid Gray;
+      box-shadow: inset 2px 2px 2px 2px Gray;
+      transition: border 0.15s ease, box-shadow 0.15s ease;
     }
 
     .profileImg.empty:hover {
       border: 2px solid Tomato;
-      box-shadow: inset 0px 0px 2px 3px Tomato;
+      box-shadow: inset 2px 2px 2px 2px Tomato;
       transition: border 0.15s ease, box-shadow 0.15s ease;
     }
 
@@ -289,7 +288,7 @@ const StoryCard = ({ className = "", storyList, hoverTransitonSec = 0.25, setFre
                     </div>
                     <div className="middle-cap">
                       <div className="journal-img">
-                        <img className="plant-img" src={v.journalImg || "/Dummy/empty_journal.png"} alt="" />
+                        <img className="plant-img" src={v.journalImg || "/Dummy/empty_bud.jpg"} alt="" />
                       </div>
                       <div className="summary">{v.textContent}</div>
                     </div>

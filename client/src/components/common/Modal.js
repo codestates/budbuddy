@@ -39,6 +39,7 @@ const ModalContainer = styled.div`
   > .modal_content > .modal_text {
     display: grid;
     white-space: pre;
+    font-size: ${(props) => props.theme.fontWritePageMid};
   }
 
   > .modal_content > button {

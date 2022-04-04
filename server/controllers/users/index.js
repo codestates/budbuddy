@@ -4,4 +4,5 @@ module.exports = {
   userInfo: require("./userInfo"),
   logout: require("./logout"),
   changeProfile: require("./changeProfileImage"),
+  changePassword: require("./changePassword"),
 };

@@ -43,25 +43,42 @@ export const Layout = styled.div`
   }
 `;
 
-const TabOption = ({ className = "", tabName, setPickValue }) => {
-  const FillterBud = [];
-  for (let i = 0; i < budDummy.length; i++) {
-    if (!FillterBud.includes(budDummy[i].budName)) {
-      FillterBud.push(budDummy[i].budName);
+const TabOption = ({ className = "", tabName, setPickPlantValue, setPickDateValue, publicJournal }) => {
+  const UserPlantsName = publicJournal.reduce((acc, cur) => {
+    if (!acc.includes(cur.plantName)) {
+      acc.push(cur.plantName);
     }
-  }
+    return acc;
+  }, []);
 
-  const OptionValue = (e) => {
-    setPickValue(e.target.value);
+  const UserPlantsDate = publicJournal.reduce((acc, cur) => {
+    let SelectDate = cur.writingDate;
+    if (!acc.includes(SelectDate)) {
+      acc.push(SelectDate);
+    }
+    return acc;
+  }, []);
+
+  const OptionDateValue = (e) => {
+    setPickDateValue(e.target.value);
+  };
+  const OptionPlantValue = (e) => {
+    setPickPlantValue(e.target.value);
   };
   return (
     <Layout className={`${className}`}>
       <div className="shell">
         <div className="cap-wrap">
           <button className="leftcap">{tabName}</button>
-          <select className="rightcap" onChange={(e) => OptionValue(e)}>
-            <option>식물을 선택해주세요</option>
-            {FillterBud.map((el) => {
+          <select defaultValue="날짜" className="rightcap" onChange={(e) => OptionDateValue(e)}>
+            <option disabled>날짜</option>
+            {UserPlantsDate.map((el) => {
+              return <option key={el}>{el}</option>;
+            })}
+          </select>
+          <select defaultValue="식물이름" className="rightcap" onChange={(e) => OptionPlantValue(e)}>
+            <option disabled>식물이름</option>
+            {UserPlantsName.map((el) => {
               return <option key={el}>{el}</option>;
             })}
           </select>
