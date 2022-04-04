@@ -7,6 +7,7 @@ import Picture from "../components/Album/Picture";
 import useLoginStore from "../store/LoginStore";
 import axios from "axios";
 import { curDate } from "../modules/date";
+import useAjaxStore from "../store/AjaxStore";
 
 const Layout = styled.div`
   display: grid;
@@ -53,9 +54,17 @@ const Album = () => {
     }
   }, [isLogin]);
 
-  const [plants, setPlants] = useState([]);
-  const [pickValue, setPickValue] = useState("");
+  const { publicJournal, getAllPublicJournal } = useAjaxStore();
+  useEffect(() => {
+    getAllPublicJournal();
+  }, []);
+  console.log(publicJournal);
 
+  const [plants, setPlants] = useState([]);
+  const [pickPlantValue, setPickPlantValue] = useState("");
+  const [pickDateValue, setPickDateValue] = useState("");
+  // console.log("pickDateValue", pickDateValue);
+  // console.log("pickPlantValue", pickPlantValue);
   async function getPlantsList() {
     try {
       const resData = await axios.get(process.env.REACT_APP_API_URL + "/plants");
@@ -68,7 +77,7 @@ const Album = () => {
   return (
     <Layout>
       <Logo className="logo" />
-      <TabOption className="TabBtnOne" tabName="앨범" setPickValue={setPickValue} />
+      <TabOption className="TabBtnOne" tabName="앨범" setPickPlantValue={setPickPlantValue} setPickDateValue={setPickDateValue} publicJournal={publicJournal} />
       <BudLayout>
         {budDummy.length === 0 ? (
           <div className="notice-pos">
@@ -76,9 +85,11 @@ const Album = () => {
           </div>
         ) : (
           <div className="card-wrap">
-            {plants.map((el) => {
-              const date = curDate();
-              return <Picture key={el.id} src={el.src || "Dummy/diary_4.PNG"} className="cardcomponent" budName={el.name} date={date} plant_id={el.id} text="안녕안녕해!" />;
+            {publicJournal.map((el) => {
+              const date = el.updatedAt.substring(0, 10);
+              return (
+                <Picture key={el.journalId} src={el.journalImg || "Dummy/diary_4.PNG"} className="cardcomponent" budName={el.nickname} date={date} plant_id={el.journalId} text={el.textContent} />
+              );
             })}
           </div>
         )}
