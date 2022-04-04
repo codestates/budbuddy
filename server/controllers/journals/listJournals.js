@@ -24,6 +24,7 @@ module.exports = {
             },
             {
               model: Plants,
+              include: Images,
             },
             {
               model: Journal_Actions,
@@ -54,6 +55,7 @@ module.exports = {
             },
             {
               model: Plants,
+              include: Images,
             },
             {
               model: Journal_Actions,
@@ -92,6 +94,7 @@ module.exports = {
           },
           {
             model: Plants,
+            include: Images,
           },
           {
             model: Journal_Actions,
@@ -130,6 +133,8 @@ module.exports = {
           },
           {
             model: Plants,
+            paranoid: false,
+            include: Images,
           },
           {
             model: Journal_Actions,

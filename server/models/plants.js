@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here\
-      Plants.hasMany(models.Journals);
+      Plants.hasMany(models.Journals, { foreignKey: "plant_id", onDelete: "SET NULL" });
       Plants.belongsTo(models.Users, { foreignKey: "user_id" });
       Plants.belongsTo(models.Images, { foreignKey: "image_id" });
     }
@@ -27,6 +27,7 @@ module.exports = (sequelize, DataTypes) => {
       sequelize,
       modelName: "Plants",
       underscored: true,
+      paranoid: true,
     },
   );
   return Plants;

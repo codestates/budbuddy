@@ -88,6 +88,13 @@ const DiaryList = ({ diaryList = [], isBudName = false, type = "" }) => {
   return (
     <Layout>
       {diaryList.map((journal, i) => {
+        console.log("DiaryList:::", journal);
+        let plantName = "";
+        if (!journal.Plant) {
+          plantName = "error";
+        } else {
+          plantName = journal.Plant.name;
+        }
         return (
           <div key={journal.id} className="wrap">
             <div className="date-wrap">
@@ -100,7 +107,7 @@ const DiaryList = ({ diaryList = [], isBudName = false, type = "" }) => {
               }}>
               <div>
                 {`${journal.title}`}
-                <span className="budname">{isBudName ? ` (${journal.Plant.name})` : ""}</span>
+                <span className="budname">{isBudName ? ` (${plantName})` : ""}</span>
               </div>
             </div>
             <div className="btn-wrap">
