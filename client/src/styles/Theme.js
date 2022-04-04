@@ -20,6 +20,7 @@ const theme = {
   hoverCancleColor: "IndianRed",
   navigationBGColor: "Silver",
   SideBarBgColor: "rgba(46, 139, 87, 0.45)",
+  replyBgColor: "lightGray",
   //font
   fontSizeBg: "1.3rem",
   fontIconSize: "15px",

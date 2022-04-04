@@ -81,7 +81,7 @@ export const Content = styled.nav`
   }
 `;
 
-function NavigationBar({ login = false }) {
+function NavigationBar() {
   const { isLogin } = useLoginStore();
   return (
     <Content>
