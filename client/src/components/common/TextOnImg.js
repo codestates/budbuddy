@@ -5,9 +5,10 @@ import { BGWrapper } from "../../styles/CommonStyled";
 
 const Content = styled(BGWrapper)`
   display: grid;
-
   img {
-    height: 27vh;
+    height: ${(props) => props.theme.backgroundImgHeight};
+    border-top: solid 1px rgb(0, 0, 0, 0.4);
+    border-bottom: solid 1px rgb(0, 0, 0, 0.4);
   }
 
   .ani {
@@ -20,6 +21,10 @@ const Content = styled(BGWrapper)`
     animation-timing-function: cubic-bezier(0.14, 1.06, 0.9, 0.5);
   }
 
+  .backText {
+    font-size: ${(props) => props.theme.fontWritePageLarge};
+    line-height: 1.6;
+  }
   @keyframes textFloating {
     from {
       opacity: 0;

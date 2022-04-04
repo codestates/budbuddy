@@ -12,7 +12,6 @@ const Layout = styled.div`
     /* border: solid 1px red; */
     width: 100%;
     padding: 0 0.3rem;
-    margin-top: 2.1rem;
   }
 
   .wrap {
