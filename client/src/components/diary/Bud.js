@@ -106,14 +106,14 @@ const Bud = ({ className, src, budName, date, plant_id, setPopupInfo }) => {
           <div
             className="text"
             onClick={() => {
-              setPopupInfo({ fn: "changeBudImage", text: alertText, plant_id });
+              setPopupInfo({ fn: "changeBudImage", text: changeName, plant_id });
             }}>
             식물 사진 변경
           </div>
           <div
             className="text"
             onClick={() => {
-              setPopupInfo({ fn: "deleteBud", text: changeName, plant_id });
+              setPopupInfo({ fn: "deleteBud", text: alertText, plant_id });
             }}>
             내식물 삭제
           </div>

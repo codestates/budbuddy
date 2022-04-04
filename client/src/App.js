@@ -15,7 +15,6 @@ import Write from "./pages/Write";
 import DairyListByBud from "./pages/DairyListByBud";
 import DairyByMode from "./pages/DairyByMode";
 import Test from "./pages/Test";
-import Test2 from "./pages/Test2";
 import NavigationBar from "./components/common/NavigationBar";
 import { OutLine, Content } from "./styles/CommonStyled";
 import useLoginStore from "./store/LoginStore";
@@ -46,7 +45,6 @@ const App = () => {
                 <Route path="/signup" element={<Signup />} />
                 {isLogin ? <Route path="/mypage" element={<Mypage />} /> : <Route path="/login" element={<Login />} />}
                 <Route path="/test" element={<Test />} />
-                <Route path="/test2" element={<Test2 />} />
                 <Route path="/mypage/list/record" element={<MypageRecord />} />
               </Routes>
             </Content>

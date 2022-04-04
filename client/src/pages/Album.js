@@ -4,6 +4,7 @@ import Logo from "../components/common/Logo";
 import TabOption from "../components/Album/TabOption";
 import { budDummy } from "../utils/dummy";
 import Picture from "../components/Album/Picture";
+import SlideModal from "../components/Album/SlideModal";
 import useLoginStore from "../store/LoginStore";
 import axios from "axios";
 import { curDate } from "../modules/date";
@@ -11,6 +12,7 @@ import useAjaxStore from "../store/AjaxStore";
 
 const Layout = styled.div`
   display: grid;
+  position: relative;
   .logo {
     margin-top: 1rem;
   }
@@ -77,6 +79,7 @@ const Album = () => {
   return (
     <Layout>
       <Logo className="logo" />
+      <SlideModal></SlideModal>
       <TabOption className="TabBtnOne" tabName="앨범" setPickPlantValue={setPickPlantValue} setPickDateValue={setPickDateValue} publicJournal={publicJournal} />
       <BudLayout>
         {budDummy.length === 0 ? (
