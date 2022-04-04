@@ -30,20 +30,35 @@ export const Layout = styled.div`
     margin-left: 2rem;
   }
   .story-card {
-    /* margin-top: 2.4rem; */
+    margin-top: 2.4rem;
     /* padding: 0 0.3rem; */
   }
 `;
 
 const Story = () => {
-  const { publicJournal, getAllPublicJournal } = useAjaxStore();
+  let { publicJournal, getAllPublicJournal } = useAjaxStore();
+  const [story, setStory] = useState(publicJournal);
   const [isFreeze, setFreeze] = useState(false);
   useEffect(() => {
     getAllPublicJournal();
   }, []);
 
-  function storySearch() {
-    console.log("스토리 검색 함수");
+  function storySearch(word) {
+    if (word === "") {
+      setStory(publicJournal);
+      return;
+    }
+
+    word = word.replace(/[\s]/g, "");
+    const regExp = new RegExp(word);
+
+    const filteredStory = publicJournal.filter((v, i) => {
+      const { plantName, nickname, textContent, title } = v;
+      const str = plantName + nickname + textContent + title;
+      if (regExp.test(str)) return v;
+      else return null;
+    });
+    setStory(filteredStory);
   }
 
   return (
@@ -53,7 +68,7 @@ const Story = () => {
         <p>Friend's Daily Log</p>
       </div>
       <SearchBar top={62} left={98} width={40} fn={storySearch} />
-      <StoryCard className="story-card" storyList={publicJournal} hoverTransitonSec={0.25} setFreeze={setFreeze} />
+      <StoryCard className="story-card" storyList={story} hoverTransitonSec={0.25} setFreeze={setFreeze} />
     </Layout>
   );
 };
