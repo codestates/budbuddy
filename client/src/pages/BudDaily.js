@@ -49,14 +49,13 @@ const BudLayout = styled.div`
     color: DimGrey;
   }
 `;
-
 const errAlreadyExist = "이미 존재하는 식물 명입니다.";
 
 const BudDaily = () => {
   const { isLogin } = useLoginStore();
   const { setPlant, getPlantsList, myPlants, deletePlant } = useAjaxStore();
 
-  const [isDialog, setDialog] = useState(false);
+  const [isAddBudDialog, setAddBudDialog] = useState(false);
   const [popupInfo, setPopupInfo] = useState(false);
 
   useEffect(() => {
@@ -65,17 +64,15 @@ const BudDaily = () => {
     }
   }, [isLogin]);
 
+  async function getBuds() {
+    await getPlantsList();
+  }
   async function asyncDeleteBud() {
     await deletePlant(popupInfo.plant_id);
     await getPlantsList();
   }
-
-  async function getBuds() {
-    await getPlantsList();
-  }
-
   function openDialog() {
-    setDialog(true);
+    setAddBudDialog(true);
   }
 
   async function registerBud(budName, upload_img) {
@@ -127,12 +124,12 @@ const BudDaily = () => {
               const date = curDate();
               let src = null;
               if (v.Image !== null) src = v.Image.store_path;
-              return <Bud key={v.id} src={src || "Dummy/empty_bud.png"} className="cardcomponent" budName={v.name} date={date} plant_id={v.id} setPopupInfo={setPopupInfo} />;
+              return <Bud key={v.id} src={src || "Dummy/empty_bud.jpg"} className="cardcomponent" budName={v.name} date={date} plant_id={v.id} setPopupInfo={setPopupInfo} />;
             })}
           </div>
         )}
       </BudLayout>
-      {isDialog ? <PlantAddDialog open={isDialog} closeFn={setDialog} apiFn={registerBud} /> : null}
+      {isAddBudDialog ? <PlantAddDialog open={isAddBudDialog} closeFn={setAddBudDialog} apiFn={registerBud} /> : null}
     </Layout>
   );
 };

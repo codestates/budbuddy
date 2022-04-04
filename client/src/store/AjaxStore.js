@@ -112,13 +112,17 @@ const useAjaxStore = create(
             let publicJournal = {
               journalId: resjournal[i].id,
               nickname: resjournal[i].User.nickname,
-              profileImg: resjournal[i].User.profile_image.store_path,
+              profileImg: null,
               plantName: resjournal[i].Plant.name,
               updatedAt: resjournal[i].updatedAt,
               title: resjournal[i].title,
               textContent: resjournal[i].body,
               journalImg: null, //유효성 검사 이후 넣어야함
             };
+
+            if (resjournal[i].User.profile_image !== null) {
+              publicJournal.profileImg = resjournal[i].User.profile_image.store_path;
+            }
 
             publicJournal.date_pick = moment(resjournal[i].updatedAt).format("MM/DD");
             if (resjournal[i].Journal_Images.length !== 0) {
