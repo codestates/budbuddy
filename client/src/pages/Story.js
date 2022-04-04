@@ -40,8 +40,12 @@ const Story = () => {
   const [story, setStory] = useState(publicJournal);
   const [isFreeze, setFreeze] = useState(false);
   useEffect(() => {
-    getAllPublicJournal();
+    getStory();
   }, []);
+
+  async function getStory() {
+    await getAllPublicJournal();
+  }
 
   function storySearch(word) {
     if (word === "") {

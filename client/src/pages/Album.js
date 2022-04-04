@@ -79,7 +79,7 @@ const Album = () => {
   return (
     <Layout>
       <Logo className="logo" />
-      <SlideModal></SlideModal>
+      <SlideModal publicJournal={publicJournal} />
       <TabOption className="TabBtnOne" tabName="앨범" setPickPlantValue={setPickPlantValue} setPickDateValue={setPickDateValue} publicJournal={publicJournal} />
       <BudLayout>
         {budDummy.length === 0 ? (
