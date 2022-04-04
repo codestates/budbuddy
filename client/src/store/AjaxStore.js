@@ -61,6 +61,7 @@ const useAjaxStore = create(
           // console.log("getPlantsList:::", resUser);
           set((state) => ({ myPlants: resData.data.data }));
         } catch (err) {
+          set((state) => ({ myPlants: [] }));
           console.log("axios err / getPlantsList :::", err);
         }
       },
