@@ -67,9 +67,9 @@ const Mypage = () => {
 
   async function getMapageInfo() {
     await setListByUserId();
-    await getUserInfo(1);
+    await getUserInfo();
   }
-  // console.log(userInfo);
+  console.log(userInfo);
   return (
     <Layout>
       <Logo className="logo" />

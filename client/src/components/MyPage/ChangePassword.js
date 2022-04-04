@@ -11,8 +11,7 @@ const Layout = styled.div`
   position: absolute;
   text-align: center;
   top: 50%;
-  left: -10%;
-  /* left: 50%; */
+  left: 0%;
 
   transform: translate(-50%, -50%);
 
@@ -194,6 +193,8 @@ const ChangePassword = ({ open = true, closeFn, setModalCode = "" }) => {
 
   function resisterBud(e) {
     e.preventDefault();
+    console.log(e);
+
     setModalCode("PasswordReplaced");
     ClosePopup();
   }
