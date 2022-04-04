@@ -80,15 +80,17 @@ export const Layout = styled.div`
   }
 `;
 
-const Picture = ({ className, src, budName, date, plant_id, text }) => {
-  const navigateSearch = useNavigateSearch();
-  const goToWrite = () => navigateSearch("/write", { name: `${encodeURI(budName)}`, plant_id: `${plant_id}` });
+const Picture = ({ className, src, date, text, setSlideState, setPictureNumber, idx }) => {
+  const openSlide = () => {
+    setPictureNumber(idx);
+    setSlideState("open");
+  };
 
   return (
     <Layout className={className}>
       <div className="shell">
         <div className="hide">
-          <div className="text" onClick={goToWrite}>
+          <div className="text" onClick={openSlide}>
             {text}
           </div>
         </div>

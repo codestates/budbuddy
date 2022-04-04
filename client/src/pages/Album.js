@@ -52,7 +52,7 @@ const Album = () => {
   const { isLogin } = useLoginStore();
   useEffect(() => {
     if (isLogin) {
-      getPlantsList();
+      getAllPublicJournal();
     }
   }, [isLogin]);
 
@@ -60,38 +60,53 @@ const Album = () => {
   useEffect(() => {
     getAllPublicJournal();
   }, []);
-  console.log(publicJournal);
 
-  const [plants, setPlants] = useState([]);
   const [pickPlantValue, setPickPlantValue] = useState("");
   const [pickDateValue, setPickDateValue] = useState("");
-  // console.log("pickDateValue", pickDateValue);
-  // console.log("pickPlantValue", pickPlantValue);
-  async function getPlantsList() {
-    try {
-      const resData = await axios.get(process.env.REACT_APP_API_URL + "/plants");
-      setPlants(resData.data.data);
-    } catch (err) {
-      console.log(err);
+
+  const TempFillteredValue = publicJournal.filter((el) => {
+    if (pickPlantValue) {
+      return el.plantName === pickPlantValue;
     }
-  }
+    return el;
+  });
+
+  const FillteredValue = TempFillteredValue.filter((el) => {
+    if (pickDateValue) {
+      return el.writingDate === pickDateValue;
+    }
+    return el;
+  });
+
+  const [SlideState, setSlideState] = useState("close");
+  const [PictureNumber, setPictureNumber] = useState(0);
 
   return (
     <Layout>
       <Logo className="logo" />
-      <SlideModal publicJournal={publicJournal} />
+      <SlideModal FillteredValue={FillteredValue} SlideState={SlideState} setSlideState={setSlideState} PictureNumber={PictureNumber} setPictureNumber={setPictureNumber} />
       <TabOption className="TabBtnOne" tabName="앨범" setPickPlantValue={setPickPlantValue} setPickDateValue={setPickDateValue} publicJournal={publicJournal} />
       <BudLayout>
-        {budDummy.length === 0 ? (
+        {FillteredValue.length === 0 ? (
           <div className="notice-pos">
             <div className="notice">등록된 사진이 없습니다</div>
           </div>
         ) : (
           <div className="card-wrap">
-            {publicJournal.map((el) => {
-              const date = el.updatedAt.substring(0, 10);
+            {FillteredValue.map((el, idx) => {
               return (
-                <Picture key={el.journalId} src={el.journalImg || "Dummy/diary_4.PNG"} className="cardcomponent" budName={el.nickname} date={date} plant_id={el.journalId} text={el.textContent} />
+                <Picture
+                  key={el.journalId}
+                  src={el.journalImg || "Dummy/diary_4.PNG"}
+                  className="cardcomponent"
+                  budName={el.nickname}
+                  date={el.writingDate}
+                  plant_id={el.journalId}
+                  text={el.textContent}
+                  setSlideState={setSlideState}
+                  setPictureNumber={setPictureNumber}
+                  idx={idx}
+                />
               );
             })}
           </div>

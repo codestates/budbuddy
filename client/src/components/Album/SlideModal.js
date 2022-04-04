@@ -1,11 +1,10 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 
 const Layout = styled.div`
   position: absolute;
   min-width: 100%;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.3);
   justify-content: center;
   text-align: center;
   align-items: center;
@@ -14,6 +13,12 @@ const Layout = styled.div`
   justify-content: center;
   overflow: hidden;
 
+  .black {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 1;
+  }
   .imageDiv {
     width: 100%;
     height: 40vh;
@@ -23,6 +28,9 @@ const Layout = styled.div`
     white-space: nowrap;
     font-size: 0;
     transition: all 0.5s;
+    z-index: 2;
+    translate: 100%;
+
     .image {
       position: relative;
       object-fit: cover;
@@ -61,6 +69,7 @@ const Layout = styled.div`
   .arrow-wrap {
     transition: opacity 0.4s ease;
     opacity: 0;
+    z-index: 3;
   }
   .arrow-wrap:hover {
     opacity: 1;
@@ -69,14 +78,17 @@ const Layout = styled.div`
   .imageDiv:hover + .arrow-wrap {
     opacity: 1;
   }
+  &.close {
+    display: none;
+  }
 `;
 
-const SlideModal = ({ publicJournal }) => {
+const SlideModal = ({ FillteredValue, SlideState, setSlideState, PictureNumber, setPictureNumber }) => {
   const slideRef = useRef(null);
   const [counter, setCounter] = useState(1);
 
   function LeftSlide() {
-    if (counter >= publicJournal.length) return;
+    if (counter >= FillteredValue.length) return;
     slideRef.current.style.transform += `translateX(-100%)`;
     setCounter((pre) => pre + 1);
   }
@@ -87,11 +99,24 @@ const SlideModal = ({ publicJournal }) => {
     setCounter((pre) => pre - 1);
   }
 
+  function CloseSlide() {
+    slideRef.current.style.transform += `translateX(${100 * (counter - 1)}%)`;
+    setCounter(1);
+    setPictureNumber(0);
+    setSlideState("close");
+    slideRef.current.style.transform = "0%";
+  }
+
+  useEffect(() => {
+    slideRef.current.style.transform += `translateX(-${100 * PictureNumber}%)`;
+    setCounter((current) => current + PictureNumber);
+  }, [SlideState]);
+
   return (
-    <Layout>
+    <Layout className={SlideState}>
+      <div className="black" onClick={CloseSlide}></div>
       <div ref={slideRef} className="imageDiv">
-        {publicJournal.map((el) => {
-          console.log(el);
+        {FillteredValue.map((el) => {
           return <img key={el.journalId} className="image" src={el.journalImg} alt={`bg`} />;
         })}
       </div>

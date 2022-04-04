@@ -52,7 +52,7 @@ const TabOption = ({ className = "", tabName, setPickPlantValue, setPickDateValu
   }, []);
 
   const UserPlantsDate = publicJournal.reduce((acc, cur) => {
-    let SelectDate = cur.updatedAt.substring(0, 10);
+    let SelectDate = cur.writingDate;
     if (!acc.includes(SelectDate)) {
       acc.push(SelectDate);
     }
