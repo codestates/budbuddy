@@ -288,7 +288,7 @@ const StoryCard = ({ className = "", storyList, hoverTransitonSec = 0.25, setFre
                     </div>
                     <div className="middle-cap">
                       <div className="journal-img">
-                        <img className="plant-img" src={v.journalImg || "/Dummy/empty_journal.png"} alt="" />
+                        <img className="plant-img" src={v.journalImg || "/Dummy/empty_bud.jpg"} alt="" />
                       </div>
                       <div className="summary">{v.textContent}</div>
                     </div>

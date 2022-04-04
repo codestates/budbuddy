@@ -262,7 +262,7 @@ const JellyPopup = ({ setJellyPopup, story }) => {
               <div>{`제목: ${story.title}`}</div>
             </div>
             <div className="photo">
-              <img className="journal-img" src={story.journalImg || "Dummy/empty_journal.png"} alt="" />
+              <img className="journal-img" src={story.journalImg || "Dummy/empty_bud.jpg"} alt="" />
             </div>
             <div className="content">
               <div className="text">{story.textContent}</div>
