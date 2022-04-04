@@ -91,7 +91,7 @@ const Mypage = () => {
         </div>
       </IdPost>
       <MyPageBg>
-        <img className="mypageBg" src={budDummy[0].src} alt={`bg`} />
+        <img className="mypageBg" src={"/Dummy/bg.png"} alt={`bg`} />
       </MyPageBg>
       {!listByUserId.length ? (
         <div className="desc">

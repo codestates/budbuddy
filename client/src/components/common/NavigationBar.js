@@ -134,7 +134,12 @@ function NavigationBar() {
           </NavLink>
         ) : (
           <NavLink to="/login">
-            <span className="login">Login</span>
+            <div className="link">
+              <FontAwesomeIcon className="login icon" icon={faUser} />
+              <div className="tooltip">
+                <span className="tooltiptext">Login</span>
+              </div>
+            </div>
           </NavLink>
         )}
       </div>
