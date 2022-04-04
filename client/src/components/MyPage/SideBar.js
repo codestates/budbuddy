@@ -5,6 +5,7 @@ import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
 import SideBarFuntions from "./SideBarFunctions";
 import useLoginStore from "../../store/LoginStore";
 import axios from "axios";
+import { makeModal } from "../../utils/errExeption";
 
 const Layout = styled.div`
   display: flex;
@@ -163,8 +164,11 @@ const SideBar = () => {
     setImage(userProfile);
   }, [userProfile]);
 
+  const [modalCode, setModalCode] = useState("");
+
   return (
     <Layout isSidebar={isSidebar}>
+      {makeModal(modalCode)}
       <div className="menu-wrap">
         <input ref={menuRef} type="checkbox" id="menu-icon" />
         <label forhtml="menu-icon">
@@ -183,7 +187,7 @@ const SideBar = () => {
             </div>
             <div className="profile-name">ID: {nickname}</div>
           </span>
-          <SideBarFuntions />
+          <SideBarFuntions setModalCode={setModalCode} />
         </div>
       </SideBarWrapper>
       <BlackScreen isSidebar={isSidebar} onClick={SidebarToggle} />

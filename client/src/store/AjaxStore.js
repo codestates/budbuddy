@@ -140,6 +140,7 @@ const useAjaxStore = create(
               nickname: resjournal[i].User.nickname,
               profileImg: null,
               plantName: null,
+              writingDate: resjournal[i].date_pick,
               updatedAt: resjournal[i].updatedAt,
               title: resjournal[i].title,
               textContent: resjournal[i].body,
