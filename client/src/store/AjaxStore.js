@@ -114,13 +114,16 @@ const useAjaxStore = create(
               journalId: resjournal[i].id,
               nickname: resjournal[i].User.nickname,
               profileImg: null,
-              plantName: resjournal[i].Plant.name,
+              plantName: null,
               updatedAt: resjournal[i].updatedAt,
               title: resjournal[i].title,
               textContent: resjournal[i].body,
               journalImg: null, //유효성 검사 이후 넣어야함
             };
 
+            if (resjournal[i].Plant) {
+              publicJournal.plantName = resjournal[i].Plant.name;
+            }
             if (resjournal[i].User.profile_image !== null) {
               publicJournal.profileImg = resjournal[i].User.profile_image.store_path;
             }
