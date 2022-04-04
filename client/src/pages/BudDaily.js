@@ -4,12 +4,15 @@ import Logo from "../components/common/Logo";
 import TabBtnOne from "../components/common/TabBtnOne";
 import Bud from "../components/diary/Bud";
 import PlantAddDialog from "../components/diary/PlantAddDialog";
-import { makeModal } from "../utils/errExeption";
 import { curDate } from "../modules/date";
 import useLoginStore from "../store/LoginStore";
 import useAjaxStore from "../store/AjaxStore";
+import ModalByMode from "../components/common/ModalByMode";
 
 const Layout = styled.div`
+  /* position: relative; */
+  padding-top: 1rem;
+
   .logo {
     margin-top: 1rem;
   }
@@ -21,8 +24,6 @@ const Layout = styled.div`
   padding-bottom: 3rem;
 `;
 const BudLayout = styled.div`
-  /* padding-top: 0.5rem;
-  padding-bottom: 2rem; */
   width: 100%;
   margin: 0 auto;
   .card-wrap {
@@ -49,18 +50,25 @@ const BudLayout = styled.div`
   }
 `;
 
+const errAlreadyExist = "이미 존재하는 식물 명입니다.";
+
 const BudDaily = () => {
   const { isLogin } = useLoginStore();
-  const { setPlant, getPlantsList, myPlants } = useAjaxStore();
+  const { setPlant, getPlantsList, myPlants, deletePlant } = useAjaxStore();
 
   const [isDialog, setDialog] = useState(false);
-  const [modalCode, setModalCode] = useState(0);
+  const [popupInfo, setPopupInfo] = useState(false);
 
   useEffect(() => {
     if (isLogin) {
       getBuds();
     }
   }, [isLogin]);
+
+  async function asyncDeleteBud() {
+    await deletePlant(popupInfo.plant_id);
+    await getPlantsList();
+  }
 
   async function getBuds() {
     await getPlantsList();
@@ -73,17 +81,39 @@ const BudDaily = () => {
   async function registerBud(budName, upload_img) {
     const res = await setPlant(budName, upload_img);
     getPlantsList();
-    setModalCode(res); //alreadyExistsBudName
+    if (res === "alreadyExistsBudName") {
+      setPopupInfo({ fn: "alreadyExistsBudName", text: errAlreadyExist });
+    }
+  }
+
+  function makePopup(info = "", fn = "") {
+    const tasks = {
+      deleteBud() {
+        info.deleteBud = asyncDeleteBud;
+        info.closePopup = setPopupInfo;
+        return <ModalByMode info={info} />;
+      },
+      changeBudImage() {
+        info.closePopup = setPopupInfo;
+        return <ModalByMode info={info} />;
+      },
+      alreadyExistsBudName() {
+        info.closePopup = setPopupInfo;
+        return <ModalByMode info={info} />;
+      },
+    };
+
+    if (!tasks[info.fn]) {
+      return null;
+    }
+    return tasks[info.fn]();
   }
 
   console.log(myPlants);
 
   return (
-    <Layout
-      onClick={() => {
-        setModalCode("");
-      }}>
-      {makeModal(modalCode)}
+    <Layout>
+      {makePopup(popupInfo)}
       <Logo className="logo" />
       <TabBtnOne className="TabBtnOne" tabName="내 식물" btnName="내 식물 추가" fn={openDialog} />
       <BudLayout>
@@ -97,7 +127,7 @@ const BudDaily = () => {
               const date = curDate();
               let src = null;
               if (v.Image !== null) src = v.Image.store_path;
-              return <Bud key={v.id} src={src || "Dummy/empty_bud.png"} className="cardcomponent" budName={v.name} date={date} plant_id={v.id} />;
+              return <Bud key={v.id} src={src || "Dummy/empty_bud.png"} className="cardcomponent" budName={v.name} date={date} plant_id={v.id} setPopupInfo={setPopupInfo} />;
             })}
           </div>
         )}

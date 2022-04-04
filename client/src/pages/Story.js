@@ -55,12 +55,9 @@ const Story = () => {
     const filteredStory = publicJournal.filter((v, i) => {
       const { plantName, nickname, textContent, title } = v;
       const str = plantName + nickname + textContent + title;
-      if (regExp.test(str)) {
-        return v;
-      }
-      return null;
+      if (regExp.test(str)) return v;
+      else return null;
     });
-
     setStory(filteredStory);
   }
 
