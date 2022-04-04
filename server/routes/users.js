@@ -18,4 +18,7 @@ router.post("/logout", users.logout);
 // PUT /profile
 router.put("/profile", users.changeProfile);
 
+// PUT /password
+router.put("/password", users.changePassword);
+
 module.exports = router;
