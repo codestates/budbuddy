@@ -106,7 +106,7 @@ const Bud = ({ className, src, budName, date, plant_id, setPopupInfo }) => {
           <div
             className="text"
             onClick={() => {
-              setPopupInfo({ fn: "changeBudImage", text: changeName, plant_id });
+              setPopupInfo({ fn: "changeBudImage", text: changeName, plant_id, budName });
             }}>
             식물 사진 변경
           </div>
