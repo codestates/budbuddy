@@ -41,10 +41,10 @@ const useAjaxStore = create(
           const arr = [];
           // console.log("추출된 replies:::", resData.data.data);
           for (let i = 0; i < resData.data.data.length; i++) {
-            const { id, group_id, journal_id, createdAt, body } = resData.data.data[i];
+            const { id, group_id, journal_id, createdAt, body, User } = resData.data.data[i];
 
             const reply = {
-              nickname: "닉넴/ajax",
+              nickname: User.nickname,
               replyId: id,
               body,
               group_id,
@@ -123,24 +123,20 @@ const useAjaxStore = create(
           if (upload_img.files.length !== 0) {
             let formdata = new FormData();
             formdata.append("image", upload_img.files[0]);
-            // console.log("imgRes:::", upload_img, payload);
             const imgRes = await axios.post(process.env.REACT_APP_API_URL + "/images", formdata);
             payload["image_id"] = [imgRes.data.data.id];
             await axios.post(process.env.REACT_APP_API_URL + "/plants", payload);
-            // console.log("setPlant:::with img:::", resData);
             return "ok";
           } else {
             await axios.post(process.env.REACT_APP_API_URL + "/plants", payload);
-            // console.log("setPlant::none img:::", resData);
             return "ok";
           }
         } catch (err) {
-          // console.log("setPlant:::err:::", err);
+          console.log("setPlant/alreadyExistsBudName/err:::", err);
           return "alreadyExistsBudName";
         }
       },
       async changePlantImg(plant_id, budName, upload_img) {
-        //
         const payload = {
           name: budName,
           image_id: null,
@@ -150,14 +146,12 @@ const useAjaxStore = create(
           if (upload_img.files.length !== 0) {
             let formdata = new FormData();
             formdata.append("image", upload_img.files[0]);
-            // console.log("imgRes:::", upload_img, payload);
             const imgRes = await axios.post(process.env.REACT_APP_API_URL + "/images", formdata);
             payload["image_id"] = imgRes.data.data.id;
             await axios.put(process.env.REACT_APP_API_URL + `/plants/${plant_id}`, payload);
-            // console.log("changePlantImg:::with img:::", resData);
             return "ok";
           } else {
-            // console.log("changePlantImg:::", "이미지가 정상 등록 안된 상태");
+            console.log("changePlantImg:::", "이미지가 정상 등록 안된 상태");
           }
         } catch (err) {
           console.log("changePlantImg:::err:::", err);
