@@ -14,7 +14,6 @@ import ModalByMode from "../common/ModalByMode";
 
 const Layout = styled.div`
   display: grid;
-  font-size: 10px;
 
   .title {
     color: white;
@@ -29,7 +28,11 @@ const Layout = styled.div`
   }
 
   .signup {
-    font-size: 1rem;
+    > a {
+      font-family: "Jua", sans-serif;
+      font-size: ${(props) => props.theme.font1rem};
+      font-weight: 500;
+    }
   }
 `;
 

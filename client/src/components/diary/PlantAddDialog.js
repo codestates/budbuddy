@@ -76,17 +76,17 @@ const FormLayout = styled.form`
   flex-direction: column;
   text-align: center;
   .title {
-    font-size: ${(props) => props.theme.fontWritePageLarge};
+    font-size: ${(props) => props.theme.fontWritePageMid};
     align-self: center;
   }
   .budname {
-    font-size: ${(props) => props.theme.fontWritePageMid};
+    font-size: ${(props) => props.theme.fontWritePageXSmall};
     align-self: start;
     display: flex;
     flex-direction: row;
 
     > .icon {
-      font-size: ${(props) => props.theme.fontWritePageMid};
+      font-size: ${(props) => props.theme.fontWritePageSmall};
       margin-right: 4px;
     }
   }
@@ -98,7 +98,7 @@ const FormLayout = styled.form`
     border: none;
     margin: 3px 0;
     padding-left: 0.5rem;
-    font-size: ${(props) => props.theme.fontWritePageMid};
+    font-size: ${(props) => props.theme.fontWritePageSmall};
   }
 
   .btn-wrapper {
@@ -115,7 +115,7 @@ const FormLayout = styled.form`
     cursor: pointer;
     padding: 1px 3px;
     margin: 0;
-    font-size: ${(props) => props.theme.fontWritePageMid};
+    font-size: ${(props) => props.theme.fontBtnMid};
   }
 
   .open:hover {
@@ -128,7 +128,7 @@ const FormLayout = styled.form`
   }
 
   .chNick {
-    font-size: 1rem;
+    font-size: ${(props) => props.theme.fontWritePageXSmall};
     padding: 4px;
     white-space: pre-wrap;
     color: DimGray;

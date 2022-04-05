@@ -1,15 +1,5 @@
 import { createGlobalStyle } from "styled-components";
-import BMJUA from "../styles/fonts/BMJUA-WEB/BMJUA.woff2";
-
 const GlobalStyle = createGlobalStyle`
-
- @font-face {
-        font-family: "BMJUA";
-        src: local("BMJUA"),
-        url(${BMJUA}) format('woff2');
-        font-weight: 100;
-        font-style: normal;
-    }
 
 html {
     box-sizing: border-box;
@@ -42,9 +32,10 @@ html {
 
 *, *::before, *::after {
     box-sizing: border-box;
-    font-family: 'BMJUA', monospace;
+    font-family: 'Sunflower', sans-serif;
+    /* font-family: 'Jua', sans-serif; */
     font-style: normal;
-    font-weight: 100;
+    font-weight: 500;
     margin: 0;
     padding: 0;
 }

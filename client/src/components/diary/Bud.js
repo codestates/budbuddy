@@ -74,7 +74,7 @@ const Layout = styled.div`
   }
 
   .date {
-    font-size: 1rem;
+    font-size: ${(props) => props.theme.fontWritePageXSmall};
   }
 
   a {

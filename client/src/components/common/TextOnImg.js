@@ -22,7 +22,8 @@ const Content = styled(BGWrapper)`
   }
 
   .backText {
-    font-size: ${(props) => props.theme.fontWritePageLarge};
+    font-family: "Jua", sans-serif;
+    font-size: ${(props) => props.theme.fontWritePageMid};
     line-height: 1.6;
   }
   @keyframes textFloating {

@@ -46,7 +46,7 @@ const Layout = styled.div`
     align-items: center;
 
     .icon {
-      font-size: 2rem;
+      font-size: ${(props) => props.theme.fontImgUploadIcon};
       padding: 0.2rem;
     }
 
@@ -65,7 +65,7 @@ const Layout = styled.div`
     .title {
       text-align: center;
       white-space: pre-wrap;
-      font-size: 1.5rem;
+      font-size: ${(props) => props.theme.fontWritePageLarge};
       color: rgba(0, 0, 0, 0.7);
     }
   }
@@ -78,7 +78,7 @@ const Layout = styled.div`
     white-space: pre;
     .content {
       margin-top: 0.5rem;
-      font-size: 1.15rem;
+      font-size: ${(props) => props.theme.fontWritePageSmall};
       line-height: 1.2;
     }
 
@@ -94,7 +94,7 @@ const Layout = styled.div`
     justify-content: space-evenly;
 
     > button {
-      font-size: 1.1rem;
+      font-size: ${(props) => props.theme.fontBtnMid};
       border: none;
       padding: 0.1rem 0.3rem;
       background: lightgray;

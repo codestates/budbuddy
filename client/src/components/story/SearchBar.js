@@ -34,7 +34,7 @@ const Layout = styled.div`
   .search-bar {
     width: 100%;
     border: none;
-    font-size: ${(props) => props.theme.fontWritePageSmall};
+    font-size: ${(props) => props.theme.fontBtnSmall};
     border-radius: ${(props) => props.theme.borderRadius} 0 0 ${(props) => props.theme.borderRadius};
     padding: 0.1rem 0 0.2rem 0.5rem;
   }
@@ -43,7 +43,7 @@ const Layout = styled.div`
     border: none;
     border-radius: 0 ${(props) => props.theme.borderRadius} ${(props) => props.theme.borderRadius} 0;
     padding: 0.3rem 0.2rem 0.2rem 0.3rem;
-    font-size: ${(props) => props.theme.fontWritePageSmall};
+    font-size: ${(props) => props.theme.fontBtnSmall};
     transition: background-color 0.25s ease, color 0.25s ease;
 
     cursor: pointer;

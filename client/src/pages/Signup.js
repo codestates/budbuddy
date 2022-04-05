@@ -40,7 +40,7 @@ const SignupBG = styled.div`
     position: absolute;
     top: 50%;
     left: 50%;
-    font-size: ${(props) => props.theme.fontWritePageLarge};
+    font-size: ${(props) => props.theme.fontWritePageMid};
 
     transform: translate(-50%, -50%);
     white-space: pre;

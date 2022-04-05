@@ -13,7 +13,7 @@ const Layout = styled.div`
 
     > div {
       /* width: 16%; */
-      font-size: ${(props) => props.theme.fontWritePageMid};
+      font-size: ${(props) => props.theme.fontWritePageSmall};
       padding: 3px 0;
     }
   }
@@ -26,8 +26,8 @@ const Layout = styled.div`
   }
 
   .input {
-    width: 70%;
-    font-size: ${(props) => props.theme.fontWritePageSmall};
+    width: 90%;
+    font-size: ${(props) => props.theme.fontWritePageXSmall};
     text-align: end;
     border: none;
     border-radius: ${(props) => props.theme.borderRadius};

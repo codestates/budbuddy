@@ -45,7 +45,7 @@ const BudLayout = styled.div`
     transform: translate(-50%, -50%);
   }
   .notice {
-    font-size: 0.9rem;
+    font-size: ${(props) => props.theme.fontWritePageSmall};
     color: DimGrey;
   }
 `;
