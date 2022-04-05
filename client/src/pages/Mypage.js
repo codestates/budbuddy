@@ -76,7 +76,6 @@ const Mypage = () => {
     await setListByUserId();
     await getUserInfo();
   }
-  console.log(userInfo);
   return (
     <Layout>
       <Logo className="logo" />

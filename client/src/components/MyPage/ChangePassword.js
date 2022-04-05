@@ -193,8 +193,6 @@ const ChangePassword = ({ open = true, closeFn, setModalCode = "" }) => {
 
   function resisterBud(e) {
     e.preventDefault();
-    console.log(e);
-
     setModalCode("PasswordReplaced");
     ClosePopup();
   }

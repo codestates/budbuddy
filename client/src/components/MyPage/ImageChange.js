@@ -87,13 +87,11 @@ function ImageChange() {
   const [img, setImg] = useState(null);
 
   function onFileChange(e) {
-    console.log("업로드 호출");
     const {
       target: { files },
     } = e;
 
     const theFile = files[0];
-    // console.log(theFile);
     const reader = new FileReader();
 
     reader.onloadend = (finishedEvent) => {
@@ -101,7 +99,6 @@ function ImageChange() {
         currentTarget: { result },
       } = finishedEvent;
       setImg(result);
-      // console.log(finishedEvent);
     };
 
     reader.readAsDataURL(theFile);

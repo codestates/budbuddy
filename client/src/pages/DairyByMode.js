@@ -59,13 +59,12 @@ const DairyByMode = () => {
   }
 
   let src = null;
-  // console.log("DairyByMode:::", params.mode, info);
+
   info.actions = convertToggleData(info.Journal_Actions);
   if (info.Journal_Images.length !== 0) {
     src = info.Journal_Images[0].Image.store_path;
   }
 
-  // console.log("일지 읽기", info);
   let journalName = "삭제된 식물";
   if (info.Plant) {
     journalName = info.Plant.name;

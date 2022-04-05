@@ -65,7 +65,6 @@ function ReplyTextArea({ journalId, contentRef, close, isRereply = false, group_
   }
 
   async function addReply() {
-    console.log("댓글 등록란");
     if (textRef.current.value === "") return;
 
     await setReplies(journalId, textRef.current.value, group_id);

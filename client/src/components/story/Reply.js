@@ -129,13 +129,11 @@ function Reply({ contentRef, info }) {
   const [isOpen, setOpen] = useState(false);
 
   async function removeReply() {
-    console.log("댓글 삭제 란");
     await deleteReplies(info.replyId);
     await getReplies(info.journal_id);
   }
 
   async function removeRereply(id) {
-    console.log("대댓글 삭제 란");
     await deleteReplies(id);
     await getReplies(info.journal_id);
   }
@@ -148,7 +146,6 @@ function Reply({ contentRef, info }) {
     setOpen(false);
   }
 
-  console.log("reply info:::", info, replies);
   return (
     <Layout className="reply">
       <div className="reply-top">

@@ -107,7 +107,6 @@ function PlantManageToggle({ className, actions = {}, mode = "" }) {
     };
 
     if (!task[fnName]) {
-      console.log("정의되지 않은 토글 함수");
       return null;
     }
     if (isReadOnly) return;

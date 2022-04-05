@@ -22,10 +22,9 @@ const useAjaxStore = create(
 
       async setReplies(journalId, body, group_id = null) {
         try {
-          const resData = await axios.post(process.env.REACT_APP_API_URL + `/journals/${journalId}/replies`, { body, group_id });
-          // console.log("Replies:::", resData.data.data);
+          await axios.post(process.env.REACT_APP_API_URL + `/journals/${journalId}/replies`, { body, group_id });
         } catch (err) {
-          // console.log("axios err / setReplies :::", err);
+          console.log("axios err / setReplies :::", err);
         }
       },
       async deleteReplies(replyId) {
@@ -33,14 +32,14 @@ const useAjaxStore = create(
           const resData = await axios.delete(process.env.REACT_APP_API_URL + `/journals/replies/${replyId}`);
           console.log("deleteReplies:::", resData, replyId);
         } catch (err) {
-          // console.log("axios err / deleteReplies :::", err);
+          console.log("axios err / deleteReplies :::", err);
         }
       },
       async getReplies(journalId) {
         try {
           const resData = await axios.get(process.env.REACT_APP_API_URL + `/journals/${journalId}/replies`);
           const arr = [];
-
+          // console.log("추출된 replies:::", resData.data.data);
           for (let i = 0; i < resData.data.data.length; i++) {
             const { id, group_id, journal_id, createdAt, body } = resData.data.data[i];
 
@@ -57,68 +56,60 @@ const useAjaxStore = create(
             arr.push(reply);
           }
 
-          console.log("추출된 replies:::", arr);
           set((state) => ({ replies: arr }));
         } catch (err) {
-          // console.log("axios err / getReplies :::", err);
+          console.log("axios err / getReplies :::", err);
           set((state) => ({ replies: [] }));
         }
       },
       async setListByPlantId(plantId) {
         try {
           const resData = await axios.get(process.env.REACT_APP_API_URL + "/journals/my", { params: { plant: plantId } });
-          // console.log("setListByPlantId:::", resData.data.data);
           set((state) => ({ listByPlantId: [...resData.data.data] }));
         } catch (err) {
-          // console.log("axios err / setListByPlatId :::", err);
+          console.log("axios err / setListByPlatId :::", err);
           set((state) => ({ listByPlantId: [] }));
         }
       },
       async setListByUserId() {
         try {
           const resData = await axios.get(process.env.REACT_APP_API_URL + "/journals/my");
-          // console.log("setListByUserId:::", resData.data.data);
           set((state) => ({ listByUserId: [...resData.data.data] }));
         } catch (err) {
-          // console.log("axios err / setListByUserId :::", err);
+          console.log("axios err / setListByUserId :::", err);
           set((state) => ({ listByUserId: [] }));
         }
       },
       async deleteListByJournalId(journal_Id) {
         try {
-          const resData = await axios.delete(process.env.REACT_APP_API_URL + `/journals/${journal_Id}`);
-          // console.log("deleteListByJournalId:::", resData);
+          await axios.delete(process.env.REACT_APP_API_URL + `/journals/${journal_Id}`);
         } catch (err) {
-          // console.log("axios err / deleteListByJournalId :::", err);
+          console.log("axios err / deleteListByJournalId :::", err);
         }
       },
       async getUserInfo() {
         try {
           const resUser = await axios.get(process.env.REACT_APP_API_URL + `/users/userinfo`);
-          // console.log("getUserInfo:::", resUser);
           set((state) => ({ userInfo: resUser.data.data }));
         } catch (err) {
           set((state) => ({}));
-          // console.log("axios err / getUserInfo :::", err);
+          console.log("axios err / getUserInfo :::", err);
         }
       },
       async getPlantsList() {
         try {
           const resData = await axios.get(process.env.REACT_APP_API_URL + "/plants");
-          // console.log("getPlantsList:::", resUser);
           set((state) => ({ myPlants: resData.data.data }));
         } catch (err) {
           set((state) => ({ myPlants: [] }));
-          // console.log("axios err / getPlantsList :::", err);
+          console.log("axios err / getPlantsList :::", err);
         }
       },
       async deletePlant(plant_id) {
         try {
-          // console.log("deletePlant:::plant_id", plant_id);
-          const resData = await axios.delete(process.env.REACT_APP_API_URL + `/plants/${plant_id}`);
-          // console.log("deletePlant:::", resData);
+          await axios.delete(process.env.REACT_APP_API_URL + `/plants/${plant_id}`);
         } catch (err) {
-          // console.log("axios err / deletePlant :::", err);
+          console.log("axios err / deletePlant :::", err);
         }
       },
       async setPlant(budName, upload_img) {
@@ -169,7 +160,7 @@ const useAjaxStore = create(
             // console.log("changePlantImg:::", "이미지가 정상 등록 안된 상태");
           }
         } catch (err) {
-          // console.log("changePlantImg:::err:::", err);
+          console.log("changePlantImg:::err:::", err);
           return "changePlantImg fail";
         }
       },
@@ -210,7 +201,7 @@ const useAjaxStore = create(
 
           set((state) => ({ publicJournal: extractedData }));
         } catch (err) {
-          // console.log("axios err / getAllPublicJournal :::", err);
+          console.log("axios err / getAllPublicJournal :::", err);
           set((state) => ({ publicJournal: [] }));
         }
       },

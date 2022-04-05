@@ -106,8 +106,6 @@ const BudDaily = () => {
     return tasks[info.fn]();
   }
 
-  console.log(myPlants);
-
   return (
     <Layout>
       {makePopup(popupInfo)}

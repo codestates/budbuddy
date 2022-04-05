@@ -121,7 +121,6 @@ const ImgSlide = ({ className = "", images }) => {
         <div className="slidewrap">
           <ul ref={slideRef} className="slidelist">
             {images.map((v, i) => {
-              console.log(v);
               return (
                 <li key={i}>
                   <div>

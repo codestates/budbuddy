@@ -85,12 +85,9 @@ const DiaryList = ({ diaryList = [], isBudName = false, type = "" }) => {
     return moment(date).format("YY-MM-DD");
   }
 
-  // console.log("뭐이", diaryList);
-
   return (
     <Layout>
       {diaryList.map((journal, i) => {
-        // console.log("DiaryList:::", journal);
         let plantName = "";
         if (!journal.Plant) {
           plantName = "삭제된 식물";

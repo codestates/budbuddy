@@ -196,7 +196,6 @@ const JellyPopup = ({ setJellyPopup, story }) => {
 
   const date = moment(story.updatedAt).format("MM/DD");
   const pastDays = moment().diff(moment(story.updatedAt), "days") + "일전";
-  console.log("story:::", story);
 
   return (
     <Layout>
