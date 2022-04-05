@@ -52,6 +52,7 @@ const useAjaxStore = create(
           // console.log("getUserInfo:::", resUser);
           set((state) => ({ userInfo: resUser.data.data }));
         } catch (err) {
+          set((state) => ({}));
           console.log("axios err / getUserInfo :::", err);
         }
       },
