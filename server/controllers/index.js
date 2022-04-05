@@ -4,4 +4,5 @@ module.exports = {
   images: require("./images"),
   oauth: require("./oauth"),
   plants: require("./plants"),
+  replies: require("./Reply"),
 };

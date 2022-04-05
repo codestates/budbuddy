@@ -9,7 +9,6 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Replies.hasMany(models.Replies, { foreignKey: "group_id" });
       Replies.belongsTo(models.Users, { foreignKey: "user_id" });
       Replies.belongsTo(models.Journals, { foreignKey: "journal_id", onDelete: "CASCADE" });
     }
@@ -30,7 +29,6 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       },
       class: DataTypes.TINYINT,
-      order: DataTypes.INTEGER,
     },
     {
       sequelize,

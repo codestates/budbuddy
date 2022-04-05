@@ -10,10 +10,6 @@ module.exports = {
       },
       group_id: {
         type: Sequelize.INTEGER,
-        references: {
-          model: "replies",
-          key: "id",
-        },
         allowNull: true,
       },
       user_id: {
@@ -39,9 +35,6 @@ module.exports = {
       },
       class: {
         type: Sequelize.TINYINT,
-      },
-      order: {
-        type: Sequelize.INTEGER,
       },
       created_at: {
         allowNull: false,
