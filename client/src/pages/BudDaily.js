@@ -5,8 +5,8 @@ import TabBtnOne from "../components/common/TabBtnOne";
 import Bud from "../components/diary/Bud";
 import PlantAddDialog from "../components/diary/PlantAddDialog";
 import { curDate } from "../modules/date";
-import useLoginStore from "../store/LoginStore";
-import useAjaxStore from "../store/AjaxStore";
+import useLoginStore from "../store/loginStore";
+import useAjaxStore from "../store/ajaxStore";
 import ModalByMode from "../components/common/ModalByMode";
 
 const Layout = styled.div`

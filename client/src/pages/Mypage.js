@@ -4,7 +4,7 @@ import Logo from "../components/common/Logo";
 import SideBar from "../components/MyPage/SideBar";
 import { budDummy } from "../utils/dummy";
 import DiaryList from "../components/list/DiaryList";
-import useAjaxStore from "../store/AjaxStore";
+import useAjaxStore from "../store/ajaxStore";
 
 const Layout = styled.div`
   display: flex;

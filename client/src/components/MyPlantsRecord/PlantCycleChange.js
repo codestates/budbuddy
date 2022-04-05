@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGear } from "@fortawesome/free-solid-svg-icons";
 import { makeCycleModal } from "../../utils/errExeption";
-import useStore from "../../store/PlantCycleStore";
+import useStore from "../../store/plantCycleStore";
 
 const PlantsCycleChangeLayout = styled.div`
   > .space {

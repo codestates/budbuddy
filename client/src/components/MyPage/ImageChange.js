@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { makeModal } from "../../utils/errExeption";
-import useStore from "../../store/PlantCycleStore";
+import useStore from "../../store/plantCycleStore";
 import ImageChangeStore from "../../store/ImageChangeStore";
 
 const ModalContainer = styled.div`

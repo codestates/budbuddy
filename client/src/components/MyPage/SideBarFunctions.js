@@ -6,7 +6,7 @@ import AccountDelete from "./AccountDelete";
 import ChangePassword from "./ChangePassword";
 import ImageChange from "./ImageChange";
 import ImageChangeStore from "../../store/ImageChangeStore";
-import useLoginStore from "../../store/LoginStore";
+import useLoginStore from "../../store/loginStore";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 

@@ -17,7 +17,7 @@ import DairyByMode from "./pages/DairyByMode";
 import Test from "./pages/Test";
 import NavigationBar from "./components/common/NavigationBar";
 import { OutLine, Content } from "./styles/CommonStyled";
-import useLoginStore from "./store/LoginStore";
+import useLoginStore from "./store/loginStore";
 import { PersistGate } from "zustand-persist";
 var moment = require("moment");
 require("moment-timezone");
