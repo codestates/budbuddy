@@ -94,7 +94,7 @@ const BudDaily = () => {
       },
       changeBudImage() {
         info.closePopup = setPopupInfo;
-        info.outerFn = setPopupInfo;
+        info.outerFn = () => {};
         info.text = "등록 식물의 사진을 변경합니다.";
         return <ModalByMode info={info} />;
       },
