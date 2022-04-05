@@ -12,16 +12,17 @@ const useAjaxStore = create(
       allowlist: ["listByPlantId", "listByUserId", "publicJournal", "userInfo", "myPlants"],
       denylist: [],
     },
-    (set) => ({
+    devtools((set) => ({
       listByPlantId: [],
       listByUserId: [],
       publicJournal: [],
       userInfo: {},
       myPlants: [],
       replies: [],
-      async setReplies(journalId, reply) {
+
+      async setReplies(journalId, body, group_id = null) {
         try {
-          const resData = await axios.post(process.env.REACT_APP_API_URL + `/journals/${journalId}/replies`, { body: reply });
+          const resData = await axios.post(process.env.REACT_APP_API_URL + `/journals/${journalId}/replies`, { body, group_id });
           // console.log("Replies:::", resData.data.data);
         } catch (err) {
           // console.log("axios err / setReplies :::", err);
@@ -30,7 +31,7 @@ const useAjaxStore = create(
       async deleteReplies(replyId) {
         try {
           const resData = await axios.delete(process.env.REACT_APP_API_URL + `/journals/replies/${replyId}`);
-          // console.log("deleteReplies:::", resData.data.data);
+          console.log("deleteReplies:::", resData, replyId);
         } catch (err) {
           // console.log("axios err / deleteReplies :::", err);
         }
@@ -49,10 +50,10 @@ const useAjaxStore = create(
               body,
               group_id,
               journal_id,
-              createdAt,
+              replyTime: null,
               class: resData.data.data[i].class,
             };
-
+            reply.replyTime = moment(createdAt).format("MM/DD ").replaceAll("0", "") + moment(createdAt).format("h:mm");
             arr.push(reply);
           }
 
@@ -213,7 +214,7 @@ const useAjaxStore = create(
           set((state) => ({ publicJournal: [] }));
         }
       },
-    }),
+    })),
   ),
 );
 

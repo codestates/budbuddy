@@ -1,6 +1,5 @@
 import React, { useRef } from "react";
 import styled from "styled-components";
-import moment from "moment";
 import useAjaxStore from "../../store/ajaxStore";
 
 const Layout = styled.div`
@@ -53,7 +52,7 @@ const Layout = styled.div`
   }
 `;
 
-function ReplyTextArea({ journalId, contentRef, close, isRereply = false }) {
+function ReplyTextArea({ journalId, contentRef, close, isRereply = false, group_id = null }) {
   const textRef = useRef(null);
   const { setReplies, getReplies } = useAjaxStore();
 
@@ -69,7 +68,7 @@ function ReplyTextArea({ journalId, contentRef, close, isRereply = false }) {
     console.log("댓글 등록란");
     if (textRef.current.value === "") return;
 
-    await setReplies(journalId, textRef.current.value);
+    await setReplies(journalId, textRef.current.value, group_id);
     await getReplies(journalId);
     textRef.current.value = "";
     if (isRereply) close();

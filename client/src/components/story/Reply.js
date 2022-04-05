@@ -1,9 +1,8 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import ReplyTextArea from "./ReplyTextArea";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faReplyd } from "@fortawesome/free-brands-svg-icons";
-import moment from "moment";
 import useAjaxStore from "../../store/ajaxStore";
 
 const Layout = styled.div`
@@ -126,9 +125,8 @@ const Layout = styled.div`
 `;
 
 function Reply({ contentRef, info }) {
-  const { deleteReplies, getReplies } = useAjaxStore();
+  const { deleteReplies, getReplies, replies } = useAjaxStore();
   const [isOpen, setOpen] = useState(false);
-  const [replyArr, setReply] = useState([]);
 
   async function removeReply() {
     console.log("댓글 삭제 란");
@@ -136,21 +134,21 @@ function Reply({ contentRef, info }) {
     await getReplies(info.journal_id);
   }
 
-  function removeRereply() {
+  async function removeRereply(id) {
     console.log("대댓글 삭제 란");
+    await deleteReplies(id);
+    await getReplies(info.journal_id);
   }
 
   function addRereply() {
     setOpen(true);
-    console.log("대댓글 작성란");
   }
 
   function close() {
     setOpen(false);
   }
 
-  console.log("reply info:::", info);
-  const replyTime = moment(info.createdAt).format("MM/DD ").replaceAll("0", "") + moment(info.createdAt).format("h:mm");
+  console.log("reply info:::", info, replies);
   return (
     <Layout className="reply">
       <div className="reply-top">
@@ -159,7 +157,7 @@ function Reply({ contentRef, info }) {
           <span className="reply-delete" onClick={removeReply}>
             삭제
           </span>
-          <span className="reply-date">{replyTime}</span>
+          <span className="reply-date">{info.replyTime}</span>
         </div>
       </div>
       <div className="reply-mid">
@@ -170,10 +168,11 @@ function Reply({ contentRef, info }) {
           </span>
         </div>
         <div className="rereply-wrap">
-          {replyArr.map((v, i) => {
-            console.log("대댓글:", v);
+          {replies.map((v, i) => {
+            if (v.class === 0) return null;
+            else if (info.group_id !== v.group_id) return null;
             return (
-              <div key={i} className="rereply-frame">
+              <div key={v.replyId} className="rereply-frame">
                 <div className="top">
                   <div className="name">
                     <span>
@@ -182,19 +181,23 @@ function Reply({ contentRef, info }) {
                     {v.nickname}
                   </div>
                   <div className="top-right">
-                    <span className="rereply-delete" onClick={removeRereply}>
+                    <span
+                      className="rereply-delete"
+                      onClick={() => {
+                        removeRereply(v.replyId);
+                      }}>
                       삭제
                     </span>
                     <div className="date">{v.replyTime}</div>
                   </div>
                 </div>
                 <div className="mid">
-                  <div className="rereply-content">&nbsp;&nbsp;{v.replyContent}</div>
+                  <div className="rereply-content">&nbsp;&nbsp;{v.body}</div>
                 </div>
               </div>
             );
           })}
-          {isOpen ? <ReplyTextArea contentRef={contentRef} setReply={setReply} isRereply={true} close={close} /> : null}
+          {isOpen ? <ReplyTextArea journalId={info.journal_id} contentRef={contentRef} isRereply={true} close={close} group_id={info.group_id} /> : null}
         </div>
       </div>
     </Layout>
