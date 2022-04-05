@@ -38,10 +38,10 @@ const IdPost = styled.div`
     margin-left: 2%;
     display: flex;
     align-items: center;
-    font-size: ${(props) => props.theme.fontWritePageSmall};
+    font-size: ${(props) => props.theme.fontWritePageXSmall};
 
     .nick {
-      font-size: ${(props) => props.theme.fontWritePageLarge};
+      font-size: ${(props) => props.theme.fontWritePageSmall};
       margin-left: 0.2rem;
       color: DarkGreen;
     }

@@ -12,18 +12,18 @@ const Layout = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: ${(props) => props.theme.fontWritePageMid};
+    font-size: ${(props) => props.theme.fontWritePageSmall};
     margin-top: 1.2rem;
   }
   .date-wrap {
     margin-left: 0.5rem;
-    font-size: ${(props) => props.theme.fontWritePageSmall};
+    font-size: ${(props) => props.theme.fontWritePageXSmall};
   }
   .btn-wrap {
     margin-right: 0.5rem;
 
     > button {
-      font-size: ${(props) => props.theme.fontWritePageSmall};
+      font-size: ${(props) => props.theme.fontBtnMid};
       border: none;
       border-radius: ${(props) => props.theme.borderRadius};
       padding: 0.1rem 0.2rem;

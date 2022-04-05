@@ -17,7 +17,7 @@ export const Layout = styled.div`
 
   .leftcap,
   .rightcap {
-    font-size: 1rem;
+    font-size: ${(props) => props.theme.fontWritePageXSmall};
     padding: 1%;
     margin: 5px;
     border: none;

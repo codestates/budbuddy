@@ -81,7 +81,7 @@ const Content = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 1.5rem;
+    font-size: ${(props) => props.theme.fontCalendarArrowBtn};
     transition: all 0.4s;
   }
 
@@ -92,11 +92,12 @@ const Content = styled.div`
   }
 
   .curMonth {
-    font-size: 1.8rem;
+    font-size: ${(props) => props.theme.fontWritePageXLarge};
     font-weight: bold;
   }
   .curDate {
-    font-size: 1.1rem;
+    margin-top: 0.3rem;
+    font-size: ${(props) => props.theme.fontWritePageSmall};
     font-weight: 100;
   }
 `;

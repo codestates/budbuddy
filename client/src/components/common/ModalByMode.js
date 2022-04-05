@@ -46,7 +46,7 @@ const Layout = styled.div`
     align-items: center;
 
     .icon {
-      font-size: 2rem;
+      font-size: ${(props) => props.theme.fontImgUploadIcon};
       padding: 0.2rem;
     }
 
@@ -65,7 +65,8 @@ const Layout = styled.div`
     .title {
       text-align: center;
       white-space: pre-wrap;
-      font-size: 1.5rem;
+      font-size: ${(props) => props.theme.fontWritePageLarge};
+      color: rgba(0, 0, 0, 0.7);
     }
   }
 
@@ -77,7 +78,7 @@ const Layout = styled.div`
     white-space: pre;
     .content {
       margin-top: 0.5rem;
-      font-size: 1.15rem;
+      font-size: ${(props) => props.theme.fontWritePageSmall};
       line-height: 1.2;
     }
 
@@ -93,7 +94,7 @@ const Layout = styled.div`
     justify-content: space-evenly;
 
     > button {
-      font-size: 1.1rem;
+      font-size: ${(props) => props.theme.fontBtnMid};
       border: none;
       padding: 0.1rem 0.3rem;
       background: lightgray;
@@ -173,12 +174,92 @@ const ModalByMode = ({ info = "" }) => {
           </div>
         );
       },
+      testLogin() {
+        return (
+          <div className="wrap">
+            <div className="top">
+              <FontAwesomeIcon className="err icon" icon={faCircleExclamation} />
+              <div className="title">안내</div>
+            </div>
+            <div className="mid">
+              <div className="content">
+                <div>{info.text}</div>
+              </div>
+            </div>
+            <div className="bottom">
+              <button className="confirm" onClick={info.done}>
+                확인
+              </button>
+            </div>
+          </div>
+        );
+      },
+      reqfillLoginform() {
+        return (
+          <div className="wrap">
+            <div className="top">
+              <FontAwesomeIcon className="err icon" icon={faCircleExclamation} />
+              <div className="title">안내</div>
+            </div>
+            <div className="mid">
+              <div className="content">
+                <div>{info.text}</div>
+              </div>
+            </div>
+            <div className="bottom">
+              <button className="confirm" onClick={close}>
+                확인
+              </button>
+            </div>
+          </div>
+        );
+      },
+      NotFound() {
+        return (
+          <div className="wrap">
+            <div className="top">
+              <FontAwesomeIcon className="err icon" icon={faCircleExclamation} />
+              <div className="title">안내</div>
+            </div>
+            <div className="mid">
+              <div className="content">
+                <div>{info.text}</div>
+              </div>
+            </div>
+            <div className="bottom">
+              <button className="confirm" onClick={close}>
+                확인
+              </button>
+            </div>
+          </div>
+        );
+      },
+      wrongPassword() {
+        return (
+          <div className="wrap">
+            <div className="top">
+              <FontAwesomeIcon className="err icon" icon={faCircleExclamation} />
+              <div className="title">안내</div>
+            </div>
+            <div className="mid">
+              <div className="content">
+                <div>{info.text}</div>
+              </div>
+            </div>
+            <div className="bottom">
+              <button className="confirm" onClick={close}>
+                확인
+              </button>
+            </div>
+          </div>
+        );
+      },
       alreadyExistsBudName() {
         return (
           <div className="wrap">
             <div className="top">
               <FontAwesomeIcon className="err icon" icon={faCircleExclamation} />
-              <div className="title">주의</div>
+              <div className="title">알림</div>
             </div>
             <div className="mid">
               <div className="content">
@@ -231,7 +312,7 @@ const ModalByMode = ({ info = "" }) => {
   }
   return (
     <Layout>
-      <div className="shell">
+      <div className="shell" onClick={info.outerFn}>
         <div className="popup">{makeModal(info)}</div>
       </div>
     </Layout>
