@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import styled from "styled-components";
 import moment from "moment";
-import useAjaxStore from "../../store/AjaxStore";
+import useAjaxStore from "../../store/ajaxStore";
 
 const Layout = styled.div`
   width: 100%;

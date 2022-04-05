@@ -3,7 +3,7 @@ import Reply from "./Reply";
 import ReplyTextArea from "./ReplyTextArea";
 import styled from "styled-components";
 import moment from "moment";
-import useLoginStore from "../../store/LoginStore";
+import useLoginStore from "../../store/loginStore";
 
 const Layout = styled.div`
   display: flex;

@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
-import useLoginStore from "../../store/LoginStore";
+import useLoginStore from "../../store/loginStore";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHouseUser, faUsers, faBook, faCamera, faUser } from "@fortawesome/free-solid-svg-icons";
 

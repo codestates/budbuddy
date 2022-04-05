@@ -18,6 +18,17 @@ const useAjaxStore = create(
       publicJournal: [],
       userInfo: {},
       myPlants: [],
+      replies: [],
+      async setReplies(plantId) {
+        try {
+          const resData = await axios.get(process.env.REACT_APP_API_URL + "/journals/my", { params: { plant: plantId } });
+          // console.log("setListByPlantId:::", resData.data.data);
+          set((state) => ({ listByPlantId: [...resData.data.data] }));
+        } catch (err) {
+          console.log("axios err / setListByPlatId :::", err);
+          set((state) => ({ listByPlantId: [] }));
+        }
+      },
       async setListByPlantId(plantId) {
         try {
           const resData = await axios.get(process.env.REACT_APP_API_URL + "/journals/my", { params: { plant: plantId } });

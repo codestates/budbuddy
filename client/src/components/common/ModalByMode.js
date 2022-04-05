@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTriangleExclamation, faCircleExclamation, faImage } from "@fortawesome/free-solid-svg-icons";
 import ImgUpload from "../common/ImgUpload";
-import useAjaxStore from "../../store/AjaxStore";
+import useAjaxStore from "../../store/ajaxStore";
 
 const Layout = styled.div`
   position: absolute;
