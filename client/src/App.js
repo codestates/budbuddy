@@ -3,30 +3,56 @@ import { ThemeProvider } from "styled-components";
 import GlobalStyle from "./styles/GlobalStyle";
 import Theme from "./styles/Theme";
 import { Route, Routes } from "react-router-dom";
-import axios from "axios";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
 import Signup from "./pages/Signup";
-import NavigationBar from "./components/NavigationBar";
+import Mypage from "./pages/Mypage";
+import MypageRecord from "./pages/MypageRecord";
+import Story from "./pages/Story";
+import BudDaily from "./pages/BudDaily";
+import Album from "./pages/Album";
+import Write from "./pages/Write";
+import DairyListByBud from "./pages/DairyListByBud";
+import DairyByMode from "./pages/DairyByMode";
+import Test from "./pages/Test";
+import NavigationBar from "./components/common/NavigationBar";
 import { OutLine, Content } from "./styles/CommonStyled";
-axios.defaults.withCredentials = true;
+import useLoginStore from "./store/LoginStore";
+import { PersistGate } from "zustand-persist";
+var moment = require("moment");
+require("moment-timezone");
+moment.locale();
+moment.tz.setDefault("Asia/Seoul");
 
 const App = () => {
+  const { isLogin } = useLoginStore();
+  // console.log("isLogin::", isLogin);
+
   return (
     <div>
-      <ThemeProvider theme={Theme}>
-        <GlobalStyle />
-        <OutLine>
-          <Content className="Content">
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/signup" element={<Signup />} />
-              <Route path="/login" element={<Login />} />
-            </Routes>
-            <NavigationBar className="navi" />
-          </Content>
-        </OutLine>
-      </ThemeProvider>
+      <PersistGate>
+        <ThemeProvider theme={Theme}>
+          <GlobalStyle />
+          <OutLine>
+            <Content>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/story" element={<Story />} />
+                <Route path="/daily" element={<BudDaily />} />
+                <Route path="/daily/:mode" element={<DairyByMode />} />
+                <Route path="/write" element={<Write />} />
+                <Route path="/list" element={<DairyListByBud />} />
+                <Route path="/album" element={<Album />} />
+                <Route path="/signup" element={<Signup />} />
+                {isLogin ? <Route path="/mypage" element={<Mypage />} /> : <Route path="/login" element={<Login />} />}
+                <Route path="/test" element={<Test />} />
+                <Route path="/mypage/list/record" element={<MypageRecord />} />
+              </Routes>
+            </Content>
+            <NavigationBar classNsame="navi" />
+          </OutLine>
+        </ThemeProvider>
+      </PersistGate>
     </div>
   );
 };

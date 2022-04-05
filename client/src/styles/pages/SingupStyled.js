@@ -1,38 +1,28 @@
 import styled from "styled-components";
 
-export const SignupWrapper = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, minmax(1fr, auto));
-  grid-template-rows: minmax(1fr, auto) minmax(3fr, auto) minmax(0.1fr, auto) minmax(1fr, auto);
-  grid-template-areas:
-    "signupText signupText signupText"
-    "inputWrapper inputWrapper inputWrapper"
-    "hr hr hr"
-    "join join cancle";
+export const SignupWrapper = styled.form`
+  display: flex;
+  flex-direction: column;
 
   text-align: center;
-  align-items: center;
   place-items: center;
-  justify-content: center;
 
-  background-color: ${(props) => props.theme.subColor};
-  margin: 15% 10% 0 10%;
-  padding-top: 4%;
-  padding-bottom: 4%;
+  background-color: ${(props) => props.theme.formColor};
+  margin: 9% 15% 0 15%;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
   border-radius: ${(props) => props.theme.borderRadius};
 
   .signupText {
-    grid-area: signupText;
-    margin-bottom: 1.3rem;
+    font-size: ${(props) => props.theme.fontWritePageLarge};
     letter-spacing: 7px;
-    color: Snow;
+    color: black;
+    margin-bottom: 0.3rem;
   }
 
   .hr {
     grid-area: hr;
-    margin: 0.6rem 0 1rem 0;
-
-    background-color: GhostWhite;
+    margin: 1rem 0 1.2rem 0;
   }
 
   .btn {
@@ -41,16 +31,12 @@ export const SignupWrapper = styled.div`
     background-color: MediumSeaGreen;
 
     color: white;
-    padding: 6px;
+    padding: 3px;
     transition: background-color 0.3s;
   }
 
-  .join {
-    grid-area: join;
-  }
-
-  .join:active {
-    background-color: Teal;
+  .join:hover {
+    background-color: ${(props) => props.theme.hoverColor};
     color: black;
   }
 
@@ -60,34 +46,51 @@ export const SignupWrapper = styled.div`
     color: black;
   }
 
-  .cancle:active {
-    background-color: IndianRed;
+  .cancle:hover {
+    background-color: ${(props) => props.theme.hoverCancleColor};
     color: white;
+  }
+
+  .btnbox {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    > .join {
+      font-size: ${(props) => props.theme.fontWritePageMid};
+      width: 25%;
+      margin-left: 10%;
+    }
+    > .cancle {
+      font-size: ${(props) => props.theme.fontWritePageMid};
+      width: 30%;
+      margin-right: 10%;
+    }
   }
 `;
 
-export const InputWrapper = styled.form`
+export const InputWrapper = styled.div`
   grid-area: inputWrapper;
 
   display: grid;
   grid-template-columns: minmax(1fr, auto) minmax(9fr, auto);
   grid-template-rows: repeat(6, minmax(1fr, auto));
   grid-template-areas:
+    "chEmail chEmail"
     "idIcon inputId"
-    "chId chId"
-    "passIcon inputPass"
     "chPass chPass"
-    "nickIcon inputNick"
-    "chNick chNick";
+    "passIcon inputPass"
+    "chNick chNick"
+    "nickIcon inputNick";
 
   justify-content: center;
   text-align: center;
   place-items: center;
 
   input {
+    font-size: ${(props) => props.theme.fontWritePageMid};
     border: none;
-    margin-left: 1rem;
-    height: 2.1rem;
+    margin-left: 0.5rem;
+    height: 1.5rem;
     border-radius: ${(props) => props.theme.borderRadius};
     padding-left: 1rem;
   }
@@ -97,7 +100,7 @@ export const InputWrapper = styled.form`
   }
 
   > .icon {
-    font-size: ${(props) => props.theme.fontIconSize};
+    font-size: ${(props) => props.theme.fontWritePageLarge};
     filter: invert(85%) sepia(90%) saturate(400%) hue-rotate(130deg) brightness(95%) contrast(50%);
   }
 
@@ -129,7 +132,7 @@ export const InputWrapper = styled.form`
   }
 
   > .ch {
-    font-size: 12px;
+    font-size: 14px;
     white-space: pre;
   }
 
@@ -137,8 +140,8 @@ export const InputWrapper = styled.form`
     color: ${(props) => props.theme.textWaringColor};
   }
 
-  > .chId {
-    grid-area: chId;
+  > .chEmail {
+    grid-area: chEmail;
   }
 
   > .chPass {

@@ -1,30 +1,60 @@
 import React, { useState, useRef } from "react";
 import styled from "styled-components";
-import { OutLine, BGWrapper } from "../styles/CommonStyled";
 import { SignupWrapper, InputWrapper } from "../styles/pages/SingupStyled";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faKey, faUser, faMask } from "@fortawesome/free-solid-svg-icons";
-import { validId, validPassword, validNickName, removeHangul } from "../modules/validation";
+import { validEmail, validPassword, validNickName } from "../modules/validation";
 import { useNavigate } from "react-router-dom";
-import { sleep, makeModal } from "../utils/errExeption";
+import { makeModal } from "../utils/errExeption";
+import { sleep } from "../modules/sleep";
 
-const SignupBG = styled(BGWrapper)`
+export const Layout = styled.div`
   padding-top: ${(props) => props.theme.backgroundPaddingTop};
 
-  margin: 0 1rem 0 1rem;
+  .signupWrapper {
+    margin-top: 4.5rem;
+  }
+`;
 
-  > .std {
-    box-shadow: 15px 15px 7px ${(props) => props.theme.boxShadowColor};
+const SignupBG = styled.div`
+  margin: 0 0rem 0 0rem;
+  text-align: center;
+
+  .std {
+    display: grid;
+    position: relative;
+  }
+
+  img {
+    width: 100%;
+    height: ${(props) => props.theme.backgroundImgHeight};
+    object-fit: cover;
+    filter: blur(1px);
+    border: none;
+    border-top: solid 1px rgb(0, 0, 0, 0.4);
+    border-bottom: solid 1px rgb(0, 0, 0, 0.4);
   }
 
   .backText {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: ${(props) => props.theme.fontWritePageLarge};
+
+    transform: translate(-50%, -50%);
+    white-space: pre;
+
+    font-weight: ${(props) => props.theme.fontWeightBg};
+    color: ${(props) => props.theme.backgroundTextColor};
+
     > h1 {
       text-transform: uppercase;
+      outline-offset: 0.4rem;
       outline: 2px solid rgb(255, 255, 255, 0.5);
-      outline-offset: 0.3em;
       display: inline-block;
-      margin: 0.4em 0 0.5em;
+      padding: 0 0.5rem;
+      margin: 0.4em 0 0.5em 0;
     }
 
     > h1 > span {
@@ -37,74 +67,56 @@ const SignupBG = styled(BGWrapper)`
     }
   }
 `;
-//배경 이미지 전환 트랜지션 필요
 
+//배경 이미지 전환 트랜지션 필요
 const Signup = () => {
   const [modalCode, setModalCode] = useState(0);
   const [isValid, setIsValid] = useState(false);
-  const idRef = useRef(null);
-  const passwordRef = useRef(null);
-  const nickRef = useRef(null);
 
-  const checkId = useRef(null);
+  const checkEmail = useRef(null);
   const checkPass = useRef(null);
   const checkNick = useRef(null);
 
-  async function reqSingup() {
-    const payload = {
-      userId: idRef.current.value,
-      password: passwordRef.current.value,
-      nickname: nickRef.current.value,
-    };
+  let navigate = useNavigate();
 
+  async function reqSingup(payload) {
     try {
       const resData = await axios.post(process.env.REACT_APP_API_URL + "/users/signup", payload);
-      console.log("회원가입 응답::::", resData);
-
-      setModalCode(201);
+      setModalCode(resData.data.message);
+      if (resData.data.message === "signupSuccess") {
+        await sleep(700);
+        navigate("/login");
+      }
     } catch (err) {
-      const err_code = Number(
-        JSON.stringify(err.message)
-          .split(" ")
-          .pop()
-          .replace(/[^0-9]/g, ""),
-      );
-      setModalCode(err_code);
+      setModalCode(err.response.data.message);
     }
   }
 
   function chValidation(e) {
     const className = e.target.className;
+    if (e.target.value === "") {
+      explainSignup(e);
+      return;
+    }
 
     switch (className) {
-      case "inputId":
+      case "inputEmail":
         {
-          if (idRef.current.value === "") {
-            explainSignup(e);
-            return;
-          }
-
-          const isValid = validId(idRef.current.value);
+          const isValid = validEmail(e.target.value);
           if (!isValid) {
-            checkId.current.textContent = "유효하지 않은 아이디입니다";
-            checkId.current.className = "chId ch invalid";
+            checkEmail.current.textContent = "유효하지 않은 이메일입니다";
+            checkEmail.current.className = "chEmail ch invalid";
             setIsValid(false);
           } else {
-            checkId.current.textContent = "";
-            checkId.current.className = "chId ch";
+            checkEmail.current.textContent = "";
+            checkEmail.current.className = "chEmail ch";
             setIsValid(true);
           }
         }
         return;
       case "inputPass":
         {
-          if (passwordRef.current.value === "") {
-            explainSignup(e);
-            return;
-          }
-          passwordRef.current.value = removeHangul(passwordRef.current.value);
-          const isValid = validPassword(passwordRef.current.value);
-          // console.log(className, isValid);
+          const isValid = validPassword(e.target.value);
           if (!isValid) {
             checkPass.current.textContent = "유효하지 않은 비밀번호입니다";
             checkPass.current.className = "chPass ch invalid";
@@ -118,12 +130,7 @@ const Signup = () => {
         return;
       case "inputNick":
         {
-          if (nickRef.current.value === "") {
-            explainSignup(e);
-            return;
-          }
-          const isValid = validNickName(nickRef.current.value);
-          // console.log(className, isValid);
+          const isValid = validNickName(e.target.value);
           if (!isValid) {
             checkNick.current.textContent = "유효하지 않은 닉네임입니다";
             checkNick.current.className = "chNick ch invalid";
@@ -142,27 +149,44 @@ const Signup = () => {
 
   function explainSignup(e) {
     const className = e.target.className;
+    if (e.target.value !== "") return;
 
     switch (className) {
-      case "inputId": {
-        if (idRef.current.value === "") {
-          checkId.current.className = "chId ch";
-          return (checkId.current.textContent = "첫글자는 영문이며 특수문자,한글 및 공백 사용불가\n 총 4~15글자 사이여야 합니다.");
-        }
-        return;
+      case "inputEmail": {
+        checkEmail.current.className = "chEmail ch";
+        return (checkEmail.current.textContent = "이메일 형식을 입력해주세요.");
       }
       case "inputPass":
-        if (passwordRef.current.value === "") {
-          checkPass.current.className = "chPass ch";
-          return (checkPass.current.textContent = "영문, 특수문자, 숫자 사용가능하며 총6~16글자 사이여야합니다");
-        }
-        return;
+        checkPass.current.className = "chPass ch";
+        return (checkPass.current.textContent = "영문, 특수문자, 숫자 사용가능하며\n 6~16글자 사이여야합니다");
       case "inputNick":
-        if (nickRef.current.value === "") {
-          checkNick.current.className = "chNick ch";
-          return (checkNick.current.textContent = "첫글자는 영문이며 숫자 사용가능하지만\n 특수문자,한글 및 공백은 사용 불가입니다.");
-        }
+        checkNick.current.className = "chNick ch";
+        return (checkNick.current.textContent = "완성된 한글 및 영문,숫자만 사용가능하며\n 1~14글자 사이여야합니다");
+      default:
         return;
+    }
+  }
+
+  function chDivInit(e) {
+    // if (e.target.value !== "") return;
+    const className = e.target.className;
+
+    switch (className) {
+      case "inputEmail": {
+        checkEmail.current.className = "chEmail ch";
+        checkEmail.current.textContent = "";
+        return;
+      }
+      case "inputPass": {
+        checkPass.current.className = "chPass ch";
+        checkPass.current.textContent = "";
+        return;
+      }
+      case "inputNick": {
+        checkNick.current.className = "chNick ch";
+        checkNick.current.textContent = "";
+        return;
+      }
       default:
         return;
     }
@@ -170,53 +194,48 @@ const Signup = () => {
 
   function explainReset(e) {
     const className = e.target.className;
-    switch (className) {
-      case "inputId": {
-        if (idRef.current.value === "") {
-          checkId.current.className = "chId ch";
-          checkId.current.textContent = "";
-          return;
-        }
 
-        const isValid = validId(idRef.current.value);
+    if (e.target.value === "") {
+      setIsValid(false);
+      chDivInit(e);
+      return;
+    }
+
+    switch (className) {
+      case "inputEmail": {
+        const isValid = validEmail(e.target.value);
         if (!isValid) {
-          checkId.current.textContent = "유효하지 않은 아이디입니다";
-          checkId.current.className = "chId ch invalid";
+          setIsValid(false);
+          checkEmail.current.textContent = "유효하지 않은 이메일 형식입니다";
+          checkEmail.current.className = "chEmail ch invalid";
         } else {
-          checkId.current.className = "chId ch";
-          checkId.current.textContent = "";
+          setIsValid(true);
+          checkEmail.current.className = "chEmail ch";
+          checkEmail.current.textContent = "";
         }
         return;
       }
       case "inputPass": {
-        if (passwordRef.current.value === "") {
-          checkPass.current.className = "chPass ch";
-          checkPass.current.textContent = "";
-          return;
-        }
-
-        const isValid = validPassword(passwordRef.current.value);
+        const isValid = validPassword(e.target.value);
         if (!isValid) {
+          setIsValid(false);
           checkPass.current.textContent = "유효하지 않은 비밀번호입니다";
           checkPass.current.className = "chPass ch invalid";
         } else {
+          setIsValid(true);
           checkPass.current.className = "chPass ch";
           checkPass.current.textContent = "";
         }
         return;
       }
       case "inputNick": {
-        if (nickRef.current.value === "") {
-          checkNick.current.className = "chNick ch";
-          checkNick.current.textContent = "";
-          return;
-        }
-
-        const isValid = validNickName(nickRef.current.value);
+        const isValid = validNickName(e.target.value);
         if (!isValid) {
+          setIsValid(false);
           checkNick.current.textContent = "유효하지 않은 닉네임입니다";
           checkNick.current.className = "chNick ch invalid";
         } else {
+          setIsValid(true);
           checkNick.current.className = "chNick ch";
           checkNick.current.textContent = "";
         }
@@ -227,15 +246,33 @@ const Signup = () => {
     }
   }
 
-  let imgNumber = 4976;
-  let navigate = useNavigate();
+  function join(e) {
+    e.preventDefault();
+    const { email, password, nickname } = e.target;
+
+    if (email.value === "" || password.value === "" || nickname.value === "") {
+      setModalCode("reqfillform");
+      return;
+    } else if (!isValid) {
+      setModalCode("invalidform");
+      return;
+    }
+
+    const signupInfo = {
+      email: email.value,
+      password: password.value,
+      nickname: nickname.value,
+    };
+
+    reqSingup(signupInfo);
+  }
 
   return (
-    <div>
+    <Layout>
       {makeModal(modalCode)}
       <SignupBG>
         <div className="std">
-          <img className="signupBg" src={`signupBg/IMG_${imgNumber || 4311}.JPG`} alt={`bg`} />
+          <img className="signupBg" src={`Dummy/bg.png`} alt={`bg`} />
           <div className="backText">
             <p>
               Take care of <span className="green">your plants</span>
@@ -249,41 +286,39 @@ const Signup = () => {
           </div>
         </div>
       </SignupBG>
-      <SignupWrapper>
-        <p className="signupText">회원가입</p>
+      <SignupWrapper className="signupWrapper" onSubmit={join}>
+        <div className="signupText">회원가입</div>
         <InputWrapper className="inputWrapper">
           <FontAwesomeIcon className="idIcon icon" icon={faUser} />
-          <input className="inputId" ref={idRef} type="text" placeholder="ID를 입력하세요" maxLength={15} onBlur={explainReset} onFocus={explainSignup} onChange={chValidation} />
-          <div ref={checkId} className="chId ch"></div>
+          <input className="inputEmail" name="email" type="text" placeholder="이메일을 입력하세요" maxLength={30} onBlur={explainReset} onFocus={explainSignup} onChange={chValidation} />
+          <div ref={checkEmail} className="chEmail ch" name="chEmail"></div>
           <FontAwesomeIcon className="passIcon icon" icon={faKey} />
-          <input className="inputPass" ref={passwordRef} type="text" placeholder="비밀번호를 입력하세요" maxLength={20} onBlur={explainReset} onFocus={explainSignup} onChange={chValidation} />
+          <input className="inputPass" name="password" type="password" placeholder="비밀번호를 입력하세요" maxLength={20} onBlur={explainReset} onFocus={explainSignup} onChange={chValidation} />
           <div ref={checkPass} className="chPass ch"></div>
           <FontAwesomeIcon className="nickIcon icon" icon={faMask} />
-          <input className="inputNick" ref={nickRef} type="text" placeholder="사용할 닉네임을 입력하세요" maxLength={15} onBlur={explainReset} onFocus={explainSignup} onChange={chValidation} />
+          <input className="inputNick" name="nickname" type="text" placeholder="사용할 닉네임을 입력하세요" maxLength={15} onBlur={explainReset} onFocus={explainSignup} onChange={chValidation} />
           <div ref={checkNick} className="chNick ch"></div>
         </InputWrapper>
         <hr className="hr" width="90%" />
-        <button
-          className="join btn"
-          onClick={() => {
-            if (!isValid) return;
-            else if (idRef.current.value === "" || passwordRef.current.value === "" || nickRef.current.value === "") return;
-
-            reqSingup();
-            setModalCode(0);
-          }}>
-          Join
-        </button>
-        <button
-          className="cancle btn"
-          onClick={async () => {
-            await sleep(200);
-            navigate("/");
-          }}>
-          가입취소
-        </button>
+        <div className="btnbox">
+          <button
+            className="join btn"
+            type="submit"
+            onBlur={() => {
+              setModalCode(0);
+            }}>
+            Join
+          </button>
+          <span
+            className="cancle btn"
+            onClick={() => {
+              navigate("/");
+            }}>
+            가입취소
+          </span>
+        </div>
       </SignupWrapper>
-    </div>
+    </Layout>
   );
 };
 

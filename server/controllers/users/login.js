@@ -1,26 +1,41 @@
-const jwt = require("jsonwebtoken");
-require("dotenv").config();
-
-const { ACCESS_SECRET } = process.env;
+const { Users } = require("../../models/index");
+const createPassword = require("../../modules/createPassword");
+const jwtModule = require("../../modules/jwt");
 
 module.exports = async (req, res) => {
-  const { Id, password } = req.body;
+  const { email: reqEmail, password: reqPassword } = req.body;
 
-  const payload = {
-    Id,
-    name: "jeyoung",
-    age: 38,
-    job: "programmer",
+  if (!reqEmail || !reqPassword) {
+    return res.status(400).send({ message: "Bad Request" });
+  }
+
+  const user = await Users.findOne({
+    where: {
+      email: reqEmail,
+    },
+  });
+
+  if (!user) return res.status(404).send({ message: "Not Found" });
+
+  const { password: reqEncryptPassword } = await createPassword(reqPassword, user.salt);
+
+  if (user.password !== reqEncryptPassword) return res.status(403).send({ message: "wrongPassword" });
+
+  const jwtPayload = {
+    idx: user.id,
+    email: user.email,
+    profileImage: user.profile_image_id,
+    created_at: user.created_at,
   };
+  try {
+    var accessToken = await jwtModule.sign(jwtPayload);
+  } catch (err) {
+    return res.status(500).send(err);
+  }
 
-  const opt = {
-    expiresIn: "1h",
-  };
-
-  const accessToken = jwt.sign(payload, ACCESS_SECRET, opt);
-
-  return res
-    .status(200)
-    .cookie("accessToken", accessToken, { maxAge: 60 * 60 * 60 * 60 * 100 })
-    .send({ payload, message: "ok" });
+  res.cookie("accessToken", accessToken, {
+    maxAge: 24 * 60 * 60 * 1000,
+    httpOnly: true,
+  });
+  return res.status(200).send({ data: accessToken, message: "sent AccessToken successfully" });
 };

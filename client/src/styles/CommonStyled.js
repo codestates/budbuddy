@@ -10,21 +10,13 @@ export const OutLine = styled.div`
 `;
 
 export const Content = styled.div`
-  background-color: Aquamarine;
-  height: 100vh;
+  background-color: ${(props) => props.theme.subColor};
+  width: 100vw;
+  min-height: 100vh;
+  border: none;
 
-  @media screen and (min-width: 390px) {
-    width: ${(props) => props.theme.iphoneWidth};
-    * {
-      font-size: 1.2rem;
-    }
-  }
-
-  @media screen and (min-width: 520px) {
-    width: ${(props) => props.theme.web520px};
-    * {
-      font-size: 1.6rem;
-    }
+  @media screen and (min-width: 391px) {
+    width: ${(props) => props.theme.webWidth + "px"};
   }
 `;
 
