@@ -25,6 +25,6 @@ router.post("/:id/replies", replies.newReply);
 router.get("/:id/replies", replies.getReplies);
 
 // DELETE /journals/:id/replies/:replyId
-router.delete("/:id/replies/:replyId", replies.deleteReply);
+router.delete("/replies/:replyId", replies.deleteReply);
 
 module.exports = router;
