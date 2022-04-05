@@ -37,14 +37,16 @@ export const Layout = styled.div`
 
 const Story = () => {
   let { publicJournal, getAllPublicJournal } = useAjaxStore();
-  const [story, setStory] = useState(publicJournal);
+  const [story, setStory] = useState([]);
   const [isFreeze, setFreeze] = useState(false);
   useEffect(() => {
     getStory();
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [publicJournal]);
 
   async function getStory() {
     await getAllPublicJournal();
+    setStory(publicJournal);
   }
 
   function storySearch(word) {
