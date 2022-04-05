@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
 import SideBarFuntions from "./SideBarFunctions";
-import useLoginStore from "../../store/LoginStore";
+import useLoginStore from "../../store/loginStore";
 import axios from "axios";
 import { makeModal } from "../../utils/errExeption";
 

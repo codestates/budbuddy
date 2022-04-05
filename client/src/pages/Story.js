@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 import Logo from "../components/common/Logo";
 import SearchBar from "../components/story/SearchBar";
 import StoryCard from "../components/story/StoryCard";
-import useAjaxStore from "../store/AjaxStore";
+import useAjaxStore from "../store/ajaxStore";
 // import { storyDummyList } from "../utils/dummy";
 
 export const Layout = styled.div`

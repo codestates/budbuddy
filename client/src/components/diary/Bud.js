@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useNavigateSearch } from "../../modules/hooks";
-import useAjaxStore from "../../store/AjaxStore";
+import useAjaxStore from "../../store/ajaxStore";
 
 const Layout = styled.div`
   display: grid;

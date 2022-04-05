@@ -5,7 +5,7 @@ import { proverbs } from "../utils/dummy";
 import TextOnImg from "../components/common/TextOnImg";
 import Hr from "../components/common/Hr";
 import LoginForm from "../components/login/LoginForm";
-import useLoginStore from "../store/LoginStore";
+import useLoginStore from "../store/loginStore";
 import axios from "axios";
 
 const Layout = styled.div`
