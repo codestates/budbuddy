@@ -3,9 +3,9 @@ const multerS3 = require("multer-s3");
 const aws = require("aws-sdk");
 
 const s3 = new aws.S3({
-  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-  region: process.env.AWS_REGION
+  accessKeyId: process.env.IAM_ACCESS_KEY_ID,
+  secretAccessKey: process.env.IAM_SECRET_ACCESS_KEY,
+  region: process.env.IAM_REGION,
 });
 
 const upload = multer({

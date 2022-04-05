@@ -148,10 +148,6 @@ const ModalByMode = ({ info = "" }) => {
       }
       info.closePopup({});
     }
-    // function changeBudImg(e) {
-    //   e.preventDefault();
-    //   console.log("버드 이미지 변경 작성란");
-    // }
 
     const tasks = {
       deleteBud() {
@@ -198,8 +194,6 @@ const ModalByMode = ({ info = "" }) => {
         );
       },
       changeBudImage() {
-        console.log("changeInfo", info);
-
         async function uploadBudImg(e) {
           info.closePopup({});
           await changePlantImg(info.plant_id, info.budName, e.target.upload_img);

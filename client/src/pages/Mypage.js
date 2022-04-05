@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import Logo from "../components/common/Logo";
 import SideBar from "../components/MyPage/SideBar";
-import { budDummy } from "../utils/dummy";
 import DiaryList from "../components/list/DiaryList";
 import useAjaxStore from "../store/ajaxStore";
 
@@ -70,13 +69,13 @@ const Mypage = () => {
 
   useEffect(() => {
     getMapageInfo();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   async function getMapageInfo() {
     await setListByUserId();
     await getUserInfo();
   }
-  console.log(userInfo);
   return (
     <Layout>
       <Logo className="logo" />

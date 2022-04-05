@@ -62,6 +62,7 @@ const BudDaily = () => {
     if (isLogin) {
       getBuds();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLogin]);
 
   async function getBuds() {
@@ -105,8 +106,6 @@ const BudDaily = () => {
     }
     return tasks[info.fn]();
   }
-
-  console.log(myPlants);
 
   return (
     <Layout>
