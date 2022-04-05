@@ -39,6 +39,10 @@ const TextOnImg = ({ className = "", texts, time = 5000 }) => {
   const [idx, setIdx] = useState(0);
 
   const changeProverb = useCallback(() => {
+    if (!texts.length) {
+      return null;
+    }
+
     setIdx((pre) => {
       while (true) {
         const idx = parseInt(Math.random() * texts.length);

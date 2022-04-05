@@ -19,21 +19,19 @@ const Home = () => {
     read();
   }, []);
 
-  const [data, setData] = useState(null);
+  const [data, setData] = useState({});
 
   async function read() {
     const { data } = await axios.get("Dummy/dummy.json");
-    console.log(data);
-
     setData(data);
   }
 
   return (
     <Layout>
       <p className="greeting">{`안녕하세요!\n자신의 식물을 일기처럼 기록해보세요!`}</p>
-      <TextOnImg texts={data.proverbs} />
+      {data.proverbs === undefined ? null : <TextOnImg texts={data.proverbs} />}
       <Hr t={4} b={4} width={80} />
-      <ImgSlide images={data.slide} />
+      {data.slide === undefined ? null : <ImgSlide images={data.slide} />}
     </Layout>
   );
 };
