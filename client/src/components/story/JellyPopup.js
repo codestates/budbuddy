@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import Reply from "./Reply";
 import ReplyTextArea from "./ReplyTextArea";
 import styled from "styled-components";
 import moment from "moment";
 import useLoginStore from "../../store/loginStore";
+import useAjaxStore from "../../store/ajaxStore";
 
 const Layout = styled.div`
   display: flex;
@@ -177,8 +178,17 @@ const StoryLayout = styled.div`
 
 const JellyPopup = ({ setJellyPopup, story }) => {
   const contentRef = useRef(null);
-  const [replyArr, setReply] = useState([]);
   const { isLogin } = useLoginStore();
+  const { replies, getReplies } = useAjaxStore();
+
+  useEffect(() => {
+    callReply();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  async function callReply() {
+    await getReplies(story.journalId);
+  }
 
   function close() {
     setJellyPopup(false);
@@ -217,10 +227,11 @@ const JellyPopup = ({ setJellyPopup, story }) => {
             </div>
           </div>
           <div></div>
-          {replyArr.map((v, i) => {
+          {replies.map((v, i) => {
+            if (v.class === 1) return null;
             return <Reply key={i} info={v} contentRef={contentRef} />;
           })}
-          {isLogin ? <ReplyTextArea contentRef={contentRef} close={close} setReply={setReply} /> : null}
+          {isLogin ? <ReplyTextArea journalId={story.journalId} contentRef={contentRef} close={close} /> : null}
         </StoryLayout>
       </div>
     </Layout>
