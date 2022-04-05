@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import TabBtnOne from "../components/common/TabBtnOne";
 import PlantManageToggle from "../components/write/PlantManageToggle";

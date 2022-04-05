@@ -126,11 +126,11 @@ const useAjaxStore = create(
             // console.log("imgRes:::", upload_img, payload);
             const imgRes = await axios.post(process.env.REACT_APP_API_URL + "/images", formdata);
             payload["image_id"] = [imgRes.data.data.id];
-            const resData = await axios.post(process.env.REACT_APP_API_URL + "/plants", payload);
+            await axios.post(process.env.REACT_APP_API_URL + "/plants", payload);
             // console.log("setPlant:::with img:::", resData);
             return "ok";
           } else {
-            const resData = await axios.post(process.env.REACT_APP_API_URL + "/plants", payload);
+            await axios.post(process.env.REACT_APP_API_URL + "/plants", payload);
             // console.log("setPlant::none img:::", resData);
             return "ok";
           }
@@ -153,7 +153,7 @@ const useAjaxStore = create(
             // console.log("imgRes:::", upload_img, payload);
             const imgRes = await axios.post(process.env.REACT_APP_API_URL + "/images", formdata);
             payload["image_id"] = imgRes.data.data.id;
-            const resData = await axios.put(process.env.REACT_APP_API_URL + `/plants/${plant_id}`, payload);
+            await axios.put(process.env.REACT_APP_API_URL + `/plants/${plant_id}`, payload);
             // console.log("changePlantImg:::with img:::", resData);
             return "ok";
           } else {

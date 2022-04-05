@@ -75,6 +75,7 @@ function PlantManageToggle({ className, actions = {}, mode = "" }) {
       if (actions.isRepot) toggleHandler("repot");
       setReadOnly(true);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function toggleHandler(fnName) {
