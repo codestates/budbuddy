@@ -3,6 +3,9 @@ import ReplyTextArea from "./ReplyTextArea";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faReplyd } from "@fortawesome/free-brands-svg-icons";
+import moment from "moment";
+import useAjaxStore from "../../store/ajaxStore";
+
 const Layout = styled.div`
   display: flex;
   flex-direction: column;
@@ -123,11 +126,14 @@ const Layout = styled.div`
 `;
 
 function Reply({ contentRef, info }) {
+  const { deleteReplies, getReplies } = useAjaxStore();
   const [isOpen, setOpen] = useState(false);
   const [replyArr, setReply] = useState([]);
 
-  function removeReply() {
-    console.log("리플 삭제 란");
+  async function removeReply() {
+    console.log("댓글 삭제 란");
+    await deleteReplies(info.replyId);
+    await getReplies(info.journal_id);
   }
 
   function removeRereply() {
@@ -144,7 +150,7 @@ function Reply({ contentRef, info }) {
   }
 
   console.log("reply info:::", info);
-  //&nbsp;&nbsp;
+  const replyTime = moment(info.createdAt).format("MM/DD ").replaceAll("0", "") + moment(info.createdAt).format("h:mm");
   return (
     <Layout className="reply">
       <div className="reply-top">
@@ -153,12 +159,12 @@ function Reply({ contentRef, info }) {
           <span className="reply-delete" onClick={removeReply}>
             삭제
           </span>
-          <span className="reply-date">{info.replyTime}</span>
+          <span className="reply-date">{replyTime}</span>
         </div>
       </div>
       <div className="reply-mid">
         <div className="reply-content">
-          {info.replyContent}&nbsp;&nbsp;
+          {info.body}&nbsp;&nbsp;
           <span className="rereply-btn" onClick={addRereply}>
             reply
           </span>

@@ -53,9 +53,9 @@ const Layout = styled.div`
   }
 `;
 
-function ReplyTextArea({ contentRef, close, setReply, isRereply = false }) {
+function ReplyTextArea({ journalId, contentRef, close, isRereply = false }) {
   const textRef = useRef(null);
-  const { userInfo } = useAjaxStore();
+  const { setReplies, getReplies } = useAjaxStore();
 
   function textAreaResize(e) {
     e.target.style.height = "auto";
@@ -65,20 +65,14 @@ function ReplyTextArea({ contentRef, close, setReply, isRereply = false }) {
     if (!isRereply) contentRef.current.scrollTo(0, contentRef.current.scrollHeight);
   }
 
-  function addReply() {
+  async function addReply() {
+    console.log("댓글 등록란");
     if (textRef.current.value === "") return;
-    userInfo.replyContent = textRef.current.value + "";
-    userInfo.replyTime = moment().format("MM/DD ").replaceAll("0", "") + moment().format("h:mm");
-    const newObj = JSON.parse(JSON.stringify(userInfo));
-    setReply((pre) => {
-      return pre.concat(newObj);
-    });
+
+    await setReplies(journalId, textRef.current.value);
+    await getReplies(journalId);
     textRef.current.value = "";
     if (isRereply) close();
-
-    const { style } = textRef.current;
-    contentRef.current.scrollTo(0, contentRef.current.scrollHeight);
-    console.log("style:::", style, contentRef.current.scrollHeight);
   }
 
   return (

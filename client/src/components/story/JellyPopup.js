@@ -4,6 +4,7 @@ import ReplyTextArea from "./ReplyTextArea";
 import styled from "styled-components";
 import moment from "moment";
 import useLoginStore from "../../store/loginStore";
+import useAjaxStore from "../../store/ajaxStore";
 
 const Layout = styled.div`
   display: flex;
@@ -179,6 +180,15 @@ const JellyPopup = ({ setJellyPopup, story }) => {
   const contentRef = useRef(null);
   const [replyArr, setReply] = useState([]);
   const { isLogin } = useLoginStore();
+  const { replies, getReplies } = useAjaxStore();
+
+  useEffect(() => {
+    callReply();
+  }, []);
+
+  async function callReply() {
+    await getReplies(story.journalId);
+  }
 
   function close() {
     setJellyPopup(false);
@@ -186,6 +196,7 @@ const JellyPopup = ({ setJellyPopup, story }) => {
 
   const date = moment(story.updatedAt).format("MM/DD");
   const pastDays = moment().diff(moment(story.updatedAt), "days") + "일전";
+  console.log("story:::", story);
 
   return (
     <Layout>
@@ -217,10 +228,10 @@ const JellyPopup = ({ setJellyPopup, story }) => {
             </div>
           </div>
           <div></div>
-          {replyArr.map((v, i) => {
+          {replies.map((v, i) => {
             return <Reply key={i} info={v} contentRef={contentRef} />;
           })}
-          {isLogin ? <ReplyTextArea contentRef={contentRef} close={close} setReply={setReply} /> : null}
+          {isLogin ? <ReplyTextArea journalId={story.journalId} contentRef={contentRef} close={close} /> : null}
         </StoryLayout>
       </div>
     </Layout>
