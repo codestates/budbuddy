@@ -84,19 +84,22 @@ const BudDaily = () => {
     }
   }
 
-  function makePopup(info = "", fn = "") {
+  function makePopup(info = "") {
     const tasks = {
       deleteBud() {
         info.deleteBud = asyncDeleteBud;
         info.closePopup = setPopupInfo;
+        info.outerFn = setPopupInfo;
         return <ModalByMode info={info} />;
       },
       changeBudImage() {
         info.closePopup = setPopupInfo;
+        info.outerFn = setPopupInfo;
         return <ModalByMode info={info} />;
       },
       alreadyExistsBudName() {
         info.closePopup = setPopupInfo;
+        info.outerFn = setPopupInfo;
         return <ModalByMode info={info} />;
       },
     };

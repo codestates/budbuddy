@@ -15,7 +15,7 @@ module.exports = async (req, res) => {
     },
   });
 
-  if (!user) return res.status(404).send({ message: "Not Found" });
+  if (!user) return res.status(404).send({ message: "NotFound" });
 
   const { password: reqEncryptPassword } = await createPassword(reqPassword, user.salt);
 
