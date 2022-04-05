@@ -182,7 +182,7 @@ const JellyPopup = ({ setJellyPopup, story }) => {
   const { replies, getReplies } = useAjaxStore();
 
   useEffect(() => {
-    callReply();
+    if (isLogin) callReply();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -227,10 +227,12 @@ const JellyPopup = ({ setJellyPopup, story }) => {
             </div>
           </div>
           <div></div>
-          {replies.map((v, i) => {
-            if (v.class === 1) return null;
-            return <Reply key={i} info={v} contentRef={contentRef} />;
-          })}
+          {isLogin
+            ? replies.map((v, i) => {
+                if (v.class === 1) return null;
+                return <Reply key={i} info={v} contentRef={contentRef} />;
+              })
+            : null}
           {isLogin ? <ReplyTextArea journalId={story.journalId} contentRef={contentRef} close={close} /> : null}
         </StoryLayout>
       </div>

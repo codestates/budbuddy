@@ -160,14 +160,10 @@ const LoginForm = () => {
               sx={{ mt: 1, width: "22%", height: "10%", fontSize: "1rem", pl: "1rem", pr: "1rem" }}
               size="small"
               onClick={async () => {
-                const loginInfo = {
-                  isLogined: true,
-                  type: "test",
-                };
                 const payload = {
                   email: "test@test.com",
                   password: "1111",
-                  nickname: "test",
+                  nickname: "테스트",
                 };
                 try {
                   let resData = await axios.post(process.env.REACT_APP_API_URL + "/users/signup", payload);
