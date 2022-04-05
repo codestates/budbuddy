@@ -1,11 +1,11 @@
 import React, { useRef, useState } from "react";
 import styled from "styled-components";
 
-export const Layout = styled.div`
+const Layout = styled.div`
   img {
     object-fit: cover;
     width: 100%;
-    height: 27vh;
+    height: ${(props) => props.theme.backgroundImgHeight};
     border: none;
   }
 
@@ -57,6 +57,47 @@ export const Layout = styled.div`
 
     transform: translate(10%, -50%);
   }
+
+  .title {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    border-top: solid 1px rgba(0, 0, 0, 0.1);
+    border-bottom: solid 1px rgba(0, 0, 0, 0.1);
+    white-space: pre;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .topic {
+      text-align: center;
+      font-size: 1.3rem;
+      line-height: 1.5;
+      /* border: solid 1px green; */
+      color: rgba(0, 0, 0, 0.8);
+      filter: contrast(200%) drop-shadow(16px 16px 20px DimGrey);
+    }
+
+    .name {
+      font-size: 1.5rem;
+      color: DarkSlateGrey;
+    }
+  }
+
+  .slidelist + .arrow-wrap {
+    transition: opacity 0.4s ease;
+    opacity: 0;
+  }
+  .slidelist + .arrow-wrap:hover {
+    opacity: 1;
+  }
+
+  .slidelist:hover + .arrow-wrap {
+    opacity: 1;
+  }
 `;
 
 const ImgSlide = ({ className = "", images }) => {
@@ -79,22 +120,31 @@ const ImgSlide = ({ className = "", images }) => {
       <div className="section">
         <div className="slidewrap">
           <ul ref={slideRef} className="slidelist">
-            {images.map((src, i) => {
+            {images.map((v, i) => {
+              console.log(v);
               return (
                 <li key={i}>
                   <div>
-                    <img src={src} alt={`bg`} />
+                    <img src={v.src} alt={`bg`} />
+                    <div className="title">
+                      <div className="topic">
+                        {v.title}
+                        <span className="name">&nbsp;{v.name}</span>
+                      </div>
+                    </div>
                   </div>
                 </li>
               );
             })}
           </ul>
-          <span className="left arrow" onClick={LeftSlide}>
-            <img src={"./slideArrow/left-arrow.png"} alt="" />
-          </span>
-          <span className="right arrow" onClick={RightSlide}>
-            <img src={"./slideArrow/right-arrow.png"} alt="" />
-          </span>
+          <div className="arrow-wrap">
+            <span className="left arrow" onClick={RightSlide}>
+              <img src={"./slideArrow/left-arrow.png"} alt="" />
+            </span>
+            <span className="right arrow" onClick={LeftSlide}>
+              <img src={"./slideArrow/right-arrow.png"} alt="" />
+            </span>
+          </div>
         </div>
       </div>
     </Layout>

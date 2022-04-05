@@ -15,6 +15,7 @@ const Layout = styled.div`
 
   .loginText {
     color: white;
+    font-size: ${(props) => props.theme.fontWritePageLarge};
   }
 `;
 
@@ -28,10 +29,12 @@ function Login() {
       const resData = await axios.get(process.env.REACT_APP_API_URL + "/users/userinfo");
       console.log(resData.data.message);
       if (resData.data.message === "ok") {
-        const { nickname, profile_image_id, id } = resData.data.data;
+        const { nickname, id } = resData.data.data;
+        if (!resData.data.data.profile_image) {
+          setImage(resData.data.data.profile_image.store_path);
+        }
         setNickname(nickname);
         setUserNumber(id);
-        setImage(profile_image_id);
         setLogin(true);
       }
     } catch (e) {

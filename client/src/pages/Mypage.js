@@ -17,31 +17,41 @@ const Layout = styled.div`
   .logo {
     margin-top: 1rem;
   }
+
+  .desc {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+    color: dimgray;
+  }
 `;
 
 const IdPost = styled.div`
   display: grid;
-  grid-template-columns: 25% 80%;
+  grid-template-columns: 42% 58%;
   justify-content: center;
   align-items: center;
   text-align: center;
   margin-top: 3rem;
   margin-bottom: 0.4rem;
 
-  > .id {
+  .id {
+    margin-left: 2%;
     display: flex;
     align-items: center;
-    font-size: ${(props) => props.theme.fontWritePageMid};
-    margin-left: 1rem;
+    font-size: ${(props) => props.theme.fontWritePageSmall};
 
     .nick {
-      font-size: 1.4rem;
+      font-size: ${(props) => props.theme.fontWritePageLarge};
       margin-left: 0.2rem;
       color: DarkGreen;
     }
   }
-  > .post {
-    margin-right: 25%;
+
+  .post {
+    font-size: ${(props) => props.theme.fontWritePageSmall};
+    display: flex;
+    align-items: center;
   }
 `;
 
@@ -66,7 +76,7 @@ const Mypage = () => {
     await setListByUserId();
     await getUserInfo();
   }
-  // console.log(userInfo);
+  console.log(userInfo);
   return (
     <Layout>
       <Logo className="logo" />
@@ -76,12 +86,20 @@ const Mypage = () => {
           <div>{"ID :"}</div>
           <div className="nick">{userInfo.nickname}</div>
         </div>
-        <div className="post">POST {listByUserId.length} 개</div>
+        <div className="post">
+          <div>POST {listByUserId.length} 개</div>
+        </div>
       </IdPost>
       <MyPageBg>
-        <img className="mypageBg" src={budDummy[0].src} alt={`bg`} />
+        <img className="mypageBg" src={"/Dummy/bg.png"} alt={`bg`} />
       </MyPageBg>
-      <DiaryList diaryList={listByUserId} isBudName={true} type="user" />
+      {!listByUserId.length ? (
+        <div className="desc">
+          <div>등록된 식물이 없습니다</div>
+        </div>
+      ) : (
+        <DiaryList diaryList={listByUserId} isBudName={true} type="user" />
+      )}
     </Layout>
   );
 };

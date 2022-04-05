@@ -8,7 +8,6 @@ import ImageChange from "./ImageChange";
 import ImageChangeStore from "../../store/ImageChangeStore";
 import useLoginStore from "../../store/LoginStore";
 import { useNavigate } from "react-router-dom";
-import SideBarStore from "../../store/SideBarStore";
 import axios from "axios";
 
 const Content = styled.div`
@@ -77,7 +76,6 @@ const Content = styled.div`
 function SideBarFunctions({ setModalCode }) {
   const navigate = useNavigate();
   const { setLogin, setNickname, setUserNumber, setImage } = useLoginStore();
-  const { DownSideBarStore } = SideBarStore();
   const { ImageChangeState, popUpImageChangeModal } = ImageChangeStore();
 
   const [isDelAccount, setDelAccount] = useState(false);
@@ -87,9 +85,8 @@ function SideBarFunctions({ setModalCode }) {
     if (resData.status === 200) {
       setNickname("");
       setUserNumber("");
-      setImage(null);
+      setImage("");
       setLogin(false);
-      DownSideBarStore();
       navigate("/");
     }
   };
@@ -113,7 +110,7 @@ function SideBarFunctions({ setModalCode }) {
       <div className="pictureChange">
         <FontAwesomeIcon className="fa-solid fa-arrows-rotate fa-2x fa-spin" icon={faRotate} color="snow" />
         <button onClick={() => popUpImageChangeModal()} className="pictureChangeButton">
-          이미지 교체
+          배경이미지 교체
         </button>
       </div>
       <div className="pwChange">

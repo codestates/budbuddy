@@ -23,6 +23,7 @@ const Layout = styled.div`
 
   .file,
   .cancle {
+    align-self: start;
     font-size: ${(props) => props.theme.fontWritePageMid};
     border: none;
     background-color: ${(props) => props.theme.btnBgColor};
@@ -52,7 +53,7 @@ const Layout = styled.div`
   }
 `;
 
-const ImgUpload = () => {
+const ImgUpload = ({ className = "" }) => {
   const [img, setImg] = useState(null);
 
   function onFileChange(e) {
@@ -77,7 +78,7 @@ const ImgUpload = () => {
   }
 
   return (
-    <Layout>
+    <Layout className={className}>
       <div className="photo-wrap">
         {!img ? (
           <div className="photo">

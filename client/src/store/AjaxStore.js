@@ -9,7 +9,7 @@ const useAjaxStore = create(
   persist(
     {
       key: "ajax",
-      allowlist: ["listByPlantId", "listByUserId", "publicJournal", "userInfo"],
+      allowlist: ["listByPlantId", "listByUserId", "publicJournal", "userInfo", "myPlants"],
       denylist: [],
     },
     (set) => ({
@@ -17,6 +17,7 @@ const useAjaxStore = create(
       listByUserId: [],
       publicJournal: [],
       userInfo: {},
+      myPlants: [],
       async setListByPlantId(plantId) {
         try {
           const resData = await axios.get(process.env.REACT_APP_API_URL + "/journals/my", { params: { plant: plantId } });
@@ -51,7 +52,79 @@ const useAjaxStore = create(
           // console.log("getUserInfo:::", resUser);
           set((state) => ({ userInfo: resUser.data.data }));
         } catch (err) {
+          set((state) => ({}));
           console.log("axios err / getUserInfo :::", err);
+        }
+      },
+      async getPlantsList() {
+        try {
+          const resData = await axios.get(process.env.REACT_APP_API_URL + "/plants");
+          // console.log("getPlantsList:::", resUser);
+          set((state) => ({ myPlants: resData.data.data }));
+        } catch (err) {
+          set((state) => ({ myPlants: [] }));
+          console.log("axios err / getPlantsList :::", err);
+        }
+      },
+      async deletePlant(plant_id) {
+        try {
+          console.log("deletePlant:::plant_id", plant_id);
+          const resData = await axios.delete(process.env.REACT_APP_API_URL + `/plants/${plant_id}`);
+          console.log("deletePlant:::", resData);
+        } catch (err) {
+          console.log("axios err / deletePlant :::", err);
+        }
+      },
+      async setPlant(budName, upload_img) {
+        //
+        const payload = {
+          name: budName,
+          image_id: null,
+        };
+
+        try {
+          if (upload_img.files.length !== 0) {
+            let formdata = new FormData();
+            formdata.append("image", upload_img.files[0]);
+            console.log("imgRes:::", upload_img, payload);
+            const imgRes = await axios.post(process.env.REACT_APP_API_URL + "/images", formdata);
+            payload["image_id"] = [imgRes.data.data.id];
+            const resData = await axios.post(process.env.REACT_APP_API_URL + "/plants", payload);
+            console.log("setPlant:::with img:::", resData);
+            return "ok";
+          } else {
+            const resData = await axios.post(process.env.REACT_APP_API_URL + "/plants", payload);
+            console.log("setPlant::none img:::", resData);
+            return "ok";
+          }
+        } catch (err) {
+          console.log("setPlant:::err:::", err);
+          return "alreadyExistsBudName";
+        }
+      },
+      async changePlantImg(plant_id, budName, upload_img) {
+        //
+        const payload = {
+          name: budName,
+          image_id: null,
+        };
+
+        try {
+          if (upload_img.files.length !== 0) {
+            let formdata = new FormData();
+            formdata.append("image", upload_img.files[0]);
+            console.log("imgRes:::", upload_img, payload);
+            const imgRes = await axios.post(process.env.REACT_APP_API_URL + "/images", formdata);
+            payload["image_id"] = imgRes.data.data.id;
+            const resData = await axios.put(process.env.REACT_APP_API_URL + `/plants/${plant_id}`, payload);
+            console.log("changePlantImg:::with img:::", resData);
+            return "ok";
+          } else {
+            console.log("changePlantImg:::", "이미지가 정상 등록 안된 상태");
+          }
+        } catch (err) {
+          console.log("changePlantImg:::err:::", err);
+          return "changePlantImg fail";
         }
       },
       async getAllPublicJournal() {
@@ -61,16 +134,26 @@ const useAjaxStore = create(
           resjournal = resjournal.data.data;
           const extractedData = [];
           console.log(resjournal);
+
           for (let i = 0; i < resjournal.length; i++) {
             let publicJournal = {
               journalId: resjournal[i].id,
               nickname: resjournal[i].User.nickname,
               profileImg: null,
-              plantName: resjournal[i].Plant.name,
+              plantName: null,
+              writingDate: resjournal[i].date_pick,
               updatedAt: resjournal[i].updatedAt,
+              title: resjournal[i].title,
               textContent: resjournal[i].body,
-              journalImg: null,
+              journalImg: null, //유효성 검사 이후 넣어야함
             };
+
+            if (resjournal[i].Plant) {
+              publicJournal.plantName = resjournal[i].Plant.name;
+            }
+            if (resjournal[i].User.profile_image !== null) {
+              publicJournal.profileImg = resjournal[i].User.profile_image.store_path;
+            }
 
             publicJournal.date_pick = moment(resjournal[i].updatedAt).format("MM/DD");
             if (resjournal[i].Journal_Images.length !== 0) {

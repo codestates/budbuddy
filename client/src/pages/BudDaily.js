@@ -4,11 +4,15 @@ import Logo from "../components/common/Logo";
 import TabBtnOne from "../components/common/TabBtnOne";
 import Bud from "../components/diary/Bud";
 import PlantAddDialog from "../components/diary/PlantAddDialog";
-import axios from "axios";
-import { makeModal } from "../utils/errExeption";
 import { curDate } from "../modules/date";
 import useLoginStore from "../store/LoginStore";
+import useAjaxStore from "../store/AjaxStore";
+import ModalByMode from "../components/common/ModalByMode";
+
 const Layout = styled.div`
+  /* position: relative; */
+  padding-top: 1rem;
+
   .logo {
     margin-top: 1rem;
   }
@@ -16,11 +20,10 @@ const Layout = styled.div`
   .TabBtnOne {
     margin-top: 0.3rem;
   }
-`;
 
+  padding-bottom: 3rem;
+`;
 const BudLayout = styled.div`
-  /* padding-top: 0.5rem;
-  padding-bottom: 2rem; */
   width: 100%;
   margin: 0 auto;
   .card-wrap {
@@ -46,87 +49,89 @@ const BudLayout = styled.div`
     color: DimGrey;
   }
 `;
+const errAlreadyExist = "이미 존재하는 식물 명입니다.";
 
-//식물 추가 탭
-const Daily = () => {
+const BudDaily = () => {
   const { isLogin } = useLoginStore();
-  const [isDialog, setDialog] = useState(false);
-  const [plants, setPlants] = useState([]);
-  const [modalCode, setModalCode] = useState(0);
+  const { setPlant, getPlantsList, myPlants, deletePlant } = useAjaxStore();
+
+  const [isAddBudDialog, setAddBudDialog] = useState(false);
+  const [popupInfo, setPopupInfo] = useState(false);
 
   useEffect(() => {
     if (isLogin) {
-      getPlantsList();
+      getBuds();
     }
   }, [isLogin]);
 
-  function openDialog() {
-    setDialog(true);
+  async function getBuds() {
+    await getPlantsList();
   }
-
-  async function getPlantsList() {
-    try {
-      const resData = await axios.get(process.env.REACT_APP_API_URL + "/plants");
-      setPlants(resData.data.data);
-    } catch (err) {
-      setModalCode();
-      console.log(err);
-    }
+  async function asyncDeleteBud() {
+    await deletePlant(popupInfo.plant_id);
+    await getPlantsList();
+  }
+  function openDialog() {
+    setAddBudDialog(true);
   }
 
   async function registerBud(budName, upload_img) {
-    //post /plants name
-    console.log(upload_img);
-
-    try {
-      const payload = {
-        name: budName,
-      };
-
-      if (upload_img.files.length !== 0) {
-        let formdata = new FormData();
-        formdata.append("image", upload_img.files[0]);
-        console.log("애칭 식물 이미지 업로드 ajax call 작성란");
-      }
-
-      const resData = await axios.post(process.env.REACT_APP_API_URL + "/plants", payload);
-      getPlantsList();
-    } catch (err) {
-      //alreadyExistsBudName
-      setModalCode("alreadyExistsBudName");
+    const res = await setPlant(budName, upload_img);
+    getPlantsList();
+    if (res === "alreadyExistsBudName") {
+      setPopupInfo({ fn: "alreadyExistsBudName", text: errAlreadyExist });
     }
-
-    console.log("내 식물 추가시 API 호출 코드 작성란", budName);
   }
 
+  function makePopup(info = "", fn = "") {
+    const tasks = {
+      deleteBud() {
+        info.deleteBud = asyncDeleteBud;
+        info.closePopup = setPopupInfo;
+        return <ModalByMode info={info} />;
+      },
+      changeBudImage() {
+        info.closePopup = setPopupInfo;
+        return <ModalByMode info={info} />;
+      },
+      alreadyExistsBudName() {
+        info.closePopup = setPopupInfo;
+        return <ModalByMode info={info} />;
+      },
+    };
+
+    if (!tasks[info.fn]) {
+      return null;
+    }
+    return tasks[info.fn]();
+  }
+
+  console.log(myPlants);
+
   return (
-    <Layout
-      onClick={() => {
-        setModalCode("");
-      }}>
-      {makeModal(modalCode)}
+    <Layout>
+      {makePopup(popupInfo)}
       <Logo className="logo" />
       <TabBtnOne className="TabBtnOne" tabName="내 식물" btnName="내 식물 추가" fn={openDialog} />
       <BudLayout>
-        {plants.length === 0 ? (
+        {myPlants.length === 0 ? (
           <div className="notice-pos">
             <div className="notice">등록된 식물이 없습니다</div>
           </div>
         ) : (
           <div className="card-wrap">
-            {plants.map((v, i) => {
+            {myPlants.map((v, i) => {
               const date = curDate();
-              return <Bud key={v.id} src={v.src || "Dummy/diary_4.PNG"} className="cardcomponent" budName={v.name} date={date} plant_id={v.id} />;
+              let src = null;
+              if (v.Image !== null) src = v.Image.store_path;
+              return <Bud key={v.id} src={src || "Dummy/empty_bud.jpg"} className="cardcomponent" budName={v.name} date={date} plant_id={v.id} setPopupInfo={setPopupInfo} />;
             })}
           </div>
         )}
-        {/* {budDummy.map((v, i) => {
-          return <Bud key={i} src={v.src} budName={v.name} date={v.createdAt} />;
-        })} */}
       </BudLayout>
-      {isDialog ? <PlantAddDialog open={isDialog} closeFn={setDialog} apiFn={registerBud} /> : null}
+      {isAddBudDialog ? <PlantAddDialog open={isAddBudDialog} closeFn={setAddBudDialog} apiFn={registerBud} /> : null}
     </Layout>
   );
 };
 
-export default Daily;
+export default BudDaily;

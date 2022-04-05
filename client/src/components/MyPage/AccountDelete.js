@@ -10,7 +10,7 @@ const Layout = styled.div`
   position: absolute;
   text-align: center;
   top: 50%;
-  left: -10%;
+  left: 0%;
 
   transform: translate(-50%, -50%);
 

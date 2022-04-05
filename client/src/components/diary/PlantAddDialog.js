@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect } from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSeedling } from "@fortawesome/free-solid-svg-icons";
@@ -11,18 +11,20 @@ const Layout = styled.div`
 
   position: absolute;
   text-align: center;
+
   top: 50%;
   left: 50%;
 
   transform: translate(-50%, -50%);
 
   .background {
-    min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 100vw;
+    min-height: 100vh;
+    border: solid 1px black;
     @media screen and (min-width: 391px) {
       width: ${(props) => props.theme.webWidth + "px"};
     }
@@ -126,9 +128,10 @@ const FormLayout = styled.form`
   }
 
   .chNick {
-    font-size: 3px;
+    font-size: 1rem;
     padding: 4px;
-    white-space: pre;
+    white-space: pre-wrap;
+    color: DimGray;
   }
   > .invalid {
     color: ${(props) => props.theme.textWaringColor};
@@ -152,7 +155,6 @@ const PlantAddDialog = ({ open = false, closeFn, apiFn = "" }) => {
     e.preventDefault();
     if (typeof apiFn === "function") {
       const { budname, upload_img } = e.target;
-
       const isValid = validNickName(budname.value);
       if (isValid) {
         apiFn(budname.value, upload_img);
@@ -171,7 +173,7 @@ const PlantAddDialog = ({ open = false, closeFn, apiFn = "" }) => {
     if (e.target.value !== "") return;
     if (name === "budname") {
       checkNick.current.className = "chNick ch";
-      return (checkNick.current.textContent = "완성된 한글 및 영문,숫자만 사용가능하며 1~14글자 사이여야합니다.");
+      return (checkNick.current.textContent = "완성된 한글 및 영문,숫자만 사용가능하며\n 1~14글자 사이여야합니다.");
     }
   }
 
