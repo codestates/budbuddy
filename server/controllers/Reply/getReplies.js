@@ -1,4 +1,4 @@
-const { Replies, Journals } = require("../../models/index");
+const { Replies, Journals, Users } = require("../../models/index");
 const checkAuth = require("../../modules/verifyCookieToken");
 
 module.exports = async (req, res) => {
@@ -26,6 +26,12 @@ module.exports = async (req, res) => {
         ["group_id", "ASC"],
         ["id", "ASC"],
       ],
+      include: {
+        model: Users,
+        attributes: {
+          exclude: ["password", "salt"],
+        },
+      },
     });
 
     return res.status(200).send({ message: "ok", data: replies });
