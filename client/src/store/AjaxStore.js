@@ -52,6 +52,7 @@ const useAjaxStore = create(
           // console.log("getUserInfo:::", resUser);
           set((state) => ({ userInfo: resUser.data.data }));
         } catch (err) {
+          set((state) => ({}));
           console.log("axios err / getUserInfo :::", err);
         }
       },
@@ -101,6 +102,31 @@ const useAjaxStore = create(
           return "alreadyExistsBudName";
         }
       },
+      async changePlantImg(plant_id, budName, upload_img) {
+        //
+        const payload = {
+          name: budName,
+          image_id: null,
+        };
+
+        try {
+          if (upload_img.files.length !== 0) {
+            let formdata = new FormData();
+            formdata.append("image", upload_img.files[0]);
+            console.log("imgRes:::", upload_img, payload);
+            const imgRes = await axios.post(process.env.REACT_APP_API_URL + "/images", formdata);
+            payload["image_id"] = imgRes.data.data.id;
+            const resData = await axios.put(process.env.REACT_APP_API_URL + `/plants/${plant_id}`, payload);
+            console.log("changePlantImg:::with img:::", resData);
+            return "ok";
+          } else {
+            console.log("changePlantImg:::", "이미지가 정상 등록 안된 상태");
+          }
+        } catch (err) {
+          console.log("changePlantImg:::err:::", err);
+          return "changePlantImg fail";
+        }
+      },
       async getAllPublicJournal() {
         try {
           let resjournal = await axios.get(process.env.REACT_APP_API_URL + `/journals`);
@@ -115,6 +141,7 @@ const useAjaxStore = create(
               nickname: resjournal[i].User.nickname,
               profileImg: null,
               plantName: null,
+              writingDate: resjournal[i].date_pick,
               updatedAt: resjournal[i].updatedAt,
               title: resjournal[i].title,
               textContent: resjournal[i].body,

@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import moment from "moment";
+import useAjaxStore from "../../store/AjaxStore";
+import useLoginStore from "../../store/LoginStore";
 
 const Layout = styled.div`
   display: flex;
@@ -225,26 +227,91 @@ const StoryLayout = styled.div`
     padding: 0.1rem 0.3rem;
     background-color: ${(props) => props.theme.replyBgColor};
     padding: 0.7rem 0 0.7rem 0;
-
+    border-bottom: solid 1px rgba(105, 105, 105, 0.3);
     .reply-top {
       display: flex;
       justify-content: space-between;
       padding: 0 0.5rem 0 0.5rem;
+
+      .top-l {
+        font-size: 1.1rem;
+        color: DarkSlateGrey;
+      }
+
+      .top-r {
+        .reply-delete {
+          cursor: pointer;
+          border-radius: ${(props) => props.theme.borderRadius};
+          transition: background-color 0.2s ease;
+          padding: 0.2rem 0.3rem;
+        }
+
+        .reply-delete:hover {
+          background-color: ${(props) => props.theme.hoverColor};
+        }
+
+        .reply-date {
+          font-size: 0.8rem;
+          margin-left: 0.5rem;
+        }
+      }
     }
+
     .reply-mid {
       margin-top: 0.6rem;
       padding: 0 0.5rem 0 0.5rem;
       white-space: pre-wrap;
+
+      .reply-content {
+        white-space: pre-wrap;
+        line-height: 1.3;
+        .rereply {
+          transition: color 0.2s ease;
+        }
+        .rereply:hover {
+          color: ${(props) => props.theme.hoverColor};
+        }
+      }
     }
   }
 `;
 
-const JellyPopup = ({ setJellyPopup, story }) => {
-  const contentRef = useRef(null);
+function Reply({ info }) {
+  const replyTime = moment().format("MM/DD ").replaceAll("0", "") + moment().format("h:mm");
 
-  function close() {
-    setJellyPopup(false);
+  function removeReply() {
+    console.log("리플 삭제 란");
   }
+
+  function addRereply() {
+    console.log("대댓글 작성란");
+  }
+
+  return (
+    <div className="reply">
+      <div className="reply-top">
+        <div className="top-l">{info.nickname}</div>
+        <div className="top-r">
+          <span className="reply-delete" onClick={removeReply}>
+            삭제
+          </span>
+          <span className="reply-date">{replyTime}</span>
+        </div>
+      </div>
+      <div className="reply-mid">
+        <div className="reply-content">
+          {info.replyContent}&nbsp;&nbsp;
+          <span className="rereply" onClick={addRereply}>
+            reply
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ReplyWrite({ contentRef, close, replyArr, setReply, userInfo }) {
+  const textRef = useRef(null);
 
   function textAreaResize(e) {
     e.target.style.height = "auto";
@@ -254,7 +321,45 @@ const JellyPopup = ({ setJellyPopup, story }) => {
     contentRef.current.scrollTo(0, contentRef.current.scrollHeight);
   }
 
-  console.log(story);
+  function addReply() {
+    if (textRef.current.value === "") return;
+    userInfo.replyContent = textRef.current.value + "";
+    const newObj = JSON.parse(JSON.stringify(userInfo));
+    setReply((pre) => {
+      return pre.concat(newObj);
+    });
+    textRef.current.value = "";
+  }
+
+  return (
+    <div className="bottom">
+      <div>
+        <div className="content-wrap">
+          <textarea ref={textRef} className="content" placeholder="댓글 입력" onKeyUp={textAreaResize} name="content" />
+        </div>
+        <div className="btn">
+          <button className="done" onClick={addReply}>
+            등록
+          </button>
+          <button className="cancle" onClick={close}>
+            취소
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+const JellyPopup = ({ setJellyPopup, story }) => {
+  const contentRef = useRef(null);
+  const [replyArr, setReply] = useState([]);
+  const { isLogin } = useLoginStore();
+  const { userInfo } = useAjaxStore();
+
+  function close() {
+    setJellyPopup(false);
+  }
+
   const date = moment(story.updatedAt).format("MM/DD");
   const pastDays = moment().diff(moment(story.updatedAt), "days") + "일전";
 
@@ -288,30 +393,10 @@ const JellyPopup = ({ setJellyPopup, story }) => {
             </div>
           </div>
           <div></div>
-          <div className="bottom">
-            <div>
-              <div className="reply">
-                <div className="reply-top">
-                  <div>달콤전도사 </div>
-                  <div>수정 삭제 03/01</div>
-                </div>
-                <div className="reply-mid">
-                  <div>
-                    내요요요요요요웅우&nbsp;<span className="rereply">reply</span>
-                  </div>
-                </div>
-              </div>
-              <div className="content-wrap">
-                <textarea className="content" placeholder="댓글 입력" onKeyUp={textAreaResize} name="content" />
-              </div>
-              <div className="btn">
-                <button className="done">등록</button>
-                <button className="cancle" onClick={close}>
-                  취소
-                </button>
-              </div>
-            </div>
-          </div>
+          {replyArr.map((v, i) => {
+            return <Reply key={i} info={v} />;
+          })}
+          {isLogin ? <ReplyWrite contentRef={contentRef} close={close} replyArr={replyArr} setReply={setReply} userInfo={userInfo} /> : null}
         </StoryLayout>
       </div>
     </Layout>

@@ -17,6 +17,13 @@ const Layout = styled.div`
   .logo {
     margin-top: 1rem;
   }
+
+  .desc {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+    color: dimgray;
+  }
 `;
 
 const IdPost = styled.div`
@@ -67,9 +74,9 @@ const Mypage = () => {
 
   async function getMapageInfo() {
     await setListByUserId();
-    await getUserInfo(1);
+    await getUserInfo();
   }
-  // console.log(userInfo);
+  console.log(userInfo);
   return (
     <Layout>
       <Logo className="logo" />
@@ -84,9 +91,15 @@ const Mypage = () => {
         </div>
       </IdPost>
       <MyPageBg>
-        <img className="mypageBg" src={budDummy[0].src} alt={`bg`} />
+        <img className="mypageBg" src={"/Dummy/bg.png"} alt={`bg`} />
       </MyPageBg>
-      <DiaryList diaryList={listByUserId} isBudName={true} type="user" />
+      {!listByUserId.length ? (
+        <div className="desc">
+          <div>등록된 식물이 없습니다</div>
+        </div>
+      ) : (
+        <DiaryList diaryList={listByUserId} isBudName={true} type="user" />
+      )}
     </Layout>
   );
 };
