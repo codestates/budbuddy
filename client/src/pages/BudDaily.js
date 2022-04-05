@@ -49,7 +49,6 @@ const BudLayout = styled.div`
     color: DimGrey;
   }
 `;
-const errAlreadyExist = "이미 존재하는 식물 명입니다.";
 
 const BudDaily = () => {
   const { isLogin } = useLoginStore();
@@ -80,7 +79,7 @@ const BudDaily = () => {
     const res = await setPlant(budName, upload_img);
     getPlantsList();
     if (res === "alreadyExistsBudName") {
-      setPopupInfo({ fn: "alreadyExistsBudName", text: errAlreadyExist });
+      setPopupInfo({ fn: "alreadyExistsBudName" });
     }
   }
 
@@ -90,16 +89,19 @@ const BudDaily = () => {
         info.deleteBud = asyncDeleteBud;
         info.closePopup = setPopupInfo;
         info.outerFn = setPopupInfo;
+        info.text = "정말 삭제하시겠습니까?\n 등록 식물을 삭제하여도 일지는 남습니다.";
         return <ModalByMode info={info} />;
       },
       changeBudImage() {
         info.closePopup = setPopupInfo;
         info.outerFn = setPopupInfo;
+        info.text = "등록 식물의 사진을 변경합니다.";
         return <ModalByMode info={info} />;
       },
       alreadyExistsBudName() {
         info.closePopup = setPopupInfo;
         info.outerFn = setPopupInfo;
+        info.text = "이미 존재하는 식물 명입니다.";
         return <ModalByMode info={info} />;
       },
     };
