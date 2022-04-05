@@ -254,7 +254,6 @@ const StoryCard = ({ className = "", storyList, hoverTransitonSec = 0.25, setFre
 
   function read(e, info) {
     e.preventDefault();
-    console.log("스토리 읽기", info);
     setJellyPopup(!isJellyPopup);
     setStory(info);
   }

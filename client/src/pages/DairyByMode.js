@@ -64,11 +64,17 @@ const DairyByMode = () => {
   if (info.Journal_Images.length !== 0) {
     src = info.Journal_Images[0].Image.store_path;
   }
+
+  // console.log("일지 읽기", info);
+  let journalName = "삭제된 식물";
+  if (info.Plant) {
+    journalName = info.Plant.name;
+  }
   return (
     <Layout onSubmit={submit}>
       <TabBtnOne
         className="TabBtnOne"
-        tabName={`${info.Plant.name}의 일지보기`}
+        tabName={`${journalName}의 일지보기`}
         btnName={"뒤로가기"}
         fn={() => {
           navigate(-1);

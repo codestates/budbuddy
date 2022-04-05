@@ -21,6 +21,7 @@ import useLoginStore from "./store/LoginStore";
 import { PersistGate } from "zustand-persist";
 var moment = require("moment");
 require("moment-timezone");
+moment.locale();
 moment.tz.setDefault("Asia/Seoul");
 
 const App = () => {
