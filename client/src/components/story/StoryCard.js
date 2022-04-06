@@ -210,10 +210,6 @@ const Card = styled.div`
       margin-left: 0.1rem;
     }
 
-    .share-wrap {
-      margin-left: 0.6rem;
-    }
-
     > div > button {
       border: none;
       border-radius: ${(props) => props.theme.borderRadius};
@@ -258,11 +254,6 @@ const StoryCard = ({ className = "", storyList, hoverTransitonSec = 0.25, setFre
     setStory(info);
   }
 
-  function share(e) {
-    e.preventDefault();
-    console.log("스토리 공유");
-  }
-
   return (
     <Layout className={className}>
       {isJellyPopup ? <JellyPopup setJellyPopup={setJellyPopup} story={story} /> : null}
@@ -295,11 +286,6 @@ const StoryCard = ({ className = "", storyList, hoverTransitonSec = 0.25, setFre
                       <div className="read-wrap">
                         <button className="read btn" onClick={(e) => read(e, v)}>
                           보기
-                        </button>
-                      </div>
-                      <div className="share-wrap">
-                        <button className="share btn" onClick={share}>
-                          공유
                         </button>
                       </div>
                     </div>

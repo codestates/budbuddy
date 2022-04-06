@@ -161,10 +161,8 @@ const useAjaxStore = create(
       async getAllPublicJournal() {
         try {
           let resjournal = await axios.get(process.env.REACT_APP_API_URL + `/journals`);
-
           resjournal = resjournal.data.data;
           const extractedData = [];
-          // console.log(resjournal);
 
           for (let i = 0; i < resjournal.length; i++) {
             let publicJournal = {
@@ -198,6 +196,7 @@ const useAjaxStore = create(
         } catch (err) {
           console.log("axios err / getAllPublicJournal :::", err);
           set((state) => ({ publicJournal: [] }));
+          return [];
         }
       },
     })),
