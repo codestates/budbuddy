@@ -4,6 +4,7 @@ import Logo from "../components/common/Logo";
 import SideBar from "../components/MyPage/SideBar";
 import DiaryList from "../components/list/DiaryList";
 import useAjaxStore from "../store/ajaxStore";
+import { bg } from "../resources";
 
 const Layout = styled.div`
   display: flex;
@@ -90,7 +91,7 @@ const Mypage = () => {
         </div>
       </IdPost>
       <MyPageBg>
-        <img className="mypageBg" src={"/Dummy/bg.png"} alt={`bg`} />
+        <img className="mypageBg" src={bg[0] || ""} alt={`bg`} />
       </MyPageBg>
       {!listByUserId.length ? (
         <div className="desc">
