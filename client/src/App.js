@@ -45,7 +45,7 @@ const App = () => {
                 <Route path="/signup" element={<Signup />} />
                 {isLogin ? <Route path="/mypage" element={<Mypage />} /> : <Route path="/login" element={<Login />} />}
                 <Route path="/test" element={<Test />} />
-                <Route path="/mypage/list/record" element={<MypageRecord />} />
+                <Route path="/daily/record" element={<MypageRecord />} />
               </Routes>
             </Content>
             <NavigationBar classNsame="navi" />

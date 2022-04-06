@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import * as d3 from "d3";
 
@@ -6,6 +6,12 @@ const ChartDiv = styled.div`
   grid-area: ChartSvg;
   > .space {
     height: 2vh;
+  }
+  .none {
+    height: 22vh;
+    text-align: center;
+    line-height: 15vh;
+    color: DimGrey;
   }
 `;
 const ChartSvgDiv = styled.div`
@@ -19,10 +25,10 @@ const ChartTitle = styled.h2`
   text-align: center;
 `;
 
-const Chart = () => {
-  useEffect(() => {
-    makeGraph();
-  }, []);
+const Chart = ({ currentUser, ChartValue }) => {
+  // useEffect(() => {
+  //   makeGraph();
+  // }, []);
 
   const makeGraph = () => {
     // 캔버스 구역 정의
@@ -31,26 +37,11 @@ const Chart = () => {
     const margin = { top: 20, left: 20, bottom: 20, right: 20 };
 
     const svg = d3.select(".list");
-
-    const data = [
-      //해당 데이터에 추가시켜주면 그래프에 추가된다
-      { day: "1일", value: 10 },
-      { day: "2일", value: 13 },
-      { day: "3일", value: 17 },
-      { day: "4일", value: 25 },
-      { day: "5일", value: 30 },
-      { day: "6일", value: 45 },
-      { day: "7일", value: 70 },
-      { day: "8일", value: 75 },
-      { day: "9일", value: 82 },
-      { day: "10일", value: 90 },
-      { day: "11일", value: 30 },
-      { day: "12일", value: 45 },
-      { day: "13일", value: 70 },
-      { day: "14일", value: 75 },
-      { day: "15일", value: 82 },
-      { day: "16일", value: 130 },
-    ];
+    const chartLine = [];
+    for (let i = 0; i <= 60; i++) {
+      chartLine.push(i * 5);
+    }
+    const data = ChartValue;
 
     // 눈금 만들기
     const x = d3
@@ -77,7 +68,7 @@ const Chart = () => {
       g
         .attr("transform", `translate(${margin.left}, 0)`)
         .call(
-          d3.axisLeft(y).tickValues([0, 20, 40, 60, 80, 100, 120]).tickSize(-width), // y축 눈금 생성
+          d3.axisLeft(y).tickValues(chartLine).tickSize(-width), // y축 눈금 생성
         )
         .call((g) => g.select(".domain").remove())
         .attr("class", "grid");
@@ -131,14 +122,19 @@ const Chart = () => {
       .attr("font-size", "12px")
       .attr("text-anchor", "middle");
   };
-
+  makeGraph();
   return (
     <ChartDiv>
       <div className="space"></div>
-      <ChartTitle>스투키 성장 기록</ChartTitle>
-      <ChartSvgDiv>
-        <ChartSvg className="list" width="320" height="320"></ChartSvg>
-      </ChartSvgDiv>
+      <ChartTitle>{currentUser} 성장 기록</ChartTitle>
+      {ChartValue.length !== 0 ? (
+        <ChartSvgDiv>
+          <ChartSvg className="list" width="320" height="320"></ChartSvg>
+        </ChartSvgDiv>
+      ) : (
+        <div className="none">스토리를 작성해주세요</div>
+      )}
+
       <div className="space"></div>
     </ChartDiv>
   );
