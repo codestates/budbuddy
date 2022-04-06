@@ -5,4 +5,5 @@ module.exports = {
   logout: require("./logout"),
   changeProfile: require("./changeProfileImage"),
   changePassword: require("./changePassword"),
+  withdraw: require("./withdraw"),
 };

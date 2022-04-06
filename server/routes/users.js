@@ -21,4 +21,6 @@ router.put("/profile", users.changeProfile);
 // PUT /password
 router.put("/password", users.changePassword);
 
+router.delete("/", users.withdraw)
+
 module.exports = router;

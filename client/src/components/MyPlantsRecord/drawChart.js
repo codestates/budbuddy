@@ -3,10 +3,11 @@ import * as d3 from "d3";
 const drawChart = (element, data, colors) => {
   // const colors = ["#05BBD2", "#2070C4"];
   const boxSize = 500;
-  console.log(data);
+  console.log("data", data);
   const maxValue = data.reduce((acc, cur) => {
     if (acc <= cur.value) {
       acc = cur;
+      console.log(cur);
     }
     return acc;
   }, 0).value;
@@ -51,18 +52,6 @@ const drawChart = (element, data, colors) => {
         return arcGenerator(d);
       };
     });
-
-  arcs
-    .append("text")
-    .attr("text-anchor", "middle")
-    .text((d) => `D-10`)
-    .style("fill", "#fff")
-    .style("line-height", "10px")
-    .style("font-size", "100px");
-  // .attr("transform", (d) => {
-  //   const [x, y] = arcGenerator.centroid(d);
-  //   return `translate(${x}, ${y})`;
-  // });
 };
 
 export default drawChart;
