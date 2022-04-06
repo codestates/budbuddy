@@ -8,8 +8,9 @@ import { validEmail, validPassword, validNickName } from "../modules/validation"
 import { useNavigate } from "react-router-dom";
 import { makeModal } from "../utils/errExeption";
 import { sleep } from "../modules/sleep";
+import { bg } from "../resources";
 
-export const Layout = styled.div`
+const Layout = styled.div`
   padding-top: ${(props) => props.theme.backgroundPaddingTop};
 
   .signupWrapper {
@@ -272,7 +273,7 @@ const Signup = () => {
       {makeModal(modalCode)}
       <SignupBG>
         <div className="std">
-          <img className="signupBg" src={`Dummy/bg.png`} alt={`bg`} />
+          <img className="signupBg" src={bg[4] || ""} alt={`bg`} />
           <div className="backText">
             <p>
               Take care of <span className="green">your plants</span>

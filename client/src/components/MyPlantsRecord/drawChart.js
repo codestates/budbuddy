@@ -3,15 +3,12 @@ import * as d3 from "d3";
 const drawChart = (element, data, colors) => {
   // const colors = ["#05BBD2", "#2070C4"];
   const boxSize = 500;
-  console.log("data", data);
   const maxValue = data.reduce((acc, cur) => {
     if (acc <= cur.value) {
       acc = cur;
-      console.log(cur);
     }
     return acc;
   }, 0).value;
-  console.log(maxValue);
 
   d3.select(element).select("svg").remove(); // Remove the old svg
   // Create new svg

@@ -46,6 +46,7 @@ const theme = {
   //style
   borderRadius: "5px",
   backgroundImgHeight: "28vh",
+  loadingPointerSize: "10px",
 };
 
 export default theme;

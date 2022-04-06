@@ -6,6 +6,7 @@ import SideBarFuntions from "./SideBarFunctions";
 import useLoginStore from "../../store/loginStore";
 import axios from "axios";
 import { makeModal } from "../../utils/errExeption";
+import { empty } from "../../resources";
 
 const Layout = styled.div`
   display: flex;
@@ -181,7 +182,7 @@ const SideBar = () => {
           <span className="area_desc">
             <div className="profile-wrap">
               <label className="file" htmlFor="input-file">
-                <img title="프로필이미지 변경하기" className={`${"profileImg"} ${!userProfile ? "empty" : ""}`} src={userProfile || "Dummy/empty_user.png"} alt="" />
+                <img title="프로필이미지 변경하기" className={`${"profileImg"} ${!userProfile ? "empty" : ""}`} src={userProfile || empty.user} alt="" />
               </label>
               <input id="input-file" type="file" accept="image/*" onChange={onFileChange} style={{ display: "none" }} name="upload_img" />
             </div>

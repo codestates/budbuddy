@@ -136,6 +136,7 @@ const FormLayout = styled.form`
       " checkPasswordDiv checkPasswordInput checkPasswordInput checkPasswordInput ";
     .currentPasswordDiv {
       grid-area: currentPasswordDiv;
+      font-size: ${(props) => props.theme.fontToolTip};
       margin: 5px;
     }
     .currentPasswordInput {
@@ -145,6 +146,7 @@ const FormLayout = styled.form`
     }
     .newPasswordDiv {
       grid-area: newPasswordDiv;
+      font-size: ${(props) => props.theme.fontToolTip};
       margin: 5px;
     }
     .newPasswordInput {
@@ -154,7 +156,8 @@ const FormLayout = styled.form`
     }
     .checkPasswordDiv {
       grid-area: checkPasswordDiv;
-      margin: 5px;
+      font-size: ${(props) => props.theme.fontToolTip};
+      margin: 5px 0px;
     }
     .checkPasswordInput {
       grid-area: checkPasswordInput;
@@ -237,7 +240,7 @@ const ChangePassword = ({ open = true, closeFn, setModalCode = "" }) => {
               <input className="currentPasswordInput" placeholder="현재 비밀번호" type="password"></input>
               <div className="newPasswordDiv">새 비밀번호</div>
               <input className="newPasswordInput" placeholder="새 비밀번호" type="password" value={isnewPassword} onChange={(e) => NewPasswordFunction(e)}></input>
-              <div className="checkPasswordDiv">새 비밀번호 확인</div>
+              <div className="checkPasswordDiv">새비밀번호 확인</div>
               <input className="checkPasswordInput" placeholder="새 비밀번호 확인" type="password" onChange={onChange} onBlur={onBlur}></input>
             </div>
             <div className="btn-wrapper trans">
