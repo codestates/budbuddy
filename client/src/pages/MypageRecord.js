@@ -4,6 +4,7 @@ import PlantsCycleChange from "../components/MyPlantsRecord/PlantCycleChange";
 import CalendarComponents from "../components/MyPlantsRecord/CalendarComponents";
 import styled from "styled-components";
 import useAjaxStore from "../store/ajaxStore";
+import useStore from "../store/plantCycleStore";
 import moment from "moment";
 
 const Content = styled.div`
@@ -24,12 +25,9 @@ const MypageRecordRayOut = styled.div`
 
 const MypageRecord = () => {
   const { setListByPlantId, listByPlantId } = useAjaxStore();
+  const { defaultWater, defaultFertilize, defaultRepot } = useStore();
 
-  const [defaultWater, setDefaultWater] = useState(10);
-  const [defaultFertilize, setDefaultFertilize] = useState(90);
-  const [defaultRepot, setDefaultRepot] = useState(180);
-
-  const [currentUser, setCurrentUser] = useState("안녕");
+  const [currentUser, setCurrentUser] = useState("안녕"); // 클릭하면 여기 바꾸게 해줘야함
   useEffect(() => {
     setListByPlantId();
   }, []);
