@@ -8,6 +8,7 @@ import { curDate } from "../modules/date";
 import useLoginStore from "../store/loginStore";
 import useAjaxStore from "../store/ajaxStore";
 import ModalByMode from "../components/common/ModalByMode";
+import { empty } from "../resources";
 
 const Layout = styled.div`
   /* position: relative; */
@@ -128,7 +129,7 @@ const BudDaily = () => {
               const date = curDate();
               let src = null;
               if (v.Image !== null) src = v.Image.store_path;
-              return <Bud key={v.id} src={src || "Dummy/empty_bud.jpg"} className="cardcomponent" budName={v.name} date={date} plant_id={v.id} setPopupInfo={setPopupInfo} />;
+              return <Bud key={v.id} src={src || empty.journal} className="cardcomponent" budName={v.name} date={date} plant_id={v.id} setPopupInfo={setPopupInfo} />;
             })}
           </div>
         )}
