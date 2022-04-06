@@ -68,7 +68,7 @@ const Album = () => {
     getAllPublicJournal();
     setListByUserId();
   }, []);
-  console.log("listByUserId", listByUserId);
+  // console.log("listByUserId", listByUserId);
 
   const [pickPlantValue, setPickPlantValue] = useState("");
   const [pickDateValue, setPickDateValue] = useState("");
@@ -92,7 +92,7 @@ const Album = () => {
     }
     return el;
   });
-  console.log(FillteredValue);
+  // console.log(FillteredValue);
 
   const [SlideState, setSlideState] = useState("close");
   const [PictureNumber, setPictureNumber] = useState(0);
@@ -112,7 +112,7 @@ const Album = () => {
             ) : (
               <div className="card-wrap">
                 {FillteredValue.map((el, idx) => {
-                  console.log(el.Journal_Images);
+                  // console.log(el.Journal_Images);
                   if (el.Journal_Images.length !== 0) {
                     return (
                       <Picture
