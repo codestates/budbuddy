@@ -86,9 +86,6 @@ function NavigationBar() {
   return (
     <Content>
       <div className="wrap">
-        <NavLink to="/test">
-          <span className="test">테스트</span>
-        </NavLink>
         <NavLink to="/">
           <div className="link">
             <FontAwesomeIcon className="home icon" icon={faHouseUser} />
