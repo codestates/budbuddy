@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import TextOnImg from "../components/common/TextOnImg";
 import Hr from "../components/common/Hr";
 import ImgSlide from "../components/common/ImgSlide";
 import { proverbs, slideImgs } from "../resources";
+import useLoginStore from "../store/loginStore";
+import axios from "axios";
 
 const Layout = styled.div`
   .version {
@@ -19,6 +21,29 @@ const Layout = styled.div`
 `;
 
 const Home = () => {
+  useEffect(() => {
+    if (!isLogin) getUserInfo();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  const { isLogin, setLogin, setNickname, setUserNumber, setImage } = useLoginStore();
+
+  async function getUserInfo() {
+    try {
+      const resData = await axios.get(process.env.REACT_APP_API_URL + "/users/userinfo");
+      if (resData.data.message === "ok") {
+        const { nickname, id } = resData.data.data;
+        if (resData.data.data.profile_image) {
+          setImage(resData.data.data.profile_image.store_path);
+        }
+        setNickname(nickname);
+        setUserNumber(id);
+        setLogin(true);
+      }
+    } catch (err) {
+      console.log("kakaoLogin:::", err);
+    }
+  }
+
   return (
     <Layout>
       <p className="version">ver1.0</p>
