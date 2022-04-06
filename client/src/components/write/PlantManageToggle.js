@@ -22,12 +22,12 @@ const Layout = styled.div`
   .text {
     /* width: 12%; */
     text-align: center;
-    font-size: ${(props) => props.theme.fontWritePageMid};
+    font-size: ${(props) => props.theme.fontWritePageSmall};
     padding: 6px 0 0 0;
   }
   .icon {
     align-self: center;
-    font-size: 1.4rem;
+    font-size: ${(props) => props.theme.fontToggleIcon};
     color: SlateGrey;
     padding: 3px;
   }

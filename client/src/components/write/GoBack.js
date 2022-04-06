@@ -51,7 +51,8 @@ const Layout = styled.div`
     color: #fff;
   }
   .icon {
-    font-size: ${(props) => props.theme.fontWritePageLarge};
+    color: dimGray;
+    font-size: ${(props) => props.theme.fontWritePageMid};
   }
 `;
 

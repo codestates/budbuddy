@@ -18,7 +18,7 @@ const Layout = styled.div`
     padding: 0 0.5rem 0 0.5rem;
 
     .top-l {
-      font-size: 1.1rem;
+      font-size: ${(props) => props.theme.fontWritePageSmall};
       color: DarkSlateGrey;
     }
 
@@ -35,7 +35,7 @@ const Layout = styled.div`
       }
 
       .reply-date {
-        font-size: 0.8rem;
+        font-size: ${(props) => props.theme.fontDateSmall};
         margin-left: 0.5rem;
       }
     }
@@ -73,7 +73,7 @@ const Layout = styled.div`
 
         .name {
           margin: 0;
-          font-size: 1.1rem;
+          font-size: ${(props) => props.theme.fontWritePageSmall};
 
           display: flex;
           flex-direction: row;
@@ -81,7 +81,7 @@ const Layout = styled.div`
           .re-icon {
             margin-right: 0.3rem;
             transform: translateY(10%);
-            font-size: 1.1rem;
+            font-size: ${(props) => props.theme.fontWritePageSmall};
             color: LightCoral;
           }
         }
@@ -95,7 +95,7 @@ const Layout = styled.div`
 
           .rereply-delete {
             margin-right: 0.5rem;
-            font-size: 1rem;
+            font-size: ${(props) => props.theme.fontBtnSmall};
             padding: 0.1rem 0.2rem;
             border-radius: ${(props) => props.theme.borderRadius};
           }
@@ -105,7 +105,7 @@ const Layout = styled.div`
           }
           .date {
             margin: 0;
-            font-size: 0.8rem;
+            font-size: ${(props) => props.theme.fontDateSmall};
           }
         }
       }

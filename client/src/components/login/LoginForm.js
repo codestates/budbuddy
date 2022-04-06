@@ -3,21 +3,17 @@ import axios from "axios";
 import styled from "styled-components";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import { teal } from "@mui/material/colors";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { makeModal } from "../../utils/errExeption";
 import { useNavigate } from "react-router-dom";
 import useLoginStore from "../../store/loginStore";
-import { sleep } from "../../modules/sleep";
+import ModalByMode from "../common/ModalByMode";
 
 const Layout = styled.div`
   display: grid;
-  font-size: 10px;
 
   .title {
     color: white;
@@ -32,7 +28,11 @@ const Layout = styled.div`
   }
 
   .signup {
-    font-size: 1rem;
+    > a {
+      font-family: "Jua", sans-serif;
+      font-size: ${(props) => props.theme.font1rem};
+      font-weight: 500;
+    }
   }
 `;
 
@@ -62,13 +62,52 @@ const theme = createTheme({
 const LoginForm = () => {
   const { setLogin, setNickname, setUserNumber, setImage } = useLoginStore();
   let navigate = useNavigate();
-  const [modalCode, setModalCode] = useState(0);
+  const [popupInfo, setPopupInfo] = useState({ fn: "" });
+
+  function makePopup(info = "") {
+    const tasks = {
+      testLogin() {
+        info.done = () => {
+          setLogin(true);
+          navigate("/mypage");
+          setPopupInfo({});
+        };
+        info.closePopup = setPopupInfo;
+        info.outerFn = info.done;
+        info.text = "테스트 계정으로 로그인 합니다.\nBudBuddy에 오신것을 환영합니다.";
+        return <ModalByMode info={info} />;
+      },
+      reqfillLoginform() {
+        info.closePopup = setPopupInfo;
+        info.outerFn = setPopupInfo;
+        info.text = "로그인 양식을 채워주세요.";
+        return <ModalByMode info={info} />;
+      },
+      NotFound() {
+        info.closePopup = setPopupInfo;
+        info.outerFn = setPopupInfo;
+        info.text = "가입되지 않은 이메일입니다.";
+        return <ModalByMode info={info} />;
+      },
+      wrongPassword() {
+        info.closePopup = setPopupInfo;
+        info.outerFn = setPopupInfo;
+        info.text = "비밀번호가 잘못되었습니다.";
+        return <ModalByMode info={info} />;
+      },
+    };
+
+    if (!tasks[info.fn]) {
+      return null;
+    }
+    return tasks[info.fn]();
+  }
 
   async function loginReq(e) {
     e.preventDefault();
     const { email, password } = e.target;
     if (email.value === "" || password.value === "") {
-      setModalCode("reqfillLoginform");
+      setPopupInfo({ fn: "reqfillLoginform" });
       return;
     }
 
@@ -93,14 +132,15 @@ const LoginForm = () => {
         return;
       }
     } catch (err) {
-      console.log(err);
-      setModalCode(err.response.data.message);
+      console.log(err.response.data.message);
+
+      setPopupInfo({ fn: err.response.data.message });
     }
   }
 
   return (
     <Layout>
-      {makeModal(modalCode)}
+      {makePopup(popupInfo)}
       <ThemeProvider theme={theme}>
         <Box
           sx={{
@@ -136,23 +176,7 @@ const LoginForm = () => {
               InputLabelProps={{ style: { fontSize: 18 } }}
               fullWidth
             />
-            <FormControlLabel
-              className="saved"
-              control={<Checkbox value="remember" color="primary" sx={{ mt: 2, "& .MuiSvgIcon-root": { fontSize: "1rem" } }} />}
-              label={
-                <Box component="div" fontSize={"1.1rem"} sx={{ mt: 2 }}>
-                  로그인 저장
-                </Box>
-              }
-            />
-            <Button
-              type="submit"
-              variant="contained"
-              size="small"
-              sx={{ mt: 1.5, width: "22%", height: "10%", fontSize: "1rem", pl: "1rem", pr: "1rem" }}
-              onBlur={() => {
-                setModalCode(0);
-              }}>
+            <Button type="submit" variant="contained" size="small" sx={{ mt: 3.5, width: "22%", height: "10%", fontSize: "1rem", pl: "1rem", pr: "1rem" }}>
               Login
             </Button>
             <Button
@@ -160,20 +184,16 @@ const LoginForm = () => {
               sx={{ mt: 1, width: "22%", height: "10%", fontSize: "1rem", pl: "1rem", pr: "1rem" }}
               size="small"
               onClick={async () => {
-                const loginInfo = {
-                  isLogined: true,
-                  type: "test",
-                };
                 const payload = {
                   email: "test@test.com",
                   password: "1111",
-                  nickname: "test",
+                  nickname: "테스트",
                 };
                 try {
-                  let resData = await axios.post(process.env.REACT_APP_API_URL + "/users/signup", payload);
+                  await axios.post(process.env.REACT_APP_API_URL + "/users/signup", payload);
                 } catch (err) {
                   if (err.response.data.message === "usedEmail") {
-                    let logindData = await axios.post(process.env.REACT_APP_API_URL + "/users/login", payload);
+                    await axios.post(process.env.REACT_APP_API_URL + "/users/login", payload);
                     const resData = await axios.get(process.env.REACT_APP_API_URL + "/users/userinfo");
                     const { nickname, id } = resData.data.data;
                     if (resData.data.data.profile_image !== null) {
@@ -183,10 +203,7 @@ const LoginForm = () => {
                     setUserNumber(id);
                   }
                 }
-                setModalCode("testLogin");
-                await sleep(500);
-                setLogin(true);
-                navigate("/mypage");
+                setPopupInfo({ fn: "testLogin" });
               }}>
               Test
             </Button>

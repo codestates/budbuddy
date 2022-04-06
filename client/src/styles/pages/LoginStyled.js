@@ -23,11 +23,6 @@ export const LoginForm = styled.form`
     padding: 0.5rem;
   }
 
-  > .icon {
-    font-size: ${(props) => props.theme.fontIconSize};
-    filter: invert(20%) sepia(100%) saturate(100%) hue-rotate(0deg) brightness(100%) contrast(0%);
-  }
-
   .idIcon {
     margin-top: 40%;
     grid-area: idIcon;
@@ -94,8 +89,9 @@ export const SocialWrapper = styled.div`
     border: none;
     border-radius: ${(props) => props.theme.borderRadius};
     padding: 4px 10px;
-    font-size: ${(props) => props.theme.fontWritePageMid};
-    color: #000000;
+    /* font-family: "Jua", sans-serif; */
+    font-size: ${(props) => props.theme.fontWritePageSmall};
+    color: dimgray;
     background-color: #f9e000;
     text-decoration: none;
     opacity: 1;
