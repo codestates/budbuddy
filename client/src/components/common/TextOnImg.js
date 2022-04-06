@@ -74,7 +74,7 @@ const TextOnImg = ({ className = "", texts = [], time = 5000 }) => {
           <Loading isAb={false} top={0} left={0} bgColor={"lightgray"} />
         ) : (
           <div>
-            <img src={bg || ""} alt={`bg`} />
+            <img src={bg[0] || ""} alt={`bg`} />
             <div className="backText ani">{texts[idx] || ""}</div>
           </div>
         )}
