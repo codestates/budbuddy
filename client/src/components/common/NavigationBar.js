@@ -10,7 +10,7 @@ export const Content = styled.nav`
   position: fixed;
   bottom: 0;
   z-index: 10;
-  padding: 0.4rem;
+  padding: 0.5rem;
 
   background-color: ${(props) => props.theme.navigationBGColor};
 
@@ -33,7 +33,7 @@ export const Content = styled.nav`
     display: flex;
     justify-content: space-around;
     align-items: center;
-    font-size: 1.5rem;
+    font-size: ${(props) => props.theme.fontWritePageLarge};
 
     .link {
       position: relative;
@@ -54,7 +54,7 @@ export const Content = styled.nav`
         top: -47%;
         left: -20%;
         text-decoration: none;
-        font-size: 0.8rem;
+        font-size: ${(props) => props.theme.fontToolTip};
         text-align: center;
         display: flex;
         justify-content: center;

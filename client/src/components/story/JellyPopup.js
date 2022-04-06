@@ -32,6 +32,30 @@ const Layout = styled.div`
     }
   }
 
+  .popup::-webkit-scrollbar {
+    width: 6px;
+    border-radius: ${(props) => props.theme.borderRadius};
+  } /* 스크롤 바 */
+
+  .popup::-webkit-scrollbar-track {
+    background-color: rgba(220, 220, 220, 0.2);
+    border-radius: ${(props) => props.theme.borderRadius};
+  } /* 스크롤 바 밑의 배경 */
+
+  .popup::-webkit-scrollbar-thumb {
+    background: rgba(60, 179, 113, 0.5);
+    border-radius: 10px;
+    border-radius: ${(props) => props.theme.borderRadius};
+  } /* 실질적 스크롤 바 */
+
+  .popup::-webkit-scrollbar-thumb:hover {
+    background: rgba(70, 130, 180, 0.8);
+  } /* 실질적 스크롤 바 위에 마우스를 올려다 둘 때 */
+
+  .popup::-webkit-scrollbar-button {
+    display: none;
+  } /* 스크롤 바 상 하단 버튼 */
+
   @keyframes jelly {
     from {
       transform: scale(1, 1);
@@ -182,7 +206,7 @@ const JellyPopup = ({ setJellyPopup, story }) => {
   const { replies, getReplies } = useAjaxStore();
 
   useEffect(() => {
-    callReply();
+    if (isLogin) callReply();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -227,10 +251,12 @@ const JellyPopup = ({ setJellyPopup, story }) => {
             </div>
           </div>
           <div></div>
-          {replies.map((v, i) => {
-            if (v.class === 1) return null;
-            return <Reply key={i} info={v} contentRef={contentRef} />;
-          })}
+          {isLogin
+            ? replies.map((v, i) => {
+                if (v.class === 1) return null;
+                return <Reply key={i} info={v} contentRef={contentRef} />;
+              })
+            : null}
           {isLogin ? <ReplyTextArea journalId={story.journalId} contentRef={contentRef} close={close} /> : null}
         </StoryLayout>
       </div>

@@ -40,7 +40,7 @@ const Wrapper = styled.div`
       justify-content: space-evenly;
 
       > button {
-        font-size: 1.2rem;
+        font-size: ${(props) => props.theme.fontBtnSmall};
         padding: 3px;
         border: none;
         border-radius: ${(props) => props.theme.borderRadius};

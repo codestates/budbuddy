@@ -15,7 +15,7 @@ const Layout = styled.div`
 
   .loginText {
     color: white;
-    font-size: ${(props) => props.theme.fontWritePageLarge};
+    font-size: ${(props) => props.theme.fontWritePageXLarge};
   }
 `;
 

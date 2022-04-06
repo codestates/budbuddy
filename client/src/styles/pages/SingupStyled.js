@@ -56,12 +56,12 @@ export const SignupWrapper = styled.form`
     display: flex;
     justify-content: space-between;
     > .join {
-      font-size: ${(props) => props.theme.fontWritePageMid};
+      font-size: ${(props) => props.theme.fontWritePageSmall};
       width: 25%;
       margin-left: 10%;
     }
     > .cancle {
-      font-size: ${(props) => props.theme.fontWritePageMid};
+      font-size: ${(props) => props.theme.fontWritePageSmall};
       width: 30%;
       margin-right: 10%;
     }
@@ -87,7 +87,7 @@ export const InputWrapper = styled.div`
   place-items: center;
 
   input {
-    font-size: ${(props) => props.theme.fontWritePageMid};
+    font-size: ${(props) => props.theme.fontWritePageSmall};
     border: none;
     margin-left: 0.5rem;
     height: 1.5rem;
@@ -132,7 +132,7 @@ export const InputWrapper = styled.div`
   }
 
   > .ch {
-    font-size: 14px;
+    font-size: ${(props) => props.theme.fontToolTip};
     white-space: pre;
   }
 
