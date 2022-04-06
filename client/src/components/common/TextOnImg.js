@@ -2,9 +2,13 @@ import React, { useState, useEffect, useCallback } from "react";
 import styled from "styled-components";
 import { useInterval } from "../../modules/hooks";
 import { BGWrapper } from "../../styles/CommonStyled";
+import Loading from "../common/Loading";
 
 const Content = styled(BGWrapper)`
   display: grid;
+  position: relative;
+  width: 100%;
+
   img {
     height: ${(props) => props.theme.backgroundImgHeight};
     border-top: solid 1px rgb(0, 0, 0, 0.4);
@@ -65,8 +69,14 @@ const TextOnImg = ({ className = "", texts, time = 5000 }) => {
   return (
     <Content className={className} textTime={time}>
       <div className="std">
-        <img src={`Dummy/bg.png`} alt={`bg`} />
-        <div className="backText ani">{texts[idx]}</div>
+        {texts.length === 0 ? (
+          <Loading isAb={false} top={0} left={0} bgColor={"lightgray"} />
+        ) : (
+          <div>
+            <img src={`Dummy/bg.png`} alt={`bg`} />
+            <div className="backText ani">{texts[idx]}</div>
+          </div>
+        )}
       </div>
     </Content>
   );

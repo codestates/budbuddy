@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 import styled from "styled-components";
+import Loading from "../common/Loading";
 
 const Layout = styled.div`
   img {
@@ -119,35 +120,39 @@ const ImgSlide = ({ className = "", images }) => {
   }
   return (
     <Layout className={className}>
-      <div className="section">
-        <div className="slidewrap">
-          <ul ref={slideRef} className="slidelist">
-            {images.map((v, i) => {
-              return (
-                <li key={i}>
-                  <div>
-                    <img src={v.src} alt={`bg`} />
-                    <div className="title">
-                      <div className="topic">
-                        {v.title}
-                        <span className="name">&nbsp;{v.name}</span>
+      {images.length === 0 ? (
+        <Loading isAb={false} top={0} left={0} bgColor={"lightgray"} />
+      ) : (
+        <div className="section">
+          <div className="slidewrap">
+            <ul ref={slideRef} className="slidelist">
+              {images.map((v, i) => {
+                return (
+                  <li key={i}>
+                    <div>
+                      <img src={v.src} alt={`bg`} />
+                      <div className="title">
+                        <div className="topic">
+                          {v.title}
+                          <span className="name">&nbsp;{v.name}</span>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </li>
-              );
-            })}
-          </ul>
-          <div className="arrow-wrap">
-            <span className="left arrow" onClick={RightSlide}>
-              <img src={"./slideArrow/left-arrow.png"} alt="" />
-            </span>
-            <span className="right arrow" onClick={LeftSlide}>
-              <img src={"./slideArrow/right-arrow.png"} alt="" />
-            </span>
+                  </li>
+                );
+              })}
+            </ul>
+            <div className="arrow-wrap">
+              <span className="left arrow" onClick={RightSlide}>
+                <img src={"./slideArrow/left-arrow.png"} alt="" />
+              </span>
+              <span className="right arrow" onClick={LeftSlide}>
+                <img src={"./slideArrow/right-arrow.png"} alt="" />
+              </span>
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </Layout>
   );
 };
