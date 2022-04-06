@@ -30,6 +30,8 @@ const Content = styled(BGWrapper)`
     font-family: "Jua", sans-serif;
     font-size: ${(props) => props.theme.fontWritePageMid};
     line-height: 1.6;
+    color: WhiteSmoke;
+    /* mix-blend-mode: normal; */
   }
   @keyframes textFloating {
     from {
@@ -67,6 +69,8 @@ const TextOnImg = ({ className = "", texts = [], time = 5000 }) => {
     changeProverb();
   }, time);
 
+  const index = parseInt(Math.random() * bg.length);
+
   return (
     <Content className={className} textTime={time}>
       <div className="std">
@@ -74,7 +78,7 @@ const TextOnImg = ({ className = "", texts = [], time = 5000 }) => {
           <Loading isAb={false} top={0} left={0} bgColor={"lightgray"} />
         ) : (
           <div>
-            <img src={bg || ""} alt={`bg`} />
+            <img src={bg[index] || ""} alt={`bg`} />
             <div className="backText ani">{texts[idx] || ""}</div>
           </div>
         )}

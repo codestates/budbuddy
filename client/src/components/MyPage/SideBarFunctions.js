@@ -82,6 +82,7 @@ function SideBarFunctions({ setModalCode }) {
   const [isChangePassword, setChangePassword] = useState(false);
   const logOutFunction = async () => {
     const resData = await axios.post(process.env.REACT_APP_API_URL + "/users/logout");
+    console.log("로그아웃:::", resData);
     if (resData.status === 200) {
       setNickname("");
       setUserNumber("");
