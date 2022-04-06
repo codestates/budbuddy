@@ -15,20 +15,13 @@ const CalendarTitle = styled.h2`
   text-align: center;
 `;
 
-function CalendarComponents() {
+function CalendarComponents({ selectActions = [] }) {
   const [value, onChange] = useState(new Date());
-  const [mark, setMark] = useState(doing);
 
   const tileContent = ({ date, view }) => {
-    const find = mark.find((element) => element.day === moment(date).format("YYYY-MM-DD"));
+    const find = selectActions.find((element) => element.date_pick === moment(date).format("YYYY-MM-DD"));
     return find ? <CalendarTileDiv actions={find.actions} /> : <CalendarTileDiv />;
   };
-  // const tileClassName = ({ date, view }) => {
-  //   if (mark.find((element) => element.day === moment(date).format("YYYY-MM-DD"))) {
-  //     return "highlight";
-  //   }
-  //   return "normal";
-  // }; //배경색
 
   return (
     <CalendarContainer>

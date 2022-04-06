@@ -3,9 +3,8 @@ import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGear } from "@fortawesome/free-solid-svg-icons";
 import { makeCycleModal } from "../../utils/errExeption";
-import useStore from "../../store/PlantCycleStore";
+import useStore from "../../store/plantCycleStore";
 import ChartComponent from "./ChartComponent";
-import useAjaxStore from "../../store/AjaxStore";
 
 const PlantsCycleChangeLayout = styled.div`
   > .space {
@@ -73,20 +72,10 @@ const CircleName = styled.div`
 
 const PlantsCycleChange = () => {
   const { plantCycle, popUpPlantCycleChangeModal } = useStore();
-  const { setListByPlantId, listByPlantId } = useAjaxStore();
-
-  useEffect(() => {
-    setListByPlantId();
-  }, []);
-  console.log(listByPlantId);
 
   const upSetting = () => {
     popUpPlantCycleChangeModal();
   };
-
-  const [defaultWater, setDefaultWater] = useState("10");
-  const [defaultFertilize, setDefaultFertilize] = useState("90");
-  const [defaultRepot, setDefaultRepot] = useState("180");
 
   const data = [{ value: 30 }, { value: 50 }];
 

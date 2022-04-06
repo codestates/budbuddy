@@ -102,7 +102,7 @@ function PlantsCycleChangeModal() {
               <FontAwesomeIcon className="fa-solid fa-2x" icon={faDroplet} color="skyblue" />
             </FontAwesomePlace>
             <div className="modal_select">
-              <select>
+              <select defaultValue="10일">
                 {CycleDay.map((el) => {
                   return (
                     <option key={el} value={el}>
@@ -118,7 +118,7 @@ function PlantsCycleChangeModal() {
               <FontAwesomeIcon className="fa-solid fa-2x" icon={faThermometer} color="#D7DF01" />
             </FontAwesomePlace>
             <div className="modal_select">
-              <select>
+              <select defaultValue="3개월">
                 {CycleMonth.map((el) => {
                   return (
                     <option key={el} value={el}>
@@ -134,7 +134,7 @@ function PlantsCycleChangeModal() {
               <FontAwesomeIcon className="fa-solid fa-2x" icon={faRepeat} color="brown" />
             </FontAwesomePlace>
             <div className="modal_select">
-              <select>
+              <select defaultValue="6개월">
                 {CycleMonth.map((el) => {
                   return (
                     <option key={el} value={el}>
