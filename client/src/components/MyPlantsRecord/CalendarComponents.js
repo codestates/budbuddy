@@ -17,7 +17,7 @@ const CalendarTitle = styled.h2`
   text-align: center;
 `;
 
-function CalendarComponents({ selectActions = [] }) {
+function CalendarComponents({ selectActions = [], currentUser = "" }) {
   const [value, onChange] = useState(new Date());
 
   const tileContent = ({ date, view }) => {
@@ -27,7 +27,7 @@ function CalendarComponents({ selectActions = [] }) {
 
   return (
     <CalendarContainer>
-      <CalendarTitle>스투키 관리 기록</CalendarTitle>
+      <CalendarTitle>{currentUser} 관리 기록</CalendarTitle>
       <Calendar
         onChange={onChange}
         value={value}
