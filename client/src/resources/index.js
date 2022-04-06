@@ -2,13 +2,13 @@ import bg from "./Dummy/bg.png";
 import dummy from "./Dummy/slide.json";
 import journal from "./Dummy/empty_bud.jpg";
 import user from "./Dummy/empty_user.png";
-import img0 from "./recomendPlant/IMG_0.JPG";
-import img1 from "./recomendPlant/IMG_1.JPG";
-import img2 from "./recomendPlant/IMG_2.JPG";
-import img3 from "./recomendPlant/IMG_3.JPG";
-import img4 from "./recomendPlant/IMG_4.JPG";
-import img5 from "./recomendPlant/IMG_5.JPG";
-import img6 from "./recomendPlant/IMG_6.JPG";
+import img0 from "./recomendPlant/IMG_0.jpg";
+import img1 from "./recomendPlant/IMG_1.jpg";
+import img2 from "./recomendPlant/IMG_2.jpg";
+import img3 from "./recomendPlant/IMG_3.jpg";
+import img4 from "./recomendPlant/IMG_4.jpg";
+import img5 from "./recomendPlant/IMG_5.jpg";
+import img6 from "./recomendPlant/IMG_6.jpg";
 
 import l from "./slideArrow/left-arrow.png";
 import r from "./slideArrow/right-arrow.png";
@@ -34,7 +34,7 @@ const asset = {
 export { bg };
 
 export { dummy };
-
+console.log(dummy, img0, dummy.slide);
 export const empty = {
   journal,
   user,
