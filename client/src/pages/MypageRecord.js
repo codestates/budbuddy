@@ -34,12 +34,10 @@ const MypageRecord = () => {
 
   useEffect(() => {
     setListByPlantId();
-  }, []);
+  }, [setListByPlantId]);
 
   const FilterCurrentUser = listByPlantId.filter((el) => {
-    if (el.Plant.name === currentUser) {
-      return true;
-    }
+    return el.Plant.name === currentUser;
   });
 
   const selectActions = FilterCurrentUser.reduce((acc, cur) => {
@@ -90,7 +88,7 @@ const MypageRecord = () => {
           value: el.plant_height,
         });
       }
-      return;
+      return el;
     });
     return acc;
   }, []);
