@@ -194,6 +194,7 @@ const useAjaxStore = create(
           }
 
           set((state) => ({ publicJournal: extractedData }));
+          return extractedData;
         } catch (err) {
           console.log("axios err / getAllPublicJournal :::", err);
           set((state) => ({ publicJournal: [] }));

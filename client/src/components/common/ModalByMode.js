@@ -277,6 +277,9 @@ const ModalByMode = ({ info = "" }) => {
       changeBudImage() {
         async function uploadBudImg(e) {
           info.closePopup({});
+
+          if (e.target.upload_img.files.length === 0) return;
+
           await changePlantImg(info.plant_id, info.budName, e.target.upload_img);
           await getPlantsList();
         }
