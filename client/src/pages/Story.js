@@ -4,9 +4,9 @@ import Logo from "../components/common/Logo";
 import SearchBar from "../components/story/SearchBar";
 import StoryCard from "../components/story/StoryCard";
 import useAjaxStore from "../store/ajaxStore";
-// import { storyDummyList } from "../utils/dummy";
+import Loading from "../components/common/Loading";
 
-export const Layout = styled.div`
+const Layout = styled.div`
   display: flex;
   flex-direction: column;
 
@@ -66,7 +66,7 @@ const Story = () => {
     });
     setStory(filteredStory);
   }
-
+  //story.length === 0
   return (
     <Layout isFreeze={isFreeze}>
       <Logo className="logo" />
@@ -74,7 +74,7 @@ const Story = () => {
         <p>Friend's Daily Log</p>
       </div>
       <SearchBar top={62} left={98} width={40} fn={storySearch} />
-      {story.length === 0 ? null : <StoryCard className="story-card" storyList={story} hoverTransitonSec={0.25} setFreeze={setFreeze} />}
+      {story.length === 0 ? <Loading isAb={true} top={250} left={0} bgColor={"none"} /> : <StoryCard className="story-card" storyList={story} hoverTransitonSec={0.25} setFreeze={setFreeze} />}
     </Layout>
   );
 };

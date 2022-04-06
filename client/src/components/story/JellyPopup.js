@@ -5,6 +5,7 @@ import styled from "styled-components";
 import moment from "moment";
 import useLoginStore from "../../store/loginStore";
 import useAjaxStore from "../../store/ajaxStore";
+import { empty } from "../../resources";
 
 const Layout = styled.div`
   display: flex;
@@ -228,7 +229,7 @@ const JellyPopup = ({ setJellyPopup, story }) => {
         <StoryLayout>
           <div className="top">
             <div className="profile">
-              <img className="img" src={story.profileImg || "Dummy/empty_user.png"} alt="" />
+              <img className="img" src={story.profileImg || empty.user} alt="젤리프로필" />
             </div>
             <div className="name">
               <div className="user">{story.nickname}</div>
@@ -244,7 +245,7 @@ const JellyPopup = ({ setJellyPopup, story }) => {
               <div>{`제목: ${story.title}`}</div>
             </div>
             <div className="photo">
-              <img className="journal-img" src={story.journalImg || "Dummy/empty_bud.jpg"} alt="" />
+              <img className="journal-img" src={story.journalImg || empty.journal} alt="젤리일지" />
             </div>
             <div className="content">
               <div className="text">{story.textContent}</div>
