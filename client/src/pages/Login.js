@@ -15,7 +15,7 @@ const Layout = styled.div`
 
   .loginText {
     color: white;
-    font-size: ${(props) => props.theme.fontWritePageLarge};
+    font-size: ${(props) => props.theme.fontWritePageXLarge};
   }
 `;
 
@@ -27,7 +27,6 @@ function Login() {
       window.location.assign(requestURL);
 
       const resData = await axios.get(process.env.REACT_APP_API_URL + "/users/userinfo");
-      console.log(resData.data.message);
       if (resData.data.message === "ok") {
         const { nickname, id } = resData.data.data;
         if (!resData.data.data.profile_image) {
@@ -37,8 +36,8 @@ function Login() {
         setUserNumber(id);
         setLogin(true);
       }
-    } catch (e) {
-      console.log(e);
+    } catch (err) {
+      console.log("kakaoLogin:::", err);
     }
   }
 

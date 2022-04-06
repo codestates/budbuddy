@@ -2,12 +2,9 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Logo from "../components/common/Logo";
 import TabOption from "../components/Album/TabOption";
-import { budDummy } from "../utils/dummy";
 import Picture from "../components/Album/Picture";
 import SlideModal from "../components/Album/SlideModal";
 import useLoginStore from "../store/loginStore";
-import axios from "axios";
-import { curDate } from "../modules/date";
 import useAjaxStore from "../store/ajaxStore";
 
 const Layout = styled.div`
@@ -19,6 +16,13 @@ const Layout = styled.div`
   .TabBtnOne {
     margin-top: 0.3rem;
   }
+  .none {
+    display: absolute;
+    min-width: 100%;
+    height: 100vh;
+    line-height: 80vh;
+    text-align: center;
+  }
 `;
 const BudLayout = styled.div`
   /* padding-top: 0.5rem;
@@ -29,11 +33,13 @@ const BudLayout = styled.div`
     display: flex;
     flex-direction: column;
     position: absolute;
-    top: 50%;
+    top: 500%;
     left: 50%;
     transform: translate(-50%, -50%);
   }
   .notice {
+    display: table-cell;
+    vertical-align: middle;
     font-size: 0.9rem;
     color: DimGrey;
   }
@@ -56,27 +62,37 @@ const Album = () => {
     }
   }, [isLogin]);
 
-  const { publicJournal, getAllPublicJournal } = useAjaxStore();
+  const { publicJournal, getAllPublicJournal, listByUserId, setListByUserId } = useAjaxStore();
+
   useEffect(() => {
     getAllPublicJournal();
+    setListByUserId();
   }, []);
+  console.log("listByUserId", listByUserId);
 
   const [pickPlantValue, setPickPlantValue] = useState("");
   const [pickDateValue, setPickDateValue] = useState("");
 
-  const TempFillteredValue = publicJournal.filter((el) => {
+  const TempFillteredValue = listByUserId.filter((el) => {
+    if (pickPlantValue === "식물이름") {
+      return el;
+    }
     if (pickPlantValue) {
-      return el.plantName === pickPlantValue;
+      return el.Plant.name === pickPlantValue;
     }
     return el;
   });
 
   const FillteredValue = TempFillteredValue.filter((el) => {
+    if (pickDateValue === "날짜") {
+      return el;
+    }
     if (pickDateValue) {
-      return el.writingDate === pickDateValue;
+      return el.date_pick === pickDateValue;
     }
     return el;
   });
+  console.log(FillteredValue);
 
   const [SlideState, setSlideState] = useState("close");
   const [PictureNumber, setPictureNumber] = useState(0);
@@ -84,34 +100,42 @@ const Album = () => {
   return (
     <Layout>
       <Logo className="logo" />
-      <SlideModal FillteredValue={FillteredValue} SlideState={SlideState} setSlideState={setSlideState} PictureNumber={PictureNumber} setPictureNumber={setPictureNumber} />
-      <TabOption className="TabBtnOne" tabName="앨범" setPickPlantValue={setPickPlantValue} setPickDateValue={setPickDateValue} publicJournal={publicJournal} />
-      <BudLayout>
-        {FillteredValue.length === 0 ? (
-          <div className="notice-pos">
-            <div className="notice">등록된 사진이 없습니다</div>
-          </div>
-        ) : (
-          <div className="card-wrap">
-            {FillteredValue.map((el, idx) => {
-              return (
-                <Picture
-                  key={el.journalId}
-                  src={el.journalImg || "Dummy/diary_4.PNG"}
-                  className="cardcomponent"
-                  budName={el.nickname}
-                  date={el.writingDate}
-                  plant_id={el.journalId}
-                  text={el.textContent}
-                  setSlideState={setSlideState}
-                  setPictureNumber={setPictureNumber}
-                  idx={idx}
-                />
-              );
-            })}
-          </div>
-        )}
-      </BudLayout>
+      {isLogin ? (
+        <>
+          <SlideModal FillteredValue={FillteredValue} SlideState={SlideState} setSlideState={setSlideState} PictureNumber={PictureNumber} setPictureNumber={setPictureNumber} />
+          <TabOption className="TabBtnOne" tabName="앨범" setPickPlantValue={setPickPlantValue} setPickDateValue={setPickDateValue} listByUserId={listByUserId} />
+          <BudLayout>
+            {FillteredValue.length === 0 ? (
+              <div className="notice-pos">
+                <div className="notice">등록된 사진이 없습니다</div>
+              </div>
+            ) : (
+              <div className="card-wrap">
+                {FillteredValue.map((el, idx) => {
+                  console.log(el.Journal_Images);
+                  if (el.Journal_Images.length !== 0) {
+                    return (
+                      <Picture
+                        key={idx}
+                        src={el.Journal_Images[0].Image.store_path || "Dummy/diary_4.PNG"}
+                        className="cardcomponent"
+                        budName={el.User.nickname}
+                        date={el.date_pick}
+                        text={el.body}
+                        setSlideState={setSlideState}
+                        setPictureNumber={setPictureNumber}
+                        idx={idx}
+                      />
+                    );
+                  }
+                })}
+              </div>
+            )}
+          </BudLayout>
+        </>
+      ) : (
+        <div className="none">로그인 후 이용해주세요</div>
+      )}
     </Layout>
   );
 };

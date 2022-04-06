@@ -17,7 +17,7 @@ export const Layout = styled.div`
 
   .leftcap,
   .rightcap {
-    font-size: 1rem;
+    font-size: ${(props) => props.theme.fontWritePageXSmall};
     padding: 1%;
     margin: 5px;
     border: none;
@@ -43,17 +43,17 @@ export const Layout = styled.div`
   }
 `;
 
-const TabOption = ({ className = "", tabName, setPickPlantValue, setPickDateValue, publicJournal }) => {
-  const UserPlantsName = publicJournal.reduce((acc, cur) => {
-    if (!acc.includes(cur.plantName)) {
-      acc.push(cur.plantName);
+const TabOption = ({ className = "", tabName, setPickPlantValue, setPickDateValue, listByUserId }) => {
+  const UserPlantsName = listByUserId.reduce((acc, cur) => {
+    if (!acc.includes(cur.Plant.name) && cur.Journal_Images.length !== 0) {
+      acc.push(cur.Plant.name);
     }
     return acc;
   }, []);
 
-  const UserPlantsDate = publicJournal.reduce((acc, cur) => {
-    let SelectDate = cur.writingDate;
-    if (!acc.includes(SelectDate)) {
+  const UserPlantsDate = listByUserId.reduce((acc, cur) => {
+    let SelectDate = cur.date_pick;
+    if (!acc.includes(SelectDate) && cur.Journal_Images.length !== 0) {
       acc.push(SelectDate);
     }
     return acc;
@@ -71,13 +71,13 @@ const TabOption = ({ className = "", tabName, setPickPlantValue, setPickDateValu
         <div className="cap-wrap">
           <button className="leftcap">{tabName}</button>
           <select defaultValue="날짜" className="rightcap" onChange={(e) => OptionDateValue(e)}>
-            <option disabled>날짜</option>
+            <option>날짜</option>
             {UserPlantsDate.map((el) => {
               return <option key={el}>{el}</option>;
             })}
           </select>
           <select defaultValue="식물이름" className="rightcap" onChange={(e) => OptionPlantValue(e)}>
-            <option disabled>식물이름</option>
+            <option>식물이름</option>
             {UserPlantsName.map((el) => {
               return <option key={el}>{el}</option>;
             })}

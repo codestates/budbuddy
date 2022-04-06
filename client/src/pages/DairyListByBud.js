@@ -27,7 +27,6 @@ const DairyListByBud = () => {
 
   return (
     <Layout>
-      <div>{`${name}: ${plant_id}`}</div>
       <Logo className="logo" />
       <TabBtnOne
         className="tab"

@@ -1,6 +1,5 @@
 import React, { useRef } from "react";
 import styled from "styled-components";
-import moment from "moment";
 import useAjaxStore from "../../store/ajaxStore";
 
 const Layout = styled.div`
@@ -42,7 +41,7 @@ const Layout = styled.div`
       margin: 0 0.5rem 1rem 0.5rem;
       padding: 0.1rem 0.3rem;
       transition: background-color 0.2s ease;
-      font-size: ${(props) => (props.isRereply ? (props) => props.theme.fontWritePageXSmall : (props) => props.theme.fontWritePageMid)};
+      font-size: ${(props) => props.theme.fontWritePageXSmall};
     }
     .done:hover {
       background-color: ${(props) => props.theme.hoverColor};
@@ -53,9 +52,9 @@ const Layout = styled.div`
   }
 `;
 
-function ReplyTextArea({ contentRef, close, setReply, isRereply = false }) {
+function ReplyTextArea({ journalId, contentRef, close, isRereply = false, group_id = null }) {
   const textRef = useRef(null);
-  const { userInfo } = useAjaxStore();
+  const { setReplies, getReplies } = useAjaxStore();
 
   function textAreaResize(e) {
     e.target.style.height = "auto";
@@ -65,20 +64,13 @@ function ReplyTextArea({ contentRef, close, setReply, isRereply = false }) {
     if (!isRereply) contentRef.current.scrollTo(0, contentRef.current.scrollHeight);
   }
 
-  function addReply() {
+  async function addReply() {
     if (textRef.current.value === "") return;
-    userInfo.replyContent = textRef.current.value + "";
-    userInfo.replyTime = moment().format("MM/DD ").replaceAll("0", "") + moment().format("h:mm");
-    const newObj = JSON.parse(JSON.stringify(userInfo));
-    setReply((pre) => {
-      return pre.concat(newObj);
-    });
+
+    await setReplies(journalId, textRef.current.value, group_id);
+    await getReplies(journalId);
     textRef.current.value = "";
     if (isRereply) close();
-
-    const { style } = textRef.current;
-    contentRef.current.scrollTo(0, contentRef.current.scrollHeight);
-    console.log("style:::", style, contentRef.current.scrollHeight);
   }
 
   return (

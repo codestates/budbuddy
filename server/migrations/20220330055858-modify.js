@@ -8,7 +8,7 @@ module.exports = {
         model: "images",
         key: "id",
       },
-      onDelete: "CASCADE",
+      onDelete: "SET NULL",
     });
     await queryInterface.addColumn("plants", "image_id", {
       type: Sequelize.INTEGER,
@@ -16,6 +16,7 @@ module.exports = {
         model: "images",
         key: "id",
       },
+      onDelete: "SET NULL",
     });
   },
 

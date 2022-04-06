@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import Reply from "./Reply";
 import ReplyTextArea from "./ReplyTextArea";
 import styled from "styled-components";
 import moment from "moment";
 import useLoginStore from "../../store/loginStore";
+import useAjaxStore from "../../store/ajaxStore";
 
 const Layout = styled.div`
   display: flex;
@@ -30,6 +31,30 @@ const Layout = styled.div`
       width: ${(props) => props.theme.webWidth * 0.85 + "px"};
     }
   }
+
+  .popup::-webkit-scrollbar {
+    width: 6px;
+    border-radius: ${(props) => props.theme.borderRadius};
+  } /* 스크롤 바 */
+
+  .popup::-webkit-scrollbar-track {
+    background-color: rgba(220, 220, 220, 0.2);
+    border-radius: ${(props) => props.theme.borderRadius};
+  } /* 스크롤 바 밑의 배경 */
+
+  .popup::-webkit-scrollbar-thumb {
+    background: rgba(60, 179, 113, 0.5);
+    border-radius: 10px;
+    border-radius: ${(props) => props.theme.borderRadius};
+  } /* 실질적 스크롤 바 */
+
+  .popup::-webkit-scrollbar-thumb:hover {
+    background: rgba(70, 130, 180, 0.8);
+  } /* 실질적 스크롤 바 위에 마우스를 올려다 둘 때 */
+
+  .popup::-webkit-scrollbar-button {
+    display: none;
+  } /* 스크롤 바 상 하단 버튼 */
 
   @keyframes jelly {
     from {
@@ -177,8 +202,17 @@ const StoryLayout = styled.div`
 
 const JellyPopup = ({ setJellyPopup, story }) => {
   const contentRef = useRef(null);
-  const [replyArr, setReply] = useState([]);
   const { isLogin } = useLoginStore();
+  const { replies, getReplies } = useAjaxStore();
+
+  useEffect(() => {
+    if (isLogin) callReply();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  async function callReply() {
+    await getReplies(story.journalId);
+  }
 
   function close() {
     setJellyPopup(false);
@@ -217,10 +251,13 @@ const JellyPopup = ({ setJellyPopup, story }) => {
             </div>
           </div>
           <div></div>
-          {replyArr.map((v, i) => {
-            return <Reply key={i} info={v} contentRef={contentRef} />;
-          })}
-          {isLogin ? <ReplyTextArea contentRef={contentRef} close={close} setReply={setReply} /> : null}
+          {isLogin
+            ? replies.map((v, i) => {
+                if (v.class === 1) return null;
+                return <Reply key={i} info={v} contentRef={contentRef} />;
+              })
+            : null}
+          {isLogin ? <ReplyTextArea journalId={story.journalId} contentRef={contentRef} close={close} /> : null}
         </StoryLayout>
       </div>
     </Layout>

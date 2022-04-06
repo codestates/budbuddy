@@ -26,7 +26,6 @@ moment.tz.setDefault("Asia/Seoul");
 
 const App = () => {
   const { isLogin } = useLoginStore();
-  // console.log("isLogin::", isLogin);
 
   return (
     <div>

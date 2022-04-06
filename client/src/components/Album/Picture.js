@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import { useNavigateSearch } from "../../modules/hooks";
 
 export const Layout = styled.div`
   display: grid;
@@ -60,7 +59,6 @@ export const Layout = styled.div`
     position: relative;
     margin: auto;
     top: 5%;
-    /* letter-spacing: 0.6vw; */
     width: 90%;
     height: 90%;
     word-break: keep-all;

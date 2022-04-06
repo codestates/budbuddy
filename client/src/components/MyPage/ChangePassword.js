@@ -2,7 +2,6 @@ import React, { useRef, useEffect, useState } from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSeedling } from "@fortawesome/free-solid-svg-icons";
-import { validNickName } from "../../modules/validation";
 
 const Layout = styled.div`
   display: flex;
@@ -193,8 +192,6 @@ const ChangePassword = ({ open = true, closeFn, setModalCode = "" }) => {
 
   function resisterBud(e) {
     e.preventDefault();
-    console.log(e);
-
     setModalCode("PasswordReplaced");
     ClosePopup();
   }

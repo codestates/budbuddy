@@ -78,7 +78,11 @@ const FontAwesomePlace = styled.div`
 
 function PlantsCycleChangeModal() {
   const [isModal, setIsModal] = useState("");
-  const { closePlantCycleChangeModal } = useStore();
+  const [water, setWater] = useState("10일");
+  const [fertilize, setFertilize] = useState("3개월");
+  const [repot, setRepot] = useState("6개월");
+
+  const { setDefaultWater, setDefaultFertilize, setDefaultRepot, closePlantCycleChangeModal } = useStore();
 
   function removeModal() {
     setIsModal("hidden");
@@ -87,7 +91,20 @@ function PlantsCycleChangeModal() {
 
   const [accessModal, setaccessModal] = useState(0);
   const accessButton = () => {
+    setDefaultWater(water.slice(0, water.length - 1));
+    setDefaultFertilize(fertilize.slice(0, fertilize.length - 2) * 30);
+    setDefaultRepot(repot.slice(0, repot.length - 2) * 30);
     setaccessModal("plantCycleReplaced");
+  };
+
+  const WaterChangeFunction = (e) => {
+    setWater(e.target.value);
+  };
+  const FertilizeChangeFunction = (e) => {
+    setFertilize(e.target.value);
+  };
+  const RepotChangeFunction = (e) => {
+    setRepot(e.target.value);
   };
 
   return (
@@ -102,7 +119,7 @@ function PlantsCycleChangeModal() {
               <FontAwesomeIcon className="fa-solid fa-2x" icon={faDroplet} color="skyblue" />
             </FontAwesomePlace>
             <div className="modal_select">
-              <select>
+              <select value={water} onChange={(e) => WaterChangeFunction(e)}>
                 {CycleDay.map((el) => {
                   return (
                     <option key={el} value={el}>
@@ -118,7 +135,7 @@ function PlantsCycleChangeModal() {
               <FontAwesomeIcon className="fa-solid fa-2x" icon={faThermometer} color="#D7DF01" />
             </FontAwesomePlace>
             <div className="modal_select">
-              <select>
+              <select value={fertilize} onChange={(e) => FertilizeChangeFunction(e)}>
                 {CycleMonth.map((el) => {
                   return (
                     <option key={el} value={el}>
@@ -134,7 +151,7 @@ function PlantsCycleChangeModal() {
               <FontAwesomeIcon className="fa-solid fa-2x" icon={faRepeat} color="brown" />
             </FontAwesomePlace>
             <div className="modal_select">
-              <select>
+              <select value={repot} onChange={(e) => RepotChangeFunction(e)}>
                 {CycleMonth.map((el) => {
                   return (
                     <option key={el} value={el}>

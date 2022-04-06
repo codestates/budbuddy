@@ -68,7 +68,7 @@ const Layout = styled.div`
       border: none;
       padding: 3px;
       border-radius: ${(props) => props.theme.borderRadius};
-      font-size: ${(props) => props.theme.fontWritePageSmall};
+      font-size: ${(props) => props.theme.fontWritePageXSmall};
       background-color: ${(props) => props.theme.btnBgColor};
       transition: background-color 0.2s ease;
     }

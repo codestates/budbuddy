@@ -1,8 +1,10 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import ReplyTextArea from "./ReplyTextArea";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faReplyd } from "@fortawesome/free-brands-svg-icons";
+import useAjaxStore from "../../store/ajaxStore";
+
 const Layout = styled.div`
   display: flex;
   flex-direction: column;
@@ -16,7 +18,7 @@ const Layout = styled.div`
     padding: 0 0.5rem 0 0.5rem;
 
     .top-l {
-      font-size: 1.1rem;
+      font-size: ${(props) => props.theme.fontWritePageSmall};
       color: DarkSlateGrey;
     }
 
@@ -33,7 +35,7 @@ const Layout = styled.div`
       }
 
       .reply-date {
-        font-size: 0.8rem;
+        font-size: ${(props) => props.theme.fontDateSmall};
         margin-left: 0.5rem;
       }
     }
@@ -71,7 +73,7 @@ const Layout = styled.div`
 
         .name {
           margin: 0;
-          font-size: 1.1rem;
+          font-size: ${(props) => props.theme.fontWritePageSmall};
 
           display: flex;
           flex-direction: row;
@@ -79,7 +81,7 @@ const Layout = styled.div`
           .re-icon {
             margin-right: 0.3rem;
             transform: translateY(10%);
-            font-size: 1.1rem;
+            font-size: ${(props) => props.theme.fontWritePageSmall};
             color: LightCoral;
           }
         }
@@ -93,7 +95,7 @@ const Layout = styled.div`
 
           .rereply-delete {
             margin-right: 0.5rem;
-            font-size: 1rem;
+            font-size: ${(props) => props.theme.fontBtnSmall};
             padding: 0.1rem 0.2rem;
             border-radius: ${(props) => props.theme.borderRadius};
           }
@@ -103,7 +105,7 @@ const Layout = styled.div`
           }
           .date {
             margin: 0;
-            font-size: 0.8rem;
+            font-size: ${(props) => props.theme.fontDateSmall};
           }
         }
       }
@@ -123,28 +125,27 @@ const Layout = styled.div`
 `;
 
 function Reply({ contentRef, info }) {
+  const { deleteReplies, getReplies, replies } = useAjaxStore();
   const [isOpen, setOpen] = useState(false);
-  const [replyArr, setReply] = useState([]);
 
-  function removeReply() {
-    console.log("리플 삭제 란");
+  async function removeReply() {
+    await deleteReplies(info.replyId);
+    await getReplies(info.journal_id);
   }
 
-  function removeRereply() {
-    console.log("대댓글 삭제 란");
+  async function removeRereply(id) {
+    await deleteReplies(id);
+    await getReplies(info.journal_id);
   }
 
   function addRereply() {
     setOpen(true);
-    console.log("대댓글 작성란");
   }
 
   function close() {
     setOpen(false);
   }
 
-  console.log("reply info:::", info);
-  //&nbsp;&nbsp;
   return (
     <Layout className="reply">
       <div className="reply-top">
@@ -158,16 +159,17 @@ function Reply({ contentRef, info }) {
       </div>
       <div className="reply-mid">
         <div className="reply-content">
-          {info.replyContent}&nbsp;&nbsp;
+          {info.body}&nbsp;&nbsp;
           <span className="rereply-btn" onClick={addRereply}>
             reply
           </span>
         </div>
         <div className="rereply-wrap">
-          {replyArr.map((v, i) => {
-            console.log("대댓글:", v);
+          {replies.map((v, i) => {
+            if (v.class === 0) return null;
+            else if (info.group_id !== v.group_id) return null;
             return (
-              <div key={i} className="rereply-frame">
+              <div key={v.replyId} className="rereply-frame">
                 <div className="top">
                   <div className="name">
                     <span>
@@ -176,19 +178,23 @@ function Reply({ contentRef, info }) {
                     {v.nickname}
                   </div>
                   <div className="top-right">
-                    <span className="rereply-delete" onClick={removeRereply}>
+                    <span
+                      className="rereply-delete"
+                      onClick={() => {
+                        removeRereply(v.replyId);
+                      }}>
                       삭제
                     </span>
                     <div className="date">{v.replyTime}</div>
                   </div>
                 </div>
                 <div className="mid">
-                  <div className="rereply-content">&nbsp;&nbsp;{v.replyContent}</div>
+                  <div className="rereply-content">&nbsp;&nbsp;{v.body}</div>
                 </div>
               </div>
             );
           })}
-          {isOpen ? <ReplyTextArea contentRef={contentRef} setReply={setReply} isRereply={true} close={close} /> : null}
+          {isOpen ? <ReplyTextArea journalId={info.journal_id} contentRef={contentRef} isRereply={true} close={close} group_id={info.group_id} /> : null}
         </div>
       </div>
     </Layout>

@@ -86,9 +86,13 @@ const Layout = styled.div`
 const SlideModal = ({ FillteredValue, SlideState, setSlideState, PictureNumber, setPictureNumber }) => {
   const slideRef = useRef(null);
   const [counter, setCounter] = useState(1);
-
+  const Value = FillteredValue.filter((el) => {
+    if (el.Journal_Images.length > 0) {
+      return el;
+    }
+  });
   function LeftSlide() {
-    if (counter >= FillteredValue.length) return;
+    if (counter >= Value.length) return;
     slideRef.current.style.transform += `translateX(-100%)`;
     setCounter((pre) => pre + 1);
   }
@@ -116,8 +120,10 @@ const SlideModal = ({ FillteredValue, SlideState, setSlideState, PictureNumber, 
     <Layout className={SlideState}>
       <div className="black" onClick={CloseSlide}></div>
       <div ref={slideRef} className="imageDiv">
-        {FillteredValue.map((el) => {
-          return <img key={el.journalId} className="image" src={el.journalImg} alt={`bg`} />;
+        {Value.map((el, idx) => {
+          return el.Journal_Images.map((JlImg) => {
+            return <img key={idx} className="image" src={JlImg.Image.store_path} alt={`bg`} />;
+          });
         })}
       </div>
       <div className="arrow-wrap">
