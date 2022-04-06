@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGear } from "@fortawesome/free-solid-svg-icons";
 import { makeCycleModal } from "../../utils/errExeption";
 import useStore from "../../store/plantCycleStore";
+import ChartComponent from "./ChartComponent";
 
 const PlantsCycleChangeLayout = styled.div`
   > .space {
@@ -23,7 +24,7 @@ const PlantsCycleChangeContainer = styled.div`
     "CircleName CircleName CircleName";
   border: 1px solid black;
   width: 95%;
-  height: 20vh;
+  height: 100%;
   margin: auto;
   border-radius: 10px;
 `;
@@ -39,49 +40,6 @@ const CustomFontAwesomeIcon = styled.div`
 `;
 const DayCircle = styled.div`
   grid-area: DayCircle;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(1fr, auto));
-  grid-template-areas: "water nutrition soil";
-  margin: auto;
-  width: 100%;
-  height: 10vh;
-  border-top: 1px solid black;
-  > .water {
-    grid-area: water;
-    background-color: skyblue;
-    width: 80%;
-    height: 80%;
-    border-radius: 50%;
-    border: 2px solid;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: auto;
-  }
-  > .nutrition {
-    grid-area: nutrition;
-    background-color: yellow;
-    width: 80%;
-    height: 80%;
-    border-radius: 50%;
-    border: 2px solid;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: auto;
-  }
-  > .soil {
-    grid-area: soil;
-    width: 80%;
-    height: 80%;
-    border-radius: 50%;
-    background-color: brown;
-    border: 2px solid;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: auto;
-  }
 `;
 
 const CircleName = styled.div`
@@ -97,20 +55,29 @@ const CircleName = styled.div`
   }
   > .waterName {
     grid-area: waterName;
+    font-size: 1.2rem;
+    color: #2070c4;
   }
   > .nutritionName {
     grid-area: nutritionName;
+    font-size: 1.2rem;
+    color: #f3a62b;
   }
   > .soilName {
     grid-area: soilName;
+    font-size: 1.2rem;
+    color: #714b33;
   }
 `;
 
 const PlantsCycleChange = () => {
   const { plantCycle, popUpPlantCycleChangeModal } = useStore();
+
   const upSetting = () => {
     popUpPlantCycleChangeModal();
   };
+
+  const data = [{ value: 30 }, { value: 50 }];
 
   return (
     <PlantsCycleChangeLayout>
@@ -123,9 +90,7 @@ const PlantsCycleChange = () => {
           <FontAwesomeIcon className="fa-solid fa-2x" icon={faGear} cursor="pointer" onClick={upSetting} />
         </CustomFontAwesomeIcon>
         <DayCircle>
-          <div className="water">D-9</div>
-          <div className="nutrition">D-9</div>
-          <div className="soil">D-9</div>
+          <ChartComponent data={data}></ChartComponent>
         </DayCircle>
         <CircleName>
           <div className="waterName">물주기</div>

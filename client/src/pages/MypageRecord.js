@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Chart from "../components/MyPlantsRecord/Chart";
 import PlantsCycleChange from "../components/MyPlantsRecord/PlantCycleChange";
 import CalendarComponents from "../components/MyPlantsRecord/CalendarComponents";
 import styled from "styled-components";
+import useAjaxStore from "../store/ajaxStore";
+import moment from "moment";
 
 const Content = styled.div`
   display: grid;
@@ -21,10 +23,61 @@ const MypageRecordRayOut = styled.div`
 `;
 
 const MypageRecord = () => {
+  const { setListByPlantId, listByPlantId } = useAjaxStore();
+
+  const [defaultWater, setDefaultWater] = useState(10);
+  const [defaultFertilize, setDefaultFertilize] = useState(90);
+  const [defaultRepot, setDefaultRepot] = useState(180);
+
+  const [currentUser, setCurrentUser] = useState("안녕");
+  useEffect(() => {
+    setListByPlantId();
+  }, []);
+
+  const FilterCurrentUser = listByPlantId.filter((el) => {
+    if (el.Plant.name === currentUser) {
+      return true;
+    }
+  });
+
+  const selectActions = FilterCurrentUser.reduce((acc, cur) => {
+    const Actions = [];
+    for (let i = 0; i < cur.Journal_Actions.length; i++) {
+      Actions.push(cur.Journal_Actions[i].Action.type);
+    }
+    let Values = { date_pick: cur.date_pick, actions: Actions };
+    acc.push(Values);
+    return acc;
+  }, []);
+
+  const theLastDateOfAction = selectActions.reduce(
+    (acc, cur) => {
+      const pastDays = moment().diff(moment(cur.date_pick), "days");
+      if (cur.actions.includes("water")) {
+        if (acc.water > pastDays) {
+          acc.water = pastDays;
+        }
+      }
+      if (cur.actions.includes("fertilize")) {
+        if (acc.fertilize > pastDays) {
+          acc.fertilize = pastDays;
+        }
+      }
+      if (cur.actions.includes("repot")) {
+        if (acc.repot > pastDays) {
+          acc.repot = pastDays;
+        }
+      }
+      return acc;
+    },
+    { repot: defaultRepot, fertilize: defaultFertilize, water: defaultWater },
+  );
+  console.log("theLastDateOfAction", theLastDateOfAction);
+
   return (
     <Content>
       <MypageRecordRayOut>
-        <CalendarComponents></CalendarComponents>
+        <CalendarComponents selectActions={selectActions}></CalendarComponents>
         <PlantsCycleChange></PlantsCycleChange>
         <Chart></Chart>
       </MypageRecordRayOut>

@@ -29,11 +29,13 @@ const BudLayout = styled.div`
     display: flex;
     flex-direction: column;
     position: absolute;
-    top: 50%;
+    top: 500%;
     left: 50%;
     transform: translate(-50%, -50%);
   }
   .notice {
+    display: table-cell;
+    vertical-align: middle;
     font-size: 0.9rem;
     color: DimGrey;
   }
@@ -65,6 +67,9 @@ const Album = () => {
   const [pickDateValue, setPickDateValue] = useState("");
 
   const TempFillteredValue = publicJournal.filter((el) => {
+    if (pickPlantValue === "식물이름") {
+      return el;
+    }
     if (pickPlantValue) {
       return el.plantName === pickPlantValue;
     }
@@ -72,6 +77,9 @@ const Album = () => {
   });
 
   const FillteredValue = TempFillteredValue.filter((el) => {
+    if (pickDateValue === "날짜") {
+      return el;
+    }
     if (pickDateValue) {
       return el.writingDate === pickDateValue;
     }

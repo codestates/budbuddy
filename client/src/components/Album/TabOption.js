@@ -71,13 +71,13 @@ const TabOption = ({ className = "", tabName, setPickPlantValue, setPickDateValu
         <div className="cap-wrap">
           <button className="leftcap">{tabName}</button>
           <select defaultValue="날짜" className="rightcap" onChange={(e) => OptionDateValue(e)}>
-            <option disabled>날짜</option>
+            <option>날짜</option>
             {UserPlantsDate.map((el) => {
               return <option key={el}>{el}</option>;
             })}
           </select>
           <select defaultValue="식물이름" className="rightcap" onChange={(e) => OptionPlantValue(e)}>
-            <option disabled>식물이름</option>
+            <option>식물이름</option>
             {UserPlantsName.map((el) => {
               return <option key={el}>{el}</option>;
             })}
