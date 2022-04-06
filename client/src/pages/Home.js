@@ -28,9 +28,9 @@ const Home = () => {
   return (
     <Layout>
       <p className="greeting">{`안녕하세요!\n자신의 식물을 일기처럼 기록해보세요!`}</p>
-      {data.proverbs === undefined ? null : <TextOnImg texts={data.proverbs} />}
+      <TextOnImg texts={data.proverbs} />
       <Hr t={4} b={4} width={80} />
-      {data.slide === undefined ? null : <ImgSlide images={data.slide} />}
+      <ImgSlide images={data.slide} />
     </Layout>
   );
 };
