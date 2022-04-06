@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import JellyPopup from "./JellyPopup";
+import { empty } from "../../resources";
 
 const Layout = styled.div`
   /* border: solid 1px black; */
@@ -266,7 +267,7 @@ const StoryCard = ({ className = "", storyList, hoverTransitonSec = 0.25, setFre
                   <div className="borderrb">
                     <div className="top-cap">
                       <div className="profile-wrap">
-                        <img className={`${"profileImg"} ${!v.profileImg ? "empty" : ""}`} src={v.profileImg || "Dummy/empty_user.png"} alt="" />
+                        <img className={`${"profileImg"} ${!v.profileImg ? "empty" : ""}`} src={v.profileImg || empty.user} alt="" />
                       </div>
                       <div className="name-wrap">
                         <div className="user-name">{v.nickname}</div>
@@ -278,7 +279,7 @@ const StoryCard = ({ className = "", storyList, hoverTransitonSec = 0.25, setFre
                     </div>
                     <div className="middle-cap">
                       <div className="journal-img">
-                        <img className="plant-img" src={v.journalImg || "/Dummy/empty_bud.jpg"} alt="" />
+                        <img className="plant-img" src={v.journalImg || empty.journal} alt="" />
                       </div>
                       <div className="summary">{v.textContent}</div>
                     </div>

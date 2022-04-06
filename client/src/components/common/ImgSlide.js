@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 import styled from "styled-components";
 import Loading from "../common/Loading";
+import { arrow } from "../../resources";
 
 const Layout = styled.div`
   img {
@@ -144,10 +145,10 @@ const ImgSlide = ({ className = "", images }) => {
             </ul>
             <div className="arrow-wrap">
               <span className="left arrow" onClick={RightSlide}>
-                <img src={"./slideArrow/left-arrow.png"} alt="" />
+                <img src={arrow.l} alt="" />
               </span>
               <span className="right arrow" onClick={LeftSlide}>
-                <img src={"./slideArrow/right-arrow.png"} alt="" />
+                <img src={arrow.r} alt="" />
               </span>
             </div>
           </div>

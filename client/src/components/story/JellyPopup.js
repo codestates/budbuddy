@@ -228,7 +228,7 @@ const JellyPopup = ({ setJellyPopup, story }) => {
         <StoryLayout>
           <div className="top">
             <div className="profile">
-              <img className="img" src={story.profileImg || "Dummy/empty_user.png"} alt="" />
+              <img className="img" src={story.profileImg || ""} alt="" />
             </div>
             <div className="name">
               <div className="user">{story.nickname}</div>
@@ -244,7 +244,7 @@ const JellyPopup = ({ setJellyPopup, story }) => {
               <div>{`제목: ${story.title}`}</div>
             </div>
             <div className="photo">
-              <img className="journal-img" src={story.journalImg || "Dummy/empty_bud.jpg"} alt="" />
+              <img className="journal-img" src={story.journalImg || ""} alt="" />
             </div>
             <div className="content">
               <div className="text">{story.textContent}</div>

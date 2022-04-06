@@ -3,7 +3,7 @@ import styled from "styled-components";
 import TextOnImg from "../components/common/TextOnImg";
 import Hr from "../components/common/Hr";
 import ImgSlide from "../components/common/ImgSlide";
-import axios from "axios";
+import { dummy } from "../resources";
 
 const Layout = styled.div`
   padding-top: 5rem;
@@ -22,8 +22,8 @@ const Home = () => {
   const [data, setData] = useState({});
 
   async function read() {
-    const { data } = await axios.get("Dummy/dummy.json");
-    setData(data);
+    setData(dummy);
+    console.log(dummy);
   }
 
   return (

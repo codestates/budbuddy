@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useInterval } from "../../modules/hooks";
 import { BGWrapper } from "../../styles/CommonStyled";
 import Loading from "../common/Loading";
+import { bg } from "../../resources";
 
 const Content = styled(BGWrapper)`
   display: grid;
@@ -73,8 +74,8 @@ const TextOnImg = ({ className = "", texts, time = 5000 }) => {
           <Loading isAb={false} top={0} left={0} bgColor={"lightgray"} />
         ) : (
           <div>
-            <img src={`Dummy/bg.png`} alt={`bg`} />
-            <div className="backText ani">{texts[idx]}</div>
+            <img src={bg || ""} alt={`bg`} />
+            <div className="backText ani">{texts[idx] || ""}</div>
           </div>
         )}
       </div>
