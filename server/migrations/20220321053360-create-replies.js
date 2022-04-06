@@ -11,6 +11,11 @@ module.exports = {
       group_id: {
         type: Sequelize.INTEGER,
         allowNull: true,
+        references: {
+          model: "replies",
+          key: "id",
+        },
+        onDelete: "CASCADE",
       },
       user_id: {
         type: Sequelize.INTEGER,
@@ -18,6 +23,7 @@ module.exports = {
           model: "users",
           key: "id",
         },
+        onDelete: "CASCADE",
         allowNull: false,
       },
       body: {

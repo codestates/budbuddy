@@ -24,6 +24,7 @@ module.exports = {
           key: "id",
         },
         allowNull: false,
+        onDelete: "CASCADE",
       },
       title: {
         type: Sequelize.STRING,

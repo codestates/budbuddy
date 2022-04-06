@@ -9,9 +9,9 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here\
-      Plants.hasMany(models.Journals, { foreignKey: "plant_id", onDelete: "SET NULL" });
+      Plants.hasMany(models.Journals, { foreignKey: "plant_id" });
       Plants.belongsTo(models.Users, { foreignKey: "user_id" });
-      Plants.belongsTo(models.Images, { foreignKey: "image_id" });
+      Plants.belongsTo(models.Images, { foreignKey: "image_id", onDelete: "SET NULL" });
     }
   }
   Plants.init(
@@ -27,7 +27,6 @@ module.exports = (sequelize, DataTypes) => {
       sequelize,
       modelName: "Plants",
       underscored: true,
-      paranoid: true,
     },
   );
   return Plants;
