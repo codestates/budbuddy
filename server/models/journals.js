@@ -13,8 +13,8 @@ module.exports = (sequelize, DataTypes) => {
       Journals.hasMany(Journal_Actions);
       Journals.hasMany(Journal_Images);
       Journals.hasMany(Replies);
-      Journals.belongsTo(Plants, { foreignKey: "plant_id" });
-      Journals.belongsTo(Users, { foreignKey: "user_id" });
+      Journals.belongsTo(Plants, { foreignKey: "plant_id", onDelete: "CASCADE" });
+      Journals.belongsTo(Users, { foreignKey: "user_id", onDelete: "CASCADE" });
     }
   }
   Journals.init(

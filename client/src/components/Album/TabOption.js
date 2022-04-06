@@ -43,17 +43,17 @@ export const Layout = styled.div`
   }
 `;
 
-const TabOption = ({ className = "", tabName, setPickPlantValue, setPickDateValue, publicJournal }) => {
-  const UserPlantsName = publicJournal.reduce((acc, cur) => {
-    if (!acc.includes(cur.plantName)) {
-      acc.push(cur.plantName);
+const TabOption = ({ className = "", tabName, setPickPlantValue, setPickDateValue, listByUserId }) => {
+  const UserPlantsName = listByUserId.reduce((acc, cur) => {
+    if (!acc.includes(cur.Plant.name) && cur.Journal_Images.length !== 0) {
+      acc.push(cur.Plant.name);
     }
     return acc;
   }, []);
 
-  const UserPlantsDate = publicJournal.reduce((acc, cur) => {
-    let SelectDate = cur.writingDate;
-    if (!acc.includes(SelectDate)) {
+  const UserPlantsDate = listByUserId.reduce((acc, cur) => {
+    let SelectDate = cur.date_pick;
+    if (!acc.includes(SelectDate) && cur.Journal_Images.length !== 0) {
       acc.push(SelectDate);
     }
     return acc;

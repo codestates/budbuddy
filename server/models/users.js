@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
       Users.hasMany(Plants);
       Users.hasMany(Journals);
       Users.hasMany(Images);
-      Users.belongsTo(Images, { foreignKey: "profile_image_id", as: "profile_image" });
+      Users.belongsTo(Images, { foreignKey: "profile_image_id", as: "profile_image", onDelete: "SET NULL" });
     }
   }
   Users.init(

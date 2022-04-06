@@ -9,15 +9,15 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Replies.belongsTo(models.Users, { foreignKey: "user_id" });
+      Replies.belongsTo(models.Users, { foreignKey: "user_id", onDelete: "CASCADE" });
       Replies.belongsTo(models.Journals, { foreignKey: "journal_id", onDelete: "CASCADE" });
+      Replies.hasMany(Replies, { foreignKey: "group_id", onDelete: "CASCADE" });
     }
   }
   Replies.init(
     {
       group_id: {
         type: DataTypes.INTEGER,
-        allowNull: true,
       },
       user_id: {
         type: DataTypes.INTEGER,
