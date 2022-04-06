@@ -4,11 +4,14 @@ import "react-calendar/dist/Calendar.css"; // css import
 import styled from "styled-components";
 import moment from "moment";
 import CalendarTileDiv from "./CalendarTileDiv";
-import "./Calendar.css";
 
 const CalendarContainer = styled.div`
   grid-area: CalendarContainer;
   margin: auto;
+  > * {
+    width: 95%;
+    margin: auto;
+  }
 `;
 const CalendarTitle = styled.h2`
   text-align: center;
