@@ -23,7 +23,6 @@ const Home = () => {
 
   async function read() {
     setData(dummy);
-    console.log(dummy);
   }
 
   return (

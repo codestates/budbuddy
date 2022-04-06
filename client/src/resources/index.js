@@ -21,8 +21,6 @@ dummy.slide[4].src = img4;
 dummy.slide[5].src = img5;
 dummy.slide[6].src = img6;
 
-console.log(dummy);
-
 const asset = {
   bg,
   empty: {
