@@ -22,12 +22,12 @@ const Layout = styled.div`
   .text {
     /* width: 12%; */
     text-align: center;
-    font-size: ${(props) => props.theme.fontWritePageMid};
+    font-size: ${(props) => props.theme.fontWritePageSmall};
     padding: 6px 0 0 0;
   }
   .icon {
     align-self: center;
-    font-size: 1.4rem;
+    font-size: ${(props) => props.theme.fontToggleIcon};
     color: SlateGrey;
     padding: 3px;
   }
@@ -75,6 +75,7 @@ function PlantManageToggle({ className, actions = {}, mode = "" }) {
       if (actions.isRepot) toggleHandler("repot");
       setReadOnly(true);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function toggleHandler(fnName) {
@@ -107,7 +108,6 @@ function PlantManageToggle({ className, actions = {}, mode = "" }) {
     };
 
     if (!task[fnName]) {
-      console.log("정의되지 않은 토글 함수");
       return null;
     }
     if (isReadOnly) return;

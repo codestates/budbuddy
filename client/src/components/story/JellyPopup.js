@@ -1,6 +1,10 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
+import Reply from "./Reply";
+import ReplyTextArea from "./ReplyTextArea";
 import styled from "styled-components";
 import moment from "moment";
+import useLoginStore from "../../store/loginStore";
+import useAjaxStore from "../../store/ajaxStore";
 
 const Layout = styled.div`
   display: flex;
@@ -27,6 +31,30 @@ const Layout = styled.div`
       width: ${(props) => props.theme.webWidth * 0.85 + "px"};
     }
   }
+
+  .popup::-webkit-scrollbar {
+    width: 6px;
+    border-radius: ${(props) => props.theme.borderRadius};
+  } /* 스크롤 바 */
+
+  .popup::-webkit-scrollbar-track {
+    background-color: rgba(220, 220, 220, 0.2);
+    border-radius: ${(props) => props.theme.borderRadius};
+  } /* 스크롤 바 밑의 배경 */
+
+  .popup::-webkit-scrollbar-thumb {
+    background: rgba(60, 179, 113, 0.5);
+    border-radius: 10px;
+    border-radius: ${(props) => props.theme.borderRadius};
+  } /* 실질적 스크롤 바 */
+
+  .popup::-webkit-scrollbar-thumb:hover {
+    background: rgba(70, 130, 180, 0.8);
+  } /* 실질적 스크롤 바 위에 마우스를 올려다 둘 때 */
+
+  .popup::-webkit-scrollbar-button {
+    display: none;
+  } /* 스크롤 바 상 하단 버튼 */
 
   @keyframes jelly {
     from {
@@ -170,91 +198,26 @@ const StoryLayout = styled.div`
       /* border: solid 2px rgba(0, 0, 0, 0.2); */
     }
   }
-
-  .bottom {
-    width: 100%;
-    .content-wrap {
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      margin-top: 10px;
-      .content {
-        border: solid 1px rgba(0, 0, 0, 0.2);
-        padding: 10px;
-        width: 95%;
-        min-height: 8vh;
-        resize: none;
-        font-size: ${(props) => props.theme.fontWritePageSmall};
-        border-radius: ${(props) => props.theme.borderRadius};
-      }
-      .content:focus {
-        outline: none;
-        padding: 10px;
-      }
-      .content::-webkit-scrollbar {
-        width: 0;
-      }
-    }
-
-    .btn {
-      display: flex;
-      justify-content: start;
-      margin-top: 0.5rem;
-      /* border: solid 1px black; */
-
-      > button {
-        border-radius: ${(props) => props.theme.borderRadius};
-        font-size: ${(props) => props.theme.fontWritePageMid};
-        border: none;
-        margin: 0 0.5rem 1rem 0.5rem;
-        padding: 0.1rem 0.3rem;
-        transition: background-color 0.2s ease;
-      }
-      .done:hover {
-        background-color: ${(props) => props.theme.hoverColor};
-      }
-      .cancle:hover {
-        background-color: ${(props) => props.theme.hoverCancleColor};
-      }
-    }
-  }
-
-  .reply {
-    display: flex;
-    flex-direction: column;
-    padding: 0.1rem 0.3rem;
-    background-color: ${(props) => props.theme.replyBgColor};
-    padding: 0.7rem 0 0.7rem 0;
-
-    .reply-top {
-      display: flex;
-      justify-content: space-between;
-      padding: 0 0.5rem 0 0.5rem;
-    }
-    .reply-mid {
-      margin-top: 0.6rem;
-      padding: 0 0.5rem 0 0.5rem;
-      white-space: pre-wrap;
-    }
-  }
 `;
 
 const JellyPopup = ({ setJellyPopup, story }) => {
   const contentRef = useRef(null);
+  const { isLogin } = useLoginStore();
+  const { replies, getReplies } = useAjaxStore();
+
+  useEffect(() => {
+    if (isLogin) callReply();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  async function callReply() {
+    await getReplies(story.journalId);
+  }
 
   function close() {
     setJellyPopup(false);
   }
 
-  function textAreaResize(e) {
-    e.target.style.height = "auto";
-    e.target.style.minHeight = "15vh";
-    let scHeight = e.target.scrollHeight;
-    e.target.style.height = `${scHeight}px`;
-    contentRef.current.scrollTo(0, contentRef.current.scrollHeight);
-  }
-
-  console.log(story);
   const date = moment(story.updatedAt).format("MM/DD");
   const pastDays = moment().diff(moment(story.updatedAt), "days") + "일전";
 
@@ -288,30 +251,13 @@ const JellyPopup = ({ setJellyPopup, story }) => {
             </div>
           </div>
           <div></div>
-          <div className="bottom">
-            <div>
-              <div className="reply">
-                <div className="reply-top">
-                  <div>달콤전도사 </div>
-                  <div>수정 삭제 03/01</div>
-                </div>
-                <div className="reply-mid">
-                  <div>
-                    내요요요요요요웅우&nbsp;<span className="rereply">reply</span>
-                  </div>
-                </div>
-              </div>
-              <div className="content-wrap">
-                <textarea className="content" placeholder="댓글 입력" onKeyUp={textAreaResize} name="content" />
-              </div>
-              <div className="btn">
-                <button className="done">등록</button>
-                <button className="cancle" onClick={close}>
-                  취소
-                </button>
-              </div>
-            </div>
-          </div>
+          {isLogin
+            ? replies.map((v, i) => {
+                if (v.class === 1) return null;
+                return <Reply key={i} info={v} contentRef={contentRef} />;
+              })
+            : null}
+          {isLogin ? <ReplyTextArea journalId={story.journalId} contentRef={contentRef} close={close} /> : null}
         </StoryLayout>
       </div>
     </Layout>

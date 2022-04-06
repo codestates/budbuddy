@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 import Logo from "../components/common/Logo";
 import SearchBar from "../components/story/SearchBar";
 import StoryCard from "../components/story/StoryCard";
-import useAjaxStore from "../store/AjaxStore";
+import useAjaxStore from "../store/ajaxStore";
 // import { storyDummyList } from "../utils/dummy";
 
 export const Layout = styled.div`
@@ -37,14 +37,16 @@ export const Layout = styled.div`
 
 const Story = () => {
   let { publicJournal, getAllPublicJournal } = useAjaxStore();
-  const [story, setStory] = useState(publicJournal);
+  const [story, setStory] = useState([]);
   const [isFreeze, setFreeze] = useState(false);
   useEffect(() => {
     getStory();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   async function getStory() {
-    await getAllPublicJournal();
+    const res = await getAllPublicJournal();
+    setStory(res);
   }
 
   function storySearch(word) {
@@ -72,7 +74,7 @@ const Story = () => {
         <p>Friend's Daily Log</p>
       </div>
       <SearchBar top={62} left={98} width={40} fn={storySearch} />
-      <StoryCard className="story-card" storyList={story} hoverTransitonSec={0.25} setFreeze={setFreeze} />
+      {story.length === 0 ? null : <StoryCard className="story-card" storyList={story} hoverTransitonSec={0.25} setFreeze={setFreeze} />}
     </Layout>
   );
 };

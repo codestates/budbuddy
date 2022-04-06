@@ -5,7 +5,7 @@ import TabBtnOne from "../components/common/TabBtnOne";
 import Logo from "../components/common/Logo";
 import DiaryList from "../components/list/DiaryList";
 import { useNavigate } from "react-router-dom";
-import useAjaxStore from "../store/AjaxStore";
+import useAjaxStore from "../store/ajaxStore";
 const qs = require("query-string");
 
 const Layout = styled.div`
@@ -27,7 +27,6 @@ const DairyListByBud = () => {
 
   return (
     <Layout>
-      <div>{`${name}: ${plant_id}`}</div>
       <Logo className="logo" />
       <TabBtnOne
         className="tab"

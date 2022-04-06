@@ -1,5 +1,5 @@
 const jwtModule = require("../modules/jwt");
-
+const { Users } = require("../models/index");
 /**
    * ## 쿠키의 토큰을 검사합니다
    * - 성공시 jwt verify값을 리턴합니다
@@ -20,6 +20,8 @@ module.exports = (req, res) => {
     const { accessToken } = req.cookies;
     try {
       var verify = await jwtModule.verify(accessToken);
+      const user = await Users.findByPk(verify.idx);
+      if (!user) reject(res.status(401).send({ message: "UnRegisted User Token" }));
       resolve(verify);
       return;
     } catch (err) {

@@ -112,7 +112,9 @@ const Chart = () => {
       .attr("fill", "#BFD4AF")
       .attr("stroke", "#8AB06D")
       .attr("stroke-width", 1)
-      .attr("d", area);
+      .attr("d", area)
+      .transition()
+      .duration(1000);
 
     // 각점에 텍스트 추가하기
     svg

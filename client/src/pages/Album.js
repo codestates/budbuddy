@@ -5,10 +5,10 @@ import TabOption from "../components/Album/TabOption";
 import { budDummy } from "../utils/dummy";
 import Picture from "../components/Album/Picture";
 import SlideModal from "../components/Album/SlideModal";
-import useLoginStore from "../store/LoginStore";
+import useLoginStore from "../store/loginStore";
 import axios from "axios";
 import { curDate } from "../modules/date";
-import useAjaxStore from "../store/AjaxStore";
+import useAjaxStore from "../store/ajaxStore";
 
 const Layout = styled.div`
   display: grid;
@@ -29,11 +29,13 @@ const BudLayout = styled.div`
     display: flex;
     flex-direction: column;
     position: absolute;
-    top: 50%;
+    top: 500%;
     left: 50%;
     transform: translate(-50%, -50%);
   }
   .notice {
+    display: table-cell;
+    vertical-align: middle;
     font-size: 0.9rem;
     color: DimGrey;
   }
@@ -65,6 +67,9 @@ const Album = () => {
   const [pickDateValue, setPickDateValue] = useState("");
 
   const TempFillteredValue = publicJournal.filter((el) => {
+    if (pickPlantValue === "식물이름") {
+      return el;
+    }
     if (pickPlantValue) {
       return el.plantName === pickPlantValue;
     }
@@ -72,6 +77,9 @@ const Album = () => {
   });
 
   const FillteredValue = TempFillteredValue.filter((el) => {
+    if (pickDateValue === "날짜") {
+      return el;
+    }
     if (pickDateValue) {
       return el.writingDate === pickDateValue;
     }

@@ -22,7 +22,8 @@ const Content = styled(BGWrapper)`
   }
 
   .backText {
-    font-size: ${(props) => props.theme.fontWritePageLarge};
+    font-family: "Jua", sans-serif;
+    font-size: ${(props) => props.theme.fontWritePageMid};
     line-height: 1.6;
   }
   @keyframes textFloating {
@@ -39,6 +40,10 @@ const TextOnImg = ({ className = "", texts, time = 5000 }) => {
   const [idx, setIdx] = useState(0);
 
   const changeProverb = useCallback(() => {
+    if (!texts.length) {
+      return null;
+    }
+
     setIdx((pre) => {
       while (true) {
         const idx = parseInt(Math.random() * texts.length);
@@ -60,7 +65,7 @@ const TextOnImg = ({ className = "", texts, time = 5000 }) => {
   return (
     <Content className={className} textTime={time}>
       <div className="std">
-        <img src={`signupBg/IMG_8.PNG`} alt={`bg`} />
+        <img src={`Dummy/bg.png`} alt={`bg`} />
         <div className="backText ani">{texts[idx]}</div>
       </div>
     </Content>

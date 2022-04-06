@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import moment from "moment";
 import { useNavigateSearch } from "../../modules/hooks";
-import useAjaxStore from "../../store/AjaxStore";
+import useAjaxStore from "../../store/ajaxStore";
 
 const Layout = styled.div`
   display: flex;
@@ -12,18 +12,18 @@ const Layout = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: ${(props) => props.theme.fontWritePageMid};
+    font-size: ${(props) => props.theme.fontWritePageSmall};
     margin-top: 1.2rem;
   }
   .date-wrap {
     margin-left: 0.5rem;
-    font-size: ${(props) => props.theme.fontWritePageSmall};
+    font-size: ${(props) => props.theme.fontWritePageXSmall};
   }
   .btn-wrap {
     margin-right: 0.5rem;
 
     > button {
-      font-size: ${(props) => props.theme.fontWritePageSmall};
+      font-size: ${(props) => props.theme.fontBtnMid};
       border: none;
       border-radius: ${(props) => props.theme.borderRadius};
       padding: 0.1rem 0.2rem;
@@ -88,10 +88,9 @@ const DiaryList = ({ diaryList = [], isBudName = false, type = "" }) => {
   return (
     <Layout>
       {diaryList.map((journal, i) => {
-        console.log("DiaryList:::", journal);
         let plantName = "";
         if (!journal.Plant) {
-          plantName = "error";
+          plantName = "삭제된 식물";
         } else {
           plantName = journal.Plant.name;
         }

@@ -23,7 +23,7 @@ const Layout = styled.div`
   }
 
   .display-day {
-    font-size: ${(props) => props.theme.fontWritePageSmall};
+    font-size: ${(props) => props.theme.fontWritePageXSmall};
     padding-left: 0.5rem;
     width: 100%;
     border: solid 1px #fff;

@@ -73,8 +73,9 @@ const Layout = styled.div`
     align-items: center;
 
     .topic {
+      font-family: "Jua", sans-serif;
       text-align: center;
-      font-size: 1.3rem;
+      font-size: ${(props) => props.theme.fontWritePageMid};
       line-height: 1.5;
       /* border: solid 1px green; */
       color: rgba(0, 0, 0, 0.8);
@@ -82,7 +83,8 @@ const Layout = styled.div`
     }
 
     .name {
-      font-size: 1.5rem;
+      font-family: "Jua", sans-serif;
+      font-size: ${(props) => props.theme.fontWritePageLarge};
       color: DarkSlateGrey;
     }
   }
@@ -121,7 +123,6 @@ const ImgSlide = ({ className = "", images }) => {
         <div className="slidewrap">
           <ul ref={slideRef} className="slidelist">
             {images.map((v, i) => {
-              console.log(v);
               return (
                 <li key={i}>
                   <div>

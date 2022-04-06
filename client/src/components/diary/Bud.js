@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import { useNavigateSearch } from "../../modules/hooks";
-import useAjaxStore from "../../store/AjaxStore";
 
 const Layout = styled.div`
   display: grid;
@@ -59,8 +58,8 @@ const Layout = styled.div`
 
   .hide > .text {
     position: relative;
-    top: 4.5%;
-    margin: 8%;
+    top: 1.6%;
+    margin: 7%;
     letter-spacing: 0.3rem;
     transition: background-color 0.1s cubic-bezier(0.55, 1.17, 0.75, 0.53);
   }
@@ -75,7 +74,7 @@ const Layout = styled.div`
   }
 
   .date {
-    font-size: 1rem;
+    font-size: ${(props) => props.theme.fontWritePageXSmall};
   }
 
   a {
@@ -83,14 +82,15 @@ const Layout = styled.div`
   }
 `;
 
-const alertText = "정말 삭제하시겠습니까?\n 등록 식물을 삭제하여도 일지는 남습니다.";
-const changeName = "등록 식물의 사진을 변경합니다.";
-
 const Bud = ({ className, src, budName, date, plant_id, setPopupInfo }) => {
   const navigateSearch = useNavigateSearch();
 
   const goToWrite = () => navigateSearch("/write", { name: `${encodeURI(budName)}`, plant_id: `${plant_id}` });
   const goToListByPlantId = () => navigateSearch("/list", { name: `${encodeURI(budName)}`, plant_id: `${plant_id}` });
+
+  function goToManageCalendarByPlantId() {
+    console.log("관리 캘린더 라우팅 작성란");
+  }
 
   return (
     <Layout className={className}>
@@ -106,16 +106,19 @@ const Bud = ({ className, src, budName, date, plant_id, setPopupInfo }) => {
           <div
             className="text"
             onClick={() => {
-              setPopupInfo({ fn: "changeBudImage", text: changeName, plant_id });
+              setPopupInfo({ fn: "changeBudImage", plant_id, budName });
             }}>
             식물 사진 변경
           </div>
           <div
             className="text"
             onClick={() => {
-              setPopupInfo({ fn: "deleteBud", text: alertText, plant_id });
+              setPopupInfo({ fn: "deleteBud", plant_id });
             }}>
             내식물 삭제
+          </div>
+          <div className="text" onClick={goToManageCalendarByPlantId}>
+            관리 캘린더
           </div>
         </div>
         <img className="coverImg" src={src} alt={`bg`} />

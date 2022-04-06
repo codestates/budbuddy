@@ -2,9 +2,8 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import Logo from "../components/common/Logo";
 import SideBar from "../components/MyPage/SideBar";
-import { budDummy } from "../utils/dummy";
 import DiaryList from "../components/list/DiaryList";
-import useAjaxStore from "../store/AjaxStore";
+import useAjaxStore from "../store/ajaxStore";
 
 const Layout = styled.div`
   display: flex;
@@ -16,6 +15,13 @@ const Layout = styled.div`
 
   .logo {
     margin-top: 1rem;
+  }
+
+  .desc {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+    color: dimgray;
   }
 `;
 
@@ -32,10 +38,10 @@ const IdPost = styled.div`
     margin-left: 2%;
     display: flex;
     align-items: center;
-    font-size: ${(props) => props.theme.fontWritePageSmall};
+    font-size: ${(props) => props.theme.fontWritePageXSmall};
 
     .nick {
-      font-size: ${(props) => props.theme.fontWritePageLarge};
+      font-size: ${(props) => props.theme.fontWritePageSmall};
       margin-left: 0.2rem;
       color: DarkGreen;
     }
@@ -63,13 +69,13 @@ const Mypage = () => {
 
   useEffect(() => {
     getMapageInfo();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   async function getMapageInfo() {
     await setListByUserId();
     await getUserInfo();
   }
-  console.log(userInfo);
   return (
     <Layout>
       <Logo className="logo" />
@@ -84,9 +90,15 @@ const Mypage = () => {
         </div>
       </IdPost>
       <MyPageBg>
-        <img className="mypageBg" src={budDummy[0].src} alt={`bg`} />
+        <img className="mypageBg" src={"/Dummy/bg.png"} alt={`bg`} />
       </MyPageBg>
-      <DiaryList diaryList={listByUserId} isBudName={true} type="user" />
+      {!listByUserId.length ? (
+        <div className="desc">
+          <div>등록된 식물이 없습니다</div>
+        </div>
+      ) : (
+        <DiaryList diaryList={listByUserId} isBudName={true} type="user" />
+      )}
     </Layout>
   );
 };

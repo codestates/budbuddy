@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDroplet, faThermometer, faRepeat } from "@fortawesome/free-solid-svg-icons";
 import { CycleDay, CycleMonth } from "../../utils/dummy";
 import { makeModal } from "../../utils/errExeption";
-import useStore from "../../store/PlantCycleStore";
+import useStore from "../../store/plantCycleStore";
 
 const ModalContainer = styled.div`
   position: fixed;
@@ -102,7 +102,7 @@ function PlantsCycleChangeModal() {
               <FontAwesomeIcon className="fa-solid fa-2x" icon={faDroplet} color="skyblue" />
             </FontAwesomePlace>
             <div className="modal_select">
-              <select>
+              <select defaultValue="10일">
                 {CycleDay.map((el) => {
                   return (
                     <option key={el} value={el}>
@@ -118,7 +118,7 @@ function PlantsCycleChangeModal() {
               <FontAwesomeIcon className="fa-solid fa-2x" icon={faThermometer} color="#D7DF01" />
             </FontAwesomePlace>
             <div className="modal_select">
-              <select>
+              <select defaultValue="3개월">
                 {CycleMonth.map((el) => {
                   return (
                     <option key={el} value={el}>
@@ -134,7 +134,7 @@ function PlantsCycleChangeModal() {
               <FontAwesomeIcon className="fa-solid fa-2x" icon={faRepeat} color="brown" />
             </FontAwesomePlace>
             <div className="modal_select">
-              <select>
+              <select defaultValue="6개월">
                 {CycleMonth.map((el) => {
                   return (
                     <option key={el} value={el}>

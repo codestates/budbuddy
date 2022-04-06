@@ -1,7 +1,6 @@
 const { sequelize, Journals, Journal_Images, Images, Journal_Actions, Actions, Plants } = require("../../models/index");
 const checkAuth = require("../../modules/verifyCookieToken");
 module.exports = async (req, res) => {
-  console.log("일지 쓰기 :: 바디:::", req.body);
   const transaction = await sequelize.transaction();
   try {
     var verify = await checkAuth(req, res);

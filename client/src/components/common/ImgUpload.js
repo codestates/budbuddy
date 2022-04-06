@@ -24,7 +24,7 @@ const Layout = styled.div`
   .file,
   .cancle {
     align-self: start;
-    font-size: ${(props) => props.theme.fontWritePageMid};
+    font-size: ${(props) => props.theme.fontWritePageSmall};
     border: none;
     background-color: ${(props) => props.theme.btnBgColor};
     color: ${(props) => props.theme.DarkSlateGrey};

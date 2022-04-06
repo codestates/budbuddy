@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { makeModal } from "../../utils/errExeption";
-import useStore from "../../store/PlantCycleStore";
+import useStore from "../../store/plantCycleStore";
 import ImageChangeStore from "../../store/ImageChangeStore";
 
 const ModalContainer = styled.div`
@@ -87,13 +87,11 @@ function ImageChange() {
   const [img, setImg] = useState(null);
 
   function onFileChange(e) {
-    console.log("업로드 호출");
     const {
       target: { files },
     } = e;
 
     const theFile = files[0];
-    // console.log(theFile);
     const reader = new FileReader();
 
     reader.onloadend = (finishedEvent) => {
@@ -101,7 +99,6 @@ function ImageChange() {
         currentTarget: { result },
       } = finishedEvent;
       setImg(result);
-      // console.log(finishedEvent);
     };
 
     reader.readAsDataURL(theFile);
