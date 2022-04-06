@@ -1,4 +1,5 @@
-const { Replies, Journals } = require("../../models/index");
+const { Replies } = require("../../models/index");
+const { Op } = require("sequelize");
 const checkAuth = require("../../modules/verifyCookieToken");
 
 module.exports = async (req, res) => {
@@ -19,7 +20,7 @@ module.exports = async (req, res) => {
 
     await Replies.destroy({
       where: {
-        group_id: reply_Id,
+        [Op.or]: [{ group_id: reply_Id }, { id: reply_Id }],
       },
     });
 

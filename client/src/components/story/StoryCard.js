@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import JellyPopup from "./JellyPopup";
+import { empty } from "../../resources";
 
 const Layout = styled.div`
   /* border: solid 1px black; */
@@ -210,10 +211,6 @@ const Card = styled.div`
       margin-left: 0.1rem;
     }
 
-    .share-wrap {
-      margin-left: 0.6rem;
-    }
-
     > div > button {
       border: none;
       border-radius: ${(props) => props.theme.borderRadius};
@@ -258,11 +255,6 @@ const StoryCard = ({ className = "", storyList, hoverTransitonSec = 0.25, setFre
     setStory(info);
   }
 
-  function share(e) {
-    e.preventDefault();
-    console.log("스토리 공유");
-  }
-
   return (
     <Layout className={className}>
       {isJellyPopup ? <JellyPopup setJellyPopup={setJellyPopup} story={story} /> : null}
@@ -275,7 +267,7 @@ const StoryCard = ({ className = "", storyList, hoverTransitonSec = 0.25, setFre
                   <div className="borderrb">
                     <div className="top-cap">
                       <div className="profile-wrap">
-                        <img className={`${"profileImg"} ${!v.profileImg ? "empty" : ""}`} src={v.profileImg || "Dummy/empty_user.png"} alt="" />
+                        <img className={`${"profileImg"} ${!v.profileImg ? "empty" : ""}`} src={v.profileImg || empty.user} alt="" />
                       </div>
                       <div className="name-wrap">
                         <div className="user-name">{v.nickname}</div>
@@ -287,7 +279,7 @@ const StoryCard = ({ className = "", storyList, hoverTransitonSec = 0.25, setFre
                     </div>
                     <div className="middle-cap">
                       <div className="journal-img">
-                        <img className="plant-img" src={v.journalImg || "/Dummy/empty_bud.jpg"} alt="" />
+                        <img className="plant-img" src={v.journalImg || empty.journal} alt="" />
                       </div>
                       <div className="summary">{v.textContent}</div>
                     </div>
@@ -295,11 +287,6 @@ const StoryCard = ({ className = "", storyList, hoverTransitonSec = 0.25, setFre
                       <div className="read-wrap">
                         <button className="read btn" onClick={(e) => read(e, v)}>
                           보기
-                        </button>
-                      </div>
-                      <div className="share-wrap">
-                        <button className="share btn" onClick={share}>
-                          공유
                         </button>
                       </div>
                     </div>
