@@ -41,7 +41,7 @@ const Content = styled(BGWrapper)`
   }
 `;
 
-const TextOnImg = ({ className = "", texts, time = 5000 }) => {
+const TextOnImg = ({ className = "", texts = [], time = 5000 }) => {
   const [idx, setIdx] = useState(0);
 
   const changeProverb = useCallback(() => {

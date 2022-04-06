@@ -104,7 +104,7 @@ const Layout = styled.div`
   }
 `;
 
-const ImgSlide = ({ className = "", images }) => {
+const ImgSlide = ({ className = "", images = [] }) => {
   const slideRef = useRef(null);
   const [counter, setCounter] = useState(1);
 
