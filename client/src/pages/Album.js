@@ -2,12 +2,9 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Logo from "../components/common/Logo";
 import TabOption from "../components/Album/TabOption";
-import { budDummy } from "../utils/dummy";
 import Picture from "../components/Album/Picture";
 import SlideModal from "../components/Album/SlideModal";
 import useLoginStore from "../store/loginStore";
-import axios from "axios";
-import { curDate } from "../modules/date";
 import useAjaxStore from "../store/ajaxStore";
 
 const Layout = styled.div`

@@ -12,20 +12,20 @@ const Cover = styled.div`
   }
 `;
 
-const DonutChart = ({ data }) => {
+const DonutChart = ({ WaterData, FertilizeData, RepotData }) => {
   const ref1 = useRef(null);
   const ref2 = useRef(null);
   const ref3 = useRef(null);
 
-  const colors = ["#05BBD2", "#2070C4"];
+  const watercolors = ["#05BBD2", "#2070C4"];
   const fertilizeColors = ["#F7C678", "#F3A62B"];
   const repotColors = ["#9B6646", "#714B33"];
 
   useEffect(() => {
     if (ref1.current) {
-      drawChart(ref1.current, data, colors);
-      drawChart(ref2.current, data, fertilizeColors);
-      drawChart(ref3.current, data, repotColors);
+      drawChart(ref1.current, WaterData, watercolors);
+      drawChart(ref2.current, FertilizeData, fertilizeColors);
+      drawChart(ref3.current, RepotData, repotColors);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ref1, ref2, ref3]);

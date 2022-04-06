@@ -78,7 +78,7 @@ const MypageRecord = () => {
     <Content>
       <MypageRecordRayOut>
         <CalendarComponents selectActions={selectActions}></CalendarComponents>
-        <PlantsCycleChange></PlantsCycleChange>
+        <PlantsCycleChange theLastDateOfAction={theLastDateOfAction}></PlantsCycleChange>
         <Chart></Chart>
       </MypageRecordRayOut>
     </Content>

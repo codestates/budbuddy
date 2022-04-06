@@ -11,6 +11,11 @@ const PlantsCycleChangeLayout = styled.div`
     height: 2vh;
   }
 `;
+const DayChecking = styled.div`
+  display: grid;
+  height: auto;
+  width: calc(100 / 3);
+`;
 
 const PlantsCycleChangeContainer = styled.div`
   background-color: ${(props) => props.theme.formColor};
@@ -46,10 +51,22 @@ const CircleName = styled.div`
   grid-area: CircleName;
   display: grid;
   grid-template-columns: repeat(3, minmax(1fr, auto));
-  grid-template-areas: "waterName nutritionName soilName";
+  grid-template-areas:
+    "DayChecking DayChecking DayChecking"
+    "waterName nutritionName soilName";
   align-items: center;
   margin: auto;
   width: 100%;
+  .DayChecking {
+    grid-area: DayChecking;
+    display: flex;
+    height: auto;
+    .Date {
+      width: 33%;
+      margin: auto;
+    }
+  }
+
   > div {
     text-align: center;
   }
@@ -70,14 +87,16 @@ const CircleName = styled.div`
   }
 `;
 
-const PlantsCycleChange = () => {
-  const { plantCycle, popUpPlantCycleChangeModal } = useStore();
+const PlantsCycleChange = ({ theLastDateOfAction }) => {
+  const { plantCycle, popUpPlantCycleChangeModal, defaultWater, defaultFertilize, defaultRepot } = useStore();
 
   const upSetting = () => {
     popUpPlantCycleChangeModal();
   };
 
-  const data = [{ value: 30 }, { value: 50 }];
+  const WaterData = [{ value: theLastDateOfAction.water }, { value: defaultWater - theLastDateOfAction.water }];
+  const FertilizeData = [{ value: theLastDateOfAction.fertilize / 3 }, { value: (defaultFertilize - theLastDateOfAction.fertilize) / 3 }];
+  const RepotData = [{ value: theLastDateOfAction.repot / 6 }, { value: (defaultRepot - theLastDateOfAction.repot) / 6 }];
 
   return (
     <PlantsCycleChangeLayout>
@@ -90,9 +109,14 @@ const PlantsCycleChange = () => {
           <FontAwesomeIcon className="fa-solid fa-2x" icon={faGear} cursor="pointer" onClick={upSetting} />
         </CustomFontAwesomeIcon>
         <DayCircle>
-          <ChartComponent data={data}></ChartComponent>
+          <ChartComponent WaterData={WaterData} FertilizeData={FertilizeData} RepotData={RepotData}></ChartComponent>
         </DayCircle>
         <CircleName>
+          <div className="DayChecking">
+            {defaultWater - theLastDateOfAction.water > 0 ? <div className="Date">D-{defaultWater - theLastDateOfAction.water}</div> : <div className="Date">물 마시고싶어요</div>}
+            {defaultFertilize - theLastDateOfAction.fertilize > 0 ? <div className="Date">D-{defaultFertilize - theLastDateOfAction.fertilize}</div> : <div className="Date">밥 먹고싶어요</div>}
+            {defaultRepot - theLastDateOfAction.repot > 0 ? <div className="Date">D-{defaultRepot - theLastDateOfAction.repot}</div> : <div className="Date">흙 주세요</div>}
+          </div>
           <div className="waterName">물주기</div>
           <div className="nutritionName">영양제</div>
           <div className="soilName">분갈이</div>
