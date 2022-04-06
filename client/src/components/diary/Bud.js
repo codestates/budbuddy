@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useNavigateSearch } from "../../modules/hooks";
-import useAjaxStore from "../../store/AjaxStore";
+import useAjaxStore from "../../store/ajaxStore";
 
 const Layout = styled.div`
   display: grid;
@@ -59,8 +59,8 @@ const Layout = styled.div`
 
   .hide > .text {
     position: relative;
-    top: 4.5%;
-    margin: 8%;
+    top: 1.6%;
+    margin: 7%;
     letter-spacing: 0.3rem;
     transition: background-color 0.1s cubic-bezier(0.55, 1.17, 0.75, 0.53);
   }
@@ -92,6 +92,10 @@ const Bud = ({ className, src, budName, date, plant_id, setPopupInfo }) => {
   const goToWrite = () => navigateSearch("/write", { name: `${encodeURI(budName)}`, plant_id: `${plant_id}` });
   const goToListByPlantId = () => navigateSearch("/list", { name: `${encodeURI(budName)}`, plant_id: `${plant_id}` });
 
+  function goToManageCalendarByPlantId() {
+    console.log("관리 캘린더 라우팅 작성란");
+  }
+
   return (
     <Layout className={className}>
       <div className="shell">
@@ -106,7 +110,7 @@ const Bud = ({ className, src, budName, date, plant_id, setPopupInfo }) => {
           <div
             className="text"
             onClick={() => {
-              setPopupInfo({ fn: "changeBudImage", text: changeName, plant_id });
+              setPopupInfo({ fn: "changeBudImage", text: changeName, plant_id, budName });
             }}>
             식물 사진 변경
           </div>
@@ -116,6 +120,9 @@ const Bud = ({ className, src, budName, date, plant_id, setPopupInfo }) => {
               setPopupInfo({ fn: "deleteBud", text: alertText, plant_id });
             }}>
             내식물 삭제
+          </div>
+          <div className="text" onClick={goToManageCalendarByPlantId}>
+            관리 캘린더
           </div>
         </div>
         <img className="coverImg" src={src} alt={`bg`} />

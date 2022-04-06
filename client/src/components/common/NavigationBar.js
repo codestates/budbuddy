@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
-import useLoginStore from "../../store/LoginStore";
+import useLoginStore from "../../store/loginStore";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHouseUser, faUsers, faBook, faCamera, faUser } from "@fortawesome/free-solid-svg-icons";
 
@@ -134,7 +134,12 @@ function NavigationBar() {
           </NavLink>
         ) : (
           <NavLink to="/login">
-            <span className="login">Login</span>
+            <div className="link">
+              <FontAwesomeIcon className="login icon" icon={faUser} />
+              <div className="tooltip">
+                <span className="tooltiptext">Login</span>
+              </div>
+            </div>
           </NavLink>
         )}
       </div>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import TabBtnOne from "../components/common/TabBtnOne";
 import PlantManageToggle from "../components/write/PlantManageToggle";
@@ -59,16 +59,21 @@ const DairyByMode = () => {
   }
 
   let src = null;
-  // console.log("DairyByMode:::", params.mode, info);
+
   info.actions = convertToggleData(info.Journal_Actions);
   if (info.Journal_Images.length !== 0) {
     src = info.Journal_Images[0].Image.store_path;
+  }
+
+  let journalName = "삭제된 식물";
+  if (info.Plant) {
+    journalName = info.Plant.name;
   }
   return (
     <Layout onSubmit={submit}>
       <TabBtnOne
         className="TabBtnOne"
-        tabName={`${info.Plant.name}의 일지보기`}
+        tabName={`${journalName}의 일지보기`}
         btnName={"뒤로가기"}
         fn={() => {
           navigate(-1);

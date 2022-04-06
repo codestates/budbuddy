@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import moment from "moment";
 import { useNavigateSearch } from "../../modules/hooks";
-import useAjaxStore from "../../store/AjaxStore";
+import useAjaxStore from "../../store/ajaxStore";
 
 const Layout = styled.div`
   display: flex;
@@ -88,10 +88,9 @@ const DiaryList = ({ diaryList = [], isBudName = false, type = "" }) => {
   return (
     <Layout>
       {diaryList.map((journal, i) => {
-        console.log("DiaryList:::", journal);
         let plantName = "";
         if (!journal.Plant) {
-          plantName = "error";
+          plantName = "삭제된 식물";
         } else {
           plantName = journal.Plant.name;
         }

@@ -93,11 +93,10 @@ const Write = () => {
 
     if (upload_img.files.length === 0) {
       try {
-        const resData = await axios.post(process.env.REACT_APP_API_URL + "/journals", payload);
-        console.log(resData.data.data);
+        await axios.post(process.env.REACT_APP_API_URL + "/journals", payload);
         navigate("/daily");
       } catch (err) {
-        console.log(err);
+        console.log("write page:submit:::", err);
       }
     } else {
       //이미지
@@ -110,7 +109,7 @@ const Write = () => {
         await axios.post(process.env.REACT_APP_API_URL + "/journals", payload);
         navigate("/daily");
       } catch (err) {
-        console.log(err);
+        console.log("write page:submit:::", err);
       }
     }
   }

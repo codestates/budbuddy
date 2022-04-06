@@ -12,16 +12,59 @@ const useAjaxStore = create(
       allowlist: ["listByPlantId", "listByUserId", "publicJournal", "userInfo", "myPlants"],
       denylist: [],
     },
-    (set) => ({
+    devtools((set) => ({
       listByPlantId: [],
       listByUserId: [],
       publicJournal: [],
       userInfo: {},
       myPlants: [],
+      replies: [],
+
+      async setReplies(journalId, body, group_id = null) {
+        try {
+          await axios.post(process.env.REACT_APP_API_URL + `/journals/${journalId}/replies`, { body, group_id });
+        } catch (err) {
+          console.log("axios err / setReplies :::", err);
+        }
+      },
+      async deleteReplies(replyId) {
+        try {
+          const resData = await axios.delete(process.env.REACT_APP_API_URL + `/journals/replies/${replyId}`);
+          console.log("deleteReplies:::", resData, replyId);
+        } catch (err) {
+          console.log("axios err / deleteReplies :::", err);
+        }
+      },
+      async getReplies(journalId) {
+        try {
+          const resData = await axios.get(process.env.REACT_APP_API_URL + `/journals/${journalId}/replies`);
+          const arr = [];
+          // console.log("추출된 replies:::", resData.data.data);
+          for (let i = 0; i < resData.data.data.length; i++) {
+            const { id, group_id, journal_id, createdAt, body, User } = resData.data.data[i];
+
+            const reply = {
+              nickname: User.nickname,
+              replyId: id,
+              body,
+              group_id,
+              journal_id,
+              replyTime: null,
+              class: resData.data.data[i].class,
+            };
+            reply.replyTime = moment(createdAt).format("MM/DD ").replaceAll("0", "") + moment(createdAt).format("h:mm");
+            arr.push(reply);
+          }
+
+          set((state) => ({ replies: arr }));
+        } catch (err) {
+          console.log("axios err / getReplies :::", err);
+          set((state) => ({ replies: [] }));
+        }
+      },
       async setListByPlantId(plantId) {
         try {
           const resData = await axios.get(process.env.REACT_APP_API_URL + "/journals/my", { params: { plant: plantId } });
-          // console.log("setListByPlantId:::", resData.data.data);
           set((state) => ({ listByPlantId: [...resData.data.data] }));
         } catch (err) {
           console.log("axios err / setListByPlatId :::", err);
@@ -31,7 +74,6 @@ const useAjaxStore = create(
       async setListByUserId() {
         try {
           const resData = await axios.get(process.env.REACT_APP_API_URL + "/journals/my");
-          // console.log("setListByUserId:::", resData.data.data);
           set((state) => ({ listByUserId: [...resData.data.data] }));
         } catch (err) {
           console.log("axios err / setListByUserId :::", err);
@@ -40,8 +82,7 @@ const useAjaxStore = create(
       },
       async deleteListByJournalId(journal_Id) {
         try {
-          const resData = await axios.delete(process.env.REACT_APP_API_URL + `/journals/${journal_Id}`);
-          console.log("deleteListByJournalId:::", resData);
+          await axios.delete(process.env.REACT_APP_API_URL + `/journals/${journal_Id}`);
         } catch (err) {
           console.log("axios err / deleteListByJournalId :::", err);
         }
@@ -49,16 +90,15 @@ const useAjaxStore = create(
       async getUserInfo() {
         try {
           const resUser = await axios.get(process.env.REACT_APP_API_URL + `/users/userinfo`);
-          // console.log("getUserInfo:::", resUser);
           set((state) => ({ userInfo: resUser.data.data }));
         } catch (err) {
+          set((state) => ({}));
           console.log("axios err / getUserInfo :::", err);
         }
       },
       async getPlantsList() {
         try {
           const resData = await axios.get(process.env.REACT_APP_API_URL + "/plants");
-          // console.log("getPlantsList:::", resUser);
           set((state) => ({ myPlants: resData.data.data }));
         } catch (err) {
           set((state) => ({ myPlants: [] }));
@@ -67,9 +107,7 @@ const useAjaxStore = create(
       },
       async deletePlant(plant_id) {
         try {
-          console.log("deletePlant:::plant_id", plant_id);
-          const resData = await axios.delete(process.env.REACT_APP_API_URL + `/plants/${plant_id}`);
-          console.log("deletePlant:::", resData);
+          await axios.delete(process.env.REACT_APP_API_URL + `/plants/${plant_id}`);
         } catch (err) {
           console.log("axios err / deletePlant :::", err);
         }
@@ -85,20 +123,39 @@ const useAjaxStore = create(
           if (upload_img.files.length !== 0) {
             let formdata = new FormData();
             formdata.append("image", upload_img.files[0]);
-            console.log("imgRes:::", upload_img, payload);
             const imgRes = await axios.post(process.env.REACT_APP_API_URL + "/images", formdata);
             payload["image_id"] = [imgRes.data.data.id];
-            const resData = await axios.post(process.env.REACT_APP_API_URL + "/plants", payload);
-            console.log("setPlant:::with img:::", resData);
+            await axios.post(process.env.REACT_APP_API_URL + "/plants", payload);
             return "ok";
           } else {
-            const resData = await axios.post(process.env.REACT_APP_API_URL + "/plants", payload);
-            console.log("setPlant::none img:::", resData);
+            await axios.post(process.env.REACT_APP_API_URL + "/plants", payload);
             return "ok";
           }
         } catch (err) {
-          console.log("setPlant:::err:::", err);
+          console.log("setPlant/alreadyExistsBudName/err:::", err);
           return "alreadyExistsBudName";
+        }
+      },
+      async changePlantImg(plant_id, budName, upload_img) {
+        const payload = {
+          name: budName,
+          image_id: null,
+        };
+
+        try {
+          if (upload_img.files.length !== 0) {
+            let formdata = new FormData();
+            formdata.append("image", upload_img.files[0]);
+            const imgRes = await axios.post(process.env.REACT_APP_API_URL + "/images", formdata);
+            payload["image_id"] = imgRes.data.data.id;
+            await axios.put(process.env.REACT_APP_API_URL + `/plants/${plant_id}`, payload);
+            return "ok";
+          } else {
+            console.log("changePlantImg:::", "이미지가 정상 등록 안된 상태");
+          }
+        } catch (err) {
+          console.log("changePlantImg:::err:::", err);
+          return "changePlantImg fail";
         }
       },
       async getAllPublicJournal() {
@@ -107,7 +164,7 @@ const useAjaxStore = create(
 
           resjournal = resjournal.data.data;
           const extractedData = [];
-          console.log(resjournal);
+          // console.log(resjournal);
 
           for (let i = 0; i < resjournal.length; i++) {
             let publicJournal = {
@@ -142,7 +199,7 @@ const useAjaxStore = create(
           set((state) => ({ publicJournal: [] }));
         }
       },
-    }),
+    })),
   ),
 );
 
