@@ -42,11 +42,11 @@ const Story = () => {
   useEffect(() => {
     getStory();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [publicJournal]);
+  }, []);
 
   async function getStory() {
-    await getAllPublicJournal();
-    setStory(publicJournal);
+    const res = await getAllPublicJournal();
+    setStory(res);
   }
 
   function storySearch(word) {
@@ -74,7 +74,7 @@ const Story = () => {
         <p>Friend's Daily Log</p>
       </div>
       <SearchBar top={62} left={98} width={40} fn={storySearch} />
-      <StoryCard className="story-card" storyList={story} hoverTransitonSec={0.25} setFreeze={setFreeze} />
+      {story.length === 0 ? null : <StoryCard className="story-card" storyList={story} hoverTransitonSec={0.25} setFreeze={setFreeze} />}
     </Layout>
   );
 };
