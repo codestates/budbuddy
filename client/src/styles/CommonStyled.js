@@ -32,7 +32,7 @@ export const BGWrapper = styled.div`
     width: 100%;
     height: 100%;
     object-fit: cover;
-    filter: blur(1px);
+    /* filter: blur(1px); */
     border: none;
   }
 

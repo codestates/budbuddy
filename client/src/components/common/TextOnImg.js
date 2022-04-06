@@ -30,6 +30,8 @@ const Content = styled(BGWrapper)`
     font-family: "Jua", sans-serif;
     font-size: ${(props) => props.theme.fontWritePageMid};
     line-height: 1.6;
+    color: WhiteSmoke;
+    /* mix-blend-mode: normal; */
   }
   @keyframes textFloating {
     from {
