@@ -64,7 +64,6 @@ const Album = () => {
   const [pickDateValue, setPickDateValue] = useState("");
   const [SlideState, setSlideState] = useState("close");
   const [PictureNumber, setPictureNumber] = useState(0);
-
   const { search } = useLocation();
   const parsed = qs.parse(search);
   const currentUser = decodeURI(parsed.name); // 클릭하면 여기 바꾸게 해줘야함
@@ -72,13 +71,18 @@ const Album = () => {
 
   useEffect(() => {
     if (isLogin) {
-      // if (currentUser !== undefined) {
-      //   setPickPlantValue(currentUser);
-      // }
-      // console.log(currentUser);
       setListByUserId();
     }
   }, [isLogin, setListByUserId]);
+
+  useEffect(() => {
+    if (currentUser === "undefined") {
+      setPickPlantValue("");
+    }
+    if (currentUser !== "undefined") {
+      setPickPlantValue(currentUser);
+    }
+  }, [currentUser]);
 
   const TempFillteredValue = listByUserId.filter((el) => {
     if (pickPlantValue === "식물이름") {
@@ -109,7 +113,7 @@ const Album = () => {
       {isLogin ? (
         <>
           <SlideModal FillteredValue={Value} SlideState={SlideState} setSlideState={setSlideState} PictureNumber={PictureNumber} setPictureNumber={setPictureNumber} />
-          <TabOption className="TabBtnOne" tabName="앨범" setPickPlantValue={setPickPlantValue} setPickDateValue={setPickDateValue} listByUserId={listByUserId} />
+          <TabOption className="TabBtnOne" tabName="앨범" setPickPlantValue={setPickPlantValue} setPickDateValue={setPickDateValue} listByUserId={listByUserId} currentUser={currentUser} />
           <BudLayout>
             {Value.length === 0 ? (
               <div className="notice-pos">
