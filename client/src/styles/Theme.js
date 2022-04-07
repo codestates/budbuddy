@@ -42,7 +42,7 @@ const theme = {
   signupInputLineHeight: "0.3rem",
   backgroundPaddingTop: "12vh",
   iphoneWidth: "100vw",
-  webWidth: 425,
+  webWidth: 410,
   //style
   borderRadius: "5px",
   backgroundImgHeight: "28vh",

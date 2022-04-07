@@ -88,9 +88,7 @@ const Bud = ({ className, src, budName, date, plant_id, setPopupInfo }) => {
   const goToWrite = () => navigateSearch("/write", { name: `${encodeURI(budName)}`, plant_id: `${plant_id}` });
   const goToListByPlantId = () => navigateSearch("/list", { name: `${encodeURI(budName)}`, plant_id: `${plant_id}` });
 
-  function goToManageCalendarByPlantId() {
-    console.log("관리 캘린더 라우팅 작성란");
-  }
+  const goToManageCalendarByPlantId = () => navigateSearch("/daily/record", { name: `${encodeURI(budName)}` });
 
   return (
     <Layout className={className}>
