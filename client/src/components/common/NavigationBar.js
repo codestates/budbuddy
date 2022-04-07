@@ -3,14 +3,14 @@ import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import useLoginStore from "../../store/loginStore";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHouseUser, faUsers, faBook, faCamera, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faHouseUser, faDoorOpen, faAddressBook, faBook, faImage, faUser } from "@fortawesome/free-solid-svg-icons";
 
 export const Content = styled.nav`
   cursor: pointer;
   position: fixed;
   bottom: 0;
   z-index: 10;
-  padding: 0.5rem;
+  padding: 0rem 0;
 
   background-color: ${(props) => props.theme.navigationBGColor};
 
@@ -37,6 +37,8 @@ export const Content = styled.nav`
 
     .link {
       position: relative;
+      width: 100%;
+      padding: 0.2rem 1.2rem;
 
       .icon {
         color: dimgray;
@@ -78,6 +80,9 @@ export const Content = styled.nav`
     .link:hover .tooltiptext {
       opacity: 1;
     }
+    .link:hover .icon {
+      color: LightCoral;
+    }
   }
 `;
 
@@ -96,7 +101,7 @@ function NavigationBar() {
         </NavLink>
         <NavLink to="/story">
           <div className="link">
-            <FontAwesomeIcon className="story icon" icon={faUsers} />
+            <FontAwesomeIcon className="story icon" icon={faAddressBook} />
             <div className="tooltip">
               <span className="tooltiptext">story</span>
             </div>
@@ -114,7 +119,7 @@ function NavigationBar() {
         ) : null}
         <NavLink to="/album">
           <div className="link">
-            <FontAwesomeIcon className="album icon" icon={faCamera} />
+            <FontAwesomeIcon className="album icon" icon={faImage} />
             <div className="tooltip">
               <span className="tooltiptext">album</span>
             </div>
@@ -132,7 +137,7 @@ function NavigationBar() {
         ) : (
           <NavLink to="/login">
             <div className="link">
-              <FontAwesomeIcon className="login icon" icon={faUser} />
+              <FontAwesomeIcon className="login icon" icon={faDoorOpen} />
               <div className="tooltip">
                 <span className="tooltiptext">Login</span>
               </div>

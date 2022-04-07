@@ -12,6 +12,8 @@ import { empty } from "../resources";
 
 const Layout = styled.div`
   /* position: relative; */
+  display: flex;
+  flex-direction: column;
   padding-top: 1rem;
 
   .logo {

@@ -6,13 +6,14 @@ export const OutLine = styled.div`
   justify-content: center;
   align-items: center;
   place-items: center;
-  margin: 0 auto;
+  margin: auto auto;
 `;
 
 export const Content = styled.div`
   background-color: ${(props) => props.theme.subColor};
   width: 100vw;
   min-height: 100vh;
+  margin: auto auto;
   border: none;
 
   @media screen and (min-width: 391px) {

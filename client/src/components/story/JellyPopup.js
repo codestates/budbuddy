@@ -199,6 +199,16 @@ const StoryLayout = styled.div`
       /* border: solid 2px rgba(0, 0, 0, 0.2); */
     }
   }
+
+  .desc {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto auto;
+    > div {
+      color: dimgray;
+    }
+  }
 `;
 
 const JellyPopup = ({ setJellyPopup, story }) => {
@@ -251,13 +261,16 @@ const JellyPopup = ({ setJellyPopup, story }) => {
               <div className="text">{story.textContent}</div>
             </div>
           </div>
-          <div></div>
-          {isLogin
-            ? replies.map((v, i) => {
-                if (v.class === 1) return null;
-                return <Reply key={i} info={v} contentRef={contentRef} />;
-              })
-            : null}
+          {isLogin ? (
+            replies.map((v, i) => {
+              if (v.class === 1) return null;
+              return <Reply key={i} info={v} contentRef={contentRef} />;
+            })
+          ) : (
+            <div className="desc">
+              <div>댓글은 로그인 시에만 보실 수 있습니다.</div>
+            </div>
+          )}
           {isLogin ? <ReplyTextArea journalId={story.journalId} contentRef={contentRef} close={close} /> : null}
         </StoryLayout>
       </div>

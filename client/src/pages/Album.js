@@ -8,7 +8,8 @@ import useLoginStore from "../store/loginStore";
 import useAjaxStore from "../store/ajaxStore";
 
 const Layout = styled.div`
-  display: grid;
+  display: flex;
+  flex-direction: column;
   position: relative;
   .logo {
     margin-top: 1rem;
