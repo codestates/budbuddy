@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import useLoginStore from "../../store/loginStore";
@@ -23,38 +23,12 @@ export const Content = styled.nav`
     display: flex;
     font-size: ${(props) => props.theme.fontWritePageLarge};
 
-    a:nth-child(1):hover ~ .ani {
-      border: solid 1px red;
-      left: 0%;
-    }
-
-    a:nth-child(2):hover ~ .ani {
-      border: solid 1px red;
-      left: 20%;
-    }
-
-    a:nth-child(3):hover ~ .ani {
-      border: solid 1px red;
-      left: 40%;
-    }
-
-    a:nth-child(4):hover ~ .ani {
-      border: solid 1px red;
-      left: 60%;
-    }
-
-    a:nth-child(5):hover ~ .ani {
-      border: solid 1px red;
-      left: 80%;
-    }
-
     .ani {
       flex-grow: 1;
       position: absolute;
       width: ${(props) => 100 / 5 + "%"};
       height: 100%;
       background: LightCoral;
-      left: 0;
       transition: all 0.3s ease 0s;
     }
 
@@ -109,11 +83,21 @@ export const Content = styled.nav`
 
 function NavigationBar() {
   const { isLogin } = useLoginStore();
+  const naviRef = useRef(null);
+
+  function moveNavi(curIdx) {
+    naviRef.current.style.transform = `translateX(${curIdx * 100}%)`;
+  }
+
   return (
     <Content>
-      <div className="wrap">
+      <form className="wrap">
         <NavLink to="/">
-          <div className="link">
+          <div
+            className="link"
+            onClick={() => {
+              moveNavi(0);
+            }}>
             <FontAwesomeIcon className="home icon" icon={faHouseUser} />
             <div className="tooltip">
               <span className="tooltiptext">Home</span>
@@ -121,7 +105,11 @@ function NavigationBar() {
           </div>
         </NavLink>
         <NavLink to="/story">
-          <div className="link">
+          <div
+            className="link"
+            onClick={() => {
+              moveNavi(1);
+            }}>
             <FontAwesomeIcon className="story icon" icon={faAddressBook} />
             <div className="tooltip">
               <span className="tooltiptext">story</span>
@@ -130,7 +118,11 @@ function NavigationBar() {
         </NavLink>
         {isLogin ? (
           <NavLink to="/daily">
-            <div className="link">
+            <div
+              className="link"
+              onClick={() => {
+                moveNavi(2);
+              }}>
               <FontAwesomeIcon className="diary icon" icon={faBook} />
               <div className="tooltip">
                 <span className="tooltiptext">diary</span>
@@ -139,7 +131,11 @@ function NavigationBar() {
           </NavLink>
         ) : null}
         <NavLink to="/album">
-          <div className="link">
+          <div
+            className="link"
+            onClick={() => {
+              moveNavi(3);
+            }}>
             <FontAwesomeIcon className="album icon" icon={faImage} />
             <div className="tooltip">
               <span className="tooltiptext">album</span>
@@ -148,7 +144,11 @@ function NavigationBar() {
         </NavLink>
         {isLogin ? (
           <NavLink to="/mypage">
-            <div className="link">
+            <div
+              className="link"
+              onClick={() => {
+                moveNavi(4);
+              }}>
               <FontAwesomeIcon className="mypage icon" icon={faUser} />
               <div className="tooltip">
                 <span className="tooltiptext">mypage</span>
@@ -157,7 +157,11 @@ function NavigationBar() {
           </NavLink>
         ) : (
           <NavLink to="/login">
-            <div className="link">
+            <div
+              className="link"
+              onClick={() => {
+                moveNavi(4);
+              }}>
               <FontAwesomeIcon className="login icon" icon={faDoorOpen} />
               <div className="tooltip">
                 <span className="tooltiptext">Login</span>
@@ -165,8 +169,8 @@ function NavigationBar() {
             </div>
           </NavLink>
         )}
-        <div className="ani"></div>
-      </div>
+        <div ref={naviRef} className="ani"></div>
+      </form>
     </Content>
   );
 }
