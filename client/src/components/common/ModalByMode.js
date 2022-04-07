@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTriangleExclamation, faCircleExclamation, faImage } from "@fortawesome/free-solid-svg-icons";
+import { faLaughBeam } from "@fortawesome/free-regular-svg-icons";
 import ImgUpload from "../common/ImgUpload";
 import useAjaxStore from "../../store/ajaxStore";
 
@@ -62,6 +63,9 @@ const Layout = styled.div`
       color: LightCoral;
     }
 
+    .kakao {
+      color: #fbe300;
+    }
     .title {
       text-align: center;
       white-space: pre-wrap;
@@ -219,6 +223,26 @@ const ModalByMode = ({ info = "" }) => {
           <div className="wrap">
             <div className="top">
               <FontAwesomeIcon className="err icon" icon={faCircleExclamation} />
+              <div className="title">안내</div>
+            </div>
+            <div className="mid">
+              <div className="content">
+                <div>{info.text}</div>
+              </div>
+            </div>
+            <div className="bottom">
+              <button className="confirm" onClick={close}>
+                확인
+              </button>
+            </div>
+          </div>
+        );
+      },
+      kakaoGreeting() {
+        return (
+          <div className="wrap">
+            <div className="top">
+              <FontAwesomeIcon className="kakao icon" icon={faLaughBeam} />
               <div className="title">안내</div>
             </div>
             <div className="mid">

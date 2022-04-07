@@ -272,15 +272,12 @@ const StoryCard = ({ className = "", storyList, hoverTransitonSec = 0.25, setFre
     getStory();
   }
 
-  console.log("userInfo:::", userInfo);
-
   return (
     <Layout className={className}>
       {isJellyPopup ? <JellyPopup setJellyPopup={setJellyPopup} story={story} /> : null}
       <div className="shell">
         <div className="wrap">
           {storyList.map((v, i) => {
-            console.log(v);
             return (
               <Card key={v.journalId} hoverTransitonSec={hoverTransitonSec}>
                 <div className="borderlt">
