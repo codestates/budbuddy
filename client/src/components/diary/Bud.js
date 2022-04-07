@@ -8,13 +8,14 @@ const Layout = styled.div`
   grid-template-rows: auto auto auto;
   flex-direction: column;
   width: 100%;
-  /* height: 53%; */
+  padding-bottom: 4rem;
 
   .shell {
     text-align: start;
     padding: 5px;
     overflow: hidden;
     position: relative;
+    min-height: 220px;
   }
 
   .shell:hover {
@@ -27,7 +28,7 @@ const Layout = styled.div`
   .coverImg {
     object-fit: cover;
     width: 100%;
-    height: 18vh;
+    height: 170px;
     mix-blend-mode: multiply;
     border: solid 2px rgb(0, 0, 0, 0.1);
   }

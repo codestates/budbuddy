@@ -55,7 +55,6 @@ const Home = () => {
       kakaoGreeting() {
         info.closePopup = setPopupInfo;
         info.outerFn = setPopupInfo;
-        info.text = "카카오톡 로그인으로 시작합니다.\n버드버디에 오신걸 환영합니다";
         return <ModalByMode info={info} />;
       },
     };
