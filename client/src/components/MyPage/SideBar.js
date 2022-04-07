@@ -161,9 +161,14 @@ const SideBar = () => {
     }
   };
 
-  useEffect(async () => {
+  useEffect(() => {
+    getImage();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  async function getImage() {
     setImage(userProfile);
-  }, [userProfile]);
+  }
 
   const [modalCode, setModalCode] = useState("");
 
