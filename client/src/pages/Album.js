@@ -6,6 +6,8 @@ import Picture from "../components/Album/Picture";
 import SlideModal from "../components/Album/SlideModal";
 import useLoginStore from "../store/loginStore";
 import useAjaxStore from "../store/ajaxStore";
+import { useLocation } from "react-router-dom";
+const qs = require("query-string");
 
 const Layout = styled.div`
   display: grid;
@@ -62,8 +64,17 @@ const Album = () => {
   const [SlideState, setSlideState] = useState("close");
   const [PictureNumber, setPictureNumber] = useState(0);
 
+  const { search } = useLocation();
+  const parsed = qs.parse(search);
+  const currentUser = decodeURI(parsed.name); // 클릭하면 여기 바꾸게 해줘야함
+  console.log(currentUser);
+
   useEffect(() => {
     if (isLogin) {
+      // if (currentUser !== undefined) {
+      //   setPickPlantValue(currentUser);
+      // }
+      // console.log(currentUser);
       setListByUserId();
     }
   }, [isLogin, setListByUserId]);

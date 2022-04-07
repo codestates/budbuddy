@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import * as d3 from "d3";
 
@@ -26,11 +26,9 @@ const ChartTitle = styled.h2`
 `;
 
 const Chart = ({ currentUser, ChartValue }) => {
-  // useEffect(() => {
-  //   makeGraph();
-  // }, []);
+  const [tempvalue, setValue] = useState(ChartValue);
 
-  const makeGraph = () => {
+  useEffect(() => {
     // 캔버스 구역 정의
     const width = 300;
     const height = 300;
@@ -41,7 +39,7 @@ const Chart = ({ currentUser, ChartValue }) => {
     for (let i = 0; i <= 60; i++) {
       chartLine.push(i * 5);
     }
-    const data = ChartValue;
+    const data = tempvalue;
 
     // 눈금 만들기
     const x = d3
@@ -121,8 +119,8 @@ const Chart = ({ currentUser, ChartValue }) => {
       .attr("font-family", "Tahoma")
       .attr("font-size", "12px")
       .attr("text-anchor", "middle");
-  };
-  makeGraph();
+  }, [tempvalue]);
+
   return (
     <ChartDiv>
       <div className="space"></div>

@@ -87,6 +87,7 @@ const Bud = ({ className, src, budName, date, plant_id, setPopupInfo }) => {
 
   const goToWrite = () => navigateSearch("/write", { name: `${encodeURI(budName)}`, plant_id: `${plant_id}` });
   const goToListByPlantId = () => navigateSearch("/list", { name: `${encodeURI(budName)}`, plant_id: `${plant_id}` });
+  const goToIdAlbum = () => navigateSearch("/album", { name: `${encodeURI(budName)}` });
 
   const goToManageCalendarByPlantId = () => navigateSearch("/daily/record", { name: `${encodeURI(budName)}` });
 
@@ -100,7 +101,9 @@ const Bud = ({ className, src, budName, date, plant_id, setPopupInfo }) => {
           <div className="text" onClick={goToListByPlantId}>
             일지목록
           </div>
-          <div className="text">앨범</div>
+          <div className="text" onClick={goToIdAlbum}>
+            앨범
+          </div>
           <div
             className="text"
             onClick={() => {

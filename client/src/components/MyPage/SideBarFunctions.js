@@ -81,14 +81,22 @@ function SideBarFunctions({ setModalCode }) {
   const [isDelAccount, setDelAccount] = useState(false);
   const [isChangePassword, setChangePassword] = useState(false);
   const logOutFunction = async () => {
-    const resData = await axios.post(process.env.REACT_APP_API_URL + "/users/logout");
-    if (resData.status === 200) {
+    try {
+      await axios.post(process.env.REACT_APP_API_URL + "/users/logout");
+      setNickname("");
+      setUserNumber("");
+      setImage("");
+      setLogin(false);
+      navigate("/");
+    } catch (err) {
       setNickname("");
       setUserNumber("");
       setImage("");
       setLogin(false);
       navigate("/");
     }
+    // if (resData.status === 200) {
+    // }
   };
   const DelAccountFunction = () => {
     setDelAccount((current) => !current);

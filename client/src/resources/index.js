@@ -5,6 +5,7 @@ import bg3 from "./bg/bg3.jpg";
 import bg4 from "./bg/bg4.jpg";
 import bg5 from "./bg/bg5.jpg";
 import bg6 from "./bg/bg6.jpg";
+import bg7 from "./bg/bg7.jpg";
 
 import journal from "./emptyImg/empty_bud.jpg";
 import user from "./emptyImg/empty_user.png";
@@ -20,7 +21,7 @@ import img6 from "./recomendPlant/IMG_6.jpg";
 import l from "./slideArrow/left-arrow.png";
 import r from "./slideArrow/right-arrow.png";
 
-export const bg = [bg0, bg1, bg2, bg3, bg4, bg5, bg6];
+export const bg = [bg0, bg1, bg2, bg3, bg4, bg5, bg6, bg7];
 export const empty = {
   journal,
   user,
