@@ -8,7 +8,7 @@ const Layout = styled.div`
   grid-template-rows: auto auto auto;
   flex-direction: column;
   width: 100%;
-  padding-bottom: 4rem;
+  padding-bottom: 2rem;
 
   .shell {
     text-align: start;

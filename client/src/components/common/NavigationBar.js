@@ -6,49 +6,73 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHouseUser, faDoorOpen, faAddressBook, faBook, faImage, faUser } from "@fortawesome/free-solid-svg-icons";
 
 export const Content = styled.nav`
+  width: 100vw;
   cursor: pointer;
   position: fixed;
   bottom: 0;
-  z-index: 10;
-  padding: 0rem 0;
-
+  z-index: 5;
+  padding: 0;
+  margin: 0;
   background-color: ${(props) => props.theme.navigationBGColor};
 
-  a {
-    color: black;
-    transition: color 0.25s cubic-bezier(0, 1.23, 1, 0.55);
-  }
-  a:hover {
-    color: white;
-  }
-  /* a:active {
-    color: black;
-  } */
-  width: 100vw;
   @media screen and (min-width: 391px) {
     width: ${(props) => props.theme.webWidth + "px"};
   }
 
   .wrap {
     display: flex;
-    justify-content: space-around;
-    align-items: center;
     font-size: ${(props) => props.theme.fontWritePageLarge};
+
+    a:nth-child(1):hover ~ .ani {
+      border: solid 1px red;
+      left: 0%;
+    }
+
+    a:nth-child(2):hover ~ .ani {
+      border: solid 1px red;
+      left: 20%;
+    }
+
+    a:nth-child(3):hover ~ .ani {
+      border: solid 1px red;
+      left: 40%;
+    }
+
+    a:nth-child(4):hover ~ .ani {
+      border: solid 1px red;
+      left: 60%;
+    }
+
+    a:nth-child(5):hover ~ .ani {
+      border: solid 1px red;
+      left: 80%;
+    }
+
+    .ani {
+      flex-grow: 1;
+      position: absolute;
+      width: ${(props) => 100 / 5 + "%"};
+      height: 100%;
+      background: LightCoral;
+      left: 0;
+      transition: all 0.3s ease 0s;
+    }
+
+    > a {
+      flex-grow: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 7;
+      .icon {
+        width: 82px;
+        color: dimgray;
+        transform: translateY(10%);
+      }
+    }
 
     .link {
       position: relative;
-      width: 100%;
-      padding: 0.2rem 1.2rem;
-
-      .icon {
-        color: dimgray;
-        transform: translateY(10%);
-        transition: color 0.25s ease;
-      }
-
-      .icon:hover {
-        color: LightCoral;
-      }
 
       .tooltip {
         position: absolute;
@@ -79,9 +103,6 @@ export const Content = styled.nav`
 
     .link:hover .tooltiptext {
       opacity: 1;
-    }
-    .link:hover .icon {
-      color: LightCoral;
     }
   }
 `;
@@ -144,6 +165,7 @@ function NavigationBar() {
             </div>
           </NavLink>
         )}
+        <div className="ani"></div>
       </div>
     </Content>
   );

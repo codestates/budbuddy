@@ -15,6 +15,7 @@ const Layout = styled.div`
   display: flex;
   flex-direction: column;
   padding-top: 1rem;
+  padding-bottom: 3rem;
 
   .logo {
     margin-top: 1rem;
