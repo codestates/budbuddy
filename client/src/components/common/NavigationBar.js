@@ -116,20 +116,18 @@ function NavigationBar() {
             </div>
           </div>
         </NavLink>
-        {isLogin ? (
-          <NavLink to="/daily">
-            <div
-              className="link"
-              onClick={() => {
-                moveNavi(2);
-              }}>
-              <FontAwesomeIcon className="diary icon" icon={faBook} />
-              <div className="tooltip">
-                <span className="tooltiptext">diary</span>
-              </div>
+        <NavLink to="/daily">
+          <div
+            className="link"
+            onClick={() => {
+              moveNavi(2);
+            }}>
+            <FontAwesomeIcon className="diary icon" icon={faBook} />
+            <div className="tooltip">
+              <span className="tooltiptext">diary</span>
             </div>
-          </NavLink>
-        ) : null}
+          </div>
+        </NavLink>
         <NavLink to="/album">
           <div
             className="link"
