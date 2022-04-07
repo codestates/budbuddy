@@ -67,6 +67,7 @@ const Album = () => {
   const { search } = useLocation();
   const parsed = qs.parse(search);
   const currentUser = decodeURI(parsed.name); // 클릭하면 여기 바꾸게 해줘야함
+  // console.log(currentUser);
 
   useEffect(() => {
     if (isLogin) {
