@@ -11,8 +11,8 @@ const Layout = styled.div`
   flex-direction: column;
 
   width: 100%;
-  position: relative;
   padding-bottom: 3.5rem;
+  position: relative;
   /* border: solid 1px blue; */
   // 젤리팝업 오픈시 부모 freeze 옵션
   ${(props) =>

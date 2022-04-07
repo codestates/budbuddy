@@ -9,6 +9,9 @@ import axios from "axios";
 import ModalByMode from "../components/common/ModalByMode";
 
 const Layout = styled.div`
+  display: flex;
+  flex-direction: column;
+
   .version {
     padding-top: 0.5rem;
     margin: 0 0 3rem 0.5rem;
@@ -66,7 +69,7 @@ const Home = () => {
   return (
     <Layout>
       {makePopup(popupInfo)}
-      <p className="version">ver1.0</p>
+      <p className="version">ver1.1</p>
       <p className="greeting">{`안녕하세요!\n자신의 식물을 일기처럼 기록해보세요!`}</p>
       <TextOnImg texts={proverbs} />
       <Hr t={4} b={4} width={80} />
