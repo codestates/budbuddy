@@ -47,7 +47,7 @@ export const Content = styled.nav`
 
     .link {
       position: relative;
-
+      transition: background-color 0.3s ease;
       .tooltip {
         position: absolute;
         width: 100%;
@@ -69,7 +69,7 @@ export const Content = styled.nav`
           border-radius: ${(props) => props.theme.borderRadius};
           padding: 0 0.3rem 0.2rem 0.3rem;
           position: absolute;
-          transition: all 0.3s ease;
+          transition: opacity 0.3s ease;
           opacity: 0;
         }
       }
@@ -77,6 +77,9 @@ export const Content = styled.nav`
 
     .link:hover .tooltiptext {
       opacity: 1;
+    }
+    .link:hover {
+      background-color: ${(props) => props.theme.hoverColor};
     }
   }
 `;

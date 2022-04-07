@@ -27,8 +27,9 @@ const Layout = styled.div`
   }
 `;
 const BudLayout = styled.div`
+  display: flex;
+  flex-grow: 1;
   width: 100%;
-  margin: 0 0;
 
   .card-wrap {
     width: 100%;
@@ -39,11 +40,6 @@ const BudLayout = styled.div`
   .cardcomponent {
     width: 50%;
   }
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-grow: 1;
 
   .notice-pos {
     flex-grow: 1;
