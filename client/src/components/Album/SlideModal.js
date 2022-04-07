@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
+import { arrow } from "../../resources";
 
 const Layout = styled.div`
   position: absolute;
@@ -87,9 +88,7 @@ const SlideModal = ({ FillteredValue, SlideState, setSlideState, PictureNumber, 
   const slideRef = useRef(null);
   const [counter, setCounter] = useState(1);
   const Value = FillteredValue.filter((el) => {
-    if (el.Journal_Images.length > 0) {
-      return el;
-    }
+    return el.Journal_Images.length > 0;
   });
   function LeftSlide() {
     if (counter >= Value.length) return;
@@ -128,10 +127,10 @@ const SlideModal = ({ FillteredValue, SlideState, setSlideState, PictureNumber, 
       </div>
       <div className="arrow-wrap">
         <span className="left arrow" onClick={RightSlide}>
-          <img src={"./slideArrow/left-arrow.png"} alt="" />
+          <img src={arrow.l} alt="" />
         </span>
         <span className="right arrow" onClick={LeftSlide}>
-          <img src={"./slideArrow/right-arrow.png"} alt="" />
+          <img src={arrow.r} alt="" />
         </span>
       </div>
     </Layout>
