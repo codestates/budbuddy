@@ -96,8 +96,13 @@ const useAjaxStore = create(
       },
       async getUserInfo() {
         try {
-          const resUser = await axios.get(process.env.REACT_APP_API_URL + `/users/userinfo`);
-          set((state) => ({ userInfo: resUser.data.data }));
+          const {
+            data: { data },
+          } = await axios.get(process.env.REACT_APP_API_URL + `/users/userinfo`);
+
+          console.log(data);
+
+          set((state) => ({ userInfo: data }));
         } catch (err) {
           set((state) => ({}));
           // console.log("axios err / getUserInfo :::", err);

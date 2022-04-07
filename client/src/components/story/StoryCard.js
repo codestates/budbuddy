@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import JellyPopup from "./JellyPopup";
+import ProfilePopup from "./ProfilePopup";
 import { empty } from "../../resources";
 import useAjaxStore from "../../store/ajaxStore";
 
@@ -253,6 +254,7 @@ const Card = styled.div`
 const StoryCard = ({ className = "", storyList, hoverTransitonSec = 0.25, setFreeze, getStory }) => {
   const { userInfo, deleteListByJournalId } = useAjaxStore();
   const [isJellyPopup, setJellyPopup] = useState(false);
+  const [profle, setProfile] = useState({ isOpen: false, src: null });
   const [story, setStory] = useState(null);
 
   useEffect(() => {
@@ -272,9 +274,14 @@ const StoryCard = ({ className = "", storyList, hoverTransitonSec = 0.25, setFre
     getStory();
   }
 
+  function viewProfile(src) {
+    setProfile({ isOpen: true, src });
+  }
+
   return (
     <Layout className={className}>
       {isJellyPopup ? <JellyPopup setJellyPopup={setJellyPopup} story={story} /> : null}
+      {profle.isOpen && !isJellyPopup ? <ProfilePopup setProfile={setProfile} src={profle.src} /> : null}
       <div className="shell">
         <div className="wrap">
           {storyList.map((v, i) => {
@@ -283,7 +290,11 @@ const StoryCard = ({ className = "", storyList, hoverTransitonSec = 0.25, setFre
                 <div className="borderlt">
                   <div className="borderrb">
                     <div className="top-cap">
-                      <div className="profile-wrap">
+                      <div
+                        className="profile-wrap"
+                        onClick={() => {
+                          viewProfile(v.profileImg);
+                        }}>
                         <img className={`${"profileImg"} ${!v.profileImg ? "empty" : ""}`} src={v.profileImg || empty.user} alt="" />
                       </div>
                       <div className="name-wrap">
