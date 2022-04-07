@@ -57,22 +57,17 @@ const BudLayout = styled.div`
 `;
 const Album = () => {
   const { isLogin } = useLoginStore();
-  useEffect(() => {
-    if (isLogin) {
-      getAllPublicJournal();
-    }
-  }, [isLogin]);
-
-  const { publicJournal, getAllPublicJournal, listByUserId, setListByUserId } = useAjaxStore();
-
-  useEffect(() => {
-    getAllPublicJournal();
-    setListByUserId();
-  }, []);
-  // console.log("listByUserId", listByUserId);
-
+  const { listByUserId, setListByUserId } = useAjaxStore();
   const [pickPlantValue, setPickPlantValue] = useState("");
   const [pickDateValue, setPickDateValue] = useState("");
+  const [SlideState, setSlideState] = useState("close");
+  const [PictureNumber, setPictureNumber] = useState(0);
+
+  useEffect(() => {
+    if (isLogin) {
+      setListByUserId();
+    }
+  }, [isLogin, setListByUserId]);
 
   const TempFillteredValue = listByUserId.filter((el) => {
     if (pickPlantValue === "식물이름") {
@@ -93,42 +88,38 @@ const Album = () => {
     }
     return el;
   });
-  // console.log(FillteredValue);
-
-  const [SlideState, setSlideState] = useState("close");
-  const [PictureNumber, setPictureNumber] = useState(0);
+  const Value = FillteredValue.filter((el) => {
+    return el.Journal_Images.length > 0;
+  });
 
   return (
     <Layout>
       <Logo className="logo" />
       {isLogin ? (
         <>
-          <SlideModal FillteredValue={FillteredValue} SlideState={SlideState} setSlideState={setSlideState} PictureNumber={PictureNumber} setPictureNumber={setPictureNumber} />
+          <SlideModal FillteredValue={Value} SlideState={SlideState} setSlideState={setSlideState} PictureNumber={PictureNumber} setPictureNumber={setPictureNumber} />
           <TabOption className="TabBtnOne" tabName="앨범" setPickPlantValue={setPickPlantValue} setPickDateValue={setPickDateValue} listByUserId={listByUserId} />
           <BudLayout>
-            {FillteredValue.length === 0 ? (
+            {Value.length === 0 ? (
               <div className="notice-pos">
                 <div className="notice">등록된 사진이 없습니다</div>
               </div>
             ) : (
               <div className="card-wrap">
-                {FillteredValue.map((el, idx) => {
-                  // console.log(el.Journal_Images);
-                  if (el.Journal_Images.length !== 0) {
-                    return (
-                      <Picture
-                        key={idx}
-                        src={el.Journal_Images[0].Image.store_path || "Dummy/diary_4.PNG"}
-                        className="cardcomponent"
-                        budName={el.User.nickname}
-                        date={el.date_pick}
-                        text={el.body}
-                        setSlideState={setSlideState}
-                        setPictureNumber={setPictureNumber}
-                        idx={idx}
-                      />
-                    );
-                  }
+                {Value.map((el, idx) => {
+                  return (
+                    <Picture
+                      key={idx}
+                      src={el.Journal_Images[0].Image.store_path || "Dummy/diary_4.PNG"}
+                      className="cardcomponent"
+                      budName={el.User.nickname}
+                      date={el.date_pick}
+                      text={el.body}
+                      setSlideState={setSlideState}
+                      setPictureNumber={setPictureNumber}
+                      idx={idx}
+                    />
+                  );
                 })}
               </div>
             )}
