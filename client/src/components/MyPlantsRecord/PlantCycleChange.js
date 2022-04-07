@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGear } from "@fortawesome/free-solid-svg-icons";
@@ -10,11 +10,6 @@ const PlantsCycleChangeLayout = styled.div`
   > .space {
     height: 2vh;
   }
-`;
-const DayChecking = styled.div`
-  display: grid;
-  height: auto;
-  width: calc(100 / 3);
 `;
 
 const PlantsCycleChangeContainer = styled.div`
@@ -102,7 +97,6 @@ const PlantsCycleChange = ({ theLastDateOfAction }) => {
     <PlantsCycleChangeLayout>
       {makeCycleModal(plantCycle)}
       <div className="space"></div>
-      <div className="space"></div>
       <PlantsCycleChangeContainer>
         <DayDiv>D-Day</DayDiv>
         <CustomFontAwesomeIcon>
@@ -122,7 +116,6 @@ const PlantsCycleChange = ({ theLastDateOfAction }) => {
           <div className="soilName">분갈이</div>
         </CircleName>
       </PlantsCycleChangeContainer>
-      <div className="space"></div>
     </PlantsCycleChangeLayout>
   );
 };

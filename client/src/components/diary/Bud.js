@@ -8,13 +8,14 @@ const Layout = styled.div`
   grid-template-rows: auto auto auto;
   flex-direction: column;
   width: 100%;
-  /* height: 53%; */
+  padding-bottom: 2rem;
 
   .shell {
     text-align: start;
     padding: 5px;
     overflow: hidden;
     position: relative;
+    min-height: 220px;
   }
 
   .shell:hover {
@@ -27,7 +28,7 @@ const Layout = styled.div`
   .coverImg {
     object-fit: cover;
     width: 100%;
-    height: 18vh;
+    height: 170px;
     mix-blend-mode: multiply;
     border: solid 2px rgb(0, 0, 0, 0.1);
   }
@@ -87,6 +88,7 @@ const Bud = ({ className, src, budName, date, plant_id, setPopupInfo }) => {
 
   const goToWrite = () => navigateSearch("/write", { name: `${encodeURI(budName)}`, plant_id: `${plant_id}` });
   const goToListByPlantId = () => navigateSearch("/list", { name: `${encodeURI(budName)}`, plant_id: `${plant_id}` });
+  const goToIdAlbum = () => navigateSearch("/album", { name: `${encodeURI(budName)}` });
 
   const goToManageCalendarByPlantId = () => navigateSearch("/daily/record", { name: `${encodeURI(budName)}` });
 
@@ -100,7 +102,9 @@ const Bud = ({ className, src, budName, date, plant_id, setPopupInfo }) => {
           <div className="text" onClick={goToListByPlantId}>
             일지목록
           </div>
-          <div className="text">앨범</div>
+          <div className="text" onClick={goToIdAlbum}>
+            앨범
+          </div>
           <div
             className="text"
             onClick={() => {

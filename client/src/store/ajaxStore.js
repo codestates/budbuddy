@@ -100,8 +100,6 @@ const useAjaxStore = create(
             data: { data },
           } = await axios.get(process.env.REACT_APP_API_URL + `/users/userinfo`);
 
-          console.log(data);
-
           set((state) => ({ userInfo: data }));
         } catch (err) {
           set((state) => ({}));

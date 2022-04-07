@@ -6,11 +6,16 @@ import Picture from "../components/Album/Picture";
 import SlideModal from "../components/Album/SlideModal";
 import useLoginStore from "../store/loginStore";
 import useAjaxStore from "../store/ajaxStore";
+import { useLocation } from "react-router-dom";
+const qs = require("query-string");
 
 const Layout = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
-  position: relative;
+  min-height: 100vh;
+  padding-top: 1rem;
+  padding-bottom: 3rem;
   .logo {
     margin-top: 1rem;
   }
@@ -18,11 +23,12 @@ const Layout = styled.div`
     margin-top: 0.3rem;
   }
   .none {
-    display: absolute;
-    min-width: 100%;
-    height: 100vh;
-    line-height: 80vh;
-    text-align: center;
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: dimgray;
+    font-size: ${(props) => props.theme.fontWritePageSmall};
   }
 `;
 const BudLayout = styled.div`
@@ -62,12 +68,25 @@ const Album = () => {
   const [pickDateValue, setPickDateValue] = useState("");
   const [SlideState, setSlideState] = useState("close");
   const [PictureNumber, setPictureNumber] = useState(0);
+  const { search } = useLocation();
+  const parsed = qs.parse(search);
+  const currentUser = decodeURI(parsed.name); // 클릭하면 여기 바꾸게 해줘야함
+  // console.log(currentUser);
 
   useEffect(() => {
     if (isLogin) {
       setListByUserId();
     }
   }, [isLogin, setListByUserId]);
+
+  useEffect(() => {
+    if (currentUser === "undefined") {
+      setPickPlantValue("");
+    }
+    if (currentUser !== "undefined") {
+      setPickPlantValue(currentUser);
+    }
+  }, [currentUser]);
 
   const TempFillteredValue = listByUserId.filter((el) => {
     if (pickPlantValue === "식물이름") {
@@ -98,7 +117,7 @@ const Album = () => {
       {isLogin ? (
         <>
           <SlideModal FillteredValue={Value} SlideState={SlideState} setSlideState={setSlideState} PictureNumber={PictureNumber} setPictureNumber={setPictureNumber} />
-          <TabOption className="TabBtnOne" tabName="앨범" setPickPlantValue={setPickPlantValue} setPickDateValue={setPickDateValue} listByUserId={listByUserId} />
+          <TabOption className="TabBtnOne" tabName="앨범" setPickPlantValue={setPickPlantValue} setPickDateValue={setPickDateValue} listByUserId={listByUserId} currentUser={currentUser} />
           <BudLayout>
             {Value.length === 0 ? (
               <div className="notice-pos">
@@ -126,7 +145,9 @@ const Album = () => {
           </BudLayout>
         </>
       ) : (
-        <div className="none">로그인 후 이용해주세요</div>
+        <div className="none">
+          <div>로그인 후 이용해 주세요</div>
+        </div>
       )}
     </Layout>
   );

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import * as d3 from "d3";
 
@@ -26,14 +26,10 @@ const ChartTitle = styled.h2`
 `;
 
 const Chart = ({ currentUser, ChartValue }) => {
-  // useEffect(() => {
-  //   makeGraph();
-  // }, []);
-
-  const makeGraph = () => {
+  useEffect(() => {
     // 캔버스 구역 정의
     const width = 300;
-    const height = 300;
+    const height = 250;
     const margin = { top: 20, left: 20, bottom: 20, right: 20 };
 
     const svg = d3.select(".list");
@@ -41,18 +37,17 @@ const Chart = ({ currentUser, ChartValue }) => {
     for (let i = 0; i <= 60; i++) {
       chartLine.push(i * 5);
     }
-    const data = ChartValue;
 
     // 눈금 만들기
     const x = d3
       .scaleBand()
-      .domain(data.map((d) => d.day)) //범위값 입력
+      .domain(ChartValue.map((d) => d.day)) //범위값 입력
       .range([margin.left, width - margin.right]); //출력값의 범위[최소,최대]
     // x축 정의
 
     const y = d3
       .scaleLinear()
-      .domain([0, d3.max(data, (d) => d.value)]) //입력값의 범위 [최소값, 최대값]
+      .domain([0, d3.max(ChartValue, (d) => d.value)]) //입력값의 범위 [최소값, 최대값]
       .nice()
       .range([height - margin.bottom, margin.top]); //[최소값, 최대값]으로 입력하면 그래프가 뒤집혀 출력 따라사 [최대값, 최소값]
     // y축 정의
@@ -99,7 +94,7 @@ const Chart = ({ currentUser, ChartValue }) => {
 
     svg
       .append("path") //넣어주기
-      .datum(data)
+      .datum(ChartValue)
       .attr("fill", "#BFD4AF")
       .attr("stroke", "#8AB06D")
       .attr("stroke-width", 1)
@@ -111,7 +106,7 @@ const Chart = ({ currentUser, ChartValue }) => {
     svg
       .append("g")
       .selectAll("text")
-      .data(data)
+      .data(ChartValue)
       .enter()
       .append("text")
       .text((d) => d.value)
@@ -121,15 +116,15 @@ const Chart = ({ currentUser, ChartValue }) => {
       .attr("font-family", "Tahoma")
       .attr("font-size", "12px")
       .attr("text-anchor", "middle");
-  };
-  makeGraph();
+  }, [ChartValue]);
+
   return (
     <ChartDiv>
       <div className="space"></div>
       <ChartTitle>{currentUser} 성장 기록</ChartTitle>
       {ChartValue.length !== 0 ? (
         <ChartSvgDiv>
-          <ChartSvg className="list" width="320" height="320"></ChartSvg>
+          <ChartSvg className="list" width="320" height="280"></ChartSvg>
         </ChartSvgDiv>
       ) : (
         <div className="none">스토리를 작성해주세요</div>

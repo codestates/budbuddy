@@ -55,7 +55,6 @@ const Home = () => {
       kakaoGreeting() {
         info.closePopup = setPopupInfo;
         info.outerFn = setPopupInfo;
-        info.text = "카카오톡 로그인으로 시작합니다.\n버드버디에 오신걸 환영합니다";
         return <ModalByMode info={info} />;
       },
     };
@@ -69,7 +68,7 @@ const Home = () => {
   return (
     <Layout>
       {makePopup(popupInfo)}
-      <p className="version">ver1.1</p>
+      <p className="version">ver1.2</p>
       <p className="greeting">{`안녕하세요!\n자신의 식물을 일기처럼 기록해보세요!`}</p>
       <TextOnImg texts={proverbs} />
       <Hr t={4} b={4} width={80} />

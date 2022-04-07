@@ -90,6 +90,13 @@ const Layout = styled.div`
       margin-top: 0.5rem;
       font-size: ${(props) => props.theme.fontWritePageSmall};
       line-height: 1.3;
+
+      .kakao {
+        color: dimgray;
+        font-size: ${(props) => props.theme.fontWritePageXSmall};
+        margin-bottom: 1rem;
+        line-height: 1.6;
+      }
     }
 
     /* .upload {
@@ -253,7 +260,9 @@ const ModalByMode = ({ info = "" }) => {
             </div>
             <div className="mid">
               <div className="content">
-                <div>{info.text}</div>
+                <div>카카오톡 로그인으로 시작합니다.</div>
+                <div className="kakao">{"(카카오 로그인시 로그인이 하루 동안 유지됩니다.)"}</div>
+                <div>{"버드버디에 오신 걸 환영합니다."}</div>
               </div>
             </div>
             <div className="bottom">
