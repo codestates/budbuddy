@@ -163,7 +163,7 @@ const useAjaxStore = create(
           let resjournal = await axios.get(process.env.REACT_APP_API_URL + `/journals`);
           resjournal = resjournal.data.data;
           const extractedData = [];
-
+          // console.log(resjournal);
           for (let i = 0; i < resjournal.length; i++) {
             let publicJournal = {
               journalId: resjournal[i].id,
@@ -175,6 +175,7 @@ const useAjaxStore = create(
               title: resjournal[i].title,
               textContent: resjournal[i].body,
               journalImg: null, //유효성 검사 이후 넣어야함
+              userId: resjournal[i].UserId,
             };
 
             if (resjournal[i].Plant) {
@@ -195,7 +196,7 @@ const useAjaxStore = create(
           return extractedData;
         } catch (err) {
           console.log("axios err / getAllPublicJournal :::", err);
-          set((state) => ({ publicJournal: [] }));
+          set((state) => ({ publicJournal: ["none"] }));
           return [];
         }
       },

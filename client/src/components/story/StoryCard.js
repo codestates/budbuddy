@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import JellyPopup from "./JellyPopup";
 import { empty } from "../../resources";
+import useAjaxStore from "../../store/ajaxStore";
 
 const Layout = styled.div`
   /* border: solid 1px black; */
@@ -210,6 +211,9 @@ const Card = styled.div`
     .read-wrap {
       margin-left: 0.1rem;
     }
+    .delete-wrap {
+      margin-left: 0.3rem;
+    }
 
     > div > button {
       border: none;
@@ -224,8 +228,13 @@ const Card = styled.div`
       transition: background-color ${(props) => `${props.hoverTransitonSec}s`} ease, color ${(props) => `${props.hoverTransitonSec}s`} ease;
     }
 
-    .btn:hover {
+    .read:hover {
       background-color: ${(props) => props.theme.hoverColor};
+      color: white;
+    }
+
+    .delete:hover {
+      background-color: ${(props) => props.theme.hoverCancleColor};
       color: white;
     }
   }
@@ -241,12 +250,14 @@ const Card = styled.div`
   }
 `;
 
-const StoryCard = ({ className = "", storyList, hoverTransitonSec = 0.25, setFreeze }) => {
+const StoryCard = ({ className = "", storyList, hoverTransitonSec = 0.25, setFreeze, getStory }) => {
+  const { userInfo, deleteListByJournalId } = useAjaxStore();
   const [isJellyPopup, setJellyPopup] = useState(false);
   const [story, setStory] = useState(null);
 
   useEffect(() => {
     setFreeze(isJellyPopup);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isJellyPopup]);
 
   function read(e, info) {
@@ -255,12 +266,21 @@ const StoryCard = ({ className = "", storyList, hoverTransitonSec = 0.25, setFre
     setStory(info);
   }
 
+  async function deleteStory(e, info) {
+    e.preventDefault();
+    await deleteListByJournalId(info.journalId);
+    getStory();
+  }
+
+  console.log("userInfo:::", userInfo);
+
   return (
     <Layout className={className}>
       {isJellyPopup ? <JellyPopup setJellyPopup={setJellyPopup} story={story} /> : null}
       <div className="shell">
         <div className="wrap">
           {storyList.map((v, i) => {
+            console.log(v);
             return (
               <Card key={v.journalId} hoverTransitonSec={hoverTransitonSec}>
                 <div className="borderlt">
@@ -288,6 +308,13 @@ const StoryCard = ({ className = "", storyList, hoverTransitonSec = 0.25, setFre
                         <button className="read btn" onClick={(e) => read(e, v)}>
                           보기
                         </button>
+                      </div>
+                      <div className="delete-wrap">
+                        {userInfo.id === v.userId ? (
+                          <button className="delete btn" onClick={(e) => deleteStory(e, v)}>
+                            삭제
+                          </button>
+                        ) : null}
                       </div>
                     </div>
                   </div>
