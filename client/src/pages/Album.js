@@ -30,25 +30,26 @@ const Layout = styled.div`
     color: dimgray;
     font-size: ${(props) => props.theme.fontWritePageSmall};
   }
+
+  .notice-fist {
+    position: absolute;
+    /* border: solid 1px red; */
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    .notice-dsec {
+      flex-grow: 1;
+      font-size: ${(props) => props.theme.fontWritePageSmall};
+      color: dimgray;
+    }
+  }
 `;
 const BudLayout = styled.div`
-  /* padding-top: 0.5rem;
-  padding-bottom: 2rem; */
   width: 100%;
   margin: 0 auto;
-  .notice-pos {
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-  .notice {
-    display: table-cell;
-    vertical-align: middle;
-    font-size: 0.9rem;
-    color: DimGrey;
-  }
+
   .card-wrap {
     width: 100%;
     display: flex;
@@ -120,12 +121,13 @@ const Album = () => {
         <>
           <SlideModal FillteredValue={Value} SlideState={SlideState} setSlideState={setSlideState} PictureNumber={PictureNumber} setPictureNumber={setPictureNumber} />
           <TabOption className="TabBtnOne" tabName="앨범" setPickPlantValue={setPickPlantValue} setPickDateValue={setPickDateValue} listByUserId={listByUserId} currentUser={currentUser} />
+          {Value.length === 0 ? (
+            <div className="notice-fist">
+              <div className="notice-dsec">등록된 사진이 없습니다</div>
+            </div>
+          ) : null}
           <BudLayout>
-            {Value.length === 0 ? (
-              <div className="notice-pos">
-                <div className="notice">등록된 사진이 없습니다</div>
-              </div>
-            ) : (
+            {Value.length === 0 ? null : (
               <div className="card-wrap">
                 {Value.map((el, idx) => {
                   return (
