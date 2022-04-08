@@ -200,7 +200,7 @@ const StoryLayout = styled.div`
     }
   }
 
-  .desc {
+  .desc-reply {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -267,7 +267,7 @@ const JellyPopup = ({ setJellyPopup, story }) => {
               return <Reply key={i} info={v} contentRef={contentRef} />;
             })
           ) : (
-            <div className="desc">
+            <div className="desc-reply">
               <div>댓글은 로그인 시에만 보실 수 있습니다.</div>
             </div>
           )}
