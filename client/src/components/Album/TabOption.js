@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
 export const Layout = styled.div`
@@ -42,7 +42,12 @@ export const Layout = styled.div`
   }
 `;
 
-const TabOption = ({ className = "", tabName, setPickPlantValue, setPickDateValue, listByUserId, currentUser = "" }) => {
+const TabOption = ({ className = "", tabName, setPickPlantValue, setPickDateValue, listByUserId, currentUser }) => {
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    setCount((current) => current + 1);
+  }, [currentUser]);
+  console.log("안에currentUser", currentUser);
   const UserPlantsName = listByUserId.reduce((acc, cur) => {
     if (!acc.includes(cur.Plant.name) && cur.Journal_Images.length !== 0) {
       acc.push(cur.Plant.name);
@@ -62,6 +67,7 @@ const TabOption = ({ className = "", tabName, setPickPlantValue, setPickDateValu
     setPickDateValue(e.target.value);
   };
   const OptionPlantValue = (e) => {
+    console.log(e);
     setPickPlantValue(e.target.value);
   };
   return (
@@ -75,7 +81,7 @@ const TabOption = ({ className = "", tabName, setPickPlantValue, setPickDateValu
               return <option key={el}>{el}</option>;
             })}
           </select>
-          <select defaultValue={currentUser || "식물이름"} className="rightcap" onChange={(e) => OptionPlantValue(e)}>
+          <select defaultValue={currentUser ? currentUser : "식물이름"} className="rightcap" onChange={(e) => OptionPlantValue(e)}>
             <option>식물이름</option>
             {UserPlantsName.map((el) => {
               return <option key={el}>{el}</option>;
