@@ -30,7 +30,7 @@ const useAjaxStore = create(
       async deleteReplies(replyId) {
         try {
           const resData = await axios.delete(process.env.REACT_APP_API_URL + `/journals/replies/${replyId}`);
-          console.log("deleteReplies:::", resData, replyId);
+          // console.log("deleteReplies:::", resData, replyId);
         } catch (err) {
           // console.log("axios err / deleteReplies :::", err);
         }
@@ -67,7 +67,7 @@ const useAjaxStore = create(
           const {
             data: { data },
           } = await axios.get(process.env.REACT_APP_API_URL + "/journals/my", { params: { plant: plantId } });
-          console.log("setListByPlantId:::", data);
+          // console.log("setListByPlantId:::", data);
           set((state) => ({ listByPlantId: [...data] }));
         } catch (err) {
           // console.log("axios err / setListByPlatId :::", err);
@@ -83,7 +83,7 @@ const useAjaxStore = create(
           data.sort((a, b) => {
             return moment(a.updatedAt).format("YYMMDDhhmmss") * 1 - moment(b.updatedAt).format("YYMMDDhhmmss") * 1;
           });
-          console.log("setListByUserId:::", data);
+          // console.log("setListByUserId:::", data);
           set((state) => ({ listByUserId: [...data] }));
         } catch (err) {
           // console.log("axios err / setListByUserId :::", err);

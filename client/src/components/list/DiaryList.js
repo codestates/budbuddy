@@ -64,8 +64,6 @@ const DiaryList = ({ diaryList = [], isBudName = false, type = "" }) => {
   const goToListByMode = (mode, info) => navigateSearch(`/daily/${mode}`, { info });
   const { setListByUserId, setListByPlantId, deleteListByJournalId } = useAjaxStore();
 
-  console.log(type);
-
   const callRead = (journal) => {
     goToListByMode("read", encodeURI(JSON.stringify(journal)));
   };
