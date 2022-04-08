@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import * as d3 from "d3";
 
@@ -19,11 +19,7 @@ const ChartSvgDiv = styled.div`
   text-align: center;
 `;
 
-const ChartSvg = styled.svg`
-  background-color: snow;
-  border-radius: 10px;
-  border: 2px solid black;
-`;
+const ChartSvg = styled.svg``;
 
 const ChartTitle = styled.h2`
   text-align: center;
@@ -33,13 +29,13 @@ const Chart = ({ currentUser, ChartValue }) => {
   useEffect(() => {
     // 캔버스 구역 정의
     const width = 300;
-    const height = 220;
+    const height = 250;
     const margin = { top: 20, left: 20, bottom: 20, right: 20 };
 
     const svg = d3.select(".list");
     const chartLine = [];
     for (let i = 0; i <= 60; i++) {
-      chartLine.push(i * 10);
+      chartLine.push(i * 5);
     }
 
     // 눈금 만들기
@@ -70,8 +66,7 @@ const Chart = ({ currentUser, ChartValue }) => {
           d3.axisLeft(y).tickValues(chartLine).tickSize(-width), // y축 눈금 생성
         )
         .call((g) => g.select(".domain").remove())
-        .attr("class", "grid")
-        .attr("height", "1px");
+        .attr("class", "grid");
 
     // 눈금 적용하기
     svg.append("g").call(xAxis);
@@ -129,12 +124,12 @@ const Chart = ({ currentUser, ChartValue }) => {
       <ChartTitle>{currentUser} 성장 기록</ChartTitle>
       {ChartValue.length !== 0 ? (
         <ChartSvgDiv>
-          <ChartSvg className="list" width="320" height="220"></ChartSvg>
+          <ChartSvg className="list" width="320" height="280"></ChartSvg>
         </ChartSvgDiv>
       ) : (
         <div className="none">스토리를 작성해주세요</div>
       )}
-      <div className="space"></div>
+
       <div className="space"></div>
     </ChartDiv>
   );
