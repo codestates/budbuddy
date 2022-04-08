@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
 import SideBarFuntions from "./SideBarFunctions";
-import useLoginStore from "../../store/loginStore";
+import useAjaxStore from "../../store/ajaxStore";
 import axios from "axios";
 import { makeModal } from "../../utils/errExeption";
 import { empty } from "../../resources";
@@ -129,10 +129,21 @@ const BlackScreen = styled.div`
 
 const SideBar = () => {
   const menuRef = useRef(null);
-  const { nickname, image, setImage } = useLoginStore();
-
+  const { userInfo, getUserInfo } = useAjaxStore();
   const [isSidebar, setSideBar] = useState(false);
-  const [userProfile, setUserProfile] = useState(image);
+  const [userProfile, setUserProfile] = useState(userInfo.profile_image.store_path);
+
+  useEffect(() => {
+    getUserInfoagain();
+    return () => {
+      getUserInfoagain();
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [userProfile]);
+
+  async function getUserInfoagain() {
+    await getUserInfo();
+  }
   function SidebarToggle() {
     menuRef.current.checked = !menuRef.current.checked;
     setSideBar(menuRef.current.checked);
@@ -161,15 +172,6 @@ const SideBar = () => {
     }
   };
 
-  useEffect(() => {
-    getImage();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  async function getImage() {
-    setImage(userProfile);
-  }
-
   const [modalCode, setModalCode] = useState("");
 
   return (
@@ -191,7 +193,7 @@ const SideBar = () => {
               </label>
               <input id="input-file" type="file" accept="image/*" onChange={onFileChange} style={{ display: "none" }} name="upload_img" />
             </div>
-            <div className="profile-name">ID: {nickname}</div>
+            <div className="profile-name">ID: {userInfo.nickname}</div>
           </span>
           <SideBarFuntions setModalCode={setModalCode} />
         </div>
