@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser, faRotate, faLock, faEraser } from "@fortawesome/free-solid-svg-icons";
+import { faUser, faLock, faLockOpen, faEraser, faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import AccountDelete from "./AccountDelete";
 import ChangePassword from "./ChangePassword";
-import ImageChange from "./ImageChange";
-import ImageChangeStore from "../../store/ImageChangeStore";
 import useLoginStore from "../../store/loginStore";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -76,10 +74,10 @@ const Content = styled.div`
 function SideBarFunctions({ setModalCode }) {
   const navigate = useNavigate();
   const { setLogin, setNickname, setUserNumber, setImage } = useLoginStore();
-  const { ImageChangeState, popUpImageChangeModal } = ImageChangeStore();
-
   const [isDelAccount, setDelAccount] = useState(false);
   const [isChangePassword, setChangePassword] = useState(false);
+  const [lockIcon, setLockIcon] = useState(false);
+  const [logoutIcon, setLogoutIcon] = useState(false);
   const logOutFunction = async () => {
     try {
       await axios.post(process.env.REACT_APP_API_URL + "/users/logout");
@@ -95,8 +93,6 @@ function SideBarFunctions({ setModalCode }) {
       setLogin(false);
       navigate("/");
     }
-    // if (resData.status === 200) {
-    // }
   };
   const DelAccountFunction = () => {
     setDelAccount((current) => !current);
@@ -104,26 +100,25 @@ function SideBarFunctions({ setModalCode }) {
   const ChangePasswordFunction = () => {
     setChangePassword((current) => !current);
   };
+  const ChangeLockIcon = () => {
+    setLockIcon((current) => !current);
+  };
+  const ChangeLogoutIcon = () => {
+    setLogoutIcon((current) => !current);
+  };
   return (
     <Content>
       {isChangePassword ? <ChangePassword open={isChangePassword} closeFn={setChangePassword} setModalCode={setModalCode} /> : null}
       {isDelAccount ? <AccountDelete open={isDelAccount} closeFn={setDelAccount} setModalCode={setModalCode} /> : null}
-      {ImageChangeState ? <ImageChange /> : null}
       <div className="logout">
-        <FontAwesomeIcon className="fa-solid fa-user fa-2x" icon={faUser} color="snow" />
-        <button className="logoutButton" onClick={logOutFunction}>
+        <FontAwesomeIcon className="fa-solid fa-user fa-2x" icon={logoutIcon ? faRightFromBracket : faUser} color="snow" />
+        <button className="logoutButton" onClick={logOutFunction} onMouseEnter={ChangeLogoutIcon} onMouseOut={ChangeLogoutIcon}>
           로그아웃
         </button>
       </div>
-      <div className="pictureChange">
-        <FontAwesomeIcon className="fa-solid fa-arrows-rotate fa-2x fa-spin" icon={faRotate} color="snow" />
-        <button onClick={() => popUpImageChangeModal()} className="pictureChangeButton">
-          배경이미지 교체
-        </button>
-      </div>
       <div className="pwChange">
-        <FontAwesomeIcon className="fa-solid fa-lock fa-2x" icon={faLock} color="snow" />
-        <button onClick={ChangePasswordFunction} className="pwChangeButton">
+        <FontAwesomeIcon className="fa-solid fa-lock fa-2x" icon={lockIcon ? faLockOpen : faLock} color="snow" />
+        <button onClick={ChangePasswordFunction} className="pwChangeButton" onMouseEnter={ChangeLockIcon} onMouseOut={ChangeLockIcon}>
           비밀번호 변경
         </button>
       </div>

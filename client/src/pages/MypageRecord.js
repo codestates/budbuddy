@@ -7,14 +7,20 @@ import useAjaxStore from "../store/ajaxStore";
 import useStore from "../store/plantCycleStore";
 import moment from "moment";
 import { useLocation } from "react-router-dom";
+import Logo from "../components/common/Logo";
+import GoBack from "../components/write/GoBack";
+
 const qs = require("query-string");
 
 const Content = styled.div`
   display: grid;
+  position: relative;
+  .logo {
+    margin-top: 2rem;
+  }
 `;
 
 const MypageRecordRayOut = styled.div`
-  background-color: ${(props) => props.theme.formColor};
   grid-template-columns: repeat(3, minmax(1fr, auto));
   grid-template-rows: repeat(5, minmax(1fr, auto));
   grid-template-areas:
@@ -95,6 +101,8 @@ const MypageRecord = () => {
 
   return (
     <Content>
+      <Logo className="logo" />
+      <GoBack top={22} left={95} width={6} />
       <MypageRecordRayOut>
         <CalendarComponents selectActions={selectActions} currentUser={currentUser}></CalendarComponents>
         <PlantsCycleChange theLastDateOfAction={theLastDateOfAction}></PlantsCycleChange>
