@@ -5,10 +5,11 @@ import { useNavigateSearch } from "../../modules/hooks";
 
 const Layout = styled.div`
   display: grid;
-  grid-template-columns: auto;
-  grid-template-rows: auto auto auto;
-  flex-direction: column;
+  grid-template-columns: auto auto;
+  white-space: wrap;
   width: 100%;
+  height: auto;
+
   padding-bottom: 1rem;
 
   .shell {
