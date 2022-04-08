@@ -132,8 +132,6 @@ const LoginForm = () => {
         return;
       }
     } catch (err) {
-      console.log(err.response.data.message);
-
       setPopupInfo({ fn: err.response.data.message });
     }
   }
@@ -194,13 +192,7 @@ const LoginForm = () => {
                 } catch (err) {
                   if (err.response.data.message === "usedEmail") {
                     await axios.post(process.env.REACT_APP_API_URL + "/users/login", payload);
-                    const resData = await axios.get(process.env.REACT_APP_API_URL + "/users/userinfo");
-                    const { nickname, id } = resData.data.data;
-                    if (resData.data.data.profile_image !== null) {
-                      setImage(resData.data.data.profile_image.store_path);
-                    }
-                    setNickname(nickname);
-                    setUserNumber(id);
+                    await axios.get(process.env.REACT_APP_API_URL + "/users/userinfo");
                   }
                 }
                 setPopupInfo({ fn: "testLogin" });

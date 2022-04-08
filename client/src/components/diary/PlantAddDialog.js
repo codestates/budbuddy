@@ -25,7 +25,7 @@ const Layout = styled.div`
     width: 100vw;
     min-height: 100vh;
     border: solid 1px black;
-    @media screen and (min-width: 391px) {
+    @media screen and (min-width: ${(props) => props.theme.webWidth + 1 + "px"}) {
       width: ${(props) => props.theme.webWidth + "px"};
     }
   }
