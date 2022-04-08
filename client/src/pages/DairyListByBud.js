@@ -25,6 +25,8 @@ const DairyListByBud = () => {
     setListByPlantId(plant_id);
   }, [plant_id, setListByPlantId]);
 
+  console.log("listByPlantId", listByPlantId);
+
   return (
     <Layout>
       <Logo className="logo" />

@@ -51,6 +51,7 @@ const Story = () => {
   let { publicJournal, getAllPublicJournal } = useAjaxStore();
   const [story, setStory] = useState([]);
   const [isFreeze, setFreeze] = useState(false);
+  const [isSearchNone, setIsSearchNone] = useState(false);
   useEffect(() => {
     getStory();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -76,7 +77,15 @@ const Story = () => {
       if (regExp.test(str)) return v;
       else return null;
     });
-    setStory(filteredStory);
+
+    if (filteredStory.length === 0) {
+      setStory(filteredStory);
+      setIsSearchNone(true);
+      return;
+    } else {
+      setIsSearchNone(false);
+      setStory(filteredStory);
+    }
   }
   //story.length === 0
   return (
@@ -91,7 +100,13 @@ const Story = () => {
           <div>{`본인과 다른 사람들이 작성한 일지 중\n 공개된 일지가 없습니다.`}</div>
         </div>
       ) : story.length === 0 ? (
-        <Loading isAb={true} top={250} left={0} />
+        isSearchNone ? (
+          <div className="desc">
+            <div>{`검색된 내용이 없습니다.`}</div>
+          </div>
+        ) : (
+          <Loading isAb={true} top={250} left={0} />
+        )
       ) : (
         <StoryCard className="story-card" storyList={story} hoverTransitonSec={0.25} setFreeze={setFreeze} getStory={getStory} />
       )}
