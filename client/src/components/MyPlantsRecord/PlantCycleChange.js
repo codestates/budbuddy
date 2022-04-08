@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGear } from "@fortawesome/free-solid-svg-icons";
@@ -88,10 +88,6 @@ const PlantsCycleChange = ({ theLastDateOfAction }) => {
   const upSetting = () => {
     popUpPlantCycleChangeModal();
   };
-  const [GearSpin, setGearSpin] = useState(false);
-  const LetsSpinGear = () => {
-    setGearSpin((current) => !current);
-  };
 
   const WaterData = [{ value: theLastDateOfAction.water }, { value: defaultWater - theLastDateOfAction.water }];
   const FertilizeData = [{ value: theLastDateOfAction.fertilize / 3 }, { value: (defaultFertilize - theLastDateOfAction.fertilize) / 3 }];
@@ -104,14 +100,7 @@ const PlantsCycleChange = ({ theLastDateOfAction }) => {
       <PlantsCycleChangeContainer>
         <DayDiv>D-Day</DayDiv>
         <CustomFontAwesomeIcon>
-          <FontAwesomeIcon
-            className={`${GearSpin ? "fa-solid fa-2x" : "fa-solid fa-2x fa-spin"}`}
-            icon={faGear}
-            cursor="pointer"
-            onClick={upSetting}
-            onMouseEnter={LetsSpinGear}
-            onMouseOut={LetsSpinGear}
-          />
+          <FontAwesomeIcon className="fa-solid fa-2x" icon={faGear} cursor="pointer" onClick={upSetting} />
         </CustomFontAwesomeIcon>
         <DayCircle>
           <ChartComponent WaterData={WaterData} FertilizeData={FertilizeData} RepotData={RepotData}></ChartComponent>
