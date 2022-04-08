@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import * as d3 from "d3";
 
@@ -19,7 +19,11 @@ const ChartSvgDiv = styled.div`
   text-align: center;
 `;
 
-const ChartSvg = styled.svg``;
+const ChartSvg = styled.svg`
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 10px;
+`;
 
 const ChartTitle = styled.h2`
   text-align: center;
@@ -29,13 +33,13 @@ const Chart = ({ currentUser, ChartValue }) => {
   useEffect(() => {
     // 캔버스 구역 정의
     const width = 300;
-    const height = 250;
+    const height = 200;
     const margin = { top: 20, left: 20, bottom: 20, right: 20 };
 
     const svg = d3.select(".list");
     const chartLine = [];
-    for (let i = 0; i <= 60; i++) {
-      chartLine.push(i * 5);
+    for (let i = 0; i <= 30; i++) {
+      chartLine.push(i * 10);
     }
 
     // 눈금 만들기
@@ -124,7 +128,7 @@ const Chart = ({ currentUser, ChartValue }) => {
       <ChartTitle>{currentUser} 성장 기록</ChartTitle>
       {ChartValue.length !== 0 ? (
         <ChartSvgDiv>
-          <ChartSvg className="list" width="320" height="280"></ChartSvg>
+          <ChartSvg className="list" width="80%" height="210"></ChartSvg>
         </ChartSvgDiv>
       ) : (
         <div className="none">스토리를 작성해주세요</div>

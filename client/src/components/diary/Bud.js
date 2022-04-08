@@ -25,7 +25,6 @@ const Layout = styled.div`
     z-index: 0;
     background-color: rgba(0, 0, 0, 0.3);
     box-shadow: 7px 4px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
-    /* filter: grayscale(100%); */
   }
 
   .coverImg {

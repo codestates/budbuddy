@@ -75,9 +75,9 @@ const DiaryList = ({ diaryList = [], isBudName = false, type = "" }) => {
   const callDelete = async (journal_id, plant_id) => {
     await deleteListByJournalId(journal_id);
     if (type === "user") {
-      setListByUserId();
+      await setListByUserId();
     } else if (type === "plant") {
-      setListByPlantId(plant_id);
+      await setListByPlantId(plant_id);
     }
   };
 

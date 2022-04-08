@@ -68,7 +68,7 @@ const Home = () => {
   return (
     <Layout>
       {makePopup(popupInfo)}
-      <p className="version">ver1.2</p>
+      <p className="version">ver1.3</p>
       <p className="greeting">{`안녕하세요!\n자신의 식물을 일기처럼 기록해보세요!`}</p>
       <TextOnImg texts={proverbs} />
       <Hr t={4} b={4} width={80} />

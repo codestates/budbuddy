@@ -8,7 +8,6 @@ import ImgUpload from "../common/ImgUpload";
 const Layout = styled.div`
   display: flex;
   flex-direction: column;
-
   position: absolute;
   text-align: center;
 
