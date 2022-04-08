@@ -64,8 +64,11 @@ const useAjaxStore = create(
       },
       async setListByPlantId(plantId) {
         try {
-          const resData = await axios.get(process.env.REACT_APP_API_URL + "/journals/my", { params: { plant: plantId } });
-          set((state) => ({ listByPlantId: [...resData.data.data] }));
+          const {
+            data: { data },
+          } = await axios.get(process.env.REACT_APP_API_URL + "/journals/my", { params: { plant: plantId } });
+          console.log("setListByPlantId:::", data);
+          set((state) => ({ listByPlantId: [...data] }));
         } catch (err) {
           // console.log("axios err / setListByPlatId :::", err);
           set((state) => ({ listByPlantId: [] }));
@@ -80,7 +83,7 @@ const useAjaxStore = create(
           data.sort((a, b) => {
             return moment(a.updatedAt).format("YYMMDDhhmmss") * 1 - moment(b.updatedAt).format("YYMMDDhhmmss") * 1;
           });
-
+          console.log("setListByUserId:::", data);
           set((state) => ({ listByUserId: [...data] }));
         } catch (err) {
           // console.log("axios err / setListByUserId :::", err);

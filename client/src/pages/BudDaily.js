@@ -16,20 +16,34 @@ const Layout = styled.div`
   flex-direction: column;
   width: 100%;
   min-height: 100vh;
-  padding-top: 1rem;
   padding-bottom: 3rem;
+  position: relative;
 
   .logo {
-    margin-top: 1rem;
+    margin-top: 2rem;
   }
 
   .TabBtnOne {
     margin-top: 0.3rem;
   }
+
+  .notice-fist {
+    position: absolute;
+    /* border: solid 1px red; */
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    .notice-dsec {
+      flex-grow: 1;
+      font-size: ${(props) => props.theme.fontWritePageSmall};
+      color: dimgray;
+    }
+  }
 `;
 const BudLayout = styled.div`
   display: flex;
-  flex-grow: 1;
   width: 100%;
 
   .card-wrap {
@@ -40,15 +54,6 @@ const BudLayout = styled.div`
   }
   .cardcomponent {
     width: 50%;
-  }
-
-  .notice-pos {
-    flex-grow: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: dimgray;
-    font-size: ${(props) => props.theme.fontWritePageSmall};
   }
 `;
 
@@ -119,12 +124,15 @@ const BudDaily = () => {
       {makePopup(popupInfo)}
       <Logo className="logo" />
       {!isLogin ? null : <TabBtnOne className="TabBtnOne" tabName="내 식물" btnName="내 식물 추가" fn={openDialog} />}
-      <BudLayout>
-        {myPlants.length === 0 || !isLogin ? (
-          <div className="notice-pos">
+      {myPlants.length === 0 || !isLogin ? (
+        <div className="notice-fist">
+          <div className="notice-dsec">
             <div>{!isLogin ? "로그인 후 이용해 주세요" : "등록된 식물이 없습니다"}</div>
           </div>
-        ) : (
+        </div>
+      ) : null}
+      <BudLayout>
+        {myPlants.length === 0 ? null : (
           <div className="card-wrap">
             {myPlants.map((v, i) => {
               const date = curDate();
