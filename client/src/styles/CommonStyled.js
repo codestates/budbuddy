@@ -16,7 +16,7 @@ export const Content = styled.div`
   margin: auto auto;
   border: none;
 
-  @media screen and (min-width: 391px) {
+  @media screen and (min-width: ${(props) => props.theme.webWidth + 1 + "px"}) {
     width: ${(props) => props.theme.webWidth + "px"};
   }
 `;
@@ -33,8 +33,6 @@ export const BGWrapper = styled.div`
     width: 100%;
     height: 100%;
     object-fit: cover;
-    /* filter: blur(1px); */
-    border: none;
   }
 
   .backText {
@@ -43,7 +41,7 @@ export const BGWrapper = styled.div`
     left: 50%;
 
     transform: translate(-50%, -50%);
-    white-space: pre;
+    white-space: pre-wrap;
 
     font-weight: ${(props) => props.theme.fontWeightBg};
     color: ${(props) => props.theme.backgroundTextColor};

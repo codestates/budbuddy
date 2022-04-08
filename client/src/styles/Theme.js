@@ -40,7 +40,7 @@ const theme = {
   fontToggleIcon: "1.4rem",
   //layout
   signupInputLineHeight: "0.3rem",
-  backgroundPaddingTop: "12vh",
+  backgroundPaddingTop: "8vh",
   iphoneWidth: "100vw",
   webWidth: 410,
   //style
