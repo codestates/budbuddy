@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import drawChart from "./drawChart";
 import styled from "styled-components";
 
@@ -32,7 +32,7 @@ const DonutChart = ({ WaterData, FertilizeData, RepotData }) => {
       drawChart(ref3.current, RepotData, repotColors);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ref1, ref2, ref3]);
+  }, [ref1, ref2, ref3, WaterData, FertilizeData, RepotData]);
 
   return (
     <Cover>

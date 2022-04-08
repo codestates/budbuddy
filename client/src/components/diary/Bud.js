@@ -19,7 +19,8 @@ const Layout = styled.div`
     padding: 5px;
     overflow: hidden;
     position: relative;
-  }
+   min-height: 20vh;
+
 
   .shell:hover {
     z-index: 0;
