@@ -3,26 +3,26 @@ import styled from "styled-components";
 export const SignupWrapper = styled.form`
   display: flex;
   flex-direction: column;
-
+  width: 80%;
+  height: 100%;
   text-align: center;
-  place-items: center;
 
   background-color: ${(props) => props.theme.formColor};
-  margin: 9% 15% 0 15%;
-  padding-top: 0.5rem;
+  padding-top: 1rem;
   padding-bottom: 0.5rem;
   border-radius: ${(props) => props.theme.borderRadius};
 
   .signupText {
-    font-size: ${(props) => props.theme.fontWritePageLarge};
+    font-size: ${(props) => props.theme.fontWritePageMid};
     letter-spacing: 7px;
     color: black;
     margin-bottom: 0.3rem;
   }
 
   .hr {
-    grid-area: hr;
-    margin: 1rem 0 1.2rem 0;
+    display: flex;
+    justify-content: center;
+    margin: 0rem 0rem 1.5rem 0;
   }
 
   .btn {
@@ -33,6 +33,7 @@ export const SignupWrapper = styled.form`
     color: white;
     padding: 3px;
     transition: background-color 0.3s;
+    margin-bottom: 1rem;
   }
 
   .join:hover {
@@ -62,93 +63,90 @@ export const SignupWrapper = styled.form`
     }
     > .cancle {
       font-size: ${(props) => props.theme.fontWritePageSmall};
-      width: 30%;
+      width: 25%;
       margin-right: 10%;
     }
   }
 `;
 
 export const InputWrapper = styled.div`
-  grid-area: inputWrapper;
-
-  display: grid;
-  grid-template-columns: minmax(1fr, auto) minmax(9fr, auto);
-  grid-template-rows: repeat(6, minmax(1fr, auto));
-  grid-template-areas:
-    "chEmail chEmail"
-    "idIcon inputId"
-    "chPass chPass"
-    "passIcon inputPass"
-    "chNick chNick"
-    "nickIcon inputNick";
+  display: flex;
+  flex-direction: column;
 
   justify-content: center;
   text-align: center;
   place-items: center;
 
   input {
-    font-size: ${(props) => props.theme.fontWritePageSmall};
+    font-size: ${(props) => props.theme.fontWritePageXSmall};
     border: none;
-    margin-left: 0.5rem;
+    width: 100%;
     height: 1.5rem;
     border-radius: ${(props) => props.theme.borderRadius};
-    padding-left: 1rem;
+  }
+
+  .item1 {
+    display: flex;
+    width: 100%;
+    place-items: center;
+    .idIcon {
+      margin: 0 1rem;
+    }
+    > input {
+      width: 75%;
+    }
+  }
+
+  .item2 {
+    place-items: center;
+    display: flex;
+    width: 100%;
+
+    > .passIcon {
+      margin: 0 1rem;
+    }
+
+    > input {
+      width: 75%;
+    }
+  }
+
+  .item3 {
+    place-items: center;
+    display: flex;
+    width: 100%;
+
+    > .nickIcon {
+      margin: 0 1rem;
+    }
+
+    > input {
+      width: 75%;
+    }
   }
 
   > * {
     margin-bottom: ${(props) => props.theme.signupInputLineHeight};
   }
 
-  > .icon {
-    font-size: ${(props) => props.theme.fontWritePageLarge};
+  .icon {
+    width: 6%;
+    font-size: 30px;
     filter: invert(85%) sepia(90%) saturate(400%) hue-rotate(130deg) brightness(95%) contrast(50%);
   }
 
-  > .idIcon {
-    grid-area: idIcon;
-  }
-  > .inputId {
-    grid-area: inputId;
-  }
-
-  > .passIcon {
-    grid-area: passIcon;
-  }
-
-  > .nickIcon {
-    grid-area: nickIcon;
-  }
-  > .inputPass {
-    grid-area: inputPass;
-  }
-
-  > .inputNick {
-    grid-area: inputNick;
-  }
-
-  > *::placeholder {
+  *::placeholder {
     color: ${(props) => props.theme.placeholderColor};
     opacity: 0.5;
+    padding-left: 1rem;
   }
 
-  > .ch {
+  .ch {
     font-size: ${(props) => props.theme.fontToolTip};
     white-space: pre;
   }
 
-  > .invalid {
+  .invalid {
     color: ${(props) => props.theme.textWaringColor};
-  }
-
-  > .chEmail {
-    grid-area: chEmail;
-  }
-
-  > .chPass {
-    grid-area: chPass;
-  }
-
-  > .chNick {
-    grid-area: chNick;
   }
 `;

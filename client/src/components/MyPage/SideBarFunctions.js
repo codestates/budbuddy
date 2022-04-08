@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser, faLock, faLockOpen, faEraser, faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
+import { faUser, faLockOpen, faRightFromBracket, faLock, faEraser } from "@fortawesome/free-solid-svg-icons";
 import AccountDelete from "./AccountDelete";
 import ChangePassword from "./ChangePassword";
 import useLoginStore from "../../store/loginStore";
@@ -73,7 +73,7 @@ const Content = styled.div`
 
 function SideBarFunctions({ setModalCode }) {
   const navigate = useNavigate();
-  const { setLogin } = useLoginStore();
+  const { setLogin, setNickname, setUserNumber, setImage } = useLoginStore();
   const [isDelAccount, setDelAccount] = useState(false);
   const [isChangePassword, setChangePassword] = useState(false);
   const [lockIcon, setLockIcon] = useState(false);
@@ -81,12 +81,20 @@ function SideBarFunctions({ setModalCode }) {
   const logOutFunction = async () => {
     try {
       await axios.post(process.env.REACT_APP_API_URL + "/users/logout");
+      setNickname("");
+      setUserNumber("");
+      setImage("");
       setLogin(false);
       navigate("/");
     } catch (err) {
+      setNickname("");
+      setUserNumber("");
+      setImage("");
       setLogin(false);
       navigate("/");
     }
+    // if (resData.status === 200) {
+    // }
   };
   const DelAccountFunction = () => {
     setDelAccount((current) => !current);
@@ -94,10 +102,10 @@ function SideBarFunctions({ setModalCode }) {
   const ChangePasswordFunction = () => {
     setChangePassword((current) => !current);
   };
-  const ChangeLockIcon = () => {
+  const LockIconChange = () => {
     setLockIcon((current) => !current);
   };
-  const ChangeLogoutIcon = () => {
+  const LogoutIconChange = () => {
     setLogoutIcon((current) => !current);
   };
   return (
@@ -106,13 +114,13 @@ function SideBarFunctions({ setModalCode }) {
       {isDelAccount ? <AccountDelete open={isDelAccount} closeFn={setDelAccount} setModalCode={setModalCode} /> : null}
       <div className="logout">
         <FontAwesomeIcon className="fa-solid fa-user fa-2x" icon={logoutIcon ? faRightFromBracket : faUser} color="snow" />
-        <button className="logoutButton" onClick={logOutFunction} onMouseEnter={ChangeLogoutIcon} onMouseOut={ChangeLogoutIcon}>
+        <button className="logoutButton" onClick={logOutFunction} onMouseEnter={LogoutIconChange} onMouseOut={LogoutIconChange}>
           로그아웃
         </button>
       </div>
       <div className="pwChange">
         <FontAwesomeIcon className="fa-solid fa-lock fa-2x" icon={lockIcon ? faLockOpen : faLock} color="snow" />
-        <button onClick={ChangePasswordFunction} className="pwChangeButton" onMouseEnter={ChangeLockIcon} onMouseOut={ChangeLockIcon}>
+        <button onClick={ChangePasswordFunction} className="pwChangeButton" onMouseEnter={LockIconChange} onMouseOut={LockIconChange}>
           비밀번호 변경
         </button>
       </div>

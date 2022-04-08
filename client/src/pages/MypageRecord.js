@@ -102,7 +102,7 @@ const MypageRecord = () => {
   return (
     <Content>
       <Logo className="logo" />
-      <GoBack top={22} left={95} width={6} />
+      <GoBack top={22} left={94} width={6} />
       <MypageRecordRayOut>
         <CalendarComponents selectActions={selectActions} currentUser={currentUser}></CalendarComponents>
         <PlantsCycleChange theLastDateOfAction={theLastDateOfAction}></PlantsCycleChange>

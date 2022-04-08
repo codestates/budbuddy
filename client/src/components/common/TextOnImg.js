@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import styled from "styled-components";
 import { useInterval } from "../../modules/hooks";
 import { BGWrapper } from "../../styles/CommonStyled";
@@ -10,7 +10,7 @@ const Content = styled(BGWrapper)`
   position: relative;
   width: 100%;
 
-  img {
+  #canvas {
     height: ${(props) => props.theme.backgroundImgHeight};
     border-top: solid 1px rgb(0, 0, 0, 0.4);
     border-bottom: solid 1px rgb(0, 0, 0, 0.4);
@@ -43,8 +43,22 @@ const Content = styled(BGWrapper)`
   }
 `;
 
+const Canvas = styled.canvas`
+  /* border: 1px solid red; */
+  position: relative;
+  width: 100%;
+  height: ${(props) => props.theme.backgroundImgHeight};
+`;
+
 const TextOnImg = ({ className = "", texts = [], time = 5000 }) => {
   const [idx, setIdx] = useState(0);
+  const [ctx, setCtx] = useState(null);
+  const canvasRef = useRef(document.getElementById("canvas"));
+
+  useEffect(() => {
+    if (!canvasRef.current) return;
+    setCtx(canvasRef.current.getContext("2d"));
+  }, [canvasRef]);
 
   const changeProverb = useCallback(() => {
     if (!texts.length) {
@@ -71,6 +85,20 @@ const TextOnImg = ({ className = "", texts = [], time = 5000 }) => {
 
   const index = parseInt(Math.random() * bg.length);
 
+  const render = useCallback(() => {
+    if (!ctx) return;
+    const bgImg = new Image();
+    bgImg.src = bg[index];
+    bgImg.onload = function () {
+      ctx.clearRect(0, 0, bgImg.width, bgImg.height);
+      ctx.drawImage(bgImg, 0, 0, bgImg.width, bgImg.height, 0, 0, canvasRef.current.width, canvasRef.current.height);
+    };
+  }, [ctx, index]);
+
+  useEffect(() => {
+    render();
+  }, [ctx, render]);
+
   return (
     <Content className={className} textTime={time}>
       <div className="std">
@@ -78,7 +106,8 @@ const TextOnImg = ({ className = "", texts = [], time = 5000 }) => {
           <Loading isAb={false} top={0} left={0} bgColor={"lightgray"} />
         ) : (
           <div>
-            <img src={bg[index] || ""} alt={`bg`} />
+            <Canvas ref={canvasRef} id="canvas" />
+            {/* <img src={bg[index] || ""} alt={`bg`} /> */}
             <div className="backText ani">{texts[idx] || ""}</div>
           </div>
         )}

@@ -40,7 +40,6 @@ const BudLayout = styled.div`
     display: flex;
     flex-direction: column;
     position: absolute;
-    top: 500%;
     left: 50%;
     transform: translate(-50%, -50%);
   }

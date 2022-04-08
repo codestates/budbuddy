@@ -60,7 +60,7 @@ const theme = createTheme({
 });
 
 const LoginForm = () => {
-  const { setLogin } = useLoginStore();
+  const { setLogin, setNickname, setUserNumber, setImage } = useLoginStore();
   let navigate = useNavigate();
   const [popupInfo, setPopupInfo] = useState({ fn: "" });
 
@@ -120,12 +120,18 @@ const LoginForm = () => {
       const resData = await axios.post(process.env.REACT_APP_API_URL + "/users/login", payload);
       const msg = resData.data.message.split(" ");
       if (msg[1] === "AccessToken") {
+        const resData = await axios.get(process.env.REACT_APP_API_URL + "/users/userinfo");
+        const { nickname, id } = resData.data.data;
+        if (resData.data.data.profile_image !== null) {
+          setImage(resData.data.data.profile_image.store_path);
+        }
+        setNickname(nickname);
+        setUserNumber(id);
+        setLogin(true);
         navigate("/mypage");
         return;
       }
     } catch (err) {
-      console.log(err.response.data.message);
-
       setPopupInfo({ fn: err.response.data.message });
     }
   }
@@ -186,6 +192,7 @@ const LoginForm = () => {
                 } catch (err) {
                   if (err.response.data.message === "usedEmail") {
                     await axios.post(process.env.REACT_APP_API_URL + "/users/login", payload);
+                    await axios.get(process.env.REACT_APP_API_URL + "/users/userinfo");
                   }
                 }
                 setPopupInfo({ fn: "testLogin" });
