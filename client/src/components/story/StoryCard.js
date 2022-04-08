@@ -226,6 +226,7 @@ const Card = styled.div`
     .btn {
       color: black;
       background-color: ${(props) => props.theme.btnBgColor};
+      background-color: rgba(207, 207, 207, 0.4);
       transition: background-color ${(props) => `${props.hoverTransitonSec}s`} ease, color ${(props) => `${props.hoverTransitonSec}s`} ease;
     }
 

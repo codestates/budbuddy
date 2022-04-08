@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { empty } from "../../resources";
 import { useNavigateSearch } from "../../modules/hooks";
 
 const Layout = styled.div`
@@ -8,14 +9,15 @@ const Layout = styled.div`
   grid-template-rows: auto auto auto;
   flex-direction: column;
   width: 100%;
-  padding-bottom: 2rem;
+  padding-bottom: 1rem;
 
   .shell {
+    width: 100%;
+    height: fit-content;
     text-align: start;
     padding: 5px;
     overflow: hidden;
     position: relative;
-    min-height: 220px;
   }
 
   .shell:hover {
@@ -28,14 +30,14 @@ const Layout = styled.div`
   .coverImg {
     object-fit: cover;
     width: 100%;
-    height: 170px;
+    height: 180px;
     mix-blend-mode: multiply;
     border: solid 2px rgb(0, 0, 0, 0.1);
   }
 
   .hide {
     width: 100%;
-    height: 100%;
+    height: fit-content;
     color: WhiteSmoke;
     z-index: 1;
 
@@ -123,7 +125,7 @@ const Bud = ({ className, src, budName, date, plant_id, setPopupInfo }) => {
             관리 캘린더
           </div>
         </div>
-        <img className="coverImg" src={src} alt={`bg`} />
+        <img className="coverImg" src={src || empty.journal} alt={`bg`} />
         <div className="budName">{budName}</div>
         <span className="date">{date}</span>
       </div>

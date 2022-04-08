@@ -15,7 +15,7 @@ const Layout = styled.div`
   overflow: hidden;
 
   .logo {
-    margin-top: 1rem;
+    margin-top: 2rem;
   }
 
   .desc {
@@ -69,11 +69,11 @@ const Mypage = () => {
   const { userInfo, getUserInfo, listByUserId, setListByUserId } = useAjaxStore();
 
   useEffect(() => {
-    getMapageInfo();
+    getMypageInfo();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  async function getMapageInfo() {
+  async function getMypageInfo() {
     await setListByUserId();
     await getUserInfo();
   }

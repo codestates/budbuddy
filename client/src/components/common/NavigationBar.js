@@ -5,7 +5,7 @@ import useLoginStore from "../../store/loginStore";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHouseUser, faDoorOpen, faAddressBook, faBook, faImage, faUser } from "@fortawesome/free-solid-svg-icons";
 
-export const Content = styled.nav`
+const Content = styled.nav`
   width: 100vw;
   cursor: pointer;
   position: fixed;
@@ -15,21 +15,22 @@ export const Content = styled.nav`
   margin: 0;
   background-color: ${(props) => props.theme.navigationBGColor};
 
-  @media screen and (min-width: 391px) {
+  @media screen and (min-width: ${(props) => props.theme.webWidth + 1 + "px"}) {
     width: ${(props) => props.theme.webWidth + "px"};
   }
 
   .wrap {
     display: flex;
+    width: 100%;
     font-size: ${(props) => props.theme.fontWritePageLarge};
 
     .ani {
       flex-grow: 1;
       position: absolute;
-      width: ${(props) => 100 / 5 + "%"};
+      width: 20%;
       height: 100%;
       background: LightCoral;
-      transition: all 0.3s ease 0s;
+      transition: all 0.5s ease 0s;
     }
 
     > a {
@@ -38,8 +39,10 @@ export const Content = styled.nav`
       align-items: center;
       justify-content: center;
       z-index: 7;
+      width: 20%;
+      height: 100%;
+
       .icon {
-        width: 82px;
         color: dimgray;
         transform: translateY(10%);
       }
@@ -79,7 +82,7 @@ export const Content = styled.nav`
       opacity: 1;
     }
     .link:hover {
-      background-color: ${(props) => props.theme.hoverColor};
+      background-color: rgba(255, 138, 80, 1);
     }
   }
 `;
@@ -95,48 +98,52 @@ function NavigationBar() {
   return (
     <Content>
       <form className="wrap">
-        <NavLink to="/">
-          <div
-            className="link"
-            onClick={() => {
-              moveNavi(0);
-            }}>
+        <NavLink
+          to="/"
+          className="link"
+          onClick={() => {
+            moveNavi(0);
+          }}>
+          <div>
             <FontAwesomeIcon className="home icon" icon={faHouseUser} />
             <div className="tooltip">
               <span className="tooltiptext">Home</span>
             </div>
           </div>
         </NavLink>
-        <NavLink to="/story">
-          <div
-            className="link"
-            onClick={() => {
-              moveNavi(1);
-            }}>
+        <NavLink
+          to="/story"
+          className="link"
+          onClick={() => {
+            moveNavi(1);
+          }}>
+          <div>
             <FontAwesomeIcon className="story icon" icon={faAddressBook} />
             <div className="tooltip">
               <span className="tooltiptext">story</span>
             </div>
           </div>
         </NavLink>
-        <NavLink to="/daily">
-          <div
-            className="link"
-            onClick={() => {
-              moveNavi(2);
-            }}>
+        <NavLink
+          to="/daily"
+          className="link"
+          onClick={() => {
+            moveNavi(2);
+          }}>
+          <div>
             <FontAwesomeIcon className="diary icon" icon={faBook} />
             <div className="tooltip">
               <span className="tooltiptext">diary</span>
             </div>
           </div>
         </NavLink>
-        <NavLink to="/album">
-          <div
-            className="link"
-            onClick={() => {
-              moveNavi(3);
-            }}>
+        <NavLink
+          to="/album"
+          className="link"
+          onClick={() => {
+            moveNavi(3);
+          }}>
+          <div>
             <FontAwesomeIcon className="album icon" icon={faImage} />
             <div className="tooltip">
               <span className="tooltiptext">album</span>
@@ -144,12 +151,13 @@ function NavigationBar() {
           </div>
         </NavLink>
         {isLogin ? (
-          <NavLink to="/mypage">
-            <div
-              className="link"
-              onClick={() => {
-                moveNavi(4);
-              }}>
+          <NavLink
+            to="/mypage"
+            className="link"
+            onClick={() => {
+              moveNavi(4);
+            }}>
+            <div className="link">
               <FontAwesomeIcon className="mypage icon" icon={faUser} />
               <div className="tooltip">
                 <span className="tooltiptext">mypage</span>
@@ -157,12 +165,13 @@ function NavigationBar() {
             </div>
           </NavLink>
         ) : (
-          <NavLink to="/login">
-            <div
-              className="link"
-              onClick={() => {
-                moveNavi(4);
-              }}>
+          <NavLink
+            to="/login"
+            className="link"
+            onClick={() => {
+              moveNavi(4);
+            }}>
+            <div>
               <FontAwesomeIcon className="login icon" icon={faDoorOpen} />
               <div className="tooltip">
                 <span className="tooltiptext">Login</span>
