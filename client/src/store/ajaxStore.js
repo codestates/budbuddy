@@ -118,6 +118,9 @@ const useAjaxStore = create(
           // console.log("axios err / getPlantsList :::", err);
         }
       },
+      resetPlantsList() {
+        set((state) => ({ myPlants: [] }));
+      },
       async deletePlant(plant_id) {
         try {
           await axios.delete(process.env.REACT_APP_API_URL + `/plants/${plant_id}`);

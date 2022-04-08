@@ -59,7 +59,7 @@ const BudLayout = styled.div`
 
 const BudDaily = () => {
   const { isLogin } = useLoginStore();
-  const { setPlant, getPlantsList, myPlants, deletePlant } = useAjaxStore();
+  const { setPlant, getPlantsList, myPlants, deletePlant, resetPlantsList } = useAjaxStore();
 
   const [isAddBudDialog, setAddBudDialog] = useState(false);
   const [popupInfo, setPopupInfo] = useState(false);
@@ -67,6 +67,8 @@ const BudDaily = () => {
   useEffect(() => {
     if (isLogin) {
       getBuds();
+    } else {
+      resetPlantsList();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLogin]);
@@ -132,7 +134,7 @@ const BudDaily = () => {
         </div>
       ) : null}
       <BudLayout>
-        {myPlants.length === 0 ? null : (
+        {myPlants.length === 0 || !isLogin ? null : (
           <div className="card-wrap">
             {myPlants.map((v, i) => {
               const date = curDate();
