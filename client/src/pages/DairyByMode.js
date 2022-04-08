@@ -6,7 +6,6 @@ import TextContent from "../components/write/TextContent";
 import { useNavigate, useLocation, useParams } from "react-router-dom";
 import PublicBtn from "../components/write/PublicBtn";
 import moment from "moment";
-import axios from "axios";
 const qs = require("query-string");
 
 const Layout = styled.form`
@@ -61,9 +60,6 @@ const DairyByMode = () => {
     const budName = info.Plant;
 
     const { title, upload_img, content, checkbox, toggle } = e.target;
-    console.log(title.value, upload_img.files[0], content.value, checkbox.checked);
-
-    console.log(toggle.value);
 
     const payload = {};
 

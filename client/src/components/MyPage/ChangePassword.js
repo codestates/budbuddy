@@ -192,7 +192,6 @@ const ChangePassword = ({ open = true, closeFn, setModalCode = "" }) => {
 
   const NewPasswordFunction = (e) => {
     setNewPassword(e.target.value);
-    console.log(isnewPassword);
   };
 
   async function resisterBud(e) {
