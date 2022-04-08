@@ -29,17 +29,13 @@ const Home = () => {
     if (!isLogin) getUserInfo();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  const { isLogin, setLogin, setImage } = useLoginStore();
+  const { isLogin } = useLoginStore();
   const [popupInfo, setPopupInfo] = useState({ fn: "" });
 
   async function getUserInfo() {
     try {
       const resData = await axios.get(process.env.REACT_APP_API_URL + "/users/userinfo");
       if (resData.data.message === "ok") {
-        if (resData.data.data.profile_image) {
-          setImage(resData.data.data.profile_image.store_path);
-        }
-        setLogin(true);
         setPopupInfo({ fn: "kakaoGreeting" });
       }
     } catch (err) {

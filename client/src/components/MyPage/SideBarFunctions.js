@@ -73,7 +73,7 @@ const Content = styled.div`
 
 function SideBarFunctions({ setModalCode }) {
   const navigate = useNavigate();
-  const { setLogin, setImage } = useLoginStore();
+  const { setLogin } = useLoginStore();
   const [isDelAccount, setDelAccount] = useState(false);
   const [isChangePassword, setChangePassword] = useState(false);
   const [lockIcon, setLockIcon] = useState(false);
@@ -81,11 +81,9 @@ function SideBarFunctions({ setModalCode }) {
   const logOutFunction = async () => {
     try {
       await axios.post(process.env.REACT_APP_API_URL + "/users/logout");
-      setImage("");
       setLogin(false);
       navigate("/");
     } catch (err) {
-      setImage("");
       setLogin(false);
       navigate("/");
     }
