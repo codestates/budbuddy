@@ -23,7 +23,7 @@ const Layout = styled.div`
     `}
 
   .logo {
-    margin-top: 1.3rem;
+    margin-top: 2rem;
   }
   .title {
     margin-top: 1rem;
@@ -91,7 +91,7 @@ const Story = () => {
           <div>{`본인과 다른 사람들이 작성한 일지 중\n 공개된 일지가 없습니다.`}</div>
         </div>
       ) : story.length === 0 ? (
-        <Loading isAb={true} top={350} left={50} />
+        <Loading isAb={true} top={250} left={0} />
       ) : (
         <StoryCard className="story-card" storyList={story} hoverTransitonSec={0.25} setFreeze={setFreeze} getStory={getStory} />
       )}

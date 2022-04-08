@@ -29,7 +29,7 @@ export const Content = styled.nav`
       width: ${(props) => 100 / 5 + "%"};
       height: 100%;
       background: LightCoral;
-      transition: all 0.3s ease 0s;
+      transition: all 0.5s ease 0s;
     }
 
     > a {
@@ -79,7 +79,7 @@ export const Content = styled.nav`
       opacity: 1;
     }
     .link:hover {
-      background-color: ${(props) => props.theme.hoverColor};
+      background-color: rgba(255, 138, 80, 0.8);
     }
   }
 `;
