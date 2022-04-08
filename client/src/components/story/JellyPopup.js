@@ -28,7 +28,7 @@ const Layout = styled.div`
     /* display: none; */
     border-radius: ${(props) => props.theme.borderRadius};
 
-    @media screen and (min-width: 391px) {
+    @media screen and (min-width: ${(props) => props.theme.webWidth + 1 + "px"}) {
       width: ${(props) => props.theme.webWidth * 0.85 + "px"};
     }
   }
@@ -100,7 +100,7 @@ const BlackScreen = styled.div`
     }
   }
 
-  @media screen and (min-width: 391px) {
+  @media screen and (min-width: ${(props) => props.theme.webWidth + 1 + "px"}) {
     width: ${(props) => props.theme.webWidth + "px"};
   }
 `;
