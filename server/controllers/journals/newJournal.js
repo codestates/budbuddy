@@ -13,7 +13,7 @@ module.exports = async (req, res) => {
   let { date_pick } = req.body;
 
   // requirements
-  if ((!plant_id, !public)) return res.status(400).send({ message: "Bad Request" });
+  if (!plant_id || public === undefined) return res.status(400).send({ message: "Bad Request" });
   // defaults
   if (!date_pick) {
     date_pick = new Date().toISOString().split("T")[0];
