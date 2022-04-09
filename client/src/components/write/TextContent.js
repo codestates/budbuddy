@@ -117,12 +117,17 @@ function TextContent({ className = "", title = "", content = "", src = null, mod
   //
   const [img, setImg] = useState(null);
   const [isReadOnly, setReadOnly] = useState(false);
+  const [isModify, setModify] = useState(false);
   useEffect(() => {
     setImg(src);
     if (mode === "read") {
       setReadOnly(true);
     } else {
       setReadOnly(false);
+    }
+
+    if (mode === "modify") {
+      setModify(true);
     }
   }, []);
 
@@ -173,7 +178,7 @@ function TextContent({ className = "", title = "", content = "", src = null, mod
             <img className="photo" src={img} alt="" />
           )}
         </div>
-        {isReadOnly ? null : (
+        {isReadOnly || isModify ? null : (
           <div className="btn">
             <label className="file" htmlFor="input-file">
               사진 업로드

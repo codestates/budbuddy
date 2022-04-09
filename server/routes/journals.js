@@ -16,7 +16,10 @@ router.get("/my", journals.listJournals.my);
 router.get("/:id", journals.listJournals.id);
 
 // DELETE /journals/:id
-router.delete("/:id", journals.deleteJournals);
+router.delete("/:id", journals.deleteJournal);
+
+// PUT /journals/:id
+router.put("/:id", journals.updateJournal);
 
 // POST /journals/:id/replies
 router.post("/:id/replies", replies.newReply);

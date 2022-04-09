@@ -1,3 +1,4 @@
 module.exports = {
-  uploadImage: require("./uploadImage")
-}
+  uploadImage: require("./uploadImage"),
+  deleteImage: require("./deleteImage"),
+};
