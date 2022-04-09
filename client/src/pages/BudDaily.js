@@ -11,7 +11,6 @@ import ModalByMode from "../components/common/ModalByMode";
 import { empty } from "../resources";
 
 const Layout = styled.div`
-  /* position: relative; */
   display: flex;
   flex-direction: column;
   width: 100%;
