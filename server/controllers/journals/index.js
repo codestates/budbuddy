@@ -1,5 +1,6 @@
 module.exports = {
   newJournal: require("./newJournal"),
   listJournals: require("./listJournals"),
-  deleteJournals: require("./deleteJournal"),
+  deleteJournal: require("./deleteJournal"),
+  updateJournal: require("./updateJournal"),
 };
