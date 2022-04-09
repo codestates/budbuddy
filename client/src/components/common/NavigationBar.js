@@ -1,7 +1,8 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import useLoginStore from "../../store/loginStore";
+import { useNaviStore } from "../../store/timeStore";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHouseUser, faDoorOpen, faAddressBook, faBook, faImage, faUser } from "@fortawesome/free-solid-svg-icons";
 
@@ -31,6 +32,7 @@ const Content = styled.nav`
       height: 100%;
       background: LightCoral;
       transition: all 0.5s ease 0s;
+      transform: translateX(${(props) => props.idx * 100 + "%"});
     }
 
     > a {
@@ -89,14 +91,20 @@ const Content = styled.nav`
 
 function NavigationBar() {
   const { isLogin } = useLoginStore();
+  const { idx, setIdx } = useNaviStore();
   const naviRef = useRef(null);
+
+  useEffect(() => {
+    naviRef.current.style.transform = `translateX(${idx * 100}%)`;
+  }, []);
 
   function moveNavi(curIdx) {
     naviRef.current.style.transform = `translateX(${curIdx * 100}%)`;
+    setIdx(curIdx);
   }
 
   return (
-    <Content>
+    <Content idx={idx}>
       <form className="wrap">
         <NavLink
           to="/"
