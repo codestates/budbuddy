@@ -41,9 +41,10 @@ const useAjaxStore = create(
           const arr = [];
           // console.log("추출된 replies:::", resData.data.data);
           for (let i = 0; i < resData.data.data.length; i++) {
-            const { id, group_id, journal_id, createdAt, body, User } = resData.data.data[i];
+            const { id, group_id, journal_id, createdAt, body, User, UserId } = resData.data.data[i];
 
             const reply = {
+              userId: UserId,
               nickname: User.nickname,
               replyId: id,
               body,
