@@ -16,8 +16,8 @@ const theme = {
   cardSelectColor: "rgba(30, 144, 255,0.5)",
   DarkSlateGrey: "DarkSlateGrey",
   btnBgColor: "rgba(248, 248, 255,0.45)",
-  hoverColor: "rgba(0, 128, 128,0.75)",
-  hoverCancleColor: "IndianRed",
+  hoverColor: "rgba(72, 169, 153,0.75)",
+  hoverCancleColor: "rgba(205, 92, 92,0.7)",
   navigationBGColor: "Silver",
   SideBarBgColor: "rgba(46, 139, 87, 0.45)",
   replyBgColor: "lightGray",
@@ -40,9 +40,9 @@ const theme = {
   fontToggleIcon: "1.4rem",
   //layout
   signupInputLineHeight: "0.3rem",
-  backgroundPaddingTop: "12vh",
+  backgroundPaddingTop: "8vh",
   iphoneWidth: "100vw",
-  webWidth: 425,
+  webWidth: 410,
   //style
   borderRadius: "5px",
   backgroundImgHeight: "28vh",

@@ -11,8 +11,8 @@ const Layout = styled.div`
   flex-direction: column;
 
   width: 100%;
-  position: relative;
   padding-bottom: 3.5rem;
+  position: relative;
   /* border: solid 1px blue; */
   // 젤리팝업 오픈시 부모 freeze 옵션
   ${(props) =>
@@ -23,7 +23,7 @@ const Layout = styled.div`
     `}
 
   .logo {
-    margin-top: 1.3rem;
+    margin-top: 2rem;
   }
   .title {
     margin-top: 1rem;
@@ -33,12 +33,25 @@ const Layout = styled.div`
     margin-top: 2.4rem;
     /* padding: 0 0.3rem; */
   }
+
+  .desc {
+    min-height: 50vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* border: 1px solid red; */
+    white-space: pre-wrap;
+    text-align: center;
+    line-height: 1.8;
+    color: dimgray;
+  }
 `;
 
 const Story = () => {
   let { publicJournal, getAllPublicJournal } = useAjaxStore();
   const [story, setStory] = useState([]);
   const [isFreeze, setFreeze] = useState(false);
+  const [isSearchNone, setIsSearchNone] = useState(false);
   useEffect(() => {
     getStory();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -64,7 +77,15 @@ const Story = () => {
       if (regExp.test(str)) return v;
       else return null;
     });
-    setStory(filteredStory);
+
+    if (filteredStory.length === 0) {
+      setStory(filteredStory);
+      setIsSearchNone(true);
+      return;
+    } else {
+      setIsSearchNone(false);
+      setStory(filteredStory);
+    }
   }
   //story.length === 0
   return (
@@ -74,7 +95,21 @@ const Story = () => {
         <p>Friend's Daily Log</p>
       </div>
       <SearchBar top={62} left={98} width={40} fn={storySearch} />
-      {story.length === 0 ? <Loading isAb={true} top={250} left={0} bgColor={"none"} /> : <StoryCard className="story-card" storyList={story} hoverTransitonSec={0.25} setFreeze={setFreeze} />}
+      {publicJournal[0] === "none" ? (
+        <div className="desc">
+          <div>{`본인과 다른 사람들이 작성한 일지 중\n 공개된 일지가 없습니다.`}</div>
+        </div>
+      ) : story.length === 0 ? (
+        isSearchNone ? (
+          <div className="desc">
+            <div>{`검색된 내용이 없습니다.`}</div>
+          </div>
+        ) : (
+          <Loading isAb={true} top={250} left={0} />
+        )
+      ) : (
+        <StoryCard className="story-card" storyList={story} hoverTransitonSec={0.25} setFreeze={setFreeze} getStory={getStory} />
+      )}
     </Layout>
   );
 };

@@ -1,16 +1,20 @@
 import React from "react";
 import styled from "styled-components";
+import { empty } from "../../resources";
 import { useNavigateSearch } from "../../modules/hooks";
 
 const Layout = styled.div`
   display: grid;
-  grid-template-columns: auto;
-  grid-template-rows: auto auto auto;
-  flex-direction: column;
+  grid-template-columns: auto auto;
+  white-space: wrap;
   width: 100%;
-  /* height: 53%; */
+  height: auto;
+
+  padding-bottom: 1rem;
 
   .shell {
+    width: 100%;
+    height: fit-content;
     text-align: start;
     padding: 5px;
     overflow: hidden;
@@ -21,20 +25,19 @@ const Layout = styled.div`
     z-index: 0;
     background-color: rgba(0, 0, 0, 0.3);
     box-shadow: 7px 4px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
-    /* filter: grayscale(100%); */
   }
 
   .coverImg {
     object-fit: cover;
     width: 100%;
-    height: 18vh;
+    height: 180px;
     mix-blend-mode: multiply;
     border: solid 2px rgb(0, 0, 0, 0.1);
   }
 
   .hide {
     width: 100%;
-    height: 100%;
+    height: fit-content;
     color: WhiteSmoke;
     z-index: 1;
 
@@ -87,10 +90,9 @@ const Bud = ({ className, src, budName, date, plant_id, setPopupInfo }) => {
 
   const goToWrite = () => navigateSearch("/write", { name: `${encodeURI(budName)}`, plant_id: `${plant_id}` });
   const goToListByPlantId = () => navigateSearch("/list", { name: `${encodeURI(budName)}`, plant_id: `${plant_id}` });
+  const goToIdAlbum = () => navigateSearch("/album", { name: `${encodeURI(budName)}` });
 
-  function goToManageCalendarByPlantId() {
-    console.log("관리 캘린더 라우팅 작성란");
-  }
+  const goToManageCalendarByPlantId = () => navigateSearch("/daily/record", { name: `${encodeURI(budName)}` });
 
   return (
     <Layout className={className}>
@@ -102,7 +104,9 @@ const Bud = ({ className, src, budName, date, plant_id, setPopupInfo }) => {
           <div className="text" onClick={goToListByPlantId}>
             일지목록
           </div>
-          <div className="text">앨범</div>
+          <div className="text" onClick={goToIdAlbum}>
+            앨범
+          </div>
           <div
             className="text"
             onClick={() => {
@@ -121,7 +125,7 @@ const Bud = ({ className, src, budName, date, plant_id, setPopupInfo }) => {
             관리 캘린더
           </div>
         </div>
-        <img className="coverImg" src={src} alt={`bg`} />
+        <img className="coverImg" src={src || empty.journal} alt={`bg`} />
         <div className="budName">{budName}</div>
         <span className="date">{date}</span>
       </div>

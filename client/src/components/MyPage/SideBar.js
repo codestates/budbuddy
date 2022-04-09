@@ -130,7 +130,6 @@ const BlackScreen = styled.div`
 const SideBar = () => {
   const menuRef = useRef(null);
   const { nickname, image, setImage } = useLoginStore();
-
   const [isSidebar, setSideBar] = useState(false);
   const [userProfile, setUserProfile] = useState(image);
   function SidebarToggle() {
@@ -148,11 +147,12 @@ const SideBar = () => {
         const {
           currentTarget: { result },
         } = finishedEvent;
-
+        setImage(result);
         setUserProfile(result);
         let formdata = new FormData();
         formdata.append("image", theFile);
         const imgRes = await axios.post(process.env.REACT_APP_API_URL + "/images", formdata);
+        console.log(imgRes);
         await axios.put(process.env.REACT_APP_API_URL + "/users/profile", { profile_image_id: imgRes.data.data.id });
       };
       reader.readAsDataURL(theFile);
@@ -161,9 +161,14 @@ const SideBar = () => {
     }
   };
 
-  useEffect(async () => {
-    setImage(userProfile);
+  useEffect(() => {
+    getImage();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userProfile]);
+
+  async function getImage() {
+    setImage(userProfile);
+  }
 
   const [modalCode, setModalCode] = useState("");
 

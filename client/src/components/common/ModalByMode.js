@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTriangleExclamation, faCircleExclamation, faImage } from "@fortawesome/free-solid-svg-icons";
+import { faTriangleExclamation, faCircleExclamation, faImage, faComment } from "@fortawesome/free-solid-svg-icons";
+import { faLaughBeam } from "@fortawesome/free-regular-svg-icons";
 import ImgUpload from "../common/ImgUpload";
 import useAjaxStore from "../../store/ajaxStore";
 
@@ -62,6 +63,15 @@ const Layout = styled.div`
       color: LightCoral;
     }
 
+    .kakao {
+      font-size: 1.3rem;
+      background-color: #fee500;
+      color: #000000;
+      border-radius: 8px;
+      padding: 0.4rem;
+      margin-right: 0.3rem;
+    }
+
     .title {
       text-align: center;
       white-space: pre-wrap;
@@ -79,7 +89,14 @@ const Layout = styled.div`
     .content {
       margin-top: 0.5rem;
       font-size: ${(props) => props.theme.fontWritePageSmall};
-      line-height: 1.2;
+      line-height: 1.3;
+
+      .kakao {
+        color: dimgray;
+        font-size: ${(props) => props.theme.fontWritePageXSmall};
+        margin-bottom: 1rem;
+        line-height: 1.6;
+      }
     }
 
     /* .upload {
@@ -224,6 +241,28 @@ const ModalByMode = ({ info = "" }) => {
             <div className="mid">
               <div className="content">
                 <div>{info.text}</div>
+              </div>
+            </div>
+            <div className="bottom">
+              <button className="confirm" onClick={close}>
+                확인
+              </button>
+            </div>
+          </div>
+        );
+      },
+      kakaoGreeting() {
+        return (
+          <div className="wrap">
+            <div className="top">
+              <FontAwesomeIcon className="kakao icon" icon={faComment} />
+              <div className="title">로그인</div>
+            </div>
+            <div className="mid">
+              <div className="content">
+                <div>카카오톡 로그인으로 시작합니다.</div>
+                <div className="kakao">{"(카카오 로그인시 로그인이 하루 동안 유지됩니다.)"}</div>
+                <div>{"버드버디에 오신 걸 환영합니다."}</div>
               </div>
             </div>
             <div className="bottom">

@@ -132,8 +132,6 @@ const LoginForm = () => {
         return;
       }
     } catch (err) {
-      console.log(err.response.data.message);
-
       setPopupInfo({ fn: err.response.data.message });
     }
   }

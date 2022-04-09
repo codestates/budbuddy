@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import JellyPopup from "./JellyPopup";
+import ProfilePopup from "./ProfilePopup";
 import { empty } from "../../resources";
+import useAjaxStore from "../../store/ajaxStore";
 
 const Layout = styled.div`
   /* border: solid 1px black; */
@@ -118,7 +120,7 @@ const Card = styled.div`
 
   .top-cap {
     display: grid;
-    grid-template-columns: 20% 60% 10%;
+    grid-template-columns: 20% 55% 25%;
     grid-template-rows: repeat(1, minmax(1fr, auto));
     grid-template-areas: "profile-wrap name-wrap date";
 
@@ -178,10 +180,10 @@ const Card = styled.div`
       display: flex;
       flex-direction: column;
       justify-content: end;
+      align-items: center;
 
       font-size: ${(props) => props.theme.fontWritePageXSmall};
       margin-bottom: 0.3rem;
-      margin-right: 0.3rem;
     }
   }
 
@@ -197,11 +199,11 @@ const Card = styled.div`
     }
 
     .summary {
-      font-size: ${(props) => props.theme.fontWritePageXSmall};
+      font-size: ${(props) => props.theme.fontWritePageSmall};
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      margin: 0 0.2rem 0 0.2rem;
+      margin: 0.2rem 0.2rem 0 0.2rem;
     }
   }
   .bottom-cap {
@@ -210,22 +212,34 @@ const Card = styled.div`
     .read-wrap {
       margin-left: 0.1rem;
     }
+    .delete-wrap {
+      margin-left: 0.3rem;
+    }
 
     > div > button {
+      margin-top: 0.5rem;
       border: none;
       border-radius: ${(props) => props.theme.borderRadius};
-      padding: 0.08rem 0.2rem;
+      padding: 0.2rem 0.4rem;
       font-size: ${(props) => props.theme.fontWritePageXSmall};
+      background-color: rgba(207, 207, 207, 1);
     }
 
     .btn {
       color: black;
-      background-color: ${(props) => props.theme.btnBgColor};
       transition: background-color ${(props) => `${props.hoverTransitonSec}s`} ease, color ${(props) => `${props.hoverTransitonSec}s`} ease;
     }
 
-    .btn:hover {
+    .delete {
+      margin-left: 0.3rem;
+    }
+    .read:hover {
       background-color: ${(props) => props.theme.hoverColor};
+      color: white;
+    }
+
+    .delete:hover {
+      background-color: ${(props) => props.theme.hoverCancleColor};
       color: white;
     }
   }
@@ -241,12 +255,15 @@ const Card = styled.div`
   }
 `;
 
-const StoryCard = ({ className = "", storyList, hoverTransitonSec = 0.25, setFreeze }) => {
+const StoryCard = ({ className = "", storyList, hoverTransitonSec = 0.25, setFreeze, getStory }) => {
+  const { userInfo, deleteListByJournalId } = useAjaxStore();
   const [isJellyPopup, setJellyPopup] = useState(false);
+  const [profle, setProfile] = useState({ isOpen: false, src: null });
   const [story, setStory] = useState(null);
 
   useEffect(() => {
     setFreeze(isJellyPopup);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isJellyPopup]);
 
   function read(e, info) {
@@ -255,9 +272,20 @@ const StoryCard = ({ className = "", storyList, hoverTransitonSec = 0.25, setFre
     setStory(info);
   }
 
+  async function deleteStory(e, info) {
+    e.preventDefault();
+    await deleteListByJournalId(info.journalId);
+    getStory();
+  }
+
+  function viewProfile(src) {
+    setProfile({ isOpen: true, src });
+  }
+
   return (
     <Layout className={className}>
       {isJellyPopup ? <JellyPopup setJellyPopup={setJellyPopup} story={story} /> : null}
+      {profle.isOpen && !isJellyPopup ? <ProfilePopup setProfile={setProfile} src={profle.src} /> : null}
       <div className="shell">
         <div className="wrap">
           {storyList.map((v, i) => {
@@ -266,7 +294,11 @@ const StoryCard = ({ className = "", storyList, hoverTransitonSec = 0.25, setFre
                 <div className="borderlt">
                   <div className="borderrb">
                     <div className="top-cap">
-                      <div className="profile-wrap">
+                      <div
+                        className="profile-wrap"
+                        onClick={() => {
+                          viewProfile(v.profileImg);
+                        }}>
                         <img className={`${"profileImg"} ${!v.profileImg ? "empty" : ""}`} src={v.profileImg || empty.user} alt="" />
                       </div>
                       <div className="name-wrap">
@@ -288,6 +320,13 @@ const StoryCard = ({ className = "", storyList, hoverTransitonSec = 0.25, setFre
                         <button className="read btn" onClick={(e) => read(e, v)}>
                           보기
                         </button>
+                      </div>
+                      <div className="delete-wrap">
+                        {userInfo.id === v.userId ? (
+                          <button className="delete btn" onClick={(e) => deleteStory(e, v)}>
+                            삭제
+                          </button>
+                        ) : null}
                       </div>
                     </div>
                   </div>

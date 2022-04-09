@@ -7,61 +7,51 @@ const ChartDiv = styled.div`
   > .space {
     height: 2vh;
   }
+  .none {
+    height: 22vh;
+    text-align: center;
+    line-height: 15vh;
+    color: DimGrey;
+  }
 `;
 const ChartSvgDiv = styled.div`
   margin: auto;
   text-align: center;
 `;
 
-const ChartSvg = styled.svg``;
+const ChartSvg = styled.svg`
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 10px;
+`;
 
 const ChartTitle = styled.h2`
   text-align: center;
 `;
 
-const Chart = () => {
+const Chart = ({ currentUser, ChartValue }) => {
   useEffect(() => {
-    makeGraph();
-  }, []);
-
-  const makeGraph = () => {
     // 캔버스 구역 정의
     const width = 300;
-    const height = 300;
+    const height = 200;
     const margin = { top: 20, left: 20, bottom: 20, right: 20 };
 
     const svg = d3.select(".list");
-
-    const data = [
-      //해당 데이터에 추가시켜주면 그래프에 추가된다
-      { day: "1일", value: 10 },
-      { day: "2일", value: 13 },
-      { day: "3일", value: 17 },
-      { day: "4일", value: 25 },
-      { day: "5일", value: 30 },
-      { day: "6일", value: 45 },
-      { day: "7일", value: 70 },
-      { day: "8일", value: 75 },
-      { day: "9일", value: 82 },
-      { day: "10일", value: 90 },
-      { day: "11일", value: 30 },
-      { day: "12일", value: 45 },
-      { day: "13일", value: 70 },
-      { day: "14일", value: 75 },
-      { day: "15일", value: 82 },
-      { day: "16일", value: 130 },
-    ];
+    const chartLine = [];
+    for (let i = 0; i <= 30; i++) {
+      chartLine.push(i * 10);
+    }
 
     // 눈금 만들기
     const x = d3
       .scaleBand()
-      .domain(data.map((d) => d.day)) //범위값 입력
+      .domain(ChartValue.map((d) => d.day)) //범위값 입력
       .range([margin.left, width - margin.right]); //출력값의 범위[최소,최대]
     // x축 정의
 
     const y = d3
       .scaleLinear()
-      .domain([0, d3.max(data, (d) => d.value)]) //입력값의 범위 [최소값, 최대값]
+      .domain([0, d3.max(ChartValue, (d) => d.value)]) //입력값의 범위 [최소값, 최대값]
       .nice()
       .range([height - margin.bottom, margin.top]); //[최소값, 최대값]으로 입력하면 그래프가 뒤집혀 출력 따라사 [최대값, 최소값]
     // y축 정의
@@ -77,7 +67,7 @@ const Chart = () => {
       g
         .attr("transform", `translate(${margin.left}, 0)`)
         .call(
-          d3.axisLeft(y).tickValues([0, 20, 40, 60, 80, 100, 120]).tickSize(-width), // y축 눈금 생성
+          d3.axisLeft(y).tickValues(chartLine).tickSize(-width), // y축 눈금 생성
         )
         .call((g) => g.select(".domain").remove())
         .attr("class", "grid");
@@ -108,7 +98,7 @@ const Chart = () => {
 
     svg
       .append("path") //넣어주기
-      .datum(data)
+      .datum(ChartValue)
       .attr("fill", "#BFD4AF")
       .attr("stroke", "#8AB06D")
       .attr("stroke-width", 1)
@@ -120,7 +110,7 @@ const Chart = () => {
     svg
       .append("g")
       .selectAll("text")
-      .data(data)
+      .data(ChartValue)
       .enter()
       .append("text")
       .text((d) => d.value)
@@ -130,15 +120,20 @@ const Chart = () => {
       .attr("font-family", "Tahoma")
       .attr("font-size", "12px")
       .attr("text-anchor", "middle");
-  };
+  }, [ChartValue]);
 
   return (
     <ChartDiv>
       <div className="space"></div>
-      <ChartTitle>스투키 성장 기록</ChartTitle>
-      <ChartSvgDiv>
-        <ChartSvg className="list" width="320" height="320"></ChartSvg>
-      </ChartSvgDiv>
+      <ChartTitle>{currentUser} 성장 기록</ChartTitle>
+      {ChartValue.length !== 0 ? (
+        <ChartSvgDiv>
+          <ChartSvg className="list" width="80%" height="210"></ChartSvg>
+        </ChartSvgDiv>
+      ) : (
+        <div className="none">스토리를 작성해주세요</div>
+      )}
+
       <div className="space"></div>
     </ChartDiv>
   );

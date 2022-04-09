@@ -2,6 +2,8 @@ import React, { useRef, useEffect, useState } from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSeedling } from "@fortawesome/free-solid-svg-icons";
+import { validPassword } from "../../modules/validation";
+import axios from "axios";
 
 const Layout = styled.div`
   display: flex;
@@ -21,7 +23,7 @@ const Layout = styled.div`
     justify-content: center;
     align-items: center;
     width: 100vw;
-    @media screen and (min-width: 391px) {
+    @media screen and (min-width: ${(props) => props.theme.webWidth + 1 + "px"}) {
       width: ${(props) => props.theme.webWidth + "px"};
     }
   }
@@ -136,6 +138,7 @@ const FormLayout = styled.form`
       " checkPasswordDiv checkPasswordInput checkPasswordInput checkPasswordInput ";
     .currentPasswordDiv {
       grid-area: currentPasswordDiv;
+      font-size: ${(props) => props.theme.fontToolTip};
       margin: 5px;
     }
     .currentPasswordInput {
@@ -145,6 +148,7 @@ const FormLayout = styled.form`
     }
     .newPasswordDiv {
       grid-area: newPasswordDiv;
+      font-size: ${(props) => props.theme.fontToolTip};
       margin: 5px;
     }
     .newPasswordInput {
@@ -154,7 +158,8 @@ const FormLayout = styled.form`
     }
     .checkPasswordDiv {
       grid-area: checkPasswordDiv;
-      margin: 5px;
+      font-size: ${(props) => props.theme.fontToolTip};
+      margin: 5px 0px;
     }
     .checkPasswordInput {
       grid-area: checkPasswordInput;
@@ -187,22 +192,35 @@ const ChangePassword = ({ open = true, closeFn, setModalCode = "" }) => {
 
   const NewPasswordFunction = (e) => {
     setNewPassword(e.target.value);
-    console.log(isnewPassword);
   };
 
-  function resisterBud(e) {
+  async function resisterBud(e) {
     e.preventDefault();
+    const { currentPassword, newPassword } = e.target;
+    if (currentPassword === "" || newPassword === "") {
+      return;
+    }
+    try {
+      await axios.put(process.env.REACT_APP_API_URL + "/users/password", { currentPassword: currentPassword.value, password: newPassword.value });
+    } catch (err) {
+      console.log(err);
+    }
     setModalCode("PasswordReplaced");
     ClosePopup();
   }
 
   function ClosePopup() {
     closeFn(false);
-    popRef.current.className = "popup";
+    // popRef.current.className = "popup";
   }
 
   function onChange(e) {
     const isValid = e.target.value === isnewPassword;
+    if (!validPassword(e.target.value)) {
+      checkNick.current.textContent = `영문, 특수문자, 숫자 사용가능하며 \n 총6~16글자 사이여야합니다`;
+      checkNick.current.className = "chNick ch invalid";
+      return;
+    }
     if (!isValid) {
       checkNick.current.textContent = "비밀번호가 맞지 않습니다.";
       checkNick.current.className = "chNick ch invalid";
@@ -234,11 +252,11 @@ const ChangePassword = ({ open = true, closeFn, setModalCode = "" }) => {
             <div ref={checkNick} className="chNick ch"></div>
             <div className="passwordCover">
               <div className="currentPasswordDiv">현재 비밀번호</div>
-              <input className="currentPasswordInput" placeholder="현재 비밀번호" type="password"></input>
+              <input className="currentPasswordInput" name="currentPassword" placeholder="현재 비밀번호" type="password"></input>
               <div className="newPasswordDiv">새 비밀번호</div>
               <input className="newPasswordInput" placeholder="새 비밀번호" type="password" value={isnewPassword} onChange={(e) => NewPasswordFunction(e)}></input>
-              <div className="checkPasswordDiv">새 비밀번호 확인</div>
-              <input className="checkPasswordInput" placeholder="새 비밀번호 확인" type="password" onChange={onChange} onBlur={onBlur}></input>
+              <div className="checkPasswordDiv">새비밀번호 확인</div>
+              <input className="checkPasswordInput" name="newPassword" placeholder="새 비밀번호 확인" type="password" onChange={onChange} onBlur={onBlur}></input>
             </div>
             <div className="btn-wrapper trans">
               <button className="open btn trans" type="submit">

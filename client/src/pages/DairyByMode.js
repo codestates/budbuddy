@@ -55,12 +55,31 @@ const DairyByMode = () => {
 
   async function submit(e) {
     e.preventDefault();
-    console.log("글 수정 ajax call 작성 란");
+
+    const updatedAt = moment().format("YY/MM/DD h:mm");
+    const budName = info.Plant;
+
+    const { title, upload_img, content, checkbox, toggle } = e.target;
+
+    const payload = {};
+
+    // if (upload_img.files !== 0) {
+    //   let formdata = new FormData();
+    //   formdata.append("image", upload_img.files[0]);
+    //   try {
+    //     const imgRes = await axios.post(process.env.REACT_APP_API_URL + "/images", formdata);
+    //     payload["images"] = [imgRes.data.data.id];
+    //     await axios.put(process.env.REACT_APP_API_URL + "/journals", payload);
+    //     navigate("/daily");
+    //   } catch (err) {
+    //     console.log("write page:submit:::", err);
+    //   }
+    // }
   }
 
   let src = null;
-
   info.actions = convertToggleData(info.Journal_Actions);
+
   if (info.Journal_Images.length !== 0) {
     src = info.Journal_Images[0].Image.store_path;
   }
@@ -69,6 +88,7 @@ const DairyByMode = () => {
   if (info.Plant) {
     journalName = info.Plant.name;
   }
+
   return (
     <Layout onSubmit={submit}>
       <TabBtnOne

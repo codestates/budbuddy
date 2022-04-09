@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 import { SignupWrapper, InputWrapper } from "../styles/pages/SingupStyled";
 import axios from "axios";
@@ -13,14 +13,22 @@ import { bg } from "../resources";
 const Layout = styled.div`
   padding-top: ${(props) => props.theme.backgroundPaddingTop};
 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  place-items: center;
+  width: 100%;
+
   .signupWrapper {
-    margin-top: 4.5rem;
+    margin-top: 7vh;
   }
 `;
 
 const SignupBG = styled.div`
   margin: 0 0rem 0 0rem;
   text-align: center;
+  width: 100%;
 
   .std {
     display: grid;
@@ -79,6 +87,11 @@ const Signup = () => {
   const checkNick = useRef(null);
 
   let navigate = useNavigate();
+  useEffect(() => {
+    checkEmail.current.textContent = " ";
+    checkPass.current.textContent = " ";
+    checkNick.current.textContent = " ";
+  }, []);
 
   async function reqSingup(payload) {
     try {
@@ -109,7 +122,7 @@ const Signup = () => {
             checkEmail.current.className = "chEmail ch invalid";
             setIsValid(false);
           } else {
-            checkEmail.current.textContent = "";
+            checkEmail.current.textContent = " ";
             checkEmail.current.className = "chEmail ch";
             setIsValid(true);
           }
@@ -123,7 +136,7 @@ const Signup = () => {
             checkPass.current.className = "chPass ch invalid";
             setIsValid(false);
           } else {
-            checkPass.current.textContent = "";
+            checkPass.current.textContent = " ";
             checkPass.current.className = "chPass ch";
             setIsValid(true);
           }
@@ -137,7 +150,7 @@ const Signup = () => {
             checkNick.current.className = "chNick ch invalid";
             setIsValid(false);
           } else {
-            checkNick.current.textContent = "";
+            checkNick.current.textContent = " ";
             checkNick.current.className = "chNick ch";
             setIsValid(true);
           }
@@ -175,17 +188,17 @@ const Signup = () => {
     switch (className) {
       case "inputEmail": {
         checkEmail.current.className = "chEmail ch";
-        checkEmail.current.textContent = "";
+        checkEmail.current.textContent = " ";
         return;
       }
       case "inputPass": {
         checkPass.current.className = "chPass ch";
-        checkPass.current.textContent = "";
+        checkPass.current.textContent = " ";
         return;
       }
       case "inputNick": {
         checkNick.current.className = "chNick ch";
-        checkNick.current.textContent = "";
+        checkNick.current.textContent = " ";
         return;
       }
       default:
@@ -212,7 +225,7 @@ const Signup = () => {
         } else {
           setIsValid(true);
           checkEmail.current.className = "chEmail ch";
-          checkEmail.current.textContent = "";
+          checkEmail.current.textContent = " ";
         }
         return;
       }
@@ -225,7 +238,7 @@ const Signup = () => {
         } else {
           setIsValid(true);
           checkPass.current.className = "chPass ch";
-          checkPass.current.textContent = "";
+          checkPass.current.textContent = " ";
         }
         return;
       }
@@ -238,7 +251,7 @@ const Signup = () => {
         } else {
           setIsValid(true);
           checkNick.current.className = "chNick ch";
-          checkNick.current.textContent = "";
+          checkNick.current.textContent = " ";
         }
         return;
       }
@@ -273,7 +286,7 @@ const Signup = () => {
       {makeModal(modalCode)}
       <SignupBG>
         <div className="std">
-          <img className="signupBg" src={bg[4] || ""} alt={`bg`} />
+          <img className="signupBg" src={bg[parseInt(Math.random() * bg.length)] || ""} alt={`bg`} />
           <div className="backText">
             <p>
               Take care of <span className="green">your plants</span>
@@ -290,17 +303,25 @@ const Signup = () => {
       <SignupWrapper className="signupWrapper" onSubmit={join}>
         <div className="signupText">회원가입</div>
         <InputWrapper className="inputWrapper">
-          <FontAwesomeIcon className="idIcon icon" icon={faUser} />
-          <input className="inputEmail" name="email" type="text" placeholder="이메일을 입력하세요" maxLength={30} onBlur={explainReset} onFocus={explainSignup} onChange={chValidation} />
-          <div ref={checkEmail} className="chEmail ch" name="chEmail"></div>
-          <FontAwesomeIcon className="passIcon icon" icon={faKey} />
-          <input className="inputPass" name="password" type="password" placeholder="비밀번호를 입력하세요" maxLength={20} onBlur={explainReset} onFocus={explainSignup} onChange={chValidation} />
-          <div ref={checkPass} className="chPass ch"></div>
-          <FontAwesomeIcon className="nickIcon icon" icon={faMask} />
-          <input className="inputNick" name="nickname" type="text" placeholder="사용할 닉네임을 입력하세요" maxLength={15} onBlur={explainReset} onFocus={explainSignup} onChange={chValidation} />
-          <div ref={checkNick} className="chNick ch"></div>
+          <div className="item1">
+            <FontAwesomeIcon className="idIcon icon" icon={faUser} />
+            <input className="inputEmail" name="email" type="text" placeholder="이메일을 입력하세요" maxLength={30} onBlur={explainReset} onFocus={explainSignup} onChange={chValidation} />
+          </div>
+          <div ref={checkEmail} className="chEmail ch" name="chEmail" defaultValue={" "}></div>
+          <div className="item2">
+            <FontAwesomeIcon className="passIcon icon" icon={faKey} />
+            <input className="inputPass" name="password" type="password" placeholder="비밀번호를 입력하세요" maxLength={20} onBlur={explainReset} onFocus={explainSignup} onChange={chValidation} />
+          </div>
+          <div ref={checkPass} className="chPass ch" defaultValue={" "}></div>
+          <div className="item3">
+            <FontAwesomeIcon className="nickIcon icon" icon={faMask} />
+            <input className="inputNick" name="nickname" type="text" placeholder="사용할 닉네임을 입력하세요" maxLength={15} onBlur={explainReset} onFocus={explainSignup} onChange={chValidation} />
+          </div>
+          <div ref={checkNick} className="chNick ch" defaultValue={" "}></div>
         </InputWrapper>
-        <hr className="hr" width="90%" />
+        <div className="hr">
+          <hr width="90%" />
+        </div>
         <div className="btnbox">
           <button
             className="join btn"

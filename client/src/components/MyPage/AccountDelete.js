@@ -2,6 +2,9 @@ import React, { useRef, useEffect } from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSeedling } from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
+import useLoginStore from "../../store/loginStore";
+import { useNavigate } from "react-router-dom";
 
 const Layout = styled.div`
   display: flex;
@@ -21,7 +24,7 @@ const Layout = styled.div`
     justify-content: center;
     align-items: center;
     width: 100vw;
-    @media screen and (min-width: 391px) {
+    @media screen and (min-width: ${(props) => props.theme.webWidth + 1 + "px"}) {
       width: ${(props) => props.theme.webWidth + "px"};
     }
   }
@@ -139,6 +142,8 @@ const AccountDelete = ({ open = true, closeFn, setModalCode }) => {
   const checkNick = useRef(null);
   const popRef = useRef(null);
   const backRef = useRef(null);
+  const { setLogin } = useLoginStore();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (open) {
@@ -147,10 +152,21 @@ const AccountDelete = ({ open = true, closeFn, setModalCode }) => {
     }
   }, [open]);
 
-  function resisterBud(e) {
+  async function deleteFunction(e) {
     e.preventDefault();
-    setModalCode("dataHasBeenRemoved");
-    ClosePopup();
+    const { deleteName } = e.target;
+    if (deleteName.value === "계정삭제") {
+      try {
+        await axios.delete(process.env.REACT_APP_API_URL + "/users/");
+      } catch (err) {
+        console.log(err);
+      }
+      setModalCode("dataHasBeenRemoved");
+      setLogin(false);
+      sessionStorage.clear();
+      navigate("/");
+      ClosePopup();
+    }
   }
 
   function ClosePopup() {
@@ -161,7 +177,7 @@ const AccountDelete = ({ open = true, closeFn, setModalCode }) => {
   function onFocus(e) {
     const name = e.target.name;
     if (e.target.value !== "") return;
-    if (name === "budname") {
+    if (name === "deleteName") {
       checkNick.current.className = "chNick ch";
       return (checkNick.current.textContent = "계정삭제를 입력해야합니다.");
     }
@@ -173,9 +189,8 @@ const AccountDelete = ({ open = true, closeFn, setModalCode }) => {
       onFocus(e);
       return;
     }
-    if (name === "budname") {
+    if (name === "deleteName") {
       const isValid = e.target.value === "계정삭제";
-      console.log(e.target.value);
       if (!isValid) {
         checkNick.current.textContent = "계정삭제를 입력해야합니다.";
         checkNick.current.className = "chNick ch invalid";
@@ -199,7 +214,7 @@ const AccountDelete = ({ open = true, closeFn, setModalCode }) => {
     <Layout>
       <div ref={backRef} className="background">
         <div ref={popRef} className={`popup`}>
-          <FormLayout onSubmit={resisterBud}>
+          <FormLayout onSubmit={deleteFunction}>
             <div className="title trans">계정삭제</div>
             <div className="budname trans">
               <FontAwesomeIcon className="icon" icon={faSeedling} />
@@ -207,7 +222,7 @@ const AccountDelete = ({ open = true, closeFn, setModalCode }) => {
             </div>
             <div>계정삭제를 원하시면 "계정삭제"를 입력해주세요</div>
             <div ref={checkNick} className="chNick ch"></div>
-            <input className="input-bud trans" placeholder="계정삭제" name="budname" onFocus={onFocus} onChange={onChange} onBlur={onBlur} type="text" />
+            <input className="input-bud trans" placeholder="계정삭제" name="deleteName" onFocus={onFocus} onChange={onChange} onBlur={onBlur} type="text" />
             <div className="btn-wrapper trans">
               <button className="open btn trans" type="submit">
                 완료
