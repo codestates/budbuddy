@@ -77,7 +77,7 @@ function ReplyTextArea({ journalId, contentRef, close, isRereply = false, group_
     <Layout className="bottom" isRereply={isRereply}>
       <div>
         <div className="content-wrap">
-          <textarea ref={textRef} className="content" placeholder="댓글 입력" onKeyUp={textAreaResize} name="content" autoFocus />
+          <textarea ref={textRef} className="content" placeholder="댓글 입력" onKeyUp={textAreaResize} name="content" />
         </div>
         <div className="btn">
           <button className="done" onClick={addReply}>

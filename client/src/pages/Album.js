@@ -10,18 +10,20 @@ import { useLocation } from "react-router-dom";
 const qs = require("query-string");
 
 const Layout = styled.div`
-  position: relative;
   display: flex;
   flex-direction: column;
+  width: 100%;
   min-height: 100vh;
-  padding-top: 1rem;
   padding-bottom: 3rem;
+  position: relative;
+
   .logo {
-    margin-top: 1rem;
+    margin-top: 2rem;
   }
   .TabBtnOne {
     margin-top: 0.3rem;
   }
+
   .none {
     flex-grow: 1;
     display: flex;
@@ -149,8 +151,8 @@ const Album = () => {
           </BudLayout>
         </>
       ) : (
-        <div className="none">
-          <div>로그인 후 이용해 주세요</div>
+        <div className="notice-fist">
+          <div className="notice-dsec">로그인 후 이용해 주세요</div>
         </div>
       )}
     </Layout>

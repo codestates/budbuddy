@@ -5,29 +5,41 @@ import PlantManageToggle from "../components/write/PlantManageToggle";
 import TextContent from "../components/write/TextContent";
 import { useNavigate, useLocation, useParams } from "react-router-dom";
 import PublicBtn from "../components/write/PublicBtn";
-import moment from "moment";
+import axios from "axios";
+import DatePicker from "../components/write/DatePicker";
+import GrowInput from "../components/write/GrowInput";
+
 const qs = require("query-string");
 
 const Layout = styled.form`
   display: flex;
   flex-direction: column;
 
-  .TabBtnOne {
-    margin-top: 2rem;
-  }
-  .date {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100vh;
+  padding-bottom: 3rem;
+  position: relative;
+
+  .date-picker {
     margin-top: 1rem;
     margin-left: 1rem;
   }
-  .toggle {
-    margin-top: 0.5rem;
-    margin-left: 1rem;
-    margin-bottom: 2rem;
+  .TabBtnOne {
+    margin-top: 2rem;
   }
 
-  .size {
+  .toggle {
+    margin-top: 1rem;
+    margin-left: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .grow-input {
     margin-top: 0.5rem;
     margin-left: 1rem;
+    margin-bottom: 1rem;
   }
 `;
 
@@ -36,6 +48,8 @@ const DairyByMode = () => {
   const params = useParams();
   const parsed = qs.parse(useLocation().search);
   const info = JSON.parse(decodeURI(parsed.info));
+
+  console.log(params.mode);
 
   function convertToggleData(toggleArr) {
     let toggle = { isWater: false, isFertilize: false, isRepot: false };
@@ -56,25 +70,37 @@ const DairyByMode = () => {
   async function submit(e) {
     e.preventDefault();
 
-    const updatedAt = moment().format("YY/MM/DD h:mm");
-    const budName = info.Plant;
+    let { title, content, checkbox, toggle, date, size } = e.target;
+    const convertDate = date.value.replaceAll("/", "-");
 
-    const { title, upload_img, content, checkbox, toggle } = e.target;
+    toggle = JSON.parse(toggle.value);
+    const toggleArr = [];
+    if (!toggle.isWater) {
+      toggleArr.push("water");
+    }
+    if (!toggle.isFertilize) {
+      toggleArr.push("fertilize");
+    }
+    if (!toggle.isRepot) {
+      toggleArr.push("repot");
+    }
 
-    const payload = {};
+    const payload = {
+      actions: toggleArr,
+      plant_id: info.plant_id,
+      title: title.value,
+      body: content.value,
+      date_pick: convertDate,
+      public: checkbox.checked,
+      plant_height: size.value,
+    };
 
-    // if (upload_img.files !== 0) {
-    //   let formdata = new FormData();
-    //   formdata.append("image", upload_img.files[0]);
-    //   try {
-    //     const imgRes = await axios.post(process.env.REACT_APP_API_URL + "/images", formdata);
-    //     payload["images"] = [imgRes.data.data.id];
-    //     await axios.put(process.env.REACT_APP_API_URL + "/journals", payload);
-    //     navigate("/daily");
-    //   } catch (err) {
-    //     console.log("write page:submit:::", err);
-    //   }
-    // }
+    try {
+      await axios.put(process.env.REACT_APP_API_URL + `/journals/${info.id}`, payload);
+      navigate("/mypage");
+    } catch (err) {
+      console.log("write page:submit:::", err);
+    }
   }
 
   let src = null;
@@ -99,13 +125,9 @@ const DairyByMode = () => {
           navigate(-1);
         }}
       />
-      <div>
-        <div className="date">{moment(info.updatedAt).format("YY/MM/DD")}</div>
-      </div>
+      <DatePicker className="date-picker" top={130} />
       <PlantManageToggle className="toggle" actions={info.actions} mode={params.mode} />
-      <div>
-        <div className="size">{`현재 키: ${info.plant_height}cm`}</div>
-      </div>
+      <GrowInput className="grow-input" />
       <TextContent title={info.title} content={info.body} src={src} mode={params.mode} />
       <PublicBtn isPublic={info.public} mode={params.mode} />
     </Layout>

@@ -69,11 +69,20 @@ function PlantManageToggle({ className, actions = {}, mode = "" }) {
   });
 
   useEffect(() => {
+    if (actions.isWater) toggleHandler("water");
+    if (actions.isRepot) toggleHandler("repot");
+    if (actions.isFertilize) toggleHandler("fertilize");
+
     if (mode === "read") {
-      if (actions.isWater) toggleHandler("water");
-      if (actions.isFertilize) toggleHandler("fertilize");
-      if (actions.isRepot) toggleHandler("repot");
       setReadOnly(true);
+    }
+
+    if (mode === "modify") {
+      setToggle({
+        isWater: !actions.isWater,
+        isFertilize: !actions.isFertilize,
+        isRepot: !actions.isRepot,
+      });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

@@ -125,7 +125,7 @@ const Layout = styled.div`
 `;
 
 function Reply({ contentRef, info }) {
-  const { deleteReplies, getReplies, replies } = useAjaxStore();
+  const { deleteReplies, getReplies, replies, userInfo } = useAjaxStore();
   const [isOpen, setOpen] = useState(false);
 
   async function removeReply() {
@@ -151,9 +151,11 @@ function Reply({ contentRef, info }) {
       <div className="reply-top">
         <div className="top-l">{info.nickname}</div>
         <div className="top-r">
-          <span className="reply-delete" onClick={removeReply}>
-            삭제
-          </span>
+          {info.userId === userInfo.id ? (
+            <span className="reply-delete" onClick={removeReply}>
+              삭제
+            </span>
+          ) : null}
           <span className="reply-date">{info.replyTime}</span>
         </div>
       </div>
@@ -178,13 +180,16 @@ function Reply({ contentRef, info }) {
                     {v.nickname}
                   </div>
                   <div className="top-right">
-                    <span
-                      className="rereply-delete"
-                      onClick={() => {
-                        removeRereply(v.replyId);
-                      }}>
-                      삭제
-                    </span>
+                    {" "}
+                    {userInfo.id === v.userId ? (
+                      <span
+                        className="rereply-delete"
+                        onClick={() => {
+                          removeRereply(v.replyId);
+                        }}>
+                        삭제
+                      </span>
+                    ) : null}
                     <div className="date">{v.replyTime}</div>
                   </div>
                 </div>

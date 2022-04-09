@@ -120,7 +120,7 @@ const Card = styled.div`
 
   .top-cap {
     display: grid;
-    grid-template-columns: 20% 60% 10%;
+    grid-template-columns: 20% 55% 25%;
     grid-template-rows: repeat(1, minmax(1fr, auto));
     grid-template-areas: "profile-wrap name-wrap date";
 
@@ -180,10 +180,10 @@ const Card = styled.div`
       display: flex;
       flex-direction: column;
       justify-content: end;
+      align-items: center;
 
       font-size: ${(props) => props.theme.fontWritePageXSmall};
       margin-bottom: 0.3rem;
-      margin-right: 0.3rem;
     }
   }
 
@@ -199,11 +199,11 @@ const Card = styled.div`
     }
 
     .summary {
-      font-size: ${(props) => props.theme.fontWritePageXSmall};
+      font-size: ${(props) => props.theme.fontWritePageSmall};
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      margin: 0 0.2rem 0 0.2rem;
+      margin: 0.2rem 0.2rem 0 0.2rem;
     }
   }
   .bottom-cap {
@@ -217,19 +217,22 @@ const Card = styled.div`
     }
 
     > div > button {
+      margin-top: 0.5rem;
       border: none;
       border-radius: ${(props) => props.theme.borderRadius};
-      padding: 0.08rem 0.2rem;
+      padding: 0.2rem 0.4rem;
       font-size: ${(props) => props.theme.fontWritePageXSmall};
+      background-color: rgba(207, 207, 207, 1);
     }
 
     .btn {
       color: black;
-      background-color: ${(props) => props.theme.btnBgColor};
-      background-color: rgba(207, 207, 207, 0.4);
       transition: background-color ${(props) => `${props.hoverTransitonSec}s`} ease, color ${(props) => `${props.hoverTransitonSec}s`} ease;
     }
 
+    .delete {
+      margin-left: 0.3rem;
+    }
     .read:hover {
       background-color: ${(props) => props.theme.hoverColor};
       color: white;
