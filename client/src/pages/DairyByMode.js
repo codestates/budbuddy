@@ -120,8 +120,6 @@ const DairyByMode = () => {
     journalName = info.Plant.name;
   }
 
-  console.log(info);
-
   return (
     <Layout onSubmit={submit}>
       <TabBtnOne
