@@ -80,7 +80,6 @@ const Write = () => {
     let toggle = JSON.parse(e.target.toggle.value);
     toggle = convertToggleData(toggle);
 
-    console.log(toggle);
     // payload
     const payload = {
       images: [],
