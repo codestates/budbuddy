@@ -111,7 +111,7 @@ const ProfilePopup = ({ setProfile, src }) => {
   function close() {
     setProfile({ isOpen: false, src: null });
   }
-  //   console.log(src);
+
   return (
     <Layout>
       <BlackScreen className="black" onClick={close} />

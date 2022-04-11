@@ -152,7 +152,6 @@ const SideBar = () => {
         let formdata = new FormData();
         formdata.append("image", theFile);
         const imgRes = await axios.post(process.env.REACT_APP_API_URL + "/images", formdata);
-        console.log(imgRes);
         await axios.put(process.env.REACT_APP_API_URL + "/users/profile", { profile_image_id: imgRes.data.data.id });
       };
       reader.readAsDataURL(theFile);

@@ -6,6 +6,7 @@ import TextContent from "../components/write/TextContent";
 import { useNavigate, useLocation, useParams } from "react-router-dom";
 import PublicBtn from "../components/write/PublicBtn";
 import axios from "axios";
+import moment from "moment";
 import DatePicker from "../components/write/DatePicker";
 import GrowInput from "../components/write/GrowInput";
 
@@ -30,8 +31,14 @@ const Layout = styled.form`
     margin-top: 2rem;
   }
 
+  .date {
+    margin-top: 1.5rem;
+    margin-left: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
   .toggle {
-    margin-top: 1rem;
+    margin-top: 0.5rem;
     margin-left: 1rem;
     margin-bottom: 0.5rem;
   }
@@ -48,8 +55,6 @@ const DairyByMode = () => {
   const params = useParams();
   const parsed = qs.parse(useLocation().search);
   const info = JSON.parse(decodeURI(parsed.info));
-
-  console.log(params.mode);
 
   function convertToggleData(toggleArr) {
     let toggle = { isWater: false, isFertilize: false, isRepot: false };
@@ -126,6 +131,9 @@ const DairyByMode = () => {
         }}
       />
       <DatePicker className="date-picker" top={130} />
+      <div>
+        <div className="date">{"PickDate: " + moment(info.date_pick).format("YY/MM/DD")}</div>
+      </div>
       <PlantManageToggle className="toggle" actions={info.actions} mode={params.mode} />
       <GrowInput className="grow-input" />
       <TextContent title={info.title} content={info.body} src={src} mode={params.mode} />
