@@ -36,9 +36,9 @@
 ![bud](https://user-images.githubusercontent.com/33453360/158592548-0ed1284e-b8f8-47da-bd41-6e6848f3eb31.png)
 
 - [API 문서 상세보기 (스웨거)](https://app.swaggerhub.com/apis/d3856/BudBuddy/1.0#/)
-
 ### Tech Stack
-![Screenshot from 2022-03-17 14-34-21](https://user-images.githubusercontent.com/93773242/158760479-4f921de7-038b-4b11-9182-e4b1f5360bc3.png)
+---
+![Screenshot from 2022-04-11 11-14-48](https://user-images.githubusercontent.com/93773242/162653933-6a595c88-ecdc-4e0d-a35e-19922ba507d3.png)
 
 ## General
 <img src="https://img.shields.io/badge/Swagger-85EA2D?style=flat-square&logo=Swagger&logoColor=white"/></a>
@@ -54,10 +54,12 @@
 <img src="https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=HTML5&logoColor=white"/></a>
 <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=JavaScript&logoColor=black"/></a>
 <img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=React&logoColor=blue"/></a>
-<img src="https://img.shields.io/badge/Redux-764ABC?style=flat-square&logo=Redux&logoColor=white"/></a>
+<img src="https://img.shields.io/badge/Zustand-764ABC?style=flat-square&logo=Zotero&logoColor=white"/></a>
 <img src="https://img.shields.io/badge/Axios-EF2D5E?style=flat-square&logo=Academia&logoColor=black"/></a>
 <img src="https://img.shields.io/badge/styled-components-DB7093?style=flat-square&logo=styled-components&logoColor=yellow"/></a>
 <img src="https://img.shields.io/badge/D3.js-F9A03C?style=flat-square&logo=D3.js&logoColor=black"/></a>
+<img src="https://img.shields.io/badge/Font Awesome-528DD7?style=flat-square&logo=Font Awesome&logoColor=white"/></a>
+<img src="https://img.shields.io/badge/Moment.js-mint?style=flat-square&logo=Monero&logoColor=black"/></a>
 
 ## Back-end
 <img src="https://img.shields.io/badge/Sequelize-52B0E7?style=flat-square&logo=Sequelize&logoColor=blue"/></a>
