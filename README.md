@@ -2,6 +2,8 @@
 
 식물 기록 및 성장을 관찰하는 웹앱플리케이션!
 
+배포 링크  [[BUD BUDDY]](https://budbuddy.click/)
+
 주요 제공 기능
 
 - 키우는 식물의 성장을 날짜 단위로 얼마나 크고 있는지 그래프로 도식화합니다
@@ -79,11 +81,10 @@
 <img src="https://img.shields.io/badge/RDS-232F3E?style=flat-square&logo=Amazon AWS&logoColor=yellow"/></a>
 <img src="https://img.shields.io/badge/S3-232F3E?style=flat-square&logo=Amazon AWS&logoColor=yellow"/></a>
 
-링크  
-[[BUD BUDDY]]()
+
 
 ---
 
 ## 각 항목의 세부사항은 Wiki에서 살펴볼 수 있습니다
 
-[Project Detail 여기를 클릭!](https://github.com/codestates/budbuddy/wiki, "google link")
+[Project Detail 여기를 클릭!](https://github.com/codestates/budbuddy/wiki)
